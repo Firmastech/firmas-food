@@ -2,23 +2,23 @@ spring:
   application:
     name: larica
   datasource:
-    url: jdbc:mysql://localhost:3306
-    username: myuser
-    password: secret
+    url: jdbc:postgresql://localhost:5432
+    username: keycloak
+    password: password
   security:
     oauth2:
       client:
         registration:
           keycloak:
-            client-id: larica-security-keycloak
-            client-secret: 'CHANGE_ME'
+            client-id: larica
+            client-secret: 0BX68TBToeEIPzbJuyQGPKaytAv1r25g
             scope: openid, profile, email
         provider:
           keycloak:
-            issuer-uri: http://localhost:8080/realms/larica
+            issuer-uri: http://localhost:9081/realms/larica
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:8080/realms/larica
+          issuer-uri: http://localhost:9081/realms/larica
 
 server:
   port: 8081

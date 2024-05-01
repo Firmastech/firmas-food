@@ -18,7 +18,6 @@ public class SecurityConfig {
                         authorizeConfig -> {
                             authorizeConfig.requestMatchers("/logout").permitAll();
                             authorizeConfig.anyRequest().authenticated();
-
                         })
                 .oauth2Login(Customizer.withDefaults())
                 .oauth2ResourceServer(conf -> conf.jwt((Customizer.withDefaults()))
