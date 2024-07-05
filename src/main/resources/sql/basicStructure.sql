@@ -74,7 +74,6 @@ CREATE TABLE item_pedido (
 --   FOREIGN KEY (tagDescontoId) REFERENCES tag_desconto (descontoId)
 -- );
 
-
 CREATE TABLE restaurante (
                              id VARCHAR(36) NOT NULL PRIMARY KEY,
                              nome VARCHAR(100) NOT NULL,
@@ -108,3 +107,15 @@ CREATE TABLE horario_de_funcionamento (
                                           restauranteId VARCHAR(36) NOT NULL,
                                           FOREIGN KEY (cronogramaFuncionamentoId, restauranteId) REFERENCES cronograma_funcionamento (id, restauranteId)
 );
+alter table
+restaurante add column estaAtivo boolean;
+
+alter table
+cardapio drop column pratoId;
+
+alter table
+prato add column pratoId VARCHAR(36) NOT NULL;
+
+ALTER TABLE
+prato
+    ADD CONSTRAINT fk_prato_cardapio FOREIGN KEY (pratoId) REFERENCES cardapio(id);

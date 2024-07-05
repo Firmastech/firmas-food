@@ -22,3 +22,14 @@ spring:
 
 server:
   port: 8081
+
+keycloak:
+  credentials:
+    secret: 1lYYCpjIaeKUM4g4Jx7cNReoDGDVtYfg
+  resource: admin-cli
+  auth-server-url:  http://localhost:9081
+  realm: larica
+
+logging:
+  level:
+    root: debug

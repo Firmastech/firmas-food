@@ -16,7 +16,7 @@ services:
 
 
   keycloak:
-    image: quay.io/keycloak/keycloak:22.0.4
+    image: quay.io/keycloak/keycloak:24.0.3
     command: start-dev
     restart: always
     links:
