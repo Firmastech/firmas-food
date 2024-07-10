@@ -1,0 +1,4 @@
+## Roles
+- RestauranteAdmin
+- RestauranteFuncionario
+- RestauranteUsuario
