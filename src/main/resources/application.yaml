@@ -10,26 +10,23 @@ spring:
       client:
         registration:
           keycloak:
-            client-id: larica
-            client-secret: 0BX68TBToeEIPzbJuyQGPKaytAv1r25g
+            client-id: firmas-food
+            client-secret: Ku8D9ZO1Kdkf7NGjiNh2rQu6hLMe7ebJ
             scope: openid, profile, email
         provider:
           keycloak:
-            issuer-uri: http://localhost:9081/realms/larica
+            issuer-uri: http://localhost:9081/realms/firmas-food-dev
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:9081/realms/larica
+          issuer-uri: http://localhost:9081/realms/firmas-food-dev
 
 server:
   port: 8081
 
 keycloak:
   credentials:
-    secret: 1lYYCpjIaeKUM4g4Jx7cNReoDGDVtYfg
+    secret: aoGHnpGJ9B7zDXyvi2t4PLa52JrIftOu
   resource: admin-cli
   auth-server-url:  http://localhost:9081
-  realm: larica
+  realm: firmas-food-dev
 
-logging:
-  level:
-    root: debug
