@@ -5,6 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
+@ComponentScan({"danieldjgomes.larica.*"})
+
 public class LaricaApplication {
 
 	public static void main(String[] args) {
