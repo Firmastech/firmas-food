@@ -1,1 +1,0 @@
-# CREATE USER 'kc_user'@'%' IDENTIFIED BY 'CHANGE_ME';

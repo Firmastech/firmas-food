@@ -4,7 +4,7 @@ import danieldjgomes.larica.core.restaurante.entity.Restaurante;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface DTOMapper {
 
     @Mapping(source = "nome", target = "nome")
