@@ -12,5 +12,5 @@ public interface CardapioService {
     List<Cardapio> listAllCardapios();
     Optional<Cardapio> getCardapioById(Long id);
     Optional<Cardapio> updateCardapio(Long id, Cardapio updatedCardapio) throws CardapioNotFoundException;
-    void deleteCardapioById(Long id);
+    void deleteCardapio(Long id);
 }

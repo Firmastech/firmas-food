@@ -3,7 +3,9 @@ package danieldjgomes.larica.core.cardapio.service.impl;
 import danieldjgomes.larica.core.cardapio.entity.Cardapio;
 import danieldjgomes.larica.core.cardapio.exception.CardapioNotFoundException;
 import danieldjgomes.larica.core.cardapio.repository.CardapioRepository;
+import danieldjgomes.larica.core.cardapio.service.CardapioService;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -11,8 +13,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@AllArgsConstructor
-public class CardapioServiceImpl {
+@RequiredArgsConstructor
+public class CardapioServiceImpl implements CardapioService {
 
     private final CardapioRepository repository;
     private final ModelMapper modelMapper;
