@@ -1,6 +1,6 @@
 @echo off
 
-set DATA_DIR=postgres_data
+set DATA_DIR=postgres_data+
 
 REM List of directories to create
 set DIRS=pg_snapshots pg_commit_ts pg_twophase pg_tblspc pg_notify pg_replslot

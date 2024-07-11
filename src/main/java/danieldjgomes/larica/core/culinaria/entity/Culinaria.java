@@ -25,6 +25,6 @@ public class Culinaria {
     @Column(nullable = false, length = 144)
     private String tipo;
 
-    @OneToMany(mappedBy = "culinaria")
+    @OneToMany(mappedBy = "tipoCulinariaId")
     private List<Cardapio> cardapios;
 }

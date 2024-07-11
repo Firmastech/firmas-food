@@ -34,6 +34,6 @@ public class Prato {
 
     @ManyToOne
     @JoinColumn(name = "tagDescontoId", nullable = false)
-    private Desconto desconto;
+    private Desconto tagDescontoId;
 
 }

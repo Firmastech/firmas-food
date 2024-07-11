@@ -25,9 +25,9 @@ public class Cardapio {
 
     @ManyToOne
     @JoinColumn(name = "pratoId", nullable = false)
-    private Prato prato;
+    private Prato pratoId;
 
     @ManyToOne
     @JoinColumn(name = "tipoCulinariaId", nullable = false)
-    private Culinaria culinaria;
+    private Culinaria tipoCulinariaId;
 }
