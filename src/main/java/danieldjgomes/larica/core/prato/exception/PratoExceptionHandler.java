@@ -1,5 +1,6 @@
-package danieldjgomes.larica.core.cardapio.exception;
+package danieldjgomes.larica.core.prato.exception;
 
+import danieldjgomes.larica.core.exception.EntityNotFoundException;
 import danieldjgomes.larica.infrastructure.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -14,12 +15,12 @@ import java.util.Date;
 
 @ControllerAdvice
 @Slf4j
-public class CardapioExceptionHandler {
+public class PratoExceptionHandler {
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler(CardapioNotFoundException.class)
+    @ExceptionHandler(EntityNotFoundException.class)
     @ResponseBody
-    public ResponseEntity handleCardapioNotFoundException(CardapioNotFoundException ex) {
+    public ResponseEntity handleCardapioNotFoundException(EntityNotFoundException ex) {
         ErrorResponse response = new ErrorResponse();
         response.setTimestamp(new Date());
         response.setMensagens(Collections.singletonList(ex.getMessage()));

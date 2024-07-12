@@ -1,10 +1,9 @@
-package danieldjgomes.larica.core.cardapio.service.impl;
+package danieldjgomes.larica.core.cardapio.service;
 
 import danieldjgomes.larica.core.cardapio.entity.Cardapio;
-import danieldjgomes.larica.core.cardapio.exception.CardapioNotFoundException;
+import danieldjgomes.larica.core.exception.EntityNotFoundException;
 import danieldjgomes.larica.core.cardapio.repository.CardapioRepository;
-import danieldjgomes.larica.core.cardapio.service.CardapioService;
-import lombok.AllArgsConstructor;
+import danieldjgomes.larica.core.usecases.CardapioUseCase;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -14,7 +13,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class CardapioServiceImpl implements CardapioService {
+public class CardapioUseCaseImpl implements CardapioUseCase {
 
     private final CardapioRepository repository;
     private final ModelMapper modelMapper;
@@ -46,7 +45,7 @@ public class CardapioServiceImpl implements CardapioService {
     private Cardapio getExistingCardapio(Long id) {
         Optional<Cardapio> existingCardapio = this.getCardapioById(id);
         if (existingCardapio.isEmpty()) {
-            throw new CardapioNotFoundException("Cardapio not found with id: " + id);
+            throw new EntityNotFoundException("Cardapio not found with id: " + id);
         }
         return existingCardapio.get();
     }

@@ -1,10 +1,7 @@
 package danieldjgomes.larica.core.culinaria.entity;
 
 import danieldjgomes.larica.core.cardapio.entity.Cardapio;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,7 +16,9 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Culinaria {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID culinariaId;
 
     @Column(nullable = false, length = 144)

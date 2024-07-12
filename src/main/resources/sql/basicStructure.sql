@@ -11,14 +11,14 @@ CREATE TABLE endereco (
 );
 
 CREATE TABLE tag_desconto (
-                              id VARCHAR(36) NOT NULL PRIMARY KEY,
+                              id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
                               nome VARCHAR(100) NOT NULL,
                               descricao VARCHAR(2000) NOT NULL,
                               porcentagemDesconto DECIMAL NOT NULL
 );
 
 CREATE TABLE culinaria (
-                           id VARCHAR(36) NOT NULL PRIMARY KEY,
+                           id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
                            tipo VARCHAR(144) NOT NULL
 );
 
@@ -38,19 +38,19 @@ CREATE TABLE culinaria (
 -- );
 
 CREATE TABLE prato (
-                       id VARCHAR(36) NOT NULL PRIMARY KEY,
+                       id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
                        nome VARCHAR(100) NOT NULL,
                        descricao VARCHAR(2000) NOT NULL,
                        urlImagem VARCHAR(8000) NOT NULL,
                        preco DECIMAL(10, 2) NOT NULL,
-                       tagDescontoId VARCHAR(36) NOT NULL,
+                       tagDescontoId UUID,
                        FOREIGN KEY (tagDescontoId) REFERENCES tag_desconto (id)
 );
 
 CREATE TABLE cardapio (
-                          id VARCHAR(36) NOT NULL PRIMARY KEY,
-                          pratoId VARCHAR(36) NOT NULL,
-                          tipoCulinariaId VARCHAR(36) NOT NULL,
+                          id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+                          pratoId UUID NOT NULL,
+                          tipoCulinariaId UUID NOT NULL,
                           FOREIGN KEY (pratoId) REFERENCES prato (id),
                           FOREIGN KEY (tipoCulinariaId) REFERENCES culinaria (id)
 );
@@ -62,6 +62,19 @@ CREATE TABLE item_pedido (
                              quantidade INT NOT NULL,
                              FOREIGN KEY (pratoId) REFERENCES prato (id)
 );
+
+-- SELECT constraint_name
+-- FROM information_schema.table_constraints
+-- WHERE table_name = 'prato' AND constraint_name = 'fk_prato_cardapio';
+--
+-- ALTER TABLE prato
+--     RENAME CONSTRAINT fk_prato_cardapio TO "prato_cardapio";
+--
+-- ALTER TABLE prato
+--     ADD CONSTRAINT fk_prato_cardapio
+--         FOREIGN KEY (pratoId) REFERENCES cardapio(id);
+
+
 
 -- CREATE TABLE promocao (
 --   promocaoId BIGINT AUTO_INCREMENT NOT NULL,

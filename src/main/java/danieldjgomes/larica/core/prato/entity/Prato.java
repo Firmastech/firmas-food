@@ -18,6 +18,7 @@ import java.util.UUID;
 public class Prato {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID pratoId;
 
     @Column(nullable = false, length = 100)

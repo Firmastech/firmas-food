@@ -2,10 +2,7 @@ package danieldjgomes.larica.core.cardapio.entity;
 
 import danieldjgomes.larica.core.culinaria.entity.Culinaria;
 import danieldjgomes.larica.core.prato.entity.Prato;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,6 +18,7 @@ import java.util.UUID;
 public class Cardapio {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID cardapioId;
 
     @ManyToOne
