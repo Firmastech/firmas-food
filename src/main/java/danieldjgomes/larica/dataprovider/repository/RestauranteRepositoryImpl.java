@@ -6,8 +6,9 @@ import danieldjgomes.larica.dataprovider.repository.entity.RestauranteEntity;
 import danieldjgomes.larica.infrastructure.dto.restaurante.response.ConsultarRestauranteResponseDTO;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-
+import java.time.LocalDateTime;
 import java.util.Optional;
+import java.util.UUID;
 
 @Component
 @AllArgsConstructor
@@ -18,17 +19,19 @@ public class RestauranteRepositoryImpl implements RestauranteRepository {
 
     @Override
     public void save(Restaurante restaurante) {
-        RestauranteEntity entity = restauranteMapper.from(restaurante);
+        RestauranteEntity entity = restauranteMapper.toEntity(restaurante);
+        entity.setIsActive(true);
+        entity.setDataInclusao(LocalDateTime.now());
         restauranteDao.save(entity);
     }
 
     @Override
-    public ConsultarRestauranteResponseDTO findById(String id) {
+    public ConsultarRestauranteResponseDTO findById(UUID id) {
         Optional<RestauranteEntity> entity = restauranteDao.findById(id);
 
         if(entity.isPresent()){
-        ConsultarRestauranteResponseDTO dto = restauranteMapper.to(entity.get());
-        return dto;
+            ConsultarRestauranteResponseDTO dto = restauranteMapper.toDTO(entity.get());
+            return dto;
         }
 
         return null;
