@@ -35,10 +35,10 @@ class RestauranteTest {
             restaurante.validar();
         });
 
-        assertEquals("ID nao pode ser nulo,\n" +
-                " Nome nao pode ser nulo,\n" +
-                " Tempo de entrega nao pode ser nulo,\n" +
-                " Status de funcionamento nao pode ser nulo",exception.getMessage());
+        assertEquals("ID nao pode ser nulo, " +
+                "Nome nao pode ser nulo, " +
+                "Tempo de entrega nao pode ser nulo, " +
+                "Status de funcionamento nao pode ser nulo",exception.getMessage());
     }
 
 

@@ -6,6 +6,8 @@ import danieldjgomes.larica.infrastructure.dto.restaurante.response.ConsultarRes
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.UUID;
+
 @Component
 @AllArgsConstructor
 public class ConsultarRestauranteUseCaseImpl implements ConsultarRestauranteUseCase {
@@ -13,7 +15,8 @@ public class ConsultarRestauranteUseCaseImpl implements ConsultarRestauranteUseC
     private final RestauranteRepository restauranteRepository;
 
     @Override
-     public ConsultarRestauranteResponseDTO consultar(String ID) {
+     public ConsultarRestauranteResponseDTO consultar(UUID ID) {
+
         return restauranteRepository.findById(ID);
      }
 }
