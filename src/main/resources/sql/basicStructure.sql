@@ -1,4 +1,4 @@
-CREATE DATABASE db_restaurante;
+--CREATE DATABASE db_restaurante;
 
 CREATE TABLE endereco (
                           id VARCHAR(36) NOT NULL PRIMARY KEY,
@@ -73,17 +73,6 @@ CREATE TABLE item_pedido (
 --   PRIMARY KEY (promocaoId),
 --   FOREIGN KEY (tagDescontoId) REFERENCES tag_desconto (descontoId)
 -- );
-
-CREATE TABLE restaurante (
-                             id VARCHAR(36) NOT NULL PRIMARY KEY,
-                             nome VARCHAR(100) NOT NULL,
-                             enderecoId VARCHAR(36) NOT NULL,
-                             tempoEstimado INT NOT NULL,
-                             statusFuncionamento VARCHAR(10) NOT NULL CHECK (statusFuncionamento IN ('ABERTO', 'FECHADO', 'INATIVO')),
-                             cardapioId VARCHAR(36) NOT NULL,
-                             FOREIGN KEY (enderecoId) REFERENCES endereco (id),
-                             FOREIGN KEY (cardapioId) REFERENCES cardapio (id)
-);
 
 CREATE TABLE cronograma_funcionamento (
                                           id VARCHAR(36) NOT NULL,
