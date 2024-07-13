@@ -26,12 +26,12 @@ public class Restaurante {
     private Endereco endereco;
     private Cardapio cardapio;
 
-  private void validar(Restaurante restaurante){
+  public void validar(){
       List<String> atributosInvalidos = new ArrayList<>();
-      validarAtributo(restaurante.getId(),"ID nao pode ser nulo",atributosInvalidos);
-      validarAtributo(restaurante.getNome(),"Nome nao pode ser nulo",atributosInvalidos);
-      validarAtributo(restaurante.getTempoEstimadoDeEntrega(),"Tempo de entrega nao pode ser nulo",atributosInvalidos);
-      validarAtributo(restaurante.getStatusFuncionamento(),"Status de funcionamento nao pode ser nulo",atributosInvalidos);
+      validarAtributo(id,"ID nao pode ser nulo",atributosInvalidos);
+      validarAtributo(nome,"Nome nao pode ser nulo",atributosInvalidos);
+      validarAtributo(tempoEstimadoDeEntrega,"Tempo de entrega nao pode ser nulo",atributosInvalidos);
+      validarAtributo(statusFuncionamento,"Status de funcionamento nao pode ser nulo",atributosInvalidos);
       notificar(atributosInvalidos);
   }
 
@@ -40,6 +40,11 @@ public class Restaurante {
                                 List<String> invalidList){
       try{
           Objects.requireNonNull(atributos,message);
+
+          if (atributos instanceof String && ((String) atributos).isEmpty()) {
+              invalidList.add(message);
+          }
+
       }catch (RuntimeException e){
           invalidList.add(e.getMessage());
       }
@@ -47,9 +52,8 @@ public class Restaurante {
 
   private void notificar(final List<String> atributosInvalidos){
     if(!atributosInvalidos.isEmpty()){
-       final String message = "Foram encontrado as seguintes inconsistencias: ";
-       final String messagefinal = String.join(" ",atributosInvalidos);
-       throw new RuntimeException(message + messagefinal);
+       final String messagefinal = String.join(",\n ",atributosInvalidos);
+       throw new RuntimeException(messagefinal);
     }
   }
 
