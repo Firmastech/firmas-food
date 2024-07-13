@@ -1,4 +1,4 @@
-package danieldjgomes.larica.core.usecases;
+package danieldjgomes.larica.core.usecases.restaurante;
 
 import danieldjgomes.larica.core.restaurante.entity.Restaurante;
 

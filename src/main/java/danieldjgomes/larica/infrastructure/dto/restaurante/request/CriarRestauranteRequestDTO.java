@@ -1,11 +1,10 @@
-package danieldjgomes.larica.infrastructure;
+package danieldjgomes.larica.infrastructure.dto.restaurante.request;
 
 import jakarta.validation.constraints.*;
 import lombok.Data;
-import lombok.Getter;
 
 @Data
-public class CriarRestauranteDTO {
+public class CriarRestauranteRequestDTO {
 
     @Min(2)
     private String nome;

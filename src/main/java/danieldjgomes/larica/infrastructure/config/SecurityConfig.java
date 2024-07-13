@@ -1,4 +1,4 @@
-package danieldjgomes.larica.infrastructure;
+package danieldjgomes.larica.infrastructure.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
