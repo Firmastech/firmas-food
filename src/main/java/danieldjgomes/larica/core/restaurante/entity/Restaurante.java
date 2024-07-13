@@ -2,6 +2,7 @@ package danieldjgomes.larica.core.restaurante.entity;
 
 import danieldjgomes.larica.core.cardapio.entity.Cardapio;
 import danieldjgomes.larica.core.endereco.entity.Endereco;
+import danieldjgomes.larica.core.exceptions.ValidationException;
 import danieldjgomes.larica.core.restaurante.entity.enums.StatusFuncionamento;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -52,8 +53,8 @@ public class Restaurante {
 
   private void notificar(final List<String> atributosInvalidos){
     if(!atributosInvalidos.isEmpty()){
-       final String messagefinal = String.join(",\n ",atributosInvalidos);
-       throw new RuntimeException(messagefinal);
+       final String messagefinal = String.join(", ",atributosInvalidos);
+       throw new ValidationException(messagefinal);
     }
   }
 
