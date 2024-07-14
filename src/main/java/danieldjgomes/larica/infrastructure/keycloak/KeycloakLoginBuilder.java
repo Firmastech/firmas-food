@@ -1,23 +1,20 @@
 package danieldjgomes.larica.infrastructure.keycloak;
 
 
-import lombok.Getter;
-import org.keycloak.admin.client.Keycloak;
 import org.keycloak.admin.client.KeycloakBuilder;
+import org.keycloak.admin.client.token.TokenManager;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Service;
 
 import static org.keycloak.OAuth2Constants.CLIENT_CREDENTIALS;
 
-@Configuration
-@Getter
-public class KeycloakConfig {
+@Service
+public class KeycloakLoginBuilder {
 
-    @Value("${keycloak.credentials.secret}")
+    @Value("${spring.security.oauth2.client.registration.keycloak.client-secret}")
     private String secretKey;
 
-    @Value("${keycloak.resource}")
+    @Value("${spring.security.oauth2.client.registration.keycloak.client-id}")
     private String clientId;
 
     @Value("${keycloak.auth-server-url}")
@@ -27,14 +24,17 @@ public class KeycloakConfig {
     private String realm;
 
 
-    @Bean
-    public Keycloak keycloak() {
+    public TokenManager getTokenManager(String usuarioId, String senha) {
         return KeycloakBuilder.builder()
                 .grantType(CLIENT_CREDENTIALS)
                 .serverUrl(authUrl)
                 .realm(realm)
                 .clientId(clientId)
                 .clientSecret(secretKey)
-                .build();
+                .username(usuarioId)
+                .password(senha)
+                .build()
+                .tokenManager();
+
     }
 }

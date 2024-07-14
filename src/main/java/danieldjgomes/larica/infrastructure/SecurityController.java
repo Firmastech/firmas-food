@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@RestController("/security")
 public class SecurityController {
 
 
@@ -26,7 +26,7 @@ public class SecurityController {
     @PreAuthorize("#restauranteId.equals(principal.getAttribute(\"restaurante\"))")
     @GetMapping("/test/{restauranteId}")
     String test2(@PathVariable("restauranteId") String restauranteId, @AuthenticationPrincipal OidcUser principal) {
-        return String.format("""
+        return String.format(""" 
                         	<h1>Oauth2 🔐  </h1>
                         <h3>Principal: %s</h3>
                         <h3>Email attribute: %s</h3>
@@ -34,9 +34,8 @@ public class SecurityController {
                         <h3>JWT: %s</h3>
                         <h3>restaurante: %s</h3>
                         """, principal, principal.getAttribute("email"), principal.getAuthorities(),
-                principal.getIdToken().getTokenValue(),principal.getAttribute("restaurante"));
+                principal.getIdToken().getTokenValue(), principal.getAttribute("restaurante"));
     }
-
 }
 
 
