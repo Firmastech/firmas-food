@@ -17,8 +17,7 @@ import java.util.UUID;
 public class RestauranteEntity extends BaseEntity{
 
     @Id
-    @Column(name = "id", nullable = false, length = 36,
-            columnDefinition = "varchar(36)")
+    @Column(name = "id", nullable = false)
     private UUID id;
 
     @Column(name = "nome", nullable = false, length = 100)
@@ -27,7 +26,7 @@ public class RestauranteEntity extends BaseEntity{
     @Column(name = "tempoEstimado", nullable = false)
     private int tempoEstimadoDeEntrega;
 
-    @Column(name = "statusFuncionamento", nullable = false, length = 10)
+    @Column(name = "statusFuncionamento", nullable = false)
     private String statusFuncionamento;
 
 

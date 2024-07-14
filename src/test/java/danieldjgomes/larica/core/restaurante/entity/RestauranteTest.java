@@ -16,30 +16,4 @@ class RestauranteTest {
         return restaurante;
     }
 
-    @Test
-    void NaoDeveRetornarErros() {
-        Restaurante restaurante = createRestaurante();
-        restaurante.validar();
-        assertEquals(restaurante.getNome(), "Restaurante");
-    }
-
-    @Test
-    void DeveRetornarUmaListaContendoTodosErrosDaEntidade() {
-        Restaurante restaurante = createRestaurante();
-        restaurante.setNome(null);
-        restaurante.setId(null);
-        restaurante.setStatusFuncionamento(null);
-        restaurante.setTempoEstimadoDeEntrega(null);
-
-        RuntimeException exception = assertThrows(RuntimeException.class, ()->{
-            restaurante.validar();
-        });
-
-        assertEquals("ID nao pode ser nulo, " +
-                "Nome nao pode ser nulo, " +
-                "Tempo de entrega nao pode ser nulo, " +
-                "Status de funcionamento nao pode ser nulo",exception.getMessage());
-    }
-
-
 }

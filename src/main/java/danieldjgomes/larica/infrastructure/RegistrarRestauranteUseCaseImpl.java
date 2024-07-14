@@ -15,7 +15,6 @@ public class RegistrarRestauranteUseCaseImpl implements RegistrarRestauranteUseC
 
     public void registrarRestaurante(Restaurante restaurante) {
         restaurante.setId(UUID.randomUUID());
-        restaurante.validar();
         restauranteRepository.save(restaurante);
     }
 }

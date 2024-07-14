@@ -7,8 +7,12 @@ import lombok.Data;
 @Data
 public class CriarRestauranteRequestDTO {
 
+    @NotBlank
     private String nome;
+
+    @NotNull
     private Integer tempoEstimadoDeEntrega;
+
     private StatusFuncionamento statusFuncionamento = StatusFuncionamento.INATIVO;
 
     @NotNull
