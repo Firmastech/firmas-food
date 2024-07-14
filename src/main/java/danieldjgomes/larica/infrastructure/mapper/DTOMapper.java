@@ -1,6 +1,7 @@
 package danieldjgomes.larica.infrastructure.mapper;
 
 import danieldjgomes.larica.core.restaurante.entity.Restaurante;
+import danieldjgomes.larica.infrastructure.dto.restaurante.request.AtualizarRestauranteRequestDTO;
 import danieldjgomes.larica.infrastructure.dto.restaurante.request.CriarRestauranteRequestDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -18,4 +19,10 @@ public interface DTOMapper {
     @Mapping(source = "endereco.numero", target = "endereco.numero")
     @Mapping(source = "endereco.pontoReferencia", target = "endereco.pontoReferencia")
      Restaurante toRestaurante(CriarRestauranteRequestDTO criarRestauranteRequestDTO);
+
+    @Mapping(source = "id",target = "id")
+    @Mapping(source = "nome", target = "nome")
+    @Mapping(source = "tempoEstimadoDeEntrega", target = "tempoEstimadoDeEntrega")
+    @Mapping(source = "statusFuncionamento", target = "statusFuncionamento")
+    Restaurante toRestaurante(AtualizarRestauranteRequestDTO dto);
 }

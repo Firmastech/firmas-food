@@ -18,6 +18,16 @@ public class RestauranteRepositoryImpl implements RestauranteRepository {
     private final RestauranteMapper restauranteMapper;
 
     @Override
+    public Optional<RestauranteEntity> findById(UUID id) {
+        return restauranteDao.findById(id);
+    }
+
+    @Override
+    public Optional<RestauranteEntity> findByNome(String nome) {
+        return restauranteDao.findByNome(nome);
+    }
+
+    @Override
     public void save(Restaurante restaurante) {
         RestauranteEntity entity = restauranteMapper.toEntity(restaurante);
         entity.setIsActive(true);
@@ -26,14 +36,15 @@ public class RestauranteRepositoryImpl implements RestauranteRepository {
     }
 
     @Override
-    public ConsultarRestauranteResponseDTO findById(UUID id) {
-        Optional<RestauranteEntity> entity = restauranteDao.findById(id);
+    public RestauranteEntity update(RestauranteEntity entityToUpdate) {
+        entityToUpdate.setDataAtualizacao(LocalDateTime.now());
+        return restauranteDao.save(entityToUpdate);
+    }
 
-        if(entity.isPresent()){
-            ConsultarRestauranteResponseDTO dto = restauranteMapper.toDTO(entity.get());
-            return dto;
-        }
-
-        return null;
+    @Override
+    public void delete(RestauranteEntity entityToDelete) {
+        entityToDelete.setDataExclusao(LocalDateTime.now());
+        entityToDelete.setIsActive(false);
+        restauranteDao.save(entityToDelete);
     }
 }

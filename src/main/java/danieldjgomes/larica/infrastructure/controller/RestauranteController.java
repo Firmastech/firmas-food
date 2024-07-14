@@ -5,6 +5,7 @@ import danieldjgomes.larica.core.usecases.restaurante.AtualizarRestauranteUseCas
 import danieldjgomes.larica.core.usecases.restaurante.ConsultarRestauranteUseCase;
 import danieldjgomes.larica.core.usecases.restaurante.InativarRestaurenteUseCase;
 import danieldjgomes.larica.core.usecases.restaurante.RegistrarRestauranteUseCase;
+import danieldjgomes.larica.infrastructure.dto.restaurante.request.AtualizarRestauranteRequestDTO;
 import danieldjgomes.larica.infrastructure.dto.restaurante.request.CriarRestauranteRequestDTO;
 import danieldjgomes.larica.infrastructure.mapper.DTOMapper;
 import jakarta.validation.Valid;
@@ -26,7 +27,6 @@ public class RestauranteController {
     private final ConsultarRestauranteUseCase consultarRestauranteUseCase;
     private final AtualizarRestauranteUseCase atualizarRestauranteUseCase;
     private final InativarRestaurenteUseCase inativarRestauranteUseCase;
-
     private DTOMapper mapper;
 
     @PostMapping
@@ -37,9 +37,24 @@ public class RestauranteController {
 
     }
 
-    @GetMapping()
-    public ResponseEntity consultarRestaurante(@RequestParam String id) {
+    @GetMapping
+    public ResponseEntity<Restaurante> consultarRestaurante(@RequestParam String id) {
         return ResponseEntity.ok(consultarRestauranteUseCase.consultar(UUID.fromString(id)));
+
+    }
+
+    @PutMapping
+    public ResponseEntity atualizarRestaurante(@RequestBody @Valid AtualizarRestauranteRequestDTO dto) {
+        Restaurante restaurante = mapper.toRestaurante(dto);
+        atualizarRestauranteUseCase.update(restaurante);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
+    @DeleteMapping
+    public ResponseEntity inativarRestaurante(@RequestBody String id) {
+        inativarRestauranteUseCase.inativarRestaurante(UUID.fromString(id));
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+
     }
 
 }

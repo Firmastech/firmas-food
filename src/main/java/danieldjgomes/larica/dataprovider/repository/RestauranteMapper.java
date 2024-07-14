@@ -14,8 +14,6 @@ public interface RestauranteMapper {
     @Mapping(source = "nome", target = "nome")
     @Mapping(source = "tempoEstimadoDeEntrega", target = "tempoEstimadoDeEntrega")
     @Mapping(source = "statusFuncionamento", target = "statusFuncionamento")
-    //@Mapping(target = "endereco", ignore = true)
-    //@Mapping(target = "cardapio", ignore = true)
     RestauranteEntity toEntity(Restaurante restaurante);
 
     @Mapping(source = "id",target = "id")
@@ -23,4 +21,11 @@ public interface RestauranteMapper {
     @Mapping(source = "tempoEstimadoDeEntrega", target = "tempoEstimadoDeEntrega")
     @Mapping(source = "statusFuncionamento", target = "statusFuncionamento")
     ConsultarRestauranteResponseDTO toDTO(RestauranteEntity restaurante);
+
+    @Mapping(source = "id",target = "id")
+    @Mapping(source = "nome", target = "nome")
+    @Mapping(source = "tempoEstimadoDeEntrega", target = "tempoEstimadoDeEntrega")
+    @Mapping(source = "statusFuncionamento", target = "statusFuncionamento")
+    Restaurante toRestaurante(RestauranteEntity entity);
+
 }
