@@ -14,23 +14,35 @@
 	<name>larica</name>
 	<description>Sistema de restaurante</description>
 	<properties>
-		<sonar.projectKey>Firmastech_firmas-food</sonar.projectKey>
+		<!-- Versões das dependencias -->
 		<java.version>17</java.version>
+		<postgresql.version>42.7.3</postgresql.version>
+		<mapstruct.version>1.5.5.Final</mapstruct.version>
+		<lombok.version>1.18.32</lombok.version>
+		<keycloak.version>25.0.1</keycloak.version>
+		<sonar.version>4.0.0.4121</sonar.version>
+		<maven.version>3.8.0</maven.version>
+		<lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
+		<jacoco.version>0.8.8</jacoco.version>
+		<!-- Porcentagem de cobertura dos testes JACOCO-->
+		<jacoco.coverage.ratio>0.80</jacoco.coverage.ratio>
+		<!-- SonarCloud config -->
+		<sonar.projectKey>Firmastech_firmas-food</sonar.projectKey>
 		<sonar.organization>firmastech</sonar.organization>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
-		<sonar.token>996eb455a717c96aebd8629581c745ba1d3b36c8</sonar.token>
+		<sonar.token>${env.SONAR_TOKEN}</sonar.token>
 		<sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
 		<sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
 		<!-- Sonar Ignore -->
-		<sonar.exclusions>
-			**/danieldjgomes/larica/core/cardapio/entity/**,
-			**/danieldjgomes/larica/core/culinaria/entity/**,
-			**/danieldjgomes/larica/core/endereco/entity/**,
-			**/danieldjgomes/larica/core/prato/entity/**,
-			**/danieldjgomes/larica/core/restaurante/entity/**,
-			**/danieldjgomes/larica/dataprovider/repository/entity/**,
-			**/danieldjgomes/larica/infrastructure/**
-		</sonar.exclusions>
+		<sonar.coverage.coverage.exclusions>
+			**/core/cardapio/entity/**
+			**/core/culinaria/entity/**
+			**/core/endereco/entity/**
+			**/core/prato/entity/**
+			**/core/restaurante/entity/**
+			**/dataprovider/repository/entity/**
+			**/infrastructure/**
+		</sonar.coverage.coverage.exclusions>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -67,7 +79,7 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>42.7.3</version>
+            <version>${postgresql.version}</version>
         </dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -87,12 +99,12 @@
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
-            <version>1.5.5.Final</version>
+            <version>${mapstruct.version}</version>
         </dependency>
         <dependency>
             <groupId>org.keycloak</groupId>
             <artifactId>keycloak-admin-client</artifactId>
-            <version>25.0.1</version>
+            <version>${keycloak.version}</version>
         </dependency>
 	</dependencies>
 	<build>
@@ -100,29 +112,29 @@
 			<plugin>
 				<groupId>org.sonarsource.scanner.maven</groupId>
 				<artifactId>sonar-maven-plugin</artifactId>
-				<version>4.0.0.4121</version>
+				<version>${sonar.version}</version>
 			</plugin>
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.8.8</version>
+				<version>${jacoco.version}</version>
+				<configuration>
+					<excludes>
+						<exclude>**/core/cardapio/entity/**</exclude>
+						<exclude>**/core/culinaria/entity/**</exclude>
+						<exclude>**/core/endereco/entity/**</exclude>
+						<exclude>**/core/prato/entity/**</exclude>
+						<exclude>**/core/restaurante/entity/**</exclude>
+						<exclude>**/dataprovider/repository/entity/**</exclude>
+						<exclude>**/infrastructure/**</exclude>
+					</excludes>
+				</configuration>
 				<executions>
 					<execution>
-						<id>prepare-agent</id>
+						<id>pre-test</id>
 						<goals>
 							<goal>prepare-agent</goal>
 						</goals>
-						<configuration>
-							<excludes>
-								<exclude>**/danieldjgomes/larica/core/cardapio/entity/**</exclude>
-								<exclude>**/danieldjgomes/larica/core/culinaria/entity/**</exclude>
-								<exclude>**/danieldjgomes/larica/core/endereco/entity/**</exclude>
-								<exclude>**/danieldjgomes/larica/core/prato/entity/**</exclude>
-								<exclude>**/danieldjgomes/larica/core/restaurante/entity/**</exclude>
-								<exclude>**/danieldjgomes/larica/dataprovider/repository/entity/**</exclude>
-								<exclude>**/danieldjgomes/larica/infrastructure/*</exclude>
-							</excludes>
-						</configuration>
 					</execution>
 					<execution>
 						<id>report-verify</id>
@@ -132,7 +144,7 @@
 						</goals>
 					</execution>
 					<execution>
-						<id>report-test</id>
+						<id>post-test</id>
 						<phase>test</phase>
 						<goals>
 							<goal>report</goal>
@@ -155,7 +167,7 @@
 										<limit>
 											<counter>LINE</counter>
 											<value>COVEREDRATIO</value>
-											<minimum>0.03</minimum>
+											<minimum>${jacoco.coverage.ratio}</minimum>
 										</limit>
 									</limits>
 								</rule>
@@ -167,7 +179,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.0</version>
+				<version>${maven.version}</version>
 				<configuration>
 					<source>${java.version}</source>
 					<target>${java.version}</target>
@@ -176,19 +188,19 @@
 						<path>
 							<groupId>org.projectlombok</groupId>
 							<artifactId>lombok</artifactId>
-							<version>1.18.32</version>
+							<version>${lombok.version}</version>
 						</path>
 						<!-- This is needed when using Lombok 1.18.16 and above -->
 						<path>
 							<groupId>org.projectlombok</groupId>
 							<artifactId>lombok-mapstruct-binding</artifactId>
-							<version>0.2.0</version>
+							<version>${lombok-mapstruct-binding.version}</version>
 						</path>
 						<!-- Mapstruct should follow the lombok path(s) -->
 						<path>
 							<groupId>org.mapstruct</groupId>
 							<artifactId>mapstruct-processor</artifactId>
-							<version>1.5.5.Final</version>
+							<version>${mapstruct.version}</version>
 						</path>
 					</annotationProcessorPaths>
 				</configuration>
