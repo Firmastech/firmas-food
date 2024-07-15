@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/cardapio")
@@ -26,7 +27,7 @@ public class CardapioController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Cardapio> getCardapioById(@PathVariable Long id) { //TODO ALTERAR PARA UUID
+    public Optional<Cardapio> getCardapioById(@PathVariable UUID id) { //TODO ALTERAR PARA UUID
         Optional<Cardapio> cardapio = cardapioUseCase.getCardapioById(id);
         return cardapio;
     }
@@ -38,13 +39,13 @@ public class CardapioController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<Optional<Cardapio>> updateCardapio(@PathVariable Long id, @RequestBody @Valid Cardapio cardapio) {
+    public ResponseEntity<Optional<Cardapio>> updateCardapio(@PathVariable UUID id, @RequestBody @Valid Cardapio cardapio) {
         Optional<Cardapio> updatedCardapio = cardapioUseCase.updateCardapio(id, cardapio);
         return new ResponseEntity<>(updatedCardapio, HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteCardapio(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteCardapio(@PathVariable UUID id) {
         cardapioUseCase.deleteCardapio(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

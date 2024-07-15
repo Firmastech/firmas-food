@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -22,11 +23,11 @@ public class CardapioUseCaseImpl implements CardapioUseCase {
         return repository.save(cardapio);
     }
 
-    public Optional<Cardapio> getCardapioById(Long id) {
+    public Optional<Cardapio> getCardapioById(UUID id) {
         return repository.findById(id);
     }
 
-    public Optional<Cardapio> updateCardapio(Long id, Cardapio updatedCardapio) {
+    public Optional<Cardapio> updateCardapio(UUID id, Cardapio updatedCardapio) {
         Cardapio existingCardapio = getExistingCardapio(id);
         modelMapper.getConfiguration().setSkipNullEnabled(true);
         modelMapper.map(updatedCardapio, existingCardapio);
@@ -37,12 +38,12 @@ public class CardapioUseCaseImpl implements CardapioUseCase {
         return repository.findAll();
     }
 
-    public void deleteCardapio(Long id) {
+    public void deleteCardapio(UUID id) {
         Cardapio existingCardapio = getExistingCardapio(id);
         repository.deleteById(id);
     }
 
-    private Cardapio getExistingCardapio(Long id) {
+    private Cardapio getExistingCardapio(UUID id) {
         Optional<Cardapio> existingCardapio = this.getCardapioById(id);
         if (existingCardapio.isEmpty()) {
             throw new EntityNotFoundException("Cardapio not found with id: " + id);
