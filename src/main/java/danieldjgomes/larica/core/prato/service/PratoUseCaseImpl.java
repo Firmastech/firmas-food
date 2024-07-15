@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -22,11 +23,11 @@ public class PratoUseCaseImpl implements PratoUseCase {
         return pratoRepository.save(prato);
     }
 
-    public Optional<Prato> getPratoById(Long id) {
+    public Optional<Prato> getPratoById(UUID id) {
         return pratoRepository.findById(id);
     }
 
-    public Optional<Prato> updatePrato(Long id, Prato updatedPrato) {
+    public Optional<Prato> updatePrato(UUID id, Prato updatedPrato) {
         Prato existingPrato = getExistingPrato(id);
         modelMapper.getConfiguration().setSkipNullEnabled(true);
         modelMapper.map(updatedPrato, existingPrato);
@@ -37,12 +38,12 @@ public class PratoUseCaseImpl implements PratoUseCase {
         return pratoRepository.findAll();
     }
 
-    public void deletePrato(Long id) {
+    public void deletePrato(UUID id) {
         Prato existingPrato = getExistingPrato(id);
         pratoRepository.deleteById(id);
     }
 
-    private Prato getExistingPrato(Long id) {
+    private Prato getExistingPrato(UUID id) {
         Optional<Prato> existingPrato = this.getPratoById(id);
         if (existingPrato.isEmpty()) {
             throw new EntityNotFoundException("Prato not found with id: " + id);

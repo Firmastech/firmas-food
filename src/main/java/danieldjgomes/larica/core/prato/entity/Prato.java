@@ -34,7 +34,7 @@ public class Prato {
     private BigDecimal preco;
 
     @ManyToOne
-    @JoinColumn(name = "tagDescontoId", nullable = false)
+    @JoinColumn(name = "tag_desconto_id", nullable = false)
     private Desconto tagDescontoId;
 
 }

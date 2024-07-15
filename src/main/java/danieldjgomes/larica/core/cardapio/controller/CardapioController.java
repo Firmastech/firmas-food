@@ -26,7 +26,7 @@ public class CardapioController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Cardapio> getCardapioById(@PathVariable Long id) {
+    public Optional<Cardapio> getCardapioById(@PathVariable Long id) { //TODO ALTERAR PARA UUID
         Optional<Cardapio> cardapio = cardapioUseCase.getCardapioById(id);
         return cardapio;
     }
@@ -42,7 +42,6 @@ public class CardapioController {
         Optional<Cardapio> updatedCardapio = cardapioUseCase.updateCardapio(id, cardapio);
         return new ResponseEntity<>(updatedCardapio, HttpStatus.OK);
     }
-
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteCardapio(@PathVariable Long id) {

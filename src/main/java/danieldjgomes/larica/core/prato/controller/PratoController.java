@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/prato")
@@ -25,7 +26,7 @@ public class PratoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Prato> getPratoById(@PathVariable Long id) {
+    public ResponseEntity<Prato> getPratoById(@PathVariable UUID id) {
         Optional<Prato> prato = pratoService.getPratoById(id);
         return prato.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
@@ -37,13 +38,13 @@ public class PratoController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<Prato> updatePrato(@PathVariable Long id, @RequestBody @Valid Prato updatedPrato) {
+    public ResponseEntity<Prato> updatePrato(@PathVariable UUID id, @RequestBody @Valid Prato updatedPrato) {
         Optional<Prato> prato = pratoService.updatePrato(id, updatedPrato);
         return prato.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deletePrato(@PathVariable Long id) {
+    public ResponseEntity<Void> deletePrato(@PathVariable UUID id) {
         pratoService.deletePrato(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

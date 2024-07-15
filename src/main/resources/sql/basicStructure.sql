@@ -1,4 +1,4 @@
-CREATE DATABASE db_restaurante;
+--CREATE DATABASE IF NOT EXISTS keycloak;
 
 CREATE TABLE endereco (
                           id VARCHAR(36) NOT NULL PRIMARY KEY,
@@ -11,16 +11,19 @@ CREATE TABLE endereco (
 );
 
 CREATE TABLE tag_desconto (
-                              id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+                              id UUID NOT NULL PRIMARY KEY,
                               nome VARCHAR(100) NOT NULL,
                               descricao VARCHAR(2000) NOT NULL,
-                              porcentagemDesconto DECIMAL NOT NULL
+                              porcentagem_desconto DECIMAL NOT NULL
 );
 
 CREATE TABLE culinaria (
-                           id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+                           id UUID NOT NULL PRIMARY KEY,
                            tipo VARCHAR(144) NOT NULL
 );
+
+
+
 
 -- CREATE TABLE privilegio (
 --   uniqueId BIGINT AUTO_INCREMENT NOT NULL,
@@ -38,7 +41,7 @@ CREATE TABLE culinaria (
 -- );
 
 CREATE TABLE prato (
-                       id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+                       id UUID NOT NULL PRIMARY KEY,
                        nome VARCHAR(100) NOT NULL,
                        descricao VARCHAR(2000) NOT NULL,
                        urlImagem VARCHAR(8000) NOT NULL,
@@ -48,7 +51,7 @@ CREATE TABLE prato (
 );
 
 CREATE TABLE cardapio (
-                          id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+                          id UUID NOT NULL PRIMARY KEY,
                           pratoId UUID NOT NULL,
                           tipoCulinariaId UUID NOT NULL,
                           FOREIGN KEY (pratoId) REFERENCES prato (id),

@@ -1,8 +1,7 @@
 package danieldjgomes.larica.core.desconto.controller;
 
-import danieldjgomes.larica.core.cardapio.entity.Cardapio;
 import danieldjgomes.larica.core.desconto.entity.Desconto;
-import danieldjgomes.larica.core.desconto.service.DescontoService;
+import danieldjgomes.larica.core.desconto.service.DescontoUseCaseImpl;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,35 +18,35 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class DescontoController {
 
-    private final DescontoService descontoService;
+    private final DescontoUseCaseImpl descontoUseCaseImpl;
 
     @PostMapping("/create")
-    public ResponseEntity<Desconto> createDesconto(@RequestBody @Valid Desconto desconto) {
-        Desconto createdDesconto = descontoService.createDesconto(desconto);
+    public ResponseEntity<Desconto> createDesconto(@RequestBody Desconto desconto) {
+        Desconto createdDesconto = descontoUseCaseImpl.createDesconto(desconto);
         return new ResponseEntity<>(createdDesconto, HttpStatus.CREATED);
     }
 
     @PutMapping("/update/{id}")
     public ResponseEntity<Optional<Desconto>> updateDesconto(@PathVariable UUID id, @RequestBody @Valid Desconto desconto) {
-        Optional<Desconto> updatedCardapio = descontoService.updateDesconto(id, desconto);
+        Optional<Desconto> updatedCardapio = descontoUseCaseImpl.updateDesconto(id, desconto);
         return new ResponseEntity<>(updatedCardapio, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public Optional<Desconto> getDescontoById(@PathVariable UUID id) {
-        Optional<Desconto> desconto = descontoService.getDescontoById(id);
+        Optional<Desconto> desconto = descontoUseCaseImpl.getDescontoById(id);
         return desconto;
     }
 
     @GetMapping
     public ResponseEntity<List<Desconto>> listAllDescontos() {
-        List<Desconto> descontos = descontoService.listAllDescontos();
+        List<Desconto> descontos = descontoUseCaseImpl.listAllDescontos();
         return new ResponseEntity<>(descontos, HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteDesconto(@PathVariable UUID id) {
-        descontoService.deleteDesconto(id);
+        descontoUseCaseImpl.deleteDesconto(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
@@ -56,7 +55,7 @@ public class DescontoController {
             @RequestParam BigDecimal valorOriginal,
             @RequestParam BigDecimal porcentagemDesconto) {
 
-        Optional<BigDecimal> valorDescontado = descontoService.aplicarDesconto(valorOriginal, porcentagemDesconto);
+        Optional<BigDecimal> valorDescontado = descontoUseCaseImpl.aplicarDesconto(valorOriginal, porcentagemDesconto);
         return valorDescontado
                 .map(valor -> ResponseEntity.ok().body(valor))
                 .orElse(ResponseEntity.badRequest().build());

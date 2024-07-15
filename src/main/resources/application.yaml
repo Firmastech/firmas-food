@@ -2,7 +2,7 @@ spring:
   application:
     name: larica
   datasource:
-    url: jdbc:postgresql://localhost:5432
+    url: jdbc:postgresql://localhost:5432/db_restaurante
     username: keycloak
     password: password
   security:

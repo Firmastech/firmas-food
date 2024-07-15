@@ -25,10 +25,10 @@ public class Desconto {
     @Column(name = "nome", nullable = false, length = 100)
     private String nome;
 
-    @Column(name = "descicao", nullable = false, length = 2000)
+    @Column(name = "descricao", nullable = false, length = 2000)
     private String descricao;
 
-    @Column(name = "porcentagemdesconto", nullable = false)
+    @Column(name = "porcentagem_desconto", nullable = false)
     private BigDecimal porcentagemDesconto;
 
 }

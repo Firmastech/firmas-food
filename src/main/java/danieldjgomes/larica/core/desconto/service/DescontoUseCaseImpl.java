@@ -15,7 +15,7 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class DescontoService implements DescontoUseCase {
+public class DescontoUseCaseImpl implements DescontoUseCase {
 
 
     private final DescontoRepository repository;
