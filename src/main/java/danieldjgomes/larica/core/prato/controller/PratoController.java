@@ -1,9 +1,11 @@
 package danieldjgomes.larica.core.prato.controller;
 
 import danieldjgomes.larica.core.prato.entity.Prato;
+import danieldjgomes.larica.core.prato.request.PratoRequest;
 import danieldjgomes.larica.core.usecases.PratoUseCase;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,9 +20,11 @@ import java.util.UUID;
 public class PratoController {
 
     private final PratoUseCase pratoService;
+    private final ModelMapper modelMapper;
 
     @PostMapping("/create")
-    public ResponseEntity<Prato> createPrato(@RequestBody @Valid Prato prato) {
+    public ResponseEntity<Prato> createPrato(@RequestBody @Valid PratoRequest request) {
+        Prato prato = modelMapper.map(request, Prato.class);
         Prato createdPrato = pratoService.createPrato(prato);
         return new ResponseEntity<>(createdPrato, HttpStatus.CREATED);
     }
