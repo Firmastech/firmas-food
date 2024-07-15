@@ -40,8 +40,11 @@
 			**/core/endereco/entity/**
 			**/core/prato/entity/**
 			**/core/restaurante/entity/**
-			**/dataprovider/repository/entity/**
+			**/dataprovider/repository/entity**
+			**/dataprovider/repository/RestauranteDao*
+			**/dataprovider/repository/RestauranteMapper*
 			**/infrastructure/**
+			**/LaricaApplication.Java
 		</sonar.coverage.coverage.exclusions>
 	</properties>
 	<dependencies>
@@ -127,6 +130,9 @@
 						<exclude>**/core/restaurante/entity/**</exclude>
 						<exclude>**/dataprovider/repository/entity/**</exclude>
 						<exclude>**/infrastructure/**</exclude>
+						<exclude>**/app/LaricaApplication*</exclude>
+						<exclude>**/dataprovider/repository/RestauranteDao*</exclude>
+						<exclude>**/dataprovider/repository/RestauranteMapper*</exclude>
 					</excludes>
 				</configuration>
 				<executions>

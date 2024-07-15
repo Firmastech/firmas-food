@@ -2,6 +2,7 @@ package danieldjgomes.larica.dataprovider.repository;
 
 import danieldjgomes.larica.core.restaurante.entity.Restaurante;
 import danieldjgomes.larica.dataprovider.repository.entity.RestauranteEntity;
+import danieldjgomes.larica.dataprovider.repository.impl.RestauranteRepositoryImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
