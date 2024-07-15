@@ -34,7 +34,7 @@
 		<sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
 		<sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
 		<!-- Sonar Ignore -->
-		<sonar.coverage.coverage.exclusions>
+		<sonar.coverage.exclusions>
 			**/core/cardapio/entity/**
 			**/core/culinaria/entity/**
 			**/core/endereco/entity/**
@@ -44,8 +44,8 @@
 			**/dataprovider/repository/RestauranteDao*
 			**/dataprovider/repository/RestauranteMapper*
 			**/infrastructure/**
-			**/LaricaApplication.Java
-		</sonar.coverage.coverage.exclusions>
+			**/LaricaApplication.java
+		</sonar.coverage.exclusions>
 	</properties>
 	<dependencies>
 		<dependency>
