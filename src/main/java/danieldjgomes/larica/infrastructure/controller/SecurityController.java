@@ -1,4 +1,4 @@
-package danieldjgomes.larica.infrastructure;
+package danieldjgomes.larica.infrastructure.controller;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;

@@ -1,14 +1,20 @@
-package danieldjgomes.larica.infrastructure;
+package danieldjgomes.larica.infrastructure.dto.restaurante.request;
 
+import danieldjgomes.larica.core.restaurante.entity.enums.StatusFuncionamento;
 import jakarta.validation.constraints.*;
 import lombok.Data;
-import lombok.Getter;
 
 @Data
-public class CriarRestauranteDTO {
+public class CriarRestauranteRequestDTO {
 
-    @Min(2)
+    @NotBlank
     private String nome;
+
+    @NotNull
+    private Integer tempoEstimadoDeEntrega;
+
+    private StatusFuncionamento statusFuncionamento = StatusFuncionamento.INATIVO;
+
     @NotNull
     private Endereco endereco;
 
