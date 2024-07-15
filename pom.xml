@@ -44,7 +44,7 @@
 			**/dataprovider/repository/RestauranteDao*
 			**/dataprovider/repository/RestauranteMapper*
 			**/infrastructure/**
-			**/LaricaApplication.Java
+			**/LaricaApplication.java
 		</sonar.coverage.exclusions>
 	</properties>
 	<dependencies>
