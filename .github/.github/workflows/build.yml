@@ -24,6 +24,8 @@ jobs:
           path: ~/.sonar/cache
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
+      - name: Verify code Jacoco
+        run: mvn clean verify
       - name: Cache Maven packages
         uses: actions/cache@v3
         with:
