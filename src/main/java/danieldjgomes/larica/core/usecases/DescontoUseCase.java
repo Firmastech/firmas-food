@@ -1,5 +1,7 @@
 package danieldjgomes.larica.core.usecases;
 
+import danieldjgomes.larica.core.desconto.dtos.DescontoRequestDTO;
+import danieldjgomes.larica.core.desconto.dtos.DescontoResponseDTO;
 import danieldjgomes.larica.core.desconto.entity.Desconto;
 
 import java.math.BigDecimal;
@@ -9,13 +11,13 @@ import java.util.UUID;
 
 public interface DescontoUseCase {
 
-    Desconto createDesconto(Desconto desconto);
+    DescontoResponseDTO createDesconto(DescontoRequestDTO dto);
 
-    Optional<Desconto> getDescontoById(UUID id);
+    Optional<DescontoResponseDTO> getDescontoById(UUID id);
 
-    List<Desconto> listAllDescontos();
+    List<DescontoResponseDTO> listAllDescontos();
 
-    Optional<Desconto> updateDesconto(UUID id, Desconto updatedDesconto);
+    Optional<DescontoResponseDTO> updateDesconto(UUID id, DescontoRequestDTO dto);
 
     void deleteDesconto(UUID id);
 

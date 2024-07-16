@@ -1,5 +1,7 @@
 package danieldjgomes.larica.core.desconto.controller;
 
+import danieldjgomes.larica.core.desconto.dtos.DescontoRequestDTO;
+import danieldjgomes.larica.core.desconto.dtos.DescontoResponseDTO;
 import danieldjgomes.larica.core.desconto.entity.Desconto;
 import danieldjgomes.larica.core.desconto.service.DescontoUseCaseImpl;
 import jakarta.validation.Valid;
@@ -21,27 +23,27 @@ public class DescontoController {
     private final DescontoUseCaseImpl descontoUseCaseImpl;
 
     @PostMapping("/create")
-    public ResponseEntity<Desconto> createDesconto(@RequestBody Desconto desconto) {
-        Desconto createdDesconto = descontoUseCaseImpl.createDesconto(desconto);
+    public ResponseEntity<DescontoResponseDTO> createDesconto(@RequestBody @Valid DescontoRequestDTO descontoRequest) {
+        DescontoResponseDTO createdDesconto = descontoUseCaseImpl.createDesconto(descontoRequest);
         return new ResponseEntity<>(createdDesconto, HttpStatus.CREATED);
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<Optional<Desconto>> updateDesconto(@PathVariable UUID id, @RequestBody @Valid Desconto desconto) {
-        Optional<Desconto> updatedCardapio = descontoUseCaseImpl.updateDesconto(id, desconto);
-        return new ResponseEntity<>(updatedCardapio, HttpStatus.OK);
+    public ResponseEntity<DescontoResponseDTO> updateDesconto(@PathVariable UUID id, @RequestBody @Valid DescontoRequestDTO descontoRequest) {
+        Optional<DescontoResponseDTO> updatedDesconto = descontoUseCaseImpl.updateDesconto(id, descontoRequest);
+        return updatedDesconto.map(response -> new ResponseEntity<>(response, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @GetMapping("/{id}")
-    public Optional<Desconto> getDescontoById(@PathVariable UUID id) {
-        Optional<Desconto> desconto = descontoUseCaseImpl.getDescontoById(id);
+    public Optional<DescontoResponseDTO> getDescontoById(@PathVariable UUID id) {
+        Optional<DescontoResponseDTO> desconto = descontoUseCaseImpl.getDescontoById(id);
         return desconto;
     }
 
     @GetMapping
-    public ResponseEntity<List<Desconto>> listAllDescontos() {
-        List<Desconto> descontos = descontoUseCaseImpl.listAllDescontos();
-        return new ResponseEntity<>(descontos, HttpStatus.OK);
+    public List<DescontoResponseDTO> getAllDescontos() {
+        return descontoUseCaseImpl.listAllDescontos();
     }
 
     @DeleteMapping("/delete/{id}")

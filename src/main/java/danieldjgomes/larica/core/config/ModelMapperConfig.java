@@ -26,7 +26,7 @@ public class ModelMapperConfig {
             protected Desconto convert(String source) {
                 UUID descontoId = UUID.fromString(source);
                 Desconto desconto = new Desconto();
-                desconto.setDescontoId(descontoId);
+                desconto.setId(descontoId);
                 return desconto;
             }
         };

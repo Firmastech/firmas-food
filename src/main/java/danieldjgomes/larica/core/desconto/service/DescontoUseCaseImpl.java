@@ -1,9 +1,12 @@
 package danieldjgomes.larica.core.desconto.service;
 
+import danieldjgomes.larica.core.desconto.dtos.DescontoRequestDTO;
+import danieldjgomes.larica.core.desconto.dtos.DescontoResponseDTO;
 import danieldjgomes.larica.core.desconto.entity.Desconto;
 import danieldjgomes.larica.core.desconto.repository.DescontoRepository;
 import danieldjgomes.larica.core.exception.EntityNotFoundException;
 import danieldjgomes.larica.core.usecases.DescontoUseCase;
+import danieldjgomes.larica.infrastructure.mapper.DescontoMapper;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -12,37 +15,45 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class DescontoUseCaseImpl implements DescontoUseCase {
 
 
-    private final DescontoRepository repository;
-    private final ModelMapper modelMapper;
+    private final DescontoRepository descontoRepository;
 
-    public Desconto createDesconto(Desconto desconto) {
-        return repository.save(desconto);
+    public DescontoResponseDTO createDesconto(DescontoRequestDTO dto) {
+        Desconto desconto = DescontoMapper.INSTANCE.toEntity(dto);
+        desconto = descontoRepository.save(desconto);
+        return DescontoMapper.INSTANCE.toDto(desconto);
     }
 
-    public Optional<Desconto> getDescontoById(UUID id) {
-        return repository.findById(id);
+    public Optional<DescontoResponseDTO> getDescontoById(UUID id) {
+        return descontoRepository.findById(id)
+                .map(DescontoMapper.INSTANCE::toDto);
     }
 
-    public List<Desconto> listAllDescontos() {
-        return repository.findAll();
+    public List<DescontoResponseDTO> listAllDescontos() {
+        return descontoRepository.findAll()
+                .stream()
+                .map(DescontoMapper.INSTANCE::toDto)
+                .collect(Collectors.toList());
     }
 
-    public Optional<Desconto> updateDesconto(UUID id, Desconto updatedDesconto) {
+    public Optional<DescontoResponseDTO> updateDesconto(UUID id, DescontoRequestDTO dto) {
         Desconto existingDesconto = getExistingDesconto(id);
-        modelMapper.getConfiguration().setSkipNullEnabled(true);
-        modelMapper.map(updatedDesconto, existingDesconto);
-        return Optional.of(repository.save(existingDesconto));
+        Desconto updatedDesconto = DescontoMapper.INSTANCE.toEntity(dto);
+        updatedDesconto.setId(existingDesconto.getId());
+        descontoRepository.save(updatedDesconto);
+        return Optional.of(DescontoMapper.INSTANCE.toDto(updatedDesconto));
     }
 
-
+    @Override
     public void deleteDesconto(UUID id) {
-        repository.findById(id);
+        Desconto existingDesconto = getExistingDesconto(id);
+        descontoRepository.delete(existingDesconto);
     }
 
     public Optional<BigDecimal> aplicarDesconto(BigDecimal valorOriginal, BigDecimal porcentagemDesconto) {
@@ -54,6 +65,7 @@ public class DescontoUseCaseImpl implements DescontoUseCase {
     }
 
     private Desconto getExistingDesconto(UUID id) {
-        return getDescontoById(id).orElseThrow(() -> new EntityNotFoundException("Desconto not found with id: " + id));
+        return descontoRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Desconto not found with id: " + id));
     }
 }

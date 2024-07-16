@@ -1,6 +1,7 @@
 package danieldjgomes.larica.core.usecases;
 
-import danieldjgomes.larica.core.prato.entity.Prato;
+import danieldjgomes.larica.core.prato.dtos.PratoRequestDTO;
+import danieldjgomes.larica.core.prato.dtos.PratoResponseDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,9 +9,13 @@ import java.util.UUID;
 
 public interface PratoUseCase {
 
-    Prato createPrato(Prato prato);
-    List<Prato> listAllPratos();
-    Optional<Prato> getPratoById(UUID id);
-    Optional<Prato> updatePrato(UUID id, Prato updatedPrato);
+    PratoResponseDTO createPrato(PratoRequestDTO pratoRequest);
+
+    Optional<PratoResponseDTO> getPratoById(UUID id);
+
+    List<PratoResponseDTO> listAllPratos();
+
+    Optional<PratoResponseDTO> updatePrato(UUID id, PratoRequestDTO pratoRequest);
+
     void deletePrato(UUID id);
 }

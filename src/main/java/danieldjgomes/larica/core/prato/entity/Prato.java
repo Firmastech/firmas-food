@@ -20,7 +20,8 @@ public class Prato {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID pratoId;
+    @Column(name = "id", updatable = false, nullable = false)
+    private UUID id;
 
     @Column(nullable = false, length = 100)
     private String nome;
@@ -35,7 +36,7 @@ public class Prato {
     private BigDecimal preco;
 
     @ManyToOne
-    @JoinColumn(name = "tag_desconto_id", nullable = false)
-    private Desconto tagDescontoId;
+    @JoinColumn(name = "tag_desconto_id")
+    private Desconto desconto;
 
 }

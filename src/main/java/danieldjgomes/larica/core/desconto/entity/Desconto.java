@@ -1,5 +1,6 @@
 package danieldjgomes.larica.core.desconto.entity;
 
+import danieldjgomes.larica.core.prato.entity.Prato;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -14,21 +16,21 @@ import java.util.UUID;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "tag_desconto")
+@Table(name = "desconto")
 public class Desconto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private UUID descontoId;
+    @Column(name = "desconto_id")
+    private UUID id;
 
-    @Column(name = "nome", nullable = false, length = 100)
+    @Column(name = "nome", length = 100)
     private String nome;
 
-    @Column(name = "descricao", nullable = false, length = 2000)
+    @Column(name = "descricao", length = 2000)
     private String descricao;
 
-    @Column(name = "porcentagem_desconto", nullable = false)
+    @Column(name = "porcentagem_desconto")
     private BigDecimal porcentagemDesconto;
 
 }
