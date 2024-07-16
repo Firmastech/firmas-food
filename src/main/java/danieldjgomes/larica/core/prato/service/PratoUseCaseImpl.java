@@ -46,6 +46,18 @@ public class PratoUseCaseImpl implements PratoUseCase {
         return PratoMapper.INSTANCE.toDto(savedPrato);
     }
 
+    public Optional<PratoResponseDTO> removeDesconto(UUID id) {
+        Optional<Prato> optionalPrato = Optional.ofNullable(getExistingPrato(id));
+        if (optionalPrato.isEmpty()) {
+            return Optional.empty();
+        }
+
+        Prato prato = optionalPrato.get();
+        prato.setDesconto(null);
+        pratoRepository.save(prato);
+        return Optional.of(PratoMapper.INSTANCE.toDto(prato));
+    }
+
     public Optional<PratoResponseDTO> getPratoById(UUID id) {
         return pratoRepository.findById(id)
                 .map(PratoMapper.INSTANCE::toDto);

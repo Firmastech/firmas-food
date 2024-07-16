@@ -13,6 +13,8 @@ public interface PratoUseCase {
 
     PratoResponseDTO applayDescontoToPrato(UUID pratoId, UUID descontoId);
 
+    Optional<PratoResponseDTO> removeDesconto(UUID pratoId);
+
     Optional<PratoResponseDTO> getPratoById(UUID id);
 
     List<PratoResponseDTO> listAllPratos();

@@ -32,6 +32,13 @@ public class PratoController {
         return ResponseEntity.ok(pratoComDesconto);
     }
 
+    @PutMapping("/{id}/remove-desconto") //TODO Está removendo desconto, porém ele não está retornando com o preço original
+    public ResponseEntity<PratoResponseDTO> removeDesconto(@PathVariable UUID id) {
+        Optional<PratoResponseDTO> pratoResponseDTO = pratoService.removeDesconto(id);
+        return pratoResponseDTO.map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<PratoResponseDTO> getPratoById(@PathVariable UUID id) {
         Optional<PratoResponseDTO> prato = pratoService.getPratoById(id);
