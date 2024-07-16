@@ -20,9 +20,10 @@ public class Culinaria {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private UUID culinariaId;
 
-    @Column(nullable = false, length = 144)
+    @Column(name = "tipo", nullable = false, length = 144)
     private String tipo;
 
     @OneToMany(mappedBy = "tipoCulinariaId")
