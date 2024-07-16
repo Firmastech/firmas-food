@@ -1,6 +1,5 @@
 package danieldjgomes.larica.core.desconto.entity;
 
-import danieldjgomes.larica.core.prato.entity.Prato;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.UUID;
 
 @Getter

@@ -26,4 +26,5 @@ public interface PratoMapper {
     @Mapping(source = "preco", target = "preco")
     @Mapping(source = "desconto", target = "desconto")
     PratoResponseDTO toDto(Prato prato);
+
 }

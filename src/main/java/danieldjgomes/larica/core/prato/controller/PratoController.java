@@ -2,11 +2,7 @@ package danieldjgomes.larica.core.prato.controller;
 
 import danieldjgomes.larica.core.prato.dtos.PratoRequestDTO;
 import danieldjgomes.larica.core.prato.dtos.PratoResponseDTO;
-import danieldjgomes.larica.core.prato.entity.Prato;
-import danieldjgomes.larica.core.prato.request.PratoRequest;
 import danieldjgomes.larica.core.usecases.PratoUseCase;
-import danieldjgomes.larica.infrastructure.mapper.DTOMapper;
-import danieldjgomes.larica.infrastructure.mapper.PratoMapper;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -28,6 +24,12 @@ public class PratoController {
     public ResponseEntity<PratoResponseDTO> createPrato(@RequestBody @Valid PratoRequestDTO request) {
         PratoResponseDTO createdPrato = pratoService.createPrato(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdPrato);
+    }
+
+    @PostMapping("/{pratoId}/aplicar-desconto/{descontoId}")
+    public ResponseEntity<PratoResponseDTO> aplicarDescontoAoPrato(@PathVariable UUID pratoId, @PathVariable UUID descontoId) {
+        PratoResponseDTO pratoComDesconto = pratoService.applayDescontoToPrato(pratoId, descontoId);
+        return ResponseEntity.ok(pratoComDesconto);
     }
 
     @GetMapping("/{id}")

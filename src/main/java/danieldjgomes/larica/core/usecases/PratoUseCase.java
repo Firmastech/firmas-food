@@ -11,6 +11,8 @@ public interface PratoUseCase {
 
     PratoResponseDTO createPrato(PratoRequestDTO pratoRequest);
 
+    PratoResponseDTO applayDescontoToPrato(UUID pratoId, UUID descontoId);
+
     Optional<PratoResponseDTO> getPratoById(UUID id);
 
     List<PratoResponseDTO> listAllPratos();

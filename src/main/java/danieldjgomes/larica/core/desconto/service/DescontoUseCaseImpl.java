@@ -8,7 +8,6 @@ import danieldjgomes.larica.core.exception.EntityNotFoundException;
 import danieldjgomes.larica.core.usecases.DescontoUseCase;
 import danieldjgomes.larica.infrastructure.mapper.DescontoMapper;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;

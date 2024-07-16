@@ -12,6 +12,7 @@ import danieldjgomes.larica.infrastructure.mapper.PratoMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -23,10 +24,24 @@ public class PratoUseCaseImpl implements PratoUseCase {
     private final PratoRepository pratoRepository;
     private final DescontoRepository descontoRepository;
 
+
     public PratoResponseDTO createPrato(PratoRequestDTO pratoRequest) {
         Prato prato = PratoMapper.INSTANCE.toEntity(pratoRequest);
-        Desconto desconto = findDescontoById(pratoRequest.getDesconto().getId());
+        Prato savedPrato = pratoRepository.save(prato);
+        return PratoMapper.INSTANCE.toDto(savedPrato);
+    }
+
+
+    public PratoResponseDTO applayDescontoToPrato(UUID pratoId, UUID descontoId) {
+        Prato prato = getExistingPrato(pratoId);
+        Desconto desconto = findDescontoById(descontoId);
         prato.setDesconto(desconto);
+        BigDecimal precoOriginal = prato.getPreco();
+        BigDecimal porcentagemDesconto = desconto.getPorcentagemDesconto();
+        BigDecimal valorDesconto = precoOriginal.multiply(porcentagemDesconto).divide(BigDecimal.valueOf(100));
+        BigDecimal precoFinal = precoOriginal.subtract(valorDesconto);
+        prato.setPreco(precoFinal);
+
         Prato savedPrato = pratoRepository.save(prato);
         return PratoMapper.INSTANCE.toDto(savedPrato);
     }

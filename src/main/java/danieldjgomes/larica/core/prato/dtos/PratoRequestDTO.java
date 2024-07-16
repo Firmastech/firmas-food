@@ -31,6 +31,5 @@ public class PratoRequestDTO {
     @NotNull
     private BigDecimal preco;
 
-    @NotNull
     private Desconto desconto;
 }

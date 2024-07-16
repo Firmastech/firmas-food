@@ -1,6 +1,5 @@
 package danieldjgomes.larica.core.prato.dtos;
 
-import danieldjgomes.larica.core.desconto.dtos.DescontoResponseDTO;
 import danieldjgomes.larica.core.desconto.entity.Desconto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

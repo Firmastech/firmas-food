@@ -2,7 +2,6 @@ package danieldjgomes.larica.core.desconto.controller;
 
 import danieldjgomes.larica.core.desconto.dtos.DescontoRequestDTO;
 import danieldjgomes.larica.core.desconto.dtos.DescontoResponseDTO;
-import danieldjgomes.larica.core.desconto.entity.Desconto;
 import danieldjgomes.larica.core.desconto.service.DescontoUseCaseImpl;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
