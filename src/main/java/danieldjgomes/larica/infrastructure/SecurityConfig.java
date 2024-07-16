@@ -22,7 +22,7 @@ public class SecurityConfig {
                 .requestCache(RequestCacheConfigurer::disable)
                 .authorizeHttpRequests(
                         authorizeConfig -> {
-                            authorizeConfig.requestMatchers("/logout","/login").permitAll();
+                            authorizeConfig.requestMatchers("/login").permitAll();
                             authorizeConfig.anyRequest().authenticated();
                         })
                 .oauth2Login(Customizer.withDefaults())
