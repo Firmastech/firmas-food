@@ -1,6 +1,7 @@
 package danieldjgomes.larica.core.cardapio.controller;
 
-import danieldjgomes.larica.core.cardapio.entity.Cardapio;
+import danieldjgomes.larica.core.cardapio.dtos.CardapioRequestDTO;
+import danieldjgomes.larica.core.cardapio.dtos.CardapioResponseDTO;
 import danieldjgomes.larica.core.usecases.CardapioUseCase;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -20,28 +21,28 @@ public class CardapioController {
     private final CardapioUseCase cardapioUseCase;
 
 
-    @GetMapping
-    public List<Cardapio> cardapio() {
-        List<Cardapio> cardapioList = cardapioUseCase.listAllCardapios();
-        return new ResponseEntity<>(cardapioList, HttpStatus.OK).getBody();
+    @PostMapping("/{pratoId}/create/{tipoCulinariaId}")
+    public ResponseEntity<CardapioResponseDTO> createCardapio(@PathVariable UUID pratoId, @PathVariable UUID tipoCulinariaId) {
+        CardapioResponseDTO createdCardapio = cardapioUseCase.createCardapio(pratoId, tipoCulinariaId);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdCardapio);
     }
 
     @GetMapping("/{id}")
-    public Optional<Cardapio> getCardapioById(@PathVariable UUID id) { //TODO ALTERAR PARA UUID
-        Optional<Cardapio> cardapio = cardapioUseCase.getCardapioById(id);
-        return cardapio;
+    public ResponseEntity<CardapioResponseDTO> getCardapioById(@PathVariable UUID id) {
+        Optional<CardapioResponseDTO> cardapio = cardapioUseCase.getCardapioById(id);
+        return cardapio.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @PostMapping("/create")
-    public ResponseEntity<Cardapio> createCardapio(@RequestBody @Valid Cardapio cardapio) {
-        Cardapio createdCardapio = cardapioUseCase.createCardapio(cardapio);
-        return new ResponseEntity<>(createdCardapio, HttpStatus.CREATED);
+    @GetMapping
+    public ResponseEntity<List<CardapioResponseDTO>> listAllCardapios() {
+        List<CardapioResponseDTO> cardapios = cardapioUseCase.listAllCardapios();
+        return new ResponseEntity<>(cardapios, HttpStatus.OK);
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<Optional<Cardapio>> updateCardapio(@PathVariable UUID id, @RequestBody @Valid Cardapio cardapio) {
-        Optional<Cardapio> updatedCardapio = cardapioUseCase.updateCardapio(id, cardapio);
-        return new ResponseEntity<>(updatedCardapio, HttpStatus.OK);
+    public ResponseEntity<CardapioResponseDTO> updatePrato(@PathVariable UUID id, @RequestBody @Valid CardapioRequestDTO updatedCardapio) {
+        Optional<CardapioResponseDTO> prato = cardapioUseCase.updateCardapio(id, updatedCardapio);
+        return prato.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/delete/{id}")

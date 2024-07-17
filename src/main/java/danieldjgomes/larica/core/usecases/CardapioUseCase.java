@@ -1,7 +1,7 @@
 package danieldjgomes.larica.core.usecases;
 
-import danieldjgomes.larica.core.cardapio.entity.Cardapio;
-import danieldjgomes.larica.core.exception.EntityNotFoundException;
+import danieldjgomes.larica.core.cardapio.dtos.CardapioRequestDTO;
+import danieldjgomes.larica.core.cardapio.dtos.CardapioResponseDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -9,9 +9,13 @@ import java.util.UUID;
 
 public interface CardapioUseCase {
 
-    Cardapio createCardapio(Cardapio cardapio);
-    List<Cardapio> listAllCardapios();
-    Optional<Cardapio> getCardapioById(UUID id);
-    Optional<Cardapio> updateCardapio(UUID id, Cardapio updatedCardapio) throws EntityNotFoundException;
+    CardapioResponseDTO createCardapio(UUID pratoId, UUID tipoCulinariaId);
+
+    List<CardapioResponseDTO> listAllCardapios();
+
+    Optional<CardapioResponseDTO> getCardapioById(UUID id);
+
+    Optional<CardapioResponseDTO> updateCardapio(UUID id, CardapioRequestDTO cardapioRequest);
+
     void deleteCardapio(UUID id);
 }

@@ -20,13 +20,14 @@ public class Cardapio {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private UUID cardapioId;
 
     @ManyToOne
-    @JoinColumn(name = "pratoId", nullable = false)
+    @JoinColumn(name = "prato_id", nullable = false)
     private Prato pratoId;
 
     @ManyToOne
-    @JoinColumn(name = "tipoCulinariaId", nullable = false)
+    @JoinColumn(name = "tipo_culinaria_id", nullable = false)
     private Culinaria tipoCulinariaId;
 }
