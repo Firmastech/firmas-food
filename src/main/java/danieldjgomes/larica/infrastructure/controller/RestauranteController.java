@@ -3,12 +3,14 @@ package danieldjgomes.larica.infrastructure.controller;
 import danieldjgomes.larica.core.restaurante.entity.Restaurante;
 import danieldjgomes.larica.core.usecases.restaurante.AtualizarRestauranteUseCase;
 import danieldjgomes.larica.core.usecases.restaurante.ConsultarRestauranteUseCase;
-import danieldjgomes.larica.core.usecases.restaurante.InativarRestaurenteUseCase;
+import danieldjgomes.larica.core.usecases.restaurante.InativarRestauranteUseCase;
 import danieldjgomes.larica.core.usecases.restaurante.RegistrarRestauranteUseCase;
 import danieldjgomes.larica.infrastructure.dto.restaurante.request.AtualizarRestauranteRequestDTO;
 import danieldjgomes.larica.infrastructure.dto.restaurante.request.CriarRestauranteRequestDTO;
 import danieldjgomes.larica.infrastructure.mapper.DTOMapper;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,19 +28,19 @@ public class RestauranteController {
     private final RegistrarRestauranteUseCase registrarRestauranteInterador;
     private final ConsultarRestauranteUseCase consultarRestauranteUseCase;
     private final AtualizarRestauranteUseCase atualizarRestauranteUseCase;
-    private final InativarRestaurenteUseCase inativarRestauranteUseCase;
-    private DTOMapper mapper;
+    private final InativarRestauranteUseCase inativarRestauranteUseCase;
+    private final DTOMapper mapper;
 
     @PostMapping
-    public ResponseEntity criarRestaurante(@RequestBody @Valid CriarRestauranteRequestDTO dto) {
+    public ResponseEntity registrarRestaurante(@RequestBody @Valid CriarRestauranteRequestDTO dto) {
         Restaurante restaurante = mapper.toRestaurante(dto);
         registrarRestauranteInterador.registrarRestaurante(restaurante);
         return ResponseEntity.status(HttpStatus.CREATED).build();
 
     }
 
-    @GetMapping
-    public ResponseEntity<Restaurante> consultarRestaurante(@RequestParam String id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<Restaurante> consultarRestaurante(@PathVariable @NotBlank @NotNull String id) {
         return ResponseEntity.ok(consultarRestauranteUseCase.consultar(UUID.fromString(id)));
 
     }
@@ -50,11 +52,10 @@ public class RestauranteController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
-    @DeleteMapping
-    public ResponseEntity inativarRestaurante(@RequestBody String id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity inativarRestaurante(@PathVariable @NotBlank @NotNull String id) {
         inativarRestauranteUseCase.inativarRestaurante(UUID.fromString(id));
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-
     }
 
 }

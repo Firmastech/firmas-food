@@ -2,7 +2,7 @@ package danieldjgomes.larica.infrastructure;
 
 import danieldjgomes.larica.core.restaurante.contract.RestauranteRepository;
 import danieldjgomes.larica.core.restaurante.exceptions.EntityNotFoundException;
-import danieldjgomes.larica.core.usecases.restaurante.InativarRestaurenteUseCase;
+import danieldjgomes.larica.core.usecases.restaurante.InativarRestauranteUseCase;
 import danieldjgomes.larica.dataprovider.repository.entity.RestauranteEntity;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -11,7 +11,7 @@ import java.util.UUID;
 
 @Component
 @AllArgsConstructor
-public class InativarRestauranteUseCaseImpl implements InativarRestaurenteUseCase {
+public class InativarRestauranteUseCaseImpl implements InativarRestauranteUseCase {
 
     private final RestauranteRepository restauranteRepository;
 

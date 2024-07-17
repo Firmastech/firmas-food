@@ -2,7 +2,7 @@ package danieldjgomes.larica.core.usecases.restaurante;
 
 import java.util.UUID;
 
-public interface InativarRestaurenteUseCase {
+public interface InativarRestauranteUseCase {
 
     void inativarRestaurante(UUID ID);
 }
