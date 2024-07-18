@@ -1,6 +1,5 @@
 package danieldjgomes.larica.infrastructure.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import danieldjgomes.larica.core.endereco.entity.Endereco;
 import danieldjgomes.larica.core.restaurante.entity.Restaurante;
@@ -10,8 +9,8 @@ import danieldjgomes.larica.core.usecases.restaurante.ConsultarRestauranteUseCas
 import danieldjgomes.larica.core.usecases.restaurante.RegistrarRestauranteUseCase;
 import danieldjgomes.larica.core.usecases.restaurante.InativarRestauranteUseCase;
 import danieldjgomes.larica.infrastructure.dto.restaurante.request.AtualizarRestauranteRequestDTO;
+import danieldjgomes.larica.infrastructure.dto.restaurante.request.CadastrarEnderecoRequest;
 import danieldjgomes.larica.infrastructure.dto.restaurante.request.CriarRestauranteRequestDTO;
-import danieldjgomes.larica.infrastructure.dto.restaurante.request.EnderecoDTO;
 import danieldjgomes.larica.infrastructure.mapper.DTOMapper;
 import jakarta.ws.rs.core.MediaType;
 import org.junit.jupiter.api.BeforeEach;
@@ -63,7 +62,7 @@ class RestauranteControllerTest {
         dto.setNome("Restaurante Teste");
         dto.setTempoEstimadoDeEntrega(60);
         dto.setStatusFuncionamento(StatusFuncionamento.INATIVO);
-        dto.setEndereco(new EnderecoDTO());
+        dto.setEndereco(new CadastrarEnderecoRequest());
         return dto;
     }
 

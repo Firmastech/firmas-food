@@ -16,6 +16,6 @@ public class CriarRestauranteRequestDTO {
     private StatusFuncionamento statusFuncionamento = StatusFuncionamento.INATIVO;
 
     @NotNull
-    private EnderecoDTO endereco;
+    private CadastrarEnderecoRequest endereco;
 
 }

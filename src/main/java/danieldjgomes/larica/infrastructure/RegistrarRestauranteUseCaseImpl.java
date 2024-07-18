@@ -3,6 +3,7 @@ package danieldjgomes.larica.infrastructure;
 import danieldjgomes.larica.core.restaurante.contract.RestauranteRepository;
 import danieldjgomes.larica.core.restaurante.entity.Restaurante;
 import danieldjgomes.larica.core.usecases.restaurante.RegistrarRestauranteUseCase;
+import danieldjgomes.larica.dataprovider.repository.mapper.RestauranteMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -12,9 +13,10 @@ import java.util.UUID;
 public class RegistrarRestauranteUseCaseImpl implements RegistrarRestauranteUseCase {
 
     private final RestauranteRepository restauranteRepository;
+    private final RestauranteMapper mapper;
 
-    public void registrarRestaurante(Restaurante restaurante) {
+    public Restaurante registrarRestaurante(Restaurante restaurante) {
         restaurante.setId(UUID.randomUUID());
-        restauranteRepository.save(restaurante);
+        return mapper.toRestaurante(restauranteRepository.save(restaurante));
     }
 }

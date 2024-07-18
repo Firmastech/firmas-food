@@ -3,7 +3,7 @@ package danieldjgomes.larica.dataprovider.repository;
 import danieldjgomes.larica.core.restaurante.contract.RestauranteRepository;
 import danieldjgomes.larica.core.restaurante.entity.Restaurante;
 import danieldjgomes.larica.dataprovider.repository.entity.RestauranteEntity;
-import danieldjgomes.larica.infrastructure.dto.restaurante.response.ConsultarRestauranteResponseDTO;
+import danieldjgomes.larica.dataprovider.repository.mapper.RestauranteMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import java.time.LocalDateTime;
@@ -28,11 +28,11 @@ public class RestauranteRepositoryImpl implements RestauranteRepository {
     }
 
     @Override
-    public void save(Restaurante restaurante) {
+    public RestauranteEntity save(Restaurante restaurante) {
         RestauranteEntity entity = restauranteMapper.toEntity(restaurante);
         entity.setIsActive(true);
         entity.setDataInclusao(LocalDateTime.now());
-        restauranteDao.save(entity);
+        return restauranteDao.save(entity);
     }
 
     @Override
