@@ -32,7 +32,7 @@ DROP ROLE restaurante_user;
 --
 
 CREATE ROLE dbo;
-ALTER ROLE dbo WITH SUPERUSER INHERIT CREATEROLE CREATEDB LOGIN REPLICATION BYPASSRLS PASSWORD 'SCRAM-SHA-256$4096:LC/MZx2gPTtSAUNT1cWWnw==$5HggIuA2ugGzhm6vLViDCKXW5Zb2zNI31u89bcQe/6s=:lDq4jyu6iTPQr7uzwJiAeIR+6rRr4ps/B8IVscbpBgg=';
+ALTER ROLE dbo WITH SUPERUSER INHERIT CREATEROLE CREATEDB LOGIN REPLICATION BYPASSRLS PASSWORD 'SCRAM-SHA-256$4096:VoYwd4bvr4lepCaOMf4mkg==$2ihwB1B2dOALxuRePG/AchiL2yoQoKcEm+2n0bOxgx8=:7cylem4yR6tYBtHzVxNvJnotF9UFS++iuqgF/FR3LOA=';
 CREATE ROLE keycloak_user;
 ALTER ROLE keycloak_user WITH NOSUPERUSER INHERIT NOCREATEROLE NOCREATEDB LOGIN NOREPLICATION NOBYPASSRLS PASSWORD 'SCRAM-SHA-256$4096:eI70QyMYJJfC/rOUd0mSxg==$rkMIE3mzO0AmZp9pOGmdmMLb63NIAq52FBIMHKEzvdQ=:7gb9OjF/eQvgMwOFiDv1/TRL/fYyWfZ1LYf7nFnQuIA=';
 CREATE ROLE postgres;
@@ -193,14 +193,14 @@ SET default_table_access_method = heap;
 --
 
 CREATE TABLE public.cardapio (
-    id character varying(36) NOT NULL,
-    nome character varying(255) NOT NULL,
-    descricao character varying(8000),
-    restaurante_id character varying(36) NOT NULL,
-    criado timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    atualizado timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    esta_ativo boolean DEFAULT true NOT NULL,
-    deletado timestamp without time zone
+                                 id character varying(36) NOT NULL,
+                                 nome character varying(255) NOT NULL,
+                                 descricao character varying(8000),
+                                 restaurante_id character varying(36) NOT NULL,
+                                 criado timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+                                 atualizado timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+                                 esta_ativo boolean DEFAULT true NOT NULL,
+                                 deletado timestamp without time zone
 );
 
 
@@ -211,8 +211,8 @@ ALTER TABLE public.cardapio OWNER TO dbo;
 --
 
 CREATE TABLE public.cardapio_prato (
-    cardapio_id character varying(36) NOT NULL,
-    prato_id character varying(36) NOT NULL
+                                       cardapio_id character varying(36) NOT NULL,
+                                       prato_id character varying(36) NOT NULL
 );
 
 
@@ -223,13 +223,13 @@ ALTER TABLE public.cardapio_prato OWNER TO dbo;
 --
 
 CREATE TABLE public.categoria_prato (
-    id character varying(36) NOT NULL,
-    nome character varying(255) NOT NULL,
-    restaurante_id character varying(36) NOT NULL,
-    criado timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    atualizado timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    esta_ativo boolean DEFAULT true NOT NULL,
-    deletado timestamp without time zone
+                                        id character varying(36) NOT NULL,
+                                        nome character varying(255) NOT NULL,
+                                        restaurante_id character varying(36) NOT NULL,
+                                        criado timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+                                        atualizado timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+                                        esta_ativo boolean DEFAULT true NOT NULL,
+                                        deletado timestamp without time zone
 );
 
 
@@ -240,13 +240,13 @@ ALTER TABLE public.categoria_prato OWNER TO dbo;
 --
 
 CREATE TABLE public.endereco (
-    id character varying(36) NOT NULL,
-    rua character varying(255) NOT NULL,
-    numero integer NOT NULL,
-    cep character varying(9) NOT NULL,
-    cidade character varying(100) NOT NULL,
-    uf character(2) NOT NULL,
-    pontoreferencia character varying(144)
+                                 id character varying(36) NOT NULL,
+                                 rua character varying(255) NOT NULL,
+                                 numero integer NOT NULL,
+                                 cep character varying(9) NOT NULL,
+                                 cidade character varying(100) NOT NULL,
+                                 uf character(2) NOT NULL,
+                                 pontoreferencia character varying(144)
 );
 
 
@@ -257,11 +257,11 @@ ALTER TABLE public.endereco OWNER TO dbo;
 --
 
 CREATE TABLE public.item_pedido (
-    id character varying(36) NOT NULL,
-    prato_id character varying(36) NOT NULL,
-    observacao character varying(600) NOT NULL,
-    pedido_id character varying(36) NOT NULL,
-    quantidade integer NOT NULL
+                                    id character varying(36) NOT NULL,
+                                    prato_id character varying(36) NOT NULL,
+                                    observacao character varying(600) NOT NULL,
+                                    pedido_id character varying(36) NOT NULL,
+                                    quantidade integer NOT NULL
 );
 
 
@@ -272,14 +272,14 @@ ALTER TABLE public.item_pedido OWNER TO dbo;
 --
 
 CREATE TABLE public.pedido (
-    id character varying(36) NOT NULL,
-    usuario_id character varying(255) NOT NULL,
-    restaurante_id character varying(36) NOT NULL,
-    valor numeric(10,2) NOT NULL,
-    status character varying(255) NOT NULL,
-    data_hora_confirmacao timestamp without time zone,
-    data_hora_pedido timestamp without time zone NOT NULL,
-    data_hora_entrega timestamp without time zone
+                               id character varying(36) NOT NULL,
+                               usuario_id character varying(255) NOT NULL,
+                               restaurante_id character varying(36) NOT NULL,
+                               valor numeric(10,2) NOT NULL,
+                               status character varying(255) NOT NULL,
+                               data_hora_confirmacao timestamp without time zone,
+                               data_hora_pedido timestamp without time zone NOT NULL,
+                               data_hora_entrega timestamp without time zone
 );
 
 
@@ -290,17 +290,17 @@ ALTER TABLE public.pedido OWNER TO dbo;
 --
 
 CREATE TABLE public.prato (
-    id character varying(36) NOT NULL,
-    descricao character varying(8000),
-    nome character varying(255) NOT NULL,
-    preco numeric(10,2) NOT NULL,
-    categoria character varying(255),
-    url_imagem character varying(8000),
-    porcentagem_desconto numeric(10,2),
-    criado timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    atualizado timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    esta_ativo boolean DEFAULT true NOT NULL,
-    deletado timestamp without time zone
+                              id character varying(36) NOT NULL,
+                              descricao character varying(8000),
+                              nome character varying(255) NOT NULL,
+                              preco numeric(10,2) NOT NULL,
+                              categoria character varying(255),
+                              url_imagem character varying(8000),
+                              porcentagem_desconto numeric(10,2),
+                              criado timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+                              atualizado timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+                              esta_ativo boolean DEFAULT true NOT NULL,
+                              deletado timestamp without time zone
 );
 
 
@@ -311,12 +311,12 @@ ALTER TABLE public.prato OWNER TO dbo;
 --
 
 CREATE TABLE public.restaurante (
-    id character varying(36) NOT NULL,
-    nome character varying(100) NOT NULL,
-    enderecoid character varying(36) NOT NULL,
-    tempoestimado integer NOT NULL,
-    statusfuncionamento character varying(10) NOT NULL,
-    CONSTRAINT restaurante_statusfuncionamento_check CHECK (((statusfuncionamento)::text = ANY (ARRAY[('ABERTO'::character varying)::text, ('FECHADO'::character varying)::text, ('INATIVO'::character varying)::text])))
+                                    id character varying(36) NOT NULL,
+                                    nome character varying(100) NOT NULL,
+                                    enderecoid character varying(36) NOT NULL,
+                                    tempoestimado integer NOT NULL,
+                                    statusfuncionamento character varying(10) NOT NULL,
+                                    CONSTRAINT restaurante_statusfuncionamento_check CHECK (((statusfuncionamento)::text = ANY (ARRAY[('ABERTO'::character varying)::text, ('FECHADO'::character varying)::text, ('INATIVO'::character varying)::text])))
 );
 
 
@@ -686,18 +686,18 @@ SET default_table_access_method = heap;
 --
 
 CREATE TABLE public.admin_event_entity (
-    id character varying(36) NOT NULL,
-    admin_event_time bigint,
-    realm_id character varying(255),
-    operation_type character varying(255),
-    auth_realm_id character varying(255),
-    auth_client_id character varying(255),
-    auth_user_id character varying(255),
-    ip_address character varying(255),
-    resource_path character varying(2550),
-    representation text,
-    error character varying(255),
-    resource_type character varying(64)
+                                           id character varying(36) NOT NULL,
+                                           admin_event_time bigint,
+                                           realm_id character varying(255),
+                                           operation_type character varying(255),
+                                           auth_realm_id character varying(255),
+                                           auth_client_id character varying(255),
+                                           auth_user_id character varying(255),
+                                           ip_address character varying(255),
+                                           resource_path character varying(2550),
+                                           representation text,
+                                           error character varying(255),
+                                           resource_type character varying(64)
 );
 
 
@@ -708,8 +708,8 @@ ALTER TABLE public.admin_event_entity OWNER TO dbo;
 --
 
 CREATE TABLE public.associated_policy (
-    policy_id character varying(36) NOT NULL,
-    associated_policy_id character varying(36) NOT NULL
+                                          policy_id character varying(36) NOT NULL,
+                                          associated_policy_id character varying(36) NOT NULL
 );
 
 
@@ -720,16 +720,16 @@ ALTER TABLE public.associated_policy OWNER TO dbo;
 --
 
 CREATE TABLE public.authentication_execution (
-    id character varying(36) NOT NULL,
-    alias character varying(255),
-    authenticator character varying(36),
-    realm_id character varying(36),
-    flow_id character varying(36),
-    requirement integer,
-    priority integer,
-    authenticator_flow boolean DEFAULT false NOT NULL,
-    auth_flow_id character varying(36),
-    auth_config character varying(36)
+                                                 id character varying(36) NOT NULL,
+                                                 alias character varying(255),
+                                                 authenticator character varying(36),
+                                                 realm_id character varying(36),
+                                                 flow_id character varying(36),
+                                                 requirement integer,
+                                                 priority integer,
+                                                 authenticator_flow boolean DEFAULT false NOT NULL,
+                                                 auth_flow_id character varying(36),
+                                                 auth_config character varying(36)
 );
 
 
@@ -740,13 +740,13 @@ ALTER TABLE public.authentication_execution OWNER TO dbo;
 --
 
 CREATE TABLE public.authentication_flow (
-    id character varying(36) NOT NULL,
-    alias character varying(255),
-    description character varying(255),
-    realm_id character varying(36),
-    provider_id character varying(36) DEFAULT 'basic-flow'::character varying NOT NULL,
-    top_level boolean DEFAULT false NOT NULL,
-    built_in boolean DEFAULT false NOT NULL
+                                            id character varying(36) NOT NULL,
+                                            alias character varying(255),
+                                            description character varying(255),
+                                            realm_id character varying(36),
+                                            provider_id character varying(36) DEFAULT 'basic-flow'::character varying NOT NULL,
+                                            top_level boolean DEFAULT false NOT NULL,
+                                            built_in boolean DEFAULT false NOT NULL
 );
 
 
@@ -757,9 +757,9 @@ ALTER TABLE public.authentication_flow OWNER TO dbo;
 --
 
 CREATE TABLE public.authenticator_config (
-    id character varying(36) NOT NULL,
-    alias character varying(255),
-    realm_id character varying(36)
+                                             id character varying(36) NOT NULL,
+                                             alias character varying(255),
+                                             realm_id character varying(36)
 );
 
 
@@ -770,9 +770,9 @@ ALTER TABLE public.authenticator_config OWNER TO dbo;
 --
 
 CREATE TABLE public.authenticator_config_entry (
-    authenticator_id character varying(36) NOT NULL,
-    value text,
-    name character varying(255) NOT NULL
+                                                   authenticator_id character varying(36) NOT NULL,
+                                                   value text,
+                                                   name character varying(255) NOT NULL
 );
 
 
@@ -783,13 +783,13 @@ ALTER TABLE public.authenticator_config_entry OWNER TO dbo;
 --
 
 CREATE TABLE public.broker_link (
-    identity_provider character varying(255) NOT NULL,
-    storage_provider_id character varying(255),
-    realm_id character varying(36) NOT NULL,
-    broker_user_id character varying(255),
-    broker_username character varying(255),
-    token text,
-    user_id character varying(255) NOT NULL
+                                    identity_provider character varying(255) NOT NULL,
+                                    storage_provider_id character varying(255),
+                                    realm_id character varying(36) NOT NULL,
+                                    broker_user_id character varying(255),
+                                    broker_username character varying(255),
+                                    token text,
+                                    user_id character varying(255) NOT NULL
 );
 
 
@@ -800,32 +800,32 @@ ALTER TABLE public.broker_link OWNER TO dbo;
 --
 
 CREATE TABLE public.client (
-    id character varying(36) NOT NULL,
-    enabled boolean DEFAULT false NOT NULL,
-    full_scope_allowed boolean DEFAULT false NOT NULL,
-    client_id character varying(255),
-    not_before integer,
-    public_client boolean DEFAULT false NOT NULL,
-    secret character varying(255),
-    base_url character varying(255),
-    bearer_only boolean DEFAULT false NOT NULL,
-    management_url character varying(255),
-    surrogate_auth_required boolean DEFAULT false NOT NULL,
-    realm_id character varying(36),
-    protocol character varying(255),
-    node_rereg_timeout integer DEFAULT 0,
-    frontchannel_logout boolean DEFAULT false NOT NULL,
-    consent_required boolean DEFAULT false NOT NULL,
-    name character varying(255),
-    service_accounts_enabled boolean DEFAULT false NOT NULL,
-    client_authenticator_type character varying(255),
-    root_url character varying(255),
-    description character varying(255),
-    registration_token character varying(255),
-    standard_flow_enabled boolean DEFAULT true NOT NULL,
-    implicit_flow_enabled boolean DEFAULT false NOT NULL,
-    direct_access_grants_enabled boolean DEFAULT false NOT NULL,
-    always_display_in_console boolean DEFAULT false NOT NULL
+                               id character varying(36) NOT NULL,
+                               enabled boolean DEFAULT false NOT NULL,
+                               full_scope_allowed boolean DEFAULT false NOT NULL,
+                               client_id character varying(255),
+                               not_before integer,
+                               public_client boolean DEFAULT false NOT NULL,
+                               secret character varying(255),
+                               base_url character varying(255),
+                               bearer_only boolean DEFAULT false NOT NULL,
+                               management_url character varying(255),
+                               surrogate_auth_required boolean DEFAULT false NOT NULL,
+                               realm_id character varying(36),
+                               protocol character varying(255),
+                               node_rereg_timeout integer DEFAULT 0,
+                               frontchannel_logout boolean DEFAULT false NOT NULL,
+                               consent_required boolean DEFAULT false NOT NULL,
+                               name character varying(255),
+                               service_accounts_enabled boolean DEFAULT false NOT NULL,
+                               client_authenticator_type character varying(255),
+                               root_url character varying(255),
+                               description character varying(255),
+                               registration_token character varying(255),
+                               standard_flow_enabled boolean DEFAULT true NOT NULL,
+                               implicit_flow_enabled boolean DEFAULT false NOT NULL,
+                               direct_access_grants_enabled boolean DEFAULT false NOT NULL,
+                               always_display_in_console boolean DEFAULT false NOT NULL
 );
 
 
@@ -836,9 +836,9 @@ ALTER TABLE public.client OWNER TO dbo;
 --
 
 CREATE TABLE public.client_attributes (
-    client_id character varying(36) NOT NULL,
-    name character varying(255) NOT NULL,
-    value text
+                                          client_id character varying(36) NOT NULL,
+                                          name character varying(255) NOT NULL,
+                                          value text
 );
 
 
@@ -849,9 +849,9 @@ ALTER TABLE public.client_attributes OWNER TO dbo;
 --
 
 CREATE TABLE public.client_auth_flow_bindings (
-    client_id character varying(36) NOT NULL,
-    flow_id character varying(36),
-    binding_name character varying(255) NOT NULL
+                                                  client_id character varying(36) NOT NULL,
+                                                  flow_id character varying(36),
+                                                  binding_name character varying(255) NOT NULL
 );
 
 
@@ -862,12 +862,12 @@ ALTER TABLE public.client_auth_flow_bindings OWNER TO dbo;
 --
 
 CREATE TABLE public.client_initial_access (
-    id character varying(36) NOT NULL,
-    realm_id character varying(36) NOT NULL,
-    "timestamp" integer,
-    expiration integer,
-    count integer,
-    remaining_count integer
+                                              id character varying(36) NOT NULL,
+                                              realm_id character varying(36) NOT NULL,
+                                              "timestamp" integer,
+                                              expiration integer,
+                                              count integer,
+                                              remaining_count integer
 );
 
 
@@ -878,9 +878,9 @@ ALTER TABLE public.client_initial_access OWNER TO dbo;
 --
 
 CREATE TABLE public.client_node_registrations (
-    client_id character varying(36) NOT NULL,
-    value integer,
-    name character varying(255) NOT NULL
+                                                  client_id character varying(36) NOT NULL,
+                                                  value integer,
+                                                  name character varying(255) NOT NULL
 );
 
 
@@ -891,11 +891,11 @@ ALTER TABLE public.client_node_registrations OWNER TO dbo;
 --
 
 CREATE TABLE public.client_scope (
-    id character varying(36) NOT NULL,
-    name character varying(255),
-    realm_id character varying(36),
-    description character varying(255),
-    protocol character varying(255)
+                                     id character varying(36) NOT NULL,
+                                     name character varying(255),
+                                     realm_id character varying(36),
+                                     description character varying(255),
+                                     protocol character varying(255)
 );
 
 
@@ -906,9 +906,9 @@ ALTER TABLE public.client_scope OWNER TO dbo;
 --
 
 CREATE TABLE public.client_scope_attributes (
-    scope_id character varying(36) NOT NULL,
-    value character varying(2048),
-    name character varying(255) NOT NULL
+                                                scope_id character varying(36) NOT NULL,
+                                                value character varying(2048),
+                                                name character varying(255) NOT NULL
 );
 
 
@@ -919,9 +919,9 @@ ALTER TABLE public.client_scope_attributes OWNER TO dbo;
 --
 
 CREATE TABLE public.client_scope_client (
-    client_id character varying(255) NOT NULL,
-    scope_id character varying(255) NOT NULL,
-    default_scope boolean DEFAULT false NOT NULL
+                                            client_id character varying(255) NOT NULL,
+                                            scope_id character varying(255) NOT NULL,
+                                            default_scope boolean DEFAULT false NOT NULL
 );
 
 
@@ -932,8 +932,8 @@ ALTER TABLE public.client_scope_client OWNER TO dbo;
 --
 
 CREATE TABLE public.client_scope_role_mapping (
-    scope_id character varying(36) NOT NULL,
-    role_id character varying(36) NOT NULL
+                                                  scope_id character varying(36) NOT NULL,
+                                                  role_id character varying(36) NOT NULL
 );
 
 
@@ -944,16 +944,16 @@ ALTER TABLE public.client_scope_role_mapping OWNER TO dbo;
 --
 
 CREATE TABLE public.client_session (
-    id character varying(36) NOT NULL,
-    client_id character varying(36),
-    redirect_uri character varying(255),
-    state character varying(255),
-    "timestamp" integer,
-    session_id character varying(36),
-    auth_method character varying(255),
-    realm_id character varying(255),
-    auth_user_id character varying(36),
-    current_action character varying(36)
+                                       id character varying(36) NOT NULL,
+                                       client_id character varying(36),
+                                       redirect_uri character varying(255),
+                                       state character varying(255),
+                                       "timestamp" integer,
+                                       session_id character varying(36),
+                                       auth_method character varying(255),
+                                       realm_id character varying(255),
+                                       auth_user_id character varying(36),
+                                       current_action character varying(36)
 );
 
 
@@ -964,9 +964,9 @@ ALTER TABLE public.client_session OWNER TO dbo;
 --
 
 CREATE TABLE public.client_session_auth_status (
-    authenticator character varying(36) NOT NULL,
-    status integer,
-    client_session character varying(36) NOT NULL
+                                                   authenticator character varying(36) NOT NULL,
+                                                   status integer,
+                                                   client_session character varying(36) NOT NULL
 );
 
 
@@ -977,9 +977,9 @@ ALTER TABLE public.client_session_auth_status OWNER TO dbo;
 --
 
 CREATE TABLE public.client_session_note (
-    name character varying(255) NOT NULL,
-    value character varying(255),
-    client_session character varying(36) NOT NULL
+                                            name character varying(255) NOT NULL,
+                                            value character varying(255),
+                                            client_session character varying(36) NOT NULL
 );
 
 
@@ -990,8 +990,8 @@ ALTER TABLE public.client_session_note OWNER TO dbo;
 --
 
 CREATE TABLE public.client_session_prot_mapper (
-    protocol_mapper_id character varying(36) NOT NULL,
-    client_session character varying(36) NOT NULL
+                                                   protocol_mapper_id character varying(36) NOT NULL,
+                                                   client_session character varying(36) NOT NULL
 );
 
 
@@ -1002,8 +1002,8 @@ ALTER TABLE public.client_session_prot_mapper OWNER TO dbo;
 --
 
 CREATE TABLE public.client_session_role (
-    role_id character varying(255) NOT NULL,
-    client_session character varying(36) NOT NULL
+                                            role_id character varying(255) NOT NULL,
+                                            client_session character varying(36) NOT NULL
 );
 
 
@@ -1014,9 +1014,9 @@ ALTER TABLE public.client_session_role OWNER TO dbo;
 --
 
 CREATE TABLE public.client_user_session_note (
-    name character varying(255) NOT NULL,
-    value character varying(2048),
-    client_session character varying(36) NOT NULL
+                                                 name character varying(255) NOT NULL,
+                                                 value character varying(2048),
+                                                 client_session character varying(36) NOT NULL
 );
 
 
@@ -1027,13 +1027,13 @@ ALTER TABLE public.client_user_session_note OWNER TO dbo;
 --
 
 CREATE TABLE public.component (
-    id character varying(36) NOT NULL,
-    name character varying(255),
-    parent_id character varying(36),
-    provider_id character varying(36),
-    provider_type character varying(255),
-    realm_id character varying(36),
-    sub_type character varying(255)
+                                  id character varying(36) NOT NULL,
+                                  name character varying(255),
+                                  parent_id character varying(36),
+                                  provider_id character varying(36),
+                                  provider_type character varying(255),
+                                  realm_id character varying(36),
+                                  sub_type character varying(255)
 );
 
 
@@ -1044,10 +1044,10 @@ ALTER TABLE public.component OWNER TO dbo;
 --
 
 CREATE TABLE public.component_config (
-    id character varying(36) NOT NULL,
-    component_id character varying(36) NOT NULL,
-    name character varying(255) NOT NULL,
-    value text
+                                         id character varying(36) NOT NULL,
+                                         component_id character varying(36) NOT NULL,
+                                         name character varying(255) NOT NULL,
+                                         value text
 );
 
 
@@ -1058,8 +1058,8 @@ ALTER TABLE public.component_config OWNER TO dbo;
 --
 
 CREATE TABLE public.composite_role (
-    composite character varying(36) NOT NULL,
-    child_role character varying(36) NOT NULL
+                                       composite character varying(36) NOT NULL,
+                                       child_role character varying(36) NOT NULL
 );
 
 
@@ -1070,15 +1070,15 @@ ALTER TABLE public.composite_role OWNER TO dbo;
 --
 
 CREATE TABLE public.credential (
-    id character varying(36) NOT NULL,
-    salt bytea,
-    type character varying(255),
-    user_id character varying(36),
-    created_date bigint,
-    user_label character varying(255),
-    secret_data text,
-    credential_data text,
-    priority integer
+                                   id character varying(36) NOT NULL,
+                                   salt bytea,
+                                   type character varying(255),
+                                   user_id character varying(36),
+                                   created_date bigint,
+                                   user_label character varying(255),
+                                   secret_data text,
+                                   credential_data text,
+                                   priority integer
 );
 
 
@@ -1089,20 +1089,20 @@ ALTER TABLE public.credential OWNER TO dbo;
 --
 
 CREATE TABLE public.databasechangelog (
-    id character varying(255) NOT NULL,
-    author character varying(255) NOT NULL,
-    filename character varying(255) NOT NULL,
-    dateexecuted timestamp without time zone NOT NULL,
-    orderexecuted integer NOT NULL,
-    exectype character varying(10) NOT NULL,
-    md5sum character varying(35),
-    description character varying(255),
-    comments character varying(255),
-    tag character varying(255),
-    liquibase character varying(20),
-    contexts character varying(255),
-    labels character varying(255),
-    deployment_id character varying(10)
+                                          id character varying(255) NOT NULL,
+                                          author character varying(255) NOT NULL,
+                                          filename character varying(255) NOT NULL,
+                                          dateexecuted timestamp without time zone NOT NULL,
+                                          orderexecuted integer NOT NULL,
+                                          exectype character varying(10) NOT NULL,
+                                          md5sum character varying(35),
+                                          description character varying(255),
+                                          comments character varying(255),
+                                          tag character varying(255),
+                                          liquibase character varying(20),
+                                          contexts character varying(255),
+                                          labels character varying(255),
+                                          deployment_id character varying(10)
 );
 
 
@@ -1113,10 +1113,10 @@ ALTER TABLE public.databasechangelog OWNER TO dbo;
 --
 
 CREATE TABLE public.databasechangeloglock (
-    id integer NOT NULL,
-    locked boolean NOT NULL,
-    lockgranted timestamp without time zone,
-    lockedby character varying(255)
+                                              id integer NOT NULL,
+                                              locked boolean NOT NULL,
+                                              lockgranted timestamp without time zone,
+                                              lockedby character varying(255)
 );
 
 
@@ -1127,9 +1127,9 @@ ALTER TABLE public.databasechangeloglock OWNER TO dbo;
 --
 
 CREATE TABLE public.default_client_scope (
-    realm_id character varying(36) NOT NULL,
-    scope_id character varying(36) NOT NULL,
-    default_scope boolean DEFAULT false NOT NULL
+                                             realm_id character varying(36) NOT NULL,
+                                             scope_id character varying(36) NOT NULL,
+                                             default_scope boolean DEFAULT false NOT NULL
 );
 
 
@@ -1140,17 +1140,17 @@ ALTER TABLE public.default_client_scope OWNER TO dbo;
 --
 
 CREATE TABLE public.event_entity (
-    id character varying(36) NOT NULL,
-    client_id character varying(255),
-    details_json character varying(2550),
-    error character varying(255),
-    ip_address character varying(255),
-    realm_id character varying(255),
-    session_id character varying(255),
-    event_time bigint,
-    type character varying(255),
-    user_id character varying(255),
-    details_json_long_value text
+                                     id character varying(36) NOT NULL,
+                                     client_id character varying(255),
+                                     details_json character varying(2550),
+                                     error character varying(255),
+                                     ip_address character varying(255),
+                                     realm_id character varying(255),
+                                     session_id character varying(255),
+                                     event_time bigint,
+                                     type character varying(255),
+                                     user_id character varying(255),
+                                     details_json_long_value text
 );
 
 
@@ -1161,15 +1161,15 @@ ALTER TABLE public.event_entity OWNER TO dbo;
 --
 
 CREATE TABLE public.fed_user_attribute (
-    id character varying(36) NOT NULL,
-    name character varying(255) NOT NULL,
-    user_id character varying(255) NOT NULL,
-    realm_id character varying(36) NOT NULL,
-    storage_provider_id character varying(36),
-    value character varying(2024),
-    long_value_hash bytea,
-    long_value_hash_lower_case bytea,
-    long_value text
+                                           id character varying(36) NOT NULL,
+                                           name character varying(255) NOT NULL,
+                                           user_id character varying(255) NOT NULL,
+                                           realm_id character varying(36) NOT NULL,
+                                           storage_provider_id character varying(36),
+                                           value character varying(2024),
+                                           long_value_hash bytea,
+                                           long_value_hash_lower_case bytea,
+                                           long_value text
 );
 
 
@@ -1180,15 +1180,15 @@ ALTER TABLE public.fed_user_attribute OWNER TO dbo;
 --
 
 CREATE TABLE public.fed_user_consent (
-    id character varying(36) NOT NULL,
-    client_id character varying(255),
-    user_id character varying(255) NOT NULL,
-    realm_id character varying(36) NOT NULL,
-    storage_provider_id character varying(36),
-    created_date bigint,
-    last_updated_date bigint,
-    client_storage_provider character varying(36),
-    external_client_id character varying(255)
+                                         id character varying(36) NOT NULL,
+                                         client_id character varying(255),
+                                         user_id character varying(255) NOT NULL,
+                                         realm_id character varying(36) NOT NULL,
+                                         storage_provider_id character varying(36),
+                                         created_date bigint,
+                                         last_updated_date bigint,
+                                         client_storage_provider character varying(36),
+                                         external_client_id character varying(255)
 );
 
 
@@ -1199,8 +1199,8 @@ ALTER TABLE public.fed_user_consent OWNER TO dbo;
 --
 
 CREATE TABLE public.fed_user_consent_cl_scope (
-    user_consent_id character varying(36) NOT NULL,
-    scope_id character varying(36) NOT NULL
+                                                  user_consent_id character varying(36) NOT NULL,
+                                                  scope_id character varying(36) NOT NULL
 );
 
 
@@ -1211,17 +1211,17 @@ ALTER TABLE public.fed_user_consent_cl_scope OWNER TO dbo;
 --
 
 CREATE TABLE public.fed_user_credential (
-    id character varying(36) NOT NULL,
-    salt bytea,
-    type character varying(255),
-    created_date bigint,
-    user_id character varying(255) NOT NULL,
-    realm_id character varying(36) NOT NULL,
-    storage_provider_id character varying(36),
-    user_label character varying(255),
-    secret_data text,
-    credential_data text,
-    priority integer
+                                            id character varying(36) NOT NULL,
+                                            salt bytea,
+                                            type character varying(255),
+                                            created_date bigint,
+                                            user_id character varying(255) NOT NULL,
+                                            realm_id character varying(36) NOT NULL,
+                                            storage_provider_id character varying(36),
+                                            user_label character varying(255),
+                                            secret_data text,
+                                            credential_data text,
+                                            priority integer
 );
 
 
@@ -1232,10 +1232,10 @@ ALTER TABLE public.fed_user_credential OWNER TO dbo;
 --
 
 CREATE TABLE public.fed_user_group_membership (
-    group_id character varying(36) NOT NULL,
-    user_id character varying(255) NOT NULL,
-    realm_id character varying(36) NOT NULL,
-    storage_provider_id character varying(36)
+                                                  group_id character varying(36) NOT NULL,
+                                                  user_id character varying(255) NOT NULL,
+                                                  realm_id character varying(36) NOT NULL,
+                                                  storage_provider_id character varying(36)
 );
 
 
@@ -1246,10 +1246,10 @@ ALTER TABLE public.fed_user_group_membership OWNER TO dbo;
 --
 
 CREATE TABLE public.fed_user_required_action (
-    required_action character varying(255) DEFAULT ' '::character varying NOT NULL,
-    user_id character varying(255) NOT NULL,
-    realm_id character varying(36) NOT NULL,
-    storage_provider_id character varying(36)
+                                                 required_action character varying(255) DEFAULT ' '::character varying NOT NULL,
+                                                 user_id character varying(255) NOT NULL,
+                                                 realm_id character varying(36) NOT NULL,
+                                                 storage_provider_id character varying(36)
 );
 
 
@@ -1260,10 +1260,10 @@ ALTER TABLE public.fed_user_required_action OWNER TO dbo;
 --
 
 CREATE TABLE public.fed_user_role_mapping (
-    role_id character varying(36) NOT NULL,
-    user_id character varying(255) NOT NULL,
-    realm_id character varying(36) NOT NULL,
-    storage_provider_id character varying(36)
+                                              role_id character varying(36) NOT NULL,
+                                              user_id character varying(255) NOT NULL,
+                                              realm_id character varying(36) NOT NULL,
+                                              storage_provider_id character varying(36)
 );
 
 
@@ -1274,12 +1274,12 @@ ALTER TABLE public.fed_user_role_mapping OWNER TO dbo;
 --
 
 CREATE TABLE public.federated_identity (
-    identity_provider character varying(255) NOT NULL,
-    realm_id character varying(36),
-    federated_user_id character varying(255),
-    federated_username character varying(255),
-    token text,
-    user_id character varying(36) NOT NULL
+                                           identity_provider character varying(255) NOT NULL,
+                                           realm_id character varying(36),
+                                           federated_user_id character varying(255),
+                                           federated_username character varying(255),
+                                           token text,
+                                           user_id character varying(36) NOT NULL
 );
 
 
@@ -1290,9 +1290,9 @@ ALTER TABLE public.federated_identity OWNER TO dbo;
 --
 
 CREATE TABLE public.federated_user (
-    id character varying(255) NOT NULL,
-    storage_provider_id character varying(255),
-    realm_id character varying(36) NOT NULL
+                                       id character varying(255) NOT NULL,
+                                       storage_provider_id character varying(255),
+                                       realm_id character varying(36) NOT NULL
 );
 
 
@@ -1303,10 +1303,10 @@ ALTER TABLE public.federated_user OWNER TO dbo;
 --
 
 CREATE TABLE public.group_attribute (
-    id character varying(36) DEFAULT 'sybase-needs-something-here'::character varying NOT NULL,
-    name character varying(255) NOT NULL,
-    value character varying(255),
-    group_id character varying(36) NOT NULL
+                                        id character varying(36) DEFAULT 'sybase-needs-something-here'::character varying NOT NULL,
+                                        name character varying(255) NOT NULL,
+                                        value character varying(255),
+                                        group_id character varying(36) NOT NULL
 );
 
 
@@ -1317,8 +1317,8 @@ ALTER TABLE public.group_attribute OWNER TO dbo;
 --
 
 CREATE TABLE public.group_role_mapping (
-    role_id character varying(36) NOT NULL,
-    group_id character varying(36) NOT NULL
+                                           role_id character varying(36) NOT NULL,
+                                           group_id character varying(36) NOT NULL
 );
 
 
@@ -1329,19 +1329,19 @@ ALTER TABLE public.group_role_mapping OWNER TO dbo;
 --
 
 CREATE TABLE public.identity_provider (
-    internal_id character varying(36) NOT NULL,
-    enabled boolean DEFAULT false NOT NULL,
-    provider_alias character varying(255),
-    provider_id character varying(255),
-    store_token boolean DEFAULT false NOT NULL,
-    authenticate_by_default boolean DEFAULT false NOT NULL,
-    realm_id character varying(36),
-    add_token_role boolean DEFAULT true NOT NULL,
-    trust_email boolean DEFAULT false NOT NULL,
-    first_broker_login_flow_id character varying(36),
-    post_broker_login_flow_id character varying(36),
-    provider_display_name character varying(255),
-    link_only boolean DEFAULT false NOT NULL
+                                          internal_id character varying(36) NOT NULL,
+                                          enabled boolean DEFAULT false NOT NULL,
+                                          provider_alias character varying(255),
+                                          provider_id character varying(255),
+                                          store_token boolean DEFAULT false NOT NULL,
+                                          authenticate_by_default boolean DEFAULT false NOT NULL,
+                                          realm_id character varying(36),
+                                          add_token_role boolean DEFAULT true NOT NULL,
+                                          trust_email boolean DEFAULT false NOT NULL,
+                                          first_broker_login_flow_id character varying(36),
+                                          post_broker_login_flow_id character varying(36),
+                                          provider_display_name character varying(255),
+                                          link_only boolean DEFAULT false NOT NULL
 );
 
 
@@ -1352,9 +1352,9 @@ ALTER TABLE public.identity_provider OWNER TO dbo;
 --
 
 CREATE TABLE public.identity_provider_config (
-    identity_provider_id character varying(36) NOT NULL,
-    value text,
-    name character varying(255) NOT NULL
+                                                 identity_provider_id character varying(36) NOT NULL,
+                                                 value text,
+                                                 name character varying(255) NOT NULL
 );
 
 
@@ -1365,11 +1365,11 @@ ALTER TABLE public.identity_provider_config OWNER TO dbo;
 --
 
 CREATE TABLE public.identity_provider_mapper (
-    id character varying(36) NOT NULL,
-    name character varying(255) NOT NULL,
-    idp_alias character varying(255) NOT NULL,
-    idp_mapper_name character varying(255) NOT NULL,
-    realm_id character varying(36) NOT NULL
+                                                 id character varying(36) NOT NULL,
+                                                 name character varying(255) NOT NULL,
+                                                 idp_alias character varying(255) NOT NULL,
+                                                 idp_mapper_name character varying(255) NOT NULL,
+                                                 realm_id character varying(36) NOT NULL
 );
 
 
@@ -1380,9 +1380,9 @@ ALTER TABLE public.identity_provider_mapper OWNER TO dbo;
 --
 
 CREATE TABLE public.idp_mapper_config (
-    idp_mapper_id character varying(36) NOT NULL,
-    value text,
-    name character varying(255) NOT NULL
+                                          idp_mapper_id character varying(36) NOT NULL,
+                                          value text,
+                                          name character varying(255) NOT NULL
 );
 
 
@@ -1393,10 +1393,10 @@ ALTER TABLE public.idp_mapper_config OWNER TO dbo;
 --
 
 CREATE TABLE public.keycloak_group (
-    id character varying(36) NOT NULL,
-    name character varying(255),
-    parent_group character varying(36) NOT NULL,
-    realm_id character varying(36)
+                                       id character varying(36) NOT NULL,
+                                       name character varying(255),
+                                       parent_group character varying(36) NOT NULL,
+                                       realm_id character varying(36)
 );
 
 
@@ -1407,14 +1407,14 @@ ALTER TABLE public.keycloak_group OWNER TO dbo;
 --
 
 CREATE TABLE public.keycloak_role (
-    id character varying(36) NOT NULL,
-    client_realm_constraint character varying(255),
-    client_role boolean DEFAULT false NOT NULL,
-    description character varying(255),
-    name character varying(255),
-    realm_id character varying(255),
-    client character varying(36),
-    realm character varying(36)
+                                      id character varying(36) NOT NULL,
+                                      client_realm_constraint character varying(255),
+                                      client_role boolean DEFAULT false NOT NULL,
+                                      description character varying(255),
+                                      name character varying(255),
+                                      realm_id character varying(255),
+                                      client character varying(36),
+                                      realm character varying(36)
 );
 
 
@@ -1425,9 +1425,9 @@ ALTER TABLE public.keycloak_role OWNER TO dbo;
 --
 
 CREATE TABLE public.migration_model (
-    id character varying(36) NOT NULL,
-    version character varying(36),
-    update_time bigint DEFAULT 0 NOT NULL
+                                        id character varying(36) NOT NULL,
+                                        version character varying(36),
+                                        update_time bigint DEFAULT 0 NOT NULL
 );
 
 
@@ -1438,13 +1438,13 @@ ALTER TABLE public.migration_model OWNER TO dbo;
 --
 
 CREATE TABLE public.offline_client_session (
-    user_session_id character varying(36) NOT NULL,
-    client_id character varying(255) NOT NULL,
-    offline_flag character varying(4) NOT NULL,
-    "timestamp" integer,
-    data text,
-    client_storage_provider character varying(36) DEFAULT 'local'::character varying NOT NULL,
-    external_client_id character varying(255) DEFAULT 'local'::character varying NOT NULL
+                                               user_session_id character varying(36) NOT NULL,
+                                               client_id character varying(255) NOT NULL,
+                                               offline_flag character varying(4) NOT NULL,
+                                               "timestamp" integer,
+                                               data text,
+                                               client_storage_provider character varying(36) DEFAULT 'local'::character varying NOT NULL,
+                                               external_client_id character varying(255) DEFAULT 'local'::character varying NOT NULL
 );
 
 
@@ -1455,13 +1455,13 @@ ALTER TABLE public.offline_client_session OWNER TO dbo;
 --
 
 CREATE TABLE public.offline_user_session (
-    user_session_id character varying(36) NOT NULL,
-    user_id character varying(255) NOT NULL,
-    realm_id character varying(36) NOT NULL,
-    created_on integer NOT NULL,
-    offline_flag character varying(4) NOT NULL,
-    data text,
-    last_session_refresh integer DEFAULT 0 NOT NULL
+                                             user_session_id character varying(36) NOT NULL,
+                                             user_id character varying(255) NOT NULL,
+                                             realm_id character varying(36) NOT NULL,
+                                             created_on integer NOT NULL,
+                                             offline_flag character varying(4) NOT NULL,
+                                             data text,
+                                             last_session_refresh integer DEFAULT 0 NOT NULL
 );
 
 
@@ -1472,9 +1472,9 @@ ALTER TABLE public.offline_user_session OWNER TO dbo;
 --
 
 CREATE TABLE public.policy_config (
-    policy_id character varying(36) NOT NULL,
-    name character varying(255) NOT NULL,
-    value text
+                                      policy_id character varying(36) NOT NULL,
+                                      name character varying(255) NOT NULL,
+                                      value text
 );
 
 
@@ -1485,12 +1485,12 @@ ALTER TABLE public.policy_config OWNER TO dbo;
 --
 
 CREATE TABLE public.protocol_mapper (
-    id character varying(36) NOT NULL,
-    name character varying(255) NOT NULL,
-    protocol character varying(255) NOT NULL,
-    protocol_mapper_name character varying(255) NOT NULL,
-    client_id character varying(36),
-    client_scope_id character varying(36)
+                                        id character varying(36) NOT NULL,
+                                        name character varying(255) NOT NULL,
+                                        protocol character varying(255) NOT NULL,
+                                        protocol_mapper_name character varying(255) NOT NULL,
+                                        client_id character varying(36),
+                                        client_scope_id character varying(36)
 );
 
 
@@ -1501,9 +1501,9 @@ ALTER TABLE public.protocol_mapper OWNER TO dbo;
 --
 
 CREATE TABLE public.protocol_mapper_config (
-    protocol_mapper_id character varying(36) NOT NULL,
-    value text,
-    name character varying(255) NOT NULL
+                                               protocol_mapper_id character varying(36) NOT NULL,
+                                               value text,
+                                               name character varying(255) NOT NULL
 );
 
 
@@ -1514,59 +1514,59 @@ ALTER TABLE public.protocol_mapper_config OWNER TO dbo;
 --
 
 CREATE TABLE public.realm (
-    id character varying(36) NOT NULL,
-    access_code_lifespan integer,
-    user_action_lifespan integer,
-    access_token_lifespan integer,
-    account_theme character varying(255),
-    admin_theme character varying(255),
-    email_theme character varying(255),
-    enabled boolean DEFAULT false NOT NULL,
-    events_enabled boolean DEFAULT false NOT NULL,
-    events_expiration bigint,
-    login_theme character varying(255),
-    name character varying(255),
-    not_before integer,
-    password_policy character varying(2550),
-    registration_allowed boolean DEFAULT false NOT NULL,
-    remember_me boolean DEFAULT false NOT NULL,
-    reset_password_allowed boolean DEFAULT false NOT NULL,
-    social boolean DEFAULT false NOT NULL,
-    ssl_required character varying(255),
-    sso_idle_timeout integer,
-    sso_max_lifespan integer,
-    update_profile_on_soc_login boolean DEFAULT false NOT NULL,
-    verify_email boolean DEFAULT false NOT NULL,
-    master_admin_client character varying(36),
-    login_lifespan integer,
-    internationalization_enabled boolean DEFAULT false NOT NULL,
-    default_locale character varying(255),
-    reg_email_as_username boolean DEFAULT false NOT NULL,
-    admin_events_enabled boolean DEFAULT false NOT NULL,
-    admin_events_details_enabled boolean DEFAULT false NOT NULL,
-    edit_username_allowed boolean DEFAULT false NOT NULL,
-    otp_policy_counter integer DEFAULT 0,
-    otp_policy_window integer DEFAULT 1,
-    otp_policy_period integer DEFAULT 30,
-    otp_policy_digits integer DEFAULT 6,
-    otp_policy_alg character varying(36) DEFAULT 'HmacSHA1'::character varying,
-    otp_policy_type character varying(36) DEFAULT 'totp'::character varying,
-    browser_flow character varying(36),
-    registration_flow character varying(36),
-    direct_grant_flow character varying(36),
-    reset_credentials_flow character varying(36),
-    client_auth_flow character varying(36),
-    offline_session_idle_timeout integer DEFAULT 0,
-    revoke_refresh_token boolean DEFAULT false NOT NULL,
-    access_token_life_implicit integer DEFAULT 0,
-    login_with_email_allowed boolean DEFAULT true NOT NULL,
-    duplicate_emails_allowed boolean DEFAULT false NOT NULL,
-    docker_auth_flow character varying(36),
-    refresh_token_max_reuse integer DEFAULT 0,
-    allow_user_managed_access boolean DEFAULT false NOT NULL,
-    sso_max_lifespan_remember_me integer DEFAULT 0 NOT NULL,
-    sso_idle_timeout_remember_me integer DEFAULT 0 NOT NULL,
-    default_role character varying(255)
+                              id character varying(36) NOT NULL,
+                              access_code_lifespan integer,
+                              user_action_lifespan integer,
+                              access_token_lifespan integer,
+                              account_theme character varying(255),
+                              admin_theme character varying(255),
+                              email_theme character varying(255),
+                              enabled boolean DEFAULT false NOT NULL,
+                              events_enabled boolean DEFAULT false NOT NULL,
+                              events_expiration bigint,
+                              login_theme character varying(255),
+                              name character varying(255),
+                              not_before integer,
+                              password_policy character varying(2550),
+                              registration_allowed boolean DEFAULT false NOT NULL,
+                              remember_me boolean DEFAULT false NOT NULL,
+                              reset_password_allowed boolean DEFAULT false NOT NULL,
+                              social boolean DEFAULT false NOT NULL,
+                              ssl_required character varying(255),
+                              sso_idle_timeout integer,
+                              sso_max_lifespan integer,
+                              update_profile_on_soc_login boolean DEFAULT false NOT NULL,
+                              verify_email boolean DEFAULT false NOT NULL,
+                              master_admin_client character varying(36),
+                              login_lifespan integer,
+                              internationalization_enabled boolean DEFAULT false NOT NULL,
+                              default_locale character varying(255),
+                              reg_email_as_username boolean DEFAULT false NOT NULL,
+                              admin_events_enabled boolean DEFAULT false NOT NULL,
+                              admin_events_details_enabled boolean DEFAULT false NOT NULL,
+                              edit_username_allowed boolean DEFAULT false NOT NULL,
+                              otp_policy_counter integer DEFAULT 0,
+                              otp_policy_window integer DEFAULT 1,
+                              otp_policy_period integer DEFAULT 30,
+                              otp_policy_digits integer DEFAULT 6,
+                              otp_policy_alg character varying(36) DEFAULT 'HmacSHA1'::character varying,
+                              otp_policy_type character varying(36) DEFAULT 'totp'::character varying,
+                              browser_flow character varying(36),
+                              registration_flow character varying(36),
+                              direct_grant_flow character varying(36),
+                              reset_credentials_flow character varying(36),
+                              client_auth_flow character varying(36),
+                              offline_session_idle_timeout integer DEFAULT 0,
+                              revoke_refresh_token boolean DEFAULT false NOT NULL,
+                              access_token_life_implicit integer DEFAULT 0,
+                              login_with_email_allowed boolean DEFAULT true NOT NULL,
+                              duplicate_emails_allowed boolean DEFAULT false NOT NULL,
+                              docker_auth_flow character varying(36),
+                              refresh_token_max_reuse integer DEFAULT 0,
+                              allow_user_managed_access boolean DEFAULT false NOT NULL,
+                              sso_max_lifespan_remember_me integer DEFAULT 0 NOT NULL,
+                              sso_idle_timeout_remember_me integer DEFAULT 0 NOT NULL,
+                              default_role character varying(255)
 );
 
 
@@ -1577,9 +1577,9 @@ ALTER TABLE public.realm OWNER TO dbo;
 --
 
 CREATE TABLE public.realm_attribute (
-    name character varying(255) NOT NULL,
-    realm_id character varying(36) NOT NULL,
-    value text
+                                        name character varying(255) NOT NULL,
+                                        realm_id character varying(36) NOT NULL,
+                                        value text
 );
 
 
@@ -1590,8 +1590,8 @@ ALTER TABLE public.realm_attribute OWNER TO dbo;
 --
 
 CREATE TABLE public.realm_default_groups (
-    realm_id character varying(36) NOT NULL,
-    group_id character varying(36) NOT NULL
+                                             realm_id character varying(36) NOT NULL,
+                                             group_id character varying(36) NOT NULL
 );
 
 
@@ -1602,8 +1602,8 @@ ALTER TABLE public.realm_default_groups OWNER TO dbo;
 --
 
 CREATE TABLE public.realm_enabled_event_types (
-    realm_id character varying(36) NOT NULL,
-    value character varying(255) NOT NULL
+                                                  realm_id character varying(36) NOT NULL,
+                                                  value character varying(255) NOT NULL
 );
 
 
@@ -1614,8 +1614,8 @@ ALTER TABLE public.realm_enabled_event_types OWNER TO dbo;
 --
 
 CREATE TABLE public.realm_events_listeners (
-    realm_id character varying(36) NOT NULL,
-    value character varying(255) NOT NULL
+                                               realm_id character varying(36) NOT NULL,
+                                               value character varying(255) NOT NULL
 );
 
 
@@ -1626,9 +1626,9 @@ ALTER TABLE public.realm_events_listeners OWNER TO dbo;
 --
 
 CREATE TABLE public.realm_localizations (
-    realm_id character varying(255) NOT NULL,
-    locale character varying(255) NOT NULL,
-    texts text NOT NULL
+                                            realm_id character varying(255) NOT NULL,
+                                            locale character varying(255) NOT NULL,
+                                            texts text NOT NULL
 );
 
 
@@ -1639,11 +1639,11 @@ ALTER TABLE public.realm_localizations OWNER TO dbo;
 --
 
 CREATE TABLE public.realm_required_credential (
-    type character varying(255) NOT NULL,
-    form_label character varying(255),
-    input boolean DEFAULT false NOT NULL,
-    secret boolean DEFAULT false NOT NULL,
-    realm_id character varying(36) NOT NULL
+                                                  type character varying(255) NOT NULL,
+                                                  form_label character varying(255),
+                                                  input boolean DEFAULT false NOT NULL,
+                                                  secret boolean DEFAULT false NOT NULL,
+                                                  realm_id character varying(36) NOT NULL
 );
 
 
@@ -1654,9 +1654,9 @@ ALTER TABLE public.realm_required_credential OWNER TO dbo;
 --
 
 CREATE TABLE public.realm_smtp_config (
-    realm_id character varying(36) NOT NULL,
-    value character varying(255),
-    name character varying(255) NOT NULL
+                                          realm_id character varying(36) NOT NULL,
+                                          value character varying(255),
+                                          name character varying(255) NOT NULL
 );
 
 
@@ -1667,8 +1667,8 @@ ALTER TABLE public.realm_smtp_config OWNER TO dbo;
 --
 
 CREATE TABLE public.realm_supported_locales (
-    realm_id character varying(36) NOT NULL,
-    value character varying(255) NOT NULL
+                                                realm_id character varying(36) NOT NULL,
+                                                value character varying(255) NOT NULL
 );
 
 
@@ -1679,8 +1679,8 @@ ALTER TABLE public.realm_supported_locales OWNER TO dbo;
 --
 
 CREATE TABLE public.redirect_uris (
-    client_id character varying(36) NOT NULL,
-    value character varying(255) NOT NULL
+                                      client_id character varying(36) NOT NULL,
+                                      value character varying(255) NOT NULL
 );
 
 
@@ -1691,9 +1691,9 @@ ALTER TABLE public.redirect_uris OWNER TO dbo;
 --
 
 CREATE TABLE public.required_action_config (
-    required_action_id character varying(36) NOT NULL,
-    value text,
-    name character varying(255) NOT NULL
+                                               required_action_id character varying(36) NOT NULL,
+                                               value text,
+                                               name character varying(255) NOT NULL
 );
 
 
@@ -1704,14 +1704,14 @@ ALTER TABLE public.required_action_config OWNER TO dbo;
 --
 
 CREATE TABLE public.required_action_provider (
-    id character varying(36) NOT NULL,
-    alias character varying(255),
-    name character varying(255),
-    realm_id character varying(36),
-    enabled boolean DEFAULT false NOT NULL,
-    default_action boolean DEFAULT false NOT NULL,
-    provider_id character varying(255),
-    priority integer
+                                                 id character varying(36) NOT NULL,
+                                                 alias character varying(255),
+                                                 name character varying(255),
+                                                 realm_id character varying(36),
+                                                 enabled boolean DEFAULT false NOT NULL,
+                                                 default_action boolean DEFAULT false NOT NULL,
+                                                 provider_id character varying(255),
+                                                 priority integer
 );
 
 
@@ -1722,10 +1722,10 @@ ALTER TABLE public.required_action_provider OWNER TO dbo;
 --
 
 CREATE TABLE public.resource_attribute (
-    id character varying(36) DEFAULT 'sybase-needs-something-here'::character varying NOT NULL,
-    name character varying(255) NOT NULL,
-    value character varying(255),
-    resource_id character varying(36) NOT NULL
+                                           id character varying(36) DEFAULT 'sybase-needs-something-here'::character varying NOT NULL,
+                                           name character varying(255) NOT NULL,
+                                           value character varying(255),
+                                           resource_id character varying(36) NOT NULL
 );
 
 
@@ -1736,8 +1736,8 @@ ALTER TABLE public.resource_attribute OWNER TO dbo;
 --
 
 CREATE TABLE public.resource_policy (
-    resource_id character varying(36) NOT NULL,
-    policy_id character varying(36) NOT NULL
+                                        resource_id character varying(36) NOT NULL,
+                                        policy_id character varying(36) NOT NULL
 );
 
 
@@ -1748,8 +1748,8 @@ ALTER TABLE public.resource_policy OWNER TO dbo;
 --
 
 CREATE TABLE public.resource_scope (
-    resource_id character varying(36) NOT NULL,
-    scope_id character varying(36) NOT NULL
+                                       resource_id character varying(36) NOT NULL,
+                                       scope_id character varying(36) NOT NULL
 );
 
 
@@ -1760,10 +1760,10 @@ ALTER TABLE public.resource_scope OWNER TO dbo;
 --
 
 CREATE TABLE public.resource_server (
-    id character varying(36) NOT NULL,
-    allow_rs_remote_mgmt boolean DEFAULT false NOT NULL,
-    policy_enforce_mode smallint NOT NULL,
-    decision_strategy smallint DEFAULT 1 NOT NULL
+                                        id character varying(36) NOT NULL,
+                                        allow_rs_remote_mgmt boolean DEFAULT false NOT NULL,
+                                        policy_enforce_mode smallint NOT NULL,
+                                        decision_strategy smallint DEFAULT 1 NOT NULL
 );
 
 
@@ -1774,15 +1774,15 @@ ALTER TABLE public.resource_server OWNER TO dbo;
 --
 
 CREATE TABLE public.resource_server_perm_ticket (
-    id character varying(36) NOT NULL,
-    owner character varying(255) NOT NULL,
-    requester character varying(255) NOT NULL,
-    created_timestamp bigint NOT NULL,
-    granted_timestamp bigint,
-    resource_id character varying(36) NOT NULL,
-    scope_id character varying(36),
-    resource_server_id character varying(36) NOT NULL,
-    policy_id character varying(36)
+                                                    id character varying(36) NOT NULL,
+                                                    owner character varying(255) NOT NULL,
+                                                    requester character varying(255) NOT NULL,
+                                                    created_timestamp bigint NOT NULL,
+                                                    granted_timestamp bigint,
+                                                    resource_id character varying(36) NOT NULL,
+                                                    scope_id character varying(36),
+                                                    resource_server_id character varying(36) NOT NULL,
+                                                    policy_id character varying(36)
 );
 
 
@@ -1793,14 +1793,14 @@ ALTER TABLE public.resource_server_perm_ticket OWNER TO dbo;
 --
 
 CREATE TABLE public.resource_server_policy (
-    id character varying(36) NOT NULL,
-    name character varying(255) NOT NULL,
-    description character varying(255),
-    type character varying(255) NOT NULL,
-    decision_strategy smallint,
-    logic smallint,
-    resource_server_id character varying(36) NOT NULL,
-    owner character varying(255)
+                                               id character varying(36) NOT NULL,
+                                               name character varying(255) NOT NULL,
+                                               description character varying(255),
+                                               type character varying(255) NOT NULL,
+                                               decision_strategy smallint,
+                                               logic smallint,
+                                               resource_server_id character varying(36) NOT NULL,
+                                               owner character varying(255)
 );
 
 
@@ -1811,14 +1811,14 @@ ALTER TABLE public.resource_server_policy OWNER TO dbo;
 --
 
 CREATE TABLE public.resource_server_resource (
-    id character varying(36) NOT NULL,
-    name character varying(255) NOT NULL,
-    type character varying(255),
-    icon_uri character varying(255),
-    owner character varying(255) NOT NULL,
-    resource_server_id character varying(36) NOT NULL,
-    owner_managed_access boolean DEFAULT false NOT NULL,
-    display_name character varying(255)
+                                                 id character varying(36) NOT NULL,
+                                                 name character varying(255) NOT NULL,
+                                                 type character varying(255),
+                                                 icon_uri character varying(255),
+                                                 owner character varying(255) NOT NULL,
+                                                 resource_server_id character varying(36) NOT NULL,
+                                                 owner_managed_access boolean DEFAULT false NOT NULL,
+                                                 display_name character varying(255)
 );
 
 
@@ -1829,11 +1829,11 @@ ALTER TABLE public.resource_server_resource OWNER TO dbo;
 --
 
 CREATE TABLE public.resource_server_scope (
-    id character varying(36) NOT NULL,
-    name character varying(255) NOT NULL,
-    icon_uri character varying(255),
-    resource_server_id character varying(36) NOT NULL,
-    display_name character varying(255)
+                                              id character varying(36) NOT NULL,
+                                              name character varying(255) NOT NULL,
+                                              icon_uri character varying(255),
+                                              resource_server_id character varying(36) NOT NULL,
+                                              display_name character varying(255)
 );
 
 
@@ -1844,8 +1844,8 @@ ALTER TABLE public.resource_server_scope OWNER TO dbo;
 --
 
 CREATE TABLE public.resource_uris (
-    resource_id character varying(36) NOT NULL,
-    value character varying(255) NOT NULL
+                                      resource_id character varying(36) NOT NULL,
+                                      value character varying(255) NOT NULL
 );
 
 
@@ -1856,10 +1856,10 @@ ALTER TABLE public.resource_uris OWNER TO dbo;
 --
 
 CREATE TABLE public.role_attribute (
-    id character varying(36) NOT NULL,
-    role_id character varying(36) NOT NULL,
-    name character varying(255) NOT NULL,
-    value character varying(255)
+                                       id character varying(36) NOT NULL,
+                                       role_id character varying(36) NOT NULL,
+                                       name character varying(255) NOT NULL,
+                                       value character varying(255)
 );
 
 
@@ -1870,8 +1870,8 @@ ALTER TABLE public.role_attribute OWNER TO dbo;
 --
 
 CREATE TABLE public.scope_mapping (
-    client_id character varying(36) NOT NULL,
-    role_id character varying(36) NOT NULL
+                                      client_id character varying(36) NOT NULL,
+                                      role_id character varying(36) NOT NULL
 );
 
 
@@ -1882,8 +1882,8 @@ ALTER TABLE public.scope_mapping OWNER TO dbo;
 --
 
 CREATE TABLE public.scope_policy (
-    scope_id character varying(36) NOT NULL,
-    policy_id character varying(36) NOT NULL
+                                     scope_id character varying(36) NOT NULL,
+                                     policy_id character varying(36) NOT NULL
 );
 
 
@@ -1894,13 +1894,13 @@ ALTER TABLE public.scope_policy OWNER TO dbo;
 --
 
 CREATE TABLE public.user_attribute (
-    name character varying(255) NOT NULL,
-    value character varying(255),
-    user_id character varying(36) NOT NULL,
-    id character varying(36) DEFAULT 'sybase-needs-something-here'::character varying NOT NULL,
-    long_value_hash bytea,
-    long_value_hash_lower_case bytea,
-    long_value text
+                                       name character varying(255) NOT NULL,
+                                       value character varying(255),
+                                       user_id character varying(36) NOT NULL,
+                                       id character varying(36) DEFAULT 'sybase-needs-something-here'::character varying NOT NULL,
+                                       long_value_hash bytea,
+                                       long_value_hash_lower_case bytea,
+                                       long_value text
 );
 
 
@@ -1911,13 +1911,13 @@ ALTER TABLE public.user_attribute OWNER TO dbo;
 --
 
 CREATE TABLE public.user_consent (
-    id character varying(36) NOT NULL,
-    client_id character varying(255),
-    user_id character varying(36) NOT NULL,
-    created_date bigint,
-    last_updated_date bigint,
-    client_storage_provider character varying(36),
-    external_client_id character varying(255)
+                                     id character varying(36) NOT NULL,
+                                     client_id character varying(255),
+                                     user_id character varying(36) NOT NULL,
+                                     created_date bigint,
+                                     last_updated_date bigint,
+                                     client_storage_provider character varying(36),
+                                     external_client_id character varying(255)
 );
 
 
@@ -1928,8 +1928,8 @@ ALTER TABLE public.user_consent OWNER TO dbo;
 --
 
 CREATE TABLE public.user_consent_client_scope (
-    user_consent_id character varying(36) NOT NULL,
-    scope_id character varying(36) NOT NULL
+                                                  user_consent_id character varying(36) NOT NULL,
+                                                  scope_id character varying(36) NOT NULL
 );
 
 
@@ -1940,19 +1940,19 @@ ALTER TABLE public.user_consent_client_scope OWNER TO dbo;
 --
 
 CREATE TABLE public.user_entity (
-    id character varying(36) NOT NULL,
-    email character varying(255),
-    email_constraint character varying(255),
-    email_verified boolean DEFAULT false NOT NULL,
-    enabled boolean DEFAULT false NOT NULL,
-    federation_link character varying(255),
-    first_name character varying(255),
-    last_name character varying(255),
-    realm_id character varying(255),
-    username character varying(255),
-    created_timestamp bigint,
-    service_account_client_link character varying(255),
-    not_before integer DEFAULT 0 NOT NULL
+                                    id character varying(36) NOT NULL,
+                                    email character varying(255),
+                                    email_constraint character varying(255),
+                                    email_verified boolean DEFAULT false NOT NULL,
+                                    enabled boolean DEFAULT false NOT NULL,
+                                    federation_link character varying(255),
+                                    first_name character varying(255),
+                                    last_name character varying(255),
+                                    realm_id character varying(255),
+                                    username character varying(255),
+                                    created_timestamp bigint,
+                                    service_account_client_link character varying(255),
+                                    not_before integer DEFAULT 0 NOT NULL
 );
 
 
@@ -1963,9 +1963,9 @@ ALTER TABLE public.user_entity OWNER TO dbo;
 --
 
 CREATE TABLE public.user_federation_config (
-    user_federation_provider_id character varying(36) NOT NULL,
-    value character varying(255),
-    name character varying(255) NOT NULL
+                                               user_federation_provider_id character varying(36) NOT NULL,
+                                               value character varying(255),
+                                               name character varying(255) NOT NULL
 );
 
 
@@ -1976,11 +1976,11 @@ ALTER TABLE public.user_federation_config OWNER TO dbo;
 --
 
 CREATE TABLE public.user_federation_mapper (
-    id character varying(36) NOT NULL,
-    name character varying(255) NOT NULL,
-    federation_provider_id character varying(36) NOT NULL,
-    federation_mapper_type character varying(255) NOT NULL,
-    realm_id character varying(36) NOT NULL
+                                               id character varying(36) NOT NULL,
+                                               name character varying(255) NOT NULL,
+                                               federation_provider_id character varying(36) NOT NULL,
+                                               federation_mapper_type character varying(255) NOT NULL,
+                                               realm_id character varying(36) NOT NULL
 );
 
 
@@ -1991,9 +1991,9 @@ ALTER TABLE public.user_federation_mapper OWNER TO dbo;
 --
 
 CREATE TABLE public.user_federation_mapper_config (
-    user_federation_mapper_id character varying(36) NOT NULL,
-    value character varying(255),
-    name character varying(255) NOT NULL
+                                                      user_federation_mapper_id character varying(36) NOT NULL,
+                                                      value character varying(255),
+                                                      name character varying(255) NOT NULL
 );
 
 
@@ -2004,14 +2004,14 @@ ALTER TABLE public.user_federation_mapper_config OWNER TO dbo;
 --
 
 CREATE TABLE public.user_federation_provider (
-    id character varying(36) NOT NULL,
-    changed_sync_period integer,
-    display_name character varying(255),
-    full_sync_period integer,
-    last_sync integer,
-    priority integer,
-    provider_name character varying(255),
-    realm_id character varying(36)
+                                                 id character varying(36) NOT NULL,
+                                                 changed_sync_period integer,
+                                                 display_name character varying(255),
+                                                 full_sync_period integer,
+                                                 last_sync integer,
+                                                 priority integer,
+                                                 provider_name character varying(255),
+                                                 realm_id character varying(36)
 );
 
 
@@ -2022,8 +2022,8 @@ ALTER TABLE public.user_federation_provider OWNER TO dbo;
 --
 
 CREATE TABLE public.user_group_membership (
-    group_id character varying(36) NOT NULL,
-    user_id character varying(36) NOT NULL
+                                              group_id character varying(36) NOT NULL,
+                                              user_id character varying(36) NOT NULL
 );
 
 
@@ -2034,8 +2034,8 @@ ALTER TABLE public.user_group_membership OWNER TO dbo;
 --
 
 CREATE TABLE public.user_required_action (
-    user_id character varying(36) NOT NULL,
-    required_action character varying(255) DEFAULT ' '::character varying NOT NULL
+                                             user_id character varying(36) NOT NULL,
+                                             required_action character varying(255) DEFAULT ' '::character varying NOT NULL
 );
 
 
@@ -2046,8 +2046,8 @@ ALTER TABLE public.user_required_action OWNER TO dbo;
 --
 
 CREATE TABLE public.user_role_mapping (
-    role_id character varying(255) NOT NULL,
-    user_id character varying(36) NOT NULL
+                                          role_id character varying(255) NOT NULL,
+                                          user_id character varying(36) NOT NULL
 );
 
 
@@ -2058,18 +2058,18 @@ ALTER TABLE public.user_role_mapping OWNER TO dbo;
 --
 
 CREATE TABLE public.user_session (
-    id character varying(36) NOT NULL,
-    auth_method character varying(255),
-    ip_address character varying(255),
-    last_session_refresh integer,
-    login_username character varying(255),
-    realm_id character varying(255),
-    remember_me boolean DEFAULT false NOT NULL,
-    started integer,
-    user_id character varying(255),
-    user_session_state integer,
-    broker_session_id character varying(255),
-    broker_user_id character varying(255)
+                                     id character varying(36) NOT NULL,
+                                     auth_method character varying(255),
+                                     ip_address character varying(255),
+                                     last_session_refresh integer,
+                                     login_username character varying(255),
+                                     realm_id character varying(255),
+                                     remember_me boolean DEFAULT false NOT NULL,
+                                     started integer,
+                                     user_id character varying(255),
+                                     user_session_state integer,
+                                     broker_session_id character varying(255),
+                                     broker_user_id character varying(255)
 );
 
 
@@ -2080,9 +2080,9 @@ ALTER TABLE public.user_session OWNER TO dbo;
 --
 
 CREATE TABLE public.user_session_note (
-    user_session character varying(36) NOT NULL,
-    name character varying(255) NOT NULL,
-    value character varying(2048)
+                                          user_session character varying(36) NOT NULL,
+                                          name character varying(255) NOT NULL,
+                                          value character varying(2048)
 );
 
 
@@ -2093,12 +2093,12 @@ ALTER TABLE public.user_session_note OWNER TO dbo;
 --
 
 CREATE TABLE public.username_login_failure (
-    realm_id character varying(36) NOT NULL,
-    username character varying(255) NOT NULL,
-    failed_login_not_before integer,
-    last_failure bigint,
-    last_ip_failure character varying(255),
-    num_failures integer
+                                               realm_id character varying(36) NOT NULL,
+                                               username character varying(255) NOT NULL,
+                                               failed_login_not_before integer,
+                                               last_failure bigint,
+                                               last_ip_failure character varying(255),
+                                               num_failures integer
 );
 
 
@@ -2109,8 +2109,8 @@ ALTER TABLE public.username_login_failure OWNER TO dbo;
 --
 
 CREATE TABLE public.web_origins (
-    client_id character varying(36) NOT NULL,
-    value character varying(255) NOT NULL
+                                    client_id character varying(36) NOT NULL,
+                                    value character varying(255) NOT NULL
 );
 
 
@@ -3103,6 +3103,378 @@ json-string-accomodation-fixed	keycloak	META-INF/jpa-changelog-13.0.0.xml	2024-0
 14.0.0-KEYCLOAK-18286-unsupported-dbs	keycloak	META-INF/jpa-changelog-14.0.0.xml	2024-07-10 23:42:54.934431	101	MARK_RAN	9:d3d977031d431db16e2c181ce49d73e9	createIndex indexName=IDX_CLIENT_ATT_BY_NAME_VALUE, tableName=CLIENT_ATTRIBUTES		\N	4.25.1	\N	\N	0654969304
 KEYCLOAK-17267-add-index-to-user-attributes	keycloak	META-INF/jpa-changelog-14.0.0.xml	2024-07-10 23:42:54.952961	102	EXECUTED	9:0b305d8d1277f3a89a0a53a659ad274c	createIndex indexName=IDX_USER_ATTRIBUTE_NAME, tableName=USER_ATTRIBUTE		\N	4.25.1	\N	\N	0654969304
 KEYCLOAK-18146-add-saml-art-binding-identifier	keycloak	META-INF/jpa-changelog-14.0.0.xml	2024-07-10 23:42:54.960903	103	EXECUTED	9:2c374ad2cdfe20e2905a84c8fac48460	customChange		\N	4.25.1	\N	\N	0654969304
+15.0.0-KEYCLOAK-18467	keycloak	META-INF/jpa-changelog-15.0.0.xml	2024-07-10 23:42:54.97174	104	EXECUTED	9:47a760639ac597360a8219f5b768b4de	addColumn tableName=REALM_LOCALIZATIONS; update tableName=REALM_LOCALIZATIONS; dropColumn columnName=TEXTS, tableName=REALM_LOCALIZATIONS; renameColumn newColumnName=TEXTS, oldColumnName=TEXTS_NEW, tableName=REALM_LOCALIZATIONS; addNotNullConstrai...		\N	4.25.1	\N	\N	0654969304
+17.0.0-9562	keycloak	META-INF/jpa-changelog-17.0.0.xml	2024-07-10 23:42:54.98224	105	EXECUTED	9:a6272f0576727dd8cad2522335f5d99e	createIndex indexName=IDX_USER_SERVICE_ACCOUNT, tableName=USER_ENTITY		\N	4.25.1	\N	\N	0654969304
+18.0.0-10625-IDX_ADMIN_EVENT_TIME	keycloak	META-INF/jpa-changelog-18.0.0.xml	2024-07-10 23:42:54.997442	106	EXECUTED	9:015479dbd691d9cc8669282f4828c41d	createIndex indexName=IDX_ADMIN_EVENT_TIME, tableName=ADMIN_EVENT_ENTITY		\N	4.25.1	\N	\N	0654969304
+19.0.0-10135	keycloak	META-INF/jpa-changelog-19.0.0.xml	2024-07-10 23:42:55.005062	107	EXECUTED	9:9518e495fdd22f78ad6425cc30630221	customChange		\N	4.25.1	\N	\N	0654969304
+20.0.0-12964-supported-dbs	keycloak	META-INF/jpa-changelog-20.0.0.xml	2024-07-10 23:42:55.017665	108	EXECUTED	9:e5f243877199fd96bcc842f27a1656ac	createIndex indexName=IDX_GROUP_ATT_BY_NAME_VALUE, tableName=GROUP_ATTRIBUTE		\N	4.25.1	\N	\N	0654969304
+20.0.0-12964-unsupported-dbs	keycloak	META-INF/jpa-changelog-20.0.0.xml	2024-07-10 23:42:55.020086	109	MARK_RAN	9:1a6fcaa85e20bdeae0a9ce49b41946a5	createIndex indexName=IDX_GROUP_ATT_BY_NAME_VALUE, tableName=GROUP_ATTRIBUTE		\N	4.25.1	\N	\N	0654969304
+client-attributes-string-accomodation-fixed	keycloak	META-INF/jpa-changelog-20.0.0.xml	2024-07-10 23:42:55.039726	110	EXECUTED	9:3f332e13e90739ed0c35b0b25b7822ca	addColumn tableName=CLIENT_ATTRIBUTES; update tableName=CLIENT_ATTRIBUTES; dropColumn columnName=VALUE, tableName=CLIENT_ATTRIBUTES; renameColumn newColumnName=VALUE, oldColumnName=VALUE_NEW, tableName=CLIENT_ATTRIBUTES		\N	4.25.1	\N	\N	0654969304
+21.0.2-17277	keycloak	META-INF/jpa-changelog-21.0.2.xml	2024-07-10 23:42:55.045973	111	EXECUTED	9:7ee1f7a3fb8f5588f171fb9a6ab623c0	customChange		\N	4.25.1	\N	\N	0654969304
+21.1.0-19404	keycloak	META-INF/jpa-changelog-21.1.0.xml	2024-07-10 23:42:55.270408	112	EXECUTED	9:3d7e830b52f33676b9d64f7f2b2ea634	modifyDataType columnName=DECISION_STRATEGY, tableName=RESOURCE_SERVER_POLICY; modifyDataType columnName=LOGIC, tableName=RESOURCE_SERVER_POLICY; modifyDataType columnName=POLICY_ENFORCE_MODE, tableName=RESOURCE_SERVER		\N	4.25.1	\N	\N	0654969304
+14.0.0-KEYCLOAK-18286-supported-dbs	keycloak	META-INF/jpa-changelog-14.0.0.xml	2024-07-10 23:42:54.930654	100	EXECUTED	9:60ca84a0f8c94ec8c3504a5a3bc88ee8	createIndex indexName=IDX_CLIENT_ATT_BY_NAME_VALUE, tableName=CLIENT_ATTRIBUTES		\N	4.25.1	\N	\N	0654969304
+21.1.0-19404-2	keycloak	META-INF/jpa-changelog-21.1.0.xml	2024-07-10 23:42:55.281114	113	MARK_RAN	9:627d032e3ef2c06c0e1f73d2ae25c26c	addColumn tableName=RESOURCE_SERVER_POLICY; update tableName=RESOURCE_SERVER_POLICY; dropColumn columnName=DECISION_STRATEGY, tableName=RESOURCE_SERVER_POLICY; renameColumn newColumnName=DECISION_STRATEGY, oldColumnName=DECISION_STRATEGY_NEW, tabl...		\N	4.25.1	\N	\N	0654969304
+22.0.0-17484-updated	keycloak	META-INF/jpa-changelog-22.0.0.xml	2024-07-10 23:42:55.292055	114	EXECUTED	9:90af0bfd30cafc17b9f4d6eccd92b8b3	customChange		\N	4.25.1	\N	\N	0654969304
+22.0.5-24031	keycloak	META-INF/jpa-changelog-22.0.0.xml	2024-07-10 23:42:55.297618	115	MARK_RAN	9:a60d2d7b315ec2d3eba9e2f145f9df28	customChange		\N	4.25.1	\N	\N	0654969304
+23.0.0-12062	keycloak	META-INF/jpa-changelog-23.0.0.xml	2024-07-10 23:42:55.517095	116	EXECUTED	9:2168fbe728fec46ae9baf15bf80927b8	addColumn tableName=COMPONENT_CONFIG; update tableName=COMPONENT_CONFIG; dropColumn columnName=VALUE, tableName=COMPONENT_CONFIG; renameColumn newColumnName=VALUE, oldColumnName=VALUE_NEW, tableName=COMPONENT_CONFIG		\N	4.25.1	\N	\N	0654969304
+23.0.0-17258	keycloak	META-INF/jpa-changelog-23.0.0.xml	2024-07-10 23:42:55.533685	117	EXECUTED	9:36506d679a83bbfda85a27ea1864dca8	addColumn tableName=EVENT_ENTITY		\N	4.25.1	\N	\N	0654969304
+24.0.0-9758	keycloak	META-INF/jpa-changelog-24.0.0.xml	2024-07-10 23:42:55.650221	118	EXECUTED	9:502c557a5189f600f0f445a9b49ebbce	addColumn tableName=USER_ATTRIBUTE; addColumn tableName=FED_USER_ATTRIBUTE; createIndex indexName=USER_ATTR_LONG_VALUES, tableName=USER_ATTRIBUTE; createIndex indexName=FED_USER_ATTR_LONG_VALUES, tableName=FED_USER_ATTRIBUTE; createIndex indexName...		\N	4.25.1	\N	\N	0654969304
+24.0.0-26618-drop-index-if-present	keycloak	META-INF/jpa-changelog-24.0.0.xml	2024-07-10 23:42:55.664885	120	MARK_RAN	9:04baaf56c116ed19951cbc2cca584022	dropIndex indexName=IDX_CLIENT_ATT_BY_NAME_VALUE, tableName=CLIENT_ATTRIBUTES		\N	4.25.1	\N	\N	0654969304
+24.0.0-26618-reindex	keycloak	META-INF/jpa-changelog-24.0.0.xml	2024-07-10 23:42:55.704023	121	EXECUTED	9:08707c0f0db1cef6b352db03a60edc7f	createIndex indexName=IDX_CLIENT_ATT_BY_NAME_VALUE, tableName=CLIENT_ATTRIBUTES		\N	4.25.1	\N	\N	0654969304
+24.0.2-27228	keycloak	META-INF/jpa-changelog-24.0.2.xml	2024-07-10 23:42:55.713875	122	EXECUTED	9:eaee11f6b8aa25d2cc6a84fb86fc6238	customChange		\N	4.25.1	\N	\N	0654969304
+24.0.2-27967-drop-index-if-present	keycloak	META-INF/jpa-changelog-24.0.2.xml	2024-07-10 23:42:55.720165	123	MARK_RAN	9:04baaf56c116ed19951cbc2cca584022	dropIndex indexName=IDX_CLIENT_ATT_BY_NAME_VALUE, tableName=CLIENT_ATTRIBUTES		\N	4.25.1	\N	\N	0654969304
+24.0.2-27967-reindex	keycloak	META-INF/jpa-changelog-24.0.2.xml	2024-07-10 23:42:55.724372	124	MARK_RAN	9:d3d977031d431db16e2c181ce49d73e9	createIndex indexName=IDX_CLIENT_ATT_BY_NAME_VALUE, tableName=CLIENT_ATTRIBUTES		\N	4.25.1	\N	\N	0654969304
+1.0.0.Final-KEYCLOAK-5461	sthorger@redhat.com	META-INF/jpa-changelog-1.0.0.Final.xml	2024-07-10 23:42:50.137495	1	EXECUTED	9:6f1016664e21e16d26517a4418f5e3df	createTable tableName=APPLICATION_DEFAULT_ROLES; createTable tableName=CLIENT; createTable tableName=CLIENT_SESSION; createTable tableName=CLIENT_SESSION_ROLE; createTable tableName=COMPOSITE_ROLE; createTable tableName=CREDENTIAL; createTable tab...		\N	4.25.1	\N	\N	0654969304
+1.0.0.Final-KEYCLOAK-5461	sthorger@redhat.com	META-INF/db2-jpa-changelog-1.0.0.Final.xml	2024-07-10 23:42:50.156611	2	MARK_RAN	9:828775b1596a07d1200ba1d49e5e3941	createTable tableName=APPLICATION_DEFAULT_ROLES; createTable tableName=CLIENT; createTable tableName=CLIENT_SESSION; createTable tableName=CLIENT_SESSION_ROLE; createTable tableName=COMPOSITE_ROLE; createTable tableName=CREDENTIAL; createTable tab...		\N	4.25.1	\N	\N	0654969304
+1.1.0.Beta1	sthorger@redhat.com	META-INF/jpa-changelog-1.1.0.Beta1.xml	2024-07-10 23:42:50.416243	3	EXECUTED	9:5f090e44a7d595883c1fb61f4b41fd38	delete tableName=CLIENT_SESSION_ROLE; delete tableName=CLIENT_SESSION; delete tableName=USER_SESSION; createTable tableName=CLIENT_ATTRIBUTES; createTable tableName=CLIENT_SESSION_NOTE; createTable tableName=APP_NODE_REGISTRATIONS; addColumn table...		\N	4.25.1	\N	\N	0654969304
+1.1.0.Final	sthorger@redhat.com	META-INF/jpa-changelog-1.1.0.Final.xml	2024-07-10 23:42:50.425611	4	EXECUTED	9:c07e577387a3d2c04d1adc9aaad8730e	renameColumn newColumnName=EVENT_TIME, oldColumnName=TIME, tableName=EVENT_ENTITY		\N	4.25.1	\N	\N	0654969304
+1.2.0.Beta1	psilva@redhat.com	META-INF/jpa-changelog-1.2.0.Beta1.xml	2024-07-10 23:42:50.762414	5	EXECUTED	9:b68ce996c655922dbcd2fe6b6ae72686	delete tableName=CLIENT_SESSION_ROLE; delete tableName=CLIENT_SESSION_NOTE; delete tableName=CLIENT_SESSION; delete tableName=USER_SESSION; createTable tableName=PROTOCOL_MAPPER; createTable tableName=PROTOCOL_MAPPER_CONFIG; createTable tableName=...		\N	4.25.1	\N	\N	0654969304
+1.2.0.Beta1	psilva@redhat.com	META-INF/db2-jpa-changelog-1.2.0.Beta1.xml	2024-07-10 23:42:50.779551	6	MARK_RAN	9:543b5c9989f024fe35c6f6c5a97de88e	delete tableName=CLIENT_SESSION_ROLE; delete tableName=CLIENT_SESSION_NOTE; delete tableName=CLIENT_SESSION; delete tableName=USER_SESSION; createTable tableName=PROTOCOL_MAPPER; createTable tableName=PROTOCOL_MAPPER_CONFIG; createTable tableName=...		\N	4.25.1	\N	\N	0654969304
+1.2.0.RC1	bburke@redhat.com	META-INF/jpa-changelog-1.2.0.CR1.xml	2024-07-10 23:42:51.205963	7	EXECUTED	9:765afebbe21cf5bbca048e632df38336	delete tableName=CLIENT_SESSION_ROLE; delete tableName=CLIENT_SESSION_NOTE; delete tableName=CLIENT_SESSION; delete tableName=USER_SESSION_NOTE; delete tableName=USER_SESSION; createTable tableName=MIGRATION_MODEL; createTable tableName=IDENTITY_P...		\N	4.25.1	\N	\N	0654969304
+1.2.0.RC1	bburke@redhat.com	META-INF/db2-jpa-changelog-1.2.0.CR1.xml	2024-07-10 23:42:51.217186	8	MARK_RAN	9:db4a145ba11a6fdaefb397f6dbf829a1	delete tableName=CLIENT_SESSION_ROLE; delete tableName=CLIENT_SESSION_NOTE; delete tableName=CLIENT_SESSION; delete tableName=USER_SESSION_NOTE; delete tableName=USER_SESSION; createTable tableName=MIGRATION_MODEL; createTable tableName=IDENTITY_P...		\N	4.25.1	\N	\N	0654969304
+1.2.0.Final	keycloak	META-INF/jpa-changelog-1.2.0.Final.xml	2024-07-10 23:42:51.22428	9	EXECUTED	9:9d05c7be10cdb873f8bcb41bc3a8ab23	update tableName=CLIENT; update tableName=CLIENT; update tableName=CLIENT		\N	4.25.1	\N	\N	0654969304
+1.3.0	bburke@redhat.com	META-INF/jpa-changelog-1.3.0.xml	2024-07-10 23:42:51.562331	10	EXECUTED	9:18593702353128d53111f9b1ff0b82b8	delete tableName=CLIENT_SESSION_ROLE; delete tableName=CLIENT_SESSION_PROT_MAPPER; delete tableName=CLIENT_SESSION_NOTE; delete tableName=CLIENT_SESSION; delete tableName=USER_SESSION_NOTE; delete tableName=USER_SESSION; createTable tableName=ADMI...		\N	4.25.1	\N	\N	0654969304
+1.4.0	bburke@redhat.com	META-INF/jpa-changelog-1.4.0.xml	2024-07-10 23:42:51.722454	11	EXECUTED	9:6122efe5f090e41a85c0f1c9e52cbb62	delete tableName=CLIENT_SESSION_AUTH_STATUS; delete tableName=CLIENT_SESSION_ROLE; delete tableName=CLIENT_SESSION_PROT_MAPPER; delete tableName=CLIENT_SESSION_NOTE; delete tableName=CLIENT_SESSION; delete tableName=USER_SESSION_NOTE; delete table...		\N	4.25.1	\N	\N	0654969304
+1.4.0	bburke@redhat.com	META-INF/db2-jpa-changelog-1.4.0.xml	2024-07-10 23:42:51.733592	12	MARK_RAN	9:e1ff28bf7568451453f844c5d54bb0b5	delete tableName=CLIENT_SESSION_AUTH_STATUS; delete tableName=CLIENT_SESSION_ROLE; delete tableName=CLIENT_SESSION_PROT_MAPPER; delete tableName=CLIENT_SESSION_NOTE; delete tableName=CLIENT_SESSION; delete tableName=USER_SESSION_NOTE; delete table...		\N	4.25.1	\N	\N	0654969304
+1.5.0	bburke@redhat.com	META-INF/jpa-changelog-1.5.0.xml	2024-07-10 23:42:51.760427	13	EXECUTED	9:7af32cd8957fbc069f796b61217483fd	delete tableName=CLIENT_SESSION_AUTH_STATUS; delete tableName=CLIENT_SESSION_ROLE; delete tableName=CLIENT_SESSION_PROT_MAPPER; delete tableName=CLIENT_SESSION_NOTE; delete tableName=CLIENT_SESSION; delete tableName=USER_SESSION_NOTE; delete table...		\N	4.25.1	\N	\N	0654969304
+1.6.1_from15	mposolda@redhat.com	META-INF/jpa-changelog-1.6.1.xml	2024-07-10 23:42:51.814505	14	EXECUTED	9:6005e15e84714cd83226bf7879f54190	addColumn tableName=REALM; addColumn tableName=KEYCLOAK_ROLE; addColumn tableName=CLIENT; createTable tableName=OFFLINE_USER_SESSION; createTable tableName=OFFLINE_CLIENT_SESSION; addPrimaryKey constraintName=CONSTRAINT_OFFL_US_SES_PK2, tableName=...		\N	4.25.1	\N	\N	0654969304
+1.6.1_from16-pre	mposolda@redhat.com	META-INF/jpa-changelog-1.6.1.xml	2024-07-10 23:42:51.817727	15	MARK_RAN	9:bf656f5a2b055d07f314431cae76f06c	delete tableName=OFFLINE_CLIENT_SESSION; delete tableName=OFFLINE_USER_SESSION		\N	4.25.1	\N	\N	0654969304
+1.6.1_from16	mposolda@redhat.com	META-INF/jpa-changelog-1.6.1.xml	2024-07-10 23:42:51.820926	16	MARK_RAN	9:f8dadc9284440469dcf71e25ca6ab99b	dropPrimaryKey constraintName=CONSTRAINT_OFFLINE_US_SES_PK, tableName=OFFLINE_USER_SESSION; dropPrimaryKey constraintName=CONSTRAINT_OFFLINE_CL_SES_PK, tableName=OFFLINE_CLIENT_SESSION; addColumn tableName=OFFLINE_USER_SESSION; update tableName=OF...		\N	4.25.1	\N	\N	0654969304
+1.6.1	mposolda@redhat.com	META-INF/jpa-changelog-1.6.1.xml	2024-07-10 23:42:51.831141	17	EXECUTED	9:d41d8cd98f00b204e9800998ecf8427e	empty		\N	4.25.1	\N	\N	0654969304
+1.7.0	bburke@redhat.com	META-INF/jpa-changelog-1.7.0.xml	2024-07-10 23:42:52.007747	18	EXECUTED	9:3368ff0be4c2855ee2dd9ca813b38d8e	createTable tableName=KEYCLOAK_GROUP; createTable tableName=GROUP_ROLE_MAPPING; createTable tableName=GROUP_ATTRIBUTE; createTable tableName=USER_GROUP_MEMBERSHIP; createTable tableName=REALM_DEFAULT_GROUPS; addColumn tableName=IDENTITY_PROVIDER; ...		\N	4.25.1	\N	\N	0654969304
+1.8.0	mposolda@redhat.com	META-INF/jpa-changelog-1.8.0.xml	2024-07-10 23:42:52.243452	19	EXECUTED	9:8ac2fb5dd030b24c0570a763ed75ed20	addColumn tableName=IDENTITY_PROVIDER; createTable tableName=CLIENT_TEMPLATE; createTable tableName=CLIENT_TEMPLATE_ATTRIBUTES; createTable tableName=TEMPLATE_SCOPE_MAPPING; dropNotNullConstraint columnName=CLIENT_ID, tableName=PROTOCOL_MAPPER; ad...		\N	4.25.1	\N	\N	0654969304
+1.8.0-2	keycloak	META-INF/jpa-changelog-1.8.0.xml	2024-07-10 23:42:52.269569	20	EXECUTED	9:f91ddca9b19743db60e3057679810e6c	dropDefaultValue columnName=ALGORITHM, tableName=CREDENTIAL; update tableName=CREDENTIAL		\N	4.25.1	\N	\N	0654969304
+24.0.0-9758-2	keycloak	META-INF/jpa-changelog-24.0.0.xml	2024-07-10 23:42:55.658752	119	EXECUTED	9:bf0fdee10afdf597a987adbf291db7b2	customChange		\N	4.25.1	\N	\N	0654969304
+1.8.0	mposolda@redhat.com	META-INF/db2-jpa-changelog-1.8.0.xml	2024-07-10 23:42:52.273842	21	MARK_RAN	9:831e82914316dc8a57dc09d755f23c51	addColumn tableName=IDENTITY_PROVIDER; createTable tableName=CLIENT_TEMPLATE; createTable tableName=CLIENT_TEMPLATE_ATTRIBUTES; createTable tableName=TEMPLATE_SCOPE_MAPPING; dropNotNullConstraint columnName=CLIENT_ID, tableName=PROTOCOL_MAPPER; ad...		\N	4.25.1	\N	\N	0654969304
+1.8.0-2	keycloak	META-INF/db2-jpa-changelog-1.8.0.xml	2024-07-10 23:42:52.280893	22	MARK_RAN	9:f91ddca9b19743db60e3057679810e6c	dropDefaultValue columnName=ALGORITHM, tableName=CREDENTIAL; update tableName=CREDENTIAL		\N	4.25.1	\N	\N	0654969304
+1.9.0	mposolda@redhat.com	META-INF/jpa-changelog-1.9.0.xml	2024-07-10 23:42:52.317185	23	EXECUTED	9:bc3d0f9e823a69dc21e23e94c7a94bb1	update tableName=REALM; update tableName=REALM; update tableName=REALM; update tableName=REALM; update tableName=CREDENTIAL; update tableName=CREDENTIAL; update tableName=CREDENTIAL; update tableName=REALM; update tableName=REALM; customChange; dr...		\N	4.25.1	\N	\N	0654969304
+1.9.1	keycloak	META-INF/jpa-changelog-1.9.1.xml	2024-07-10 23:42:52.325334	24	EXECUTED	9:c9999da42f543575ab790e76439a2679	modifyDataType columnName=PRIVATE_KEY, tableName=REALM; modifyDataType columnName=PUBLIC_KEY, tableName=REALM; modifyDataType columnName=CERTIFICATE, tableName=REALM		\N	4.25.1	\N	\N	0654969304
+1.9.1	keycloak	META-INF/db2-jpa-changelog-1.9.1.xml	2024-07-10 23:42:52.327705	25	MARK_RAN	9:0d6c65c6f58732d81569e77b10ba301d	modifyDataType columnName=PRIVATE_KEY, tableName=REALM; modifyDataType columnName=CERTIFICATE, tableName=REALM		\N	4.25.1	\N	\N	0654969304
+1.9.2	keycloak	META-INF/jpa-changelog-1.9.2.xml	2024-07-10 23:42:52.399749	26	EXECUTED	9:fc576660fc016ae53d2d4778d84d86d0	createIndex indexName=IDX_USER_EMAIL, tableName=USER_ENTITY; createIndex indexName=IDX_USER_ROLE_MAPPING, tableName=USER_ROLE_MAPPING; createIndex indexName=IDX_USER_GROUP_MAPPING, tableName=USER_GROUP_MEMBERSHIP; createIndex indexName=IDX_USER_CO...		\N	4.25.1	\N	\N	0654969304
+authz-2.0.0	psilva@redhat.com	META-INF/jpa-changelog-authz-2.0.0.xml	2024-07-10 23:42:52.633093	27	EXECUTED	9:43ed6b0da89ff77206289e87eaa9c024	createTable tableName=RESOURCE_SERVER; addPrimaryKey constraintName=CONSTRAINT_FARS, tableName=RESOURCE_SERVER; addUniqueConstraint constraintName=UK_AU8TT6T700S9V50BU18WS5HA6, tableName=RESOURCE_SERVER; createTable tableName=RESOURCE_SERVER_RESOU...		\N	4.25.1	\N	\N	0654969304
+authz-2.5.1	psilva@redhat.com	META-INF/jpa-changelog-authz-2.5.1.xml	2024-07-10 23:42:52.645142	28	EXECUTED	9:44bae577f551b3738740281eceb4ea70	update tableName=RESOURCE_SERVER_POLICY		\N	4.25.1	\N	\N	0654969304
+2.1.0-KEYCLOAK-5461	bburke@redhat.com	META-INF/jpa-changelog-2.1.0.xml	2024-07-10 23:42:52.795264	29	EXECUTED	9:bd88e1f833df0420b01e114533aee5e8	createTable tableName=BROKER_LINK; createTable tableName=FED_USER_ATTRIBUTE; createTable tableName=FED_USER_CONSENT; createTable tableName=FED_USER_CONSENT_ROLE; createTable tableName=FED_USER_CONSENT_PROT_MAPPER; createTable tableName=FED_USER_CR...		\N	4.25.1	\N	\N	0654969304
+2.2.0	bburke@redhat.com	META-INF/jpa-changelog-2.2.0.xml	2024-07-10 23:42:52.826773	30	EXECUTED	9:a7022af5267f019d020edfe316ef4371	addColumn tableName=ADMIN_EVENT_ENTITY; createTable tableName=CREDENTIAL_ATTRIBUTE; createTable tableName=FED_CREDENTIAL_ATTRIBUTE; modifyDataType columnName=VALUE, tableName=CREDENTIAL; addForeignKeyConstraint baseTableName=FED_CREDENTIAL_ATTRIBU...		\N	4.25.1	\N	\N	0654969304
+2.3.0	bburke@redhat.com	META-INF/jpa-changelog-2.3.0.xml	2024-07-10 23:42:52.85627	31	EXECUTED	9:fc155c394040654d6a79227e56f5e25a	createTable tableName=FEDERATED_USER; addPrimaryKey constraintName=CONSTR_FEDERATED_USER, tableName=FEDERATED_USER; dropDefaultValue columnName=TOTP, tableName=USER_ENTITY; dropColumn columnName=TOTP, tableName=USER_ENTITY; addColumn tableName=IDE...		\N	4.25.1	\N	\N	0654969304
+2.4.0	bburke@redhat.com	META-INF/jpa-changelog-2.4.0.xml	2024-07-10 23:42:52.863165	32	EXECUTED	9:eac4ffb2a14795e5dc7b426063e54d88	customChange		\N	4.25.1	\N	\N	0654969304
+2.5.0	bburke@redhat.com	META-INF/jpa-changelog-2.5.0.xml	2024-07-10 23:42:52.870924	33	EXECUTED	9:54937c05672568c4c64fc9524c1e9462	customChange; modifyDataType columnName=USER_ID, tableName=OFFLINE_USER_SESSION		\N	4.25.1	\N	\N	0654969304
+2.5.0-unicode-oracle	hmlnarik@redhat.com	META-INF/jpa-changelog-2.5.0.xml	2024-07-10 23:42:52.873463	34	MARK_RAN	9:3a32bace77c84d7678d035a7f5a8084e	modifyDataType columnName=DESCRIPTION, tableName=AUTHENTICATION_FLOW; modifyDataType columnName=DESCRIPTION, tableName=CLIENT_TEMPLATE; modifyDataType columnName=DESCRIPTION, tableName=RESOURCE_SERVER_POLICY; modifyDataType columnName=DESCRIPTION,...		\N	4.25.1	\N	\N	0654969304
+2.5.0-unicode-other-dbs	hmlnarik@redhat.com	META-INF/jpa-changelog-2.5.0.xml	2024-07-10 23:42:52.922201	35	EXECUTED	9:33d72168746f81f98ae3a1e8e0ca3554	modifyDataType columnName=DESCRIPTION, tableName=AUTHENTICATION_FLOW; modifyDataType columnName=DESCRIPTION, tableName=CLIENT_TEMPLATE; modifyDataType columnName=DESCRIPTION, tableName=RESOURCE_SERVER_POLICY; modifyDataType columnName=DESCRIPTION,...		\N	4.25.1	\N	\N	0654969304
+2.5.0-duplicate-email-support	slawomir@dabek.name	META-INF/jpa-changelog-2.5.0.xml	2024-07-10 23:42:52.928458	36	EXECUTED	9:61b6d3d7a4c0e0024b0c839da283da0c	addColumn tableName=REALM		\N	4.25.1	\N	\N	0654969304
+2.5.0-unique-group-names	hmlnarik@redhat.com	META-INF/jpa-changelog-2.5.0.xml	2024-07-10 23:42:52.937732	37	EXECUTED	9:8dcac7bdf7378e7d823cdfddebf72fda	addUniqueConstraint constraintName=SIBLING_NAMES, tableName=KEYCLOAK_GROUP		\N	4.25.1	\N	\N	0654969304
+2.5.1	bburke@redhat.com	META-INF/jpa-changelog-2.5.1.xml	2024-07-10 23:42:52.943241	38	EXECUTED	9:a2b870802540cb3faa72098db5388af3	addColumn tableName=FED_USER_CONSENT		\N	4.25.1	\N	\N	0654969304
+3.0.0	bburke@redhat.com	META-INF/jpa-changelog-3.0.0.xml	2024-07-10 23:42:52.948102	39	EXECUTED	9:132a67499ba24bcc54fb5cbdcfe7e4c0	addColumn tableName=IDENTITY_PROVIDER		\N	4.25.1	\N	\N	0654969304
+3.2.0-fix	keycloak	META-INF/jpa-changelog-3.2.0.xml	2024-07-10 23:42:52.950108	40	MARK_RAN	9:938f894c032f5430f2b0fafb1a243462	addNotNullConstraint columnName=REALM_ID, tableName=CLIENT_INITIAL_ACCESS		\N	4.25.1	\N	\N	0654969304
+3.2.0-fix-with-keycloak-5416	keycloak	META-INF/jpa-changelog-3.2.0.xml	2024-07-10 23:42:52.952434	41	MARK_RAN	9:845c332ff1874dc5d35974b0babf3006	dropIndex indexName=IDX_CLIENT_INIT_ACC_REALM, tableName=CLIENT_INITIAL_ACCESS; addNotNullConstraint columnName=REALM_ID, tableName=CLIENT_INITIAL_ACCESS; createIndex indexName=IDX_CLIENT_INIT_ACC_REALM, tableName=CLIENT_INITIAL_ACCESS		\N	4.25.1	\N	\N	0654969304
+3.2.0-fix-offline-sessions	hmlnarik	META-INF/jpa-changelog-3.2.0.xml	2024-07-10 23:42:52.959399	42	EXECUTED	9:fc86359c079781adc577c5a217e4d04c	customChange		\N	4.25.1	\N	\N	0654969304
+3.2.0-fixed	keycloak	META-INF/jpa-changelog-3.2.0.xml	2024-07-10 23:42:53.244705	43	EXECUTED	9:59a64800e3c0d09b825f8a3b444fa8f4	addColumn tableName=REALM; dropPrimaryKey constraintName=CONSTRAINT_OFFL_CL_SES_PK2, tableName=OFFLINE_CLIENT_SESSION; dropColumn columnName=CLIENT_SESSION_ID, tableName=OFFLINE_CLIENT_SESSION; addPrimaryKey constraintName=CONSTRAINT_OFFL_CL_SES_P...		\N	4.25.1	\N	\N	0654969304
+3.3.0	keycloak	META-INF/jpa-changelog-3.3.0.xml	2024-07-10 23:42:53.252083	44	EXECUTED	9:d48d6da5c6ccf667807f633fe489ce88	addColumn tableName=USER_ENTITY		\N	4.25.1	\N	\N	0654969304
+authz-3.4.0.CR1-resource-server-pk-change-part1	glavoie@gmail.com	META-INF/jpa-changelog-authz-3.4.0.CR1.xml	2024-07-10 23:42:53.258022	45	EXECUTED	9:dde36f7973e80d71fceee683bc5d2951	addColumn tableName=RESOURCE_SERVER_POLICY; addColumn tableName=RESOURCE_SERVER_RESOURCE; addColumn tableName=RESOURCE_SERVER_SCOPE		\N	4.25.1	\N	\N	0654969304
+authz-3.4.0.CR1-resource-server-pk-change-part2-KEYCLOAK-6095	hmlnarik@redhat.com	META-INF/jpa-changelog-authz-3.4.0.CR1.xml	2024-07-10 23:42:53.265429	46	EXECUTED	9:b855e9b0a406b34fa323235a0cf4f640	customChange		\N	4.25.1	\N	\N	0654969304
+authz-3.4.0.CR1-resource-server-pk-change-part3-fixed	glavoie@gmail.com	META-INF/jpa-changelog-authz-3.4.0.CR1.xml	2024-07-10 23:42:53.26752	47	MARK_RAN	9:51abbacd7b416c50c4421a8cabf7927e	dropIndex indexName=IDX_RES_SERV_POL_RES_SERV, tableName=RESOURCE_SERVER_POLICY; dropIndex indexName=IDX_RES_SRV_RES_RES_SRV, tableName=RESOURCE_SERVER_RESOURCE; dropIndex indexName=IDX_RES_SRV_SCOPE_RES_SRV, tableName=RESOURCE_SERVER_SCOPE		\N	4.25.1	\N	\N	0654969304
+authz-3.4.0.CR1-resource-server-pk-change-part3-fixed-nodropindex	glavoie@gmail.com	META-INF/jpa-changelog-authz-3.4.0.CR1.xml	2024-07-10 23:42:53.353602	48	EXECUTED	9:bdc99e567b3398bac83263d375aad143	addNotNullConstraint columnName=RESOURCE_SERVER_CLIENT_ID, tableName=RESOURCE_SERVER_POLICY; addNotNullConstraint columnName=RESOURCE_SERVER_CLIENT_ID, tableName=RESOURCE_SERVER_RESOURCE; addNotNullConstraint columnName=RESOURCE_SERVER_CLIENT_ID, ...		\N	4.25.1	\N	\N	0654969304
+authn-3.4.0.CR1-refresh-token-max-reuse	glavoie@gmail.com	META-INF/jpa-changelog-authz-3.4.0.CR1.xml	2024-07-10 23:42:53.361863	49	EXECUTED	9:d198654156881c46bfba39abd7769e69	addColumn tableName=REALM		\N	4.25.1	\N	\N	0654969304
+3.4.0	keycloak	META-INF/jpa-changelog-3.4.0.xml	2024-07-10 23:42:53.477374	50	EXECUTED	9:cfdd8736332ccdd72c5256ccb42335db	addPrimaryKey constraintName=CONSTRAINT_REALM_DEFAULT_ROLES, tableName=REALM_DEFAULT_ROLES; addPrimaryKey constraintName=CONSTRAINT_COMPOSITE_ROLE, tableName=COMPOSITE_ROLE; addPrimaryKey constraintName=CONSTR_REALM_DEFAULT_GROUPS, tableName=REALM...		\N	4.25.1	\N	\N	0654969304
+3.4.0-KEYCLOAK-5230	hmlnarik@redhat.com	META-INF/jpa-changelog-3.4.0.xml	2024-07-10 23:42:53.543976	51	EXECUTED	9:7c84de3d9bd84d7f077607c1a4dcb714	createIndex indexName=IDX_FU_ATTRIBUTE, tableName=FED_USER_ATTRIBUTE; createIndex indexName=IDX_FU_CONSENT, tableName=FED_USER_CONSENT; createIndex indexName=IDX_FU_CONSENT_RU, tableName=FED_USER_CONSENT; createIndex indexName=IDX_FU_CREDENTIAL, t...		\N	4.25.1	\N	\N	0654969304
+3.4.1	psilva@redhat.com	META-INF/jpa-changelog-3.4.1.xml	2024-07-10 23:42:53.548333	52	EXECUTED	9:5a6bb36cbefb6a9d6928452c0852af2d	modifyDataType columnName=VALUE, tableName=CLIENT_ATTRIBUTES		\N	4.25.1	\N	\N	0654969304
+3.4.2	keycloak	META-INF/jpa-changelog-3.4.2.xml	2024-07-10 23:42:53.551911	53	EXECUTED	9:8f23e334dbc59f82e0a328373ca6ced0	update tableName=REALM		\N	4.25.1	\N	\N	0654969304
+3.4.2-KEYCLOAK-5172	mkanis@redhat.com	META-INF/jpa-changelog-3.4.2.xml	2024-07-10 23:42:53.556029	54	EXECUTED	9:9156214268f09d970cdf0e1564d866af	update tableName=CLIENT		\N	4.25.1	\N	\N	0654969304
+4.0.0-KEYCLOAK-6335	bburke@redhat.com	META-INF/jpa-changelog-4.0.0.xml	2024-07-10 23:42:53.567132	55	EXECUTED	9:db806613b1ed154826c02610b7dbdf74	createTable tableName=CLIENT_AUTH_FLOW_BINDINGS; addPrimaryKey constraintName=C_CLI_FLOW_BIND, tableName=CLIENT_AUTH_FLOW_BINDINGS		\N	4.25.1	\N	\N	0654969304
+4.0.0-CLEANUP-UNUSED-TABLE	bburke@redhat.com	META-INF/jpa-changelog-4.0.0.xml	2024-07-10 23:42:53.57746	56	EXECUTED	9:229a041fb72d5beac76bb94a5fa709de	dropTable tableName=CLIENT_IDENTITY_PROV_MAPPING		\N	4.25.1	\N	\N	0654969304
+4.0.0-KEYCLOAK-6228	bburke@redhat.com	META-INF/jpa-changelog-4.0.0.xml	2024-07-10 23:42:53.614704	57	EXECUTED	9:079899dade9c1e683f26b2aa9ca6ff04	dropUniqueConstraint constraintName=UK_JKUWUVD56ONTGSUHOGM8UEWRT, tableName=USER_CONSENT; dropNotNullConstraint columnName=CLIENT_ID, tableName=USER_CONSENT; addColumn tableName=USER_CONSENT; addUniqueConstraint constraintName=UK_JKUWUVD56ONTGSUHO...		\N	4.25.1	\N	\N	0654969304
+4.0.0-KEYCLOAK-5579-fixed	mposolda@redhat.com	META-INF/jpa-changelog-4.0.0.xml	2024-07-10 23:42:54.020307	58	EXECUTED	9:139b79bcbbfe903bb1c2d2a4dbf001d9	dropForeignKeyConstraint baseTableName=CLIENT_TEMPLATE_ATTRIBUTES, constraintName=FK_CL_TEMPL_ATTR_TEMPL; renameTable newTableName=CLIENT_SCOPE_ATTRIBUTES, oldTableName=CLIENT_TEMPLATE_ATTRIBUTES; renameColumn newColumnName=SCOPE_ID, oldColumnName...		\N	4.25.1	\N	\N	0654969304
+authz-4.0.0.CR1	psilva@redhat.com	META-INF/jpa-changelog-authz-4.0.0.CR1.xml	2024-07-10 23:42:54.162355	59	EXECUTED	9:b55738ad889860c625ba2bf483495a04	createTable tableName=RESOURCE_SERVER_PERM_TICKET; addPrimaryKey constraintName=CONSTRAINT_FAPMT, tableName=RESOURCE_SERVER_PERM_TICKET; addForeignKeyConstraint baseTableName=RESOURCE_SERVER_PERM_TICKET, constraintName=FK_FRSRHO213XCX4WNKOG82SSPMT...		\N	4.25.1	\N	\N	0654969304
+authz-4.0.0.Beta3	psilva@redhat.com	META-INF/jpa-changelog-authz-4.0.0.Beta3.xml	2024-07-10 23:42:54.179609	60	EXECUTED	9:e0057eac39aa8fc8e09ac6cfa4ae15fe	addColumn tableName=RESOURCE_SERVER_POLICY; addColumn tableName=RESOURCE_SERVER_PERM_TICKET; addForeignKeyConstraint baseTableName=RESOURCE_SERVER_PERM_TICKET, constraintName=FK_FRSRPO2128CX4WNKOG82SSRFY, referencedTableName=RESOURCE_SERVER_POLICY		\N	4.25.1	\N	\N	0654969304
+authz-4.2.0.Final	mhajas@redhat.com	META-INF/jpa-changelog-authz-4.2.0.Final.xml	2024-07-10 23:42:54.200768	61	EXECUTED	9:42a33806f3a0443fe0e7feeec821326c	createTable tableName=RESOURCE_URIS; addForeignKeyConstraint baseTableName=RESOURCE_URIS, constraintName=FK_RESOURCE_SERVER_URIS, referencedTableName=RESOURCE_SERVER_RESOURCE; customChange; dropColumn columnName=URI, tableName=RESOURCE_SERVER_RESO...		\N	4.25.1	\N	\N	0654969304
+authz-4.2.0.Final-KEYCLOAK-9944	hmlnarik@redhat.com	META-INF/jpa-changelog-authz-4.2.0.Final.xml	2024-07-10 23:42:54.215337	62	EXECUTED	9:9968206fca46eecc1f51db9c024bfe56	addPrimaryKey constraintName=CONSTRAINT_RESOUR_URIS_PK, tableName=RESOURCE_URIS		\N	4.25.1	\N	\N	0654969304
+4.2.0-KEYCLOAK-6313	wadahiro@gmail.com	META-INF/jpa-changelog-4.2.0.xml	2024-07-10 23:42:54.22302	63	EXECUTED	9:92143a6daea0a3f3b8f598c97ce55c3d	addColumn tableName=REQUIRED_ACTION_PROVIDER		\N	4.25.1	\N	\N	0654969304
+4.3.0-KEYCLOAK-7984	wadahiro@gmail.com	META-INF/jpa-changelog-4.3.0.xml	2024-07-10 23:42:54.231767	64	EXECUTED	9:82bab26a27195d889fb0429003b18f40	update tableName=REQUIRED_ACTION_PROVIDER		\N	4.25.1	\N	\N	0654969304
+4.6.0-KEYCLOAK-7950	psilva@redhat.com	META-INF/jpa-changelog-4.6.0.xml	2024-07-10 23:42:54.23731	65	EXECUTED	9:e590c88ddc0b38b0ae4249bbfcb5abc3	update tableName=RESOURCE_SERVER_RESOURCE		\N	4.25.1	\N	\N	0654969304
+4.6.0-KEYCLOAK-8377	keycloak	META-INF/jpa-changelog-4.6.0.xml	2024-07-10 23:42:54.294076	66	EXECUTED	9:5c1f475536118dbdc38d5d7977950cc0	createTable tableName=ROLE_ATTRIBUTE; addPrimaryKey constraintName=CONSTRAINT_ROLE_ATTRIBUTE_PK, tableName=ROLE_ATTRIBUTE; addForeignKeyConstraint baseTableName=ROLE_ATTRIBUTE, constraintName=FK_ROLE_ATTRIBUTE_ID, referencedTableName=KEYCLOAK_ROLE...		\N	4.25.1	\N	\N	0654969304
+4.6.0-KEYCLOAK-8555	gideonray@gmail.com	META-INF/jpa-changelog-4.6.0.xml	2024-07-10 23:42:54.309051	67	EXECUTED	9:e7c9f5f9c4d67ccbbcc215440c718a17	createIndex indexName=IDX_COMPONENT_PROVIDER_TYPE, tableName=COMPONENT		\N	4.25.1	\N	\N	0654969304
+4.7.0-KEYCLOAK-1267	sguilhen@redhat.com	META-INF/jpa-changelog-4.7.0.xml	2024-07-10 23:42:54.317403	68	EXECUTED	9:88e0bfdda924690d6f4e430c53447dd5	addColumn tableName=REALM		\N	4.25.1	\N	\N	0654969304
+4.7.0-KEYCLOAK-7275	keycloak	META-INF/jpa-changelog-4.7.0.xml	2024-07-10 23:42:54.343453	69	EXECUTED	9:f53177f137e1c46b6a88c59ec1cb5218	renameColumn newColumnName=CREATED_ON, oldColumnName=LAST_SESSION_REFRESH, tableName=OFFLINE_USER_SESSION; addNotNullConstraint columnName=CREATED_ON, tableName=OFFLINE_USER_SESSION; addColumn tableName=OFFLINE_USER_SESSION; customChange; createIn...		\N	4.25.1	\N	\N	0654969304
+4.8.0-KEYCLOAK-8835	sguilhen@redhat.com	META-INF/jpa-changelog-4.8.0.xml	2024-07-10 23:42:54.354756	70	EXECUTED	9:a74d33da4dc42a37ec27121580d1459f	addNotNullConstraint columnName=SSO_MAX_LIFESPAN_REMEMBER_ME, tableName=REALM; addNotNullConstraint columnName=SSO_IDLE_TIMEOUT_REMEMBER_ME, tableName=REALM		\N	4.25.1	\N	\N	0654969304
+authz-7.0.0-KEYCLOAK-10443	psilva@redhat.com	META-INF/jpa-changelog-authz-7.0.0.xml	2024-07-10 23:42:54.361354	71	EXECUTED	9:fd4ade7b90c3b67fae0bfcfcb42dfb5f	addColumn tableName=RESOURCE_SERVER		\N	4.25.1	\N	\N	0654969304
+8.0.0-adding-credential-columns	keycloak	META-INF/jpa-changelog-8.0.0.xml	2024-07-10 23:42:54.37	72	EXECUTED	9:aa072ad090bbba210d8f18781b8cebf4	addColumn tableName=CREDENTIAL; addColumn tableName=FED_USER_CREDENTIAL		\N	4.25.1	\N	\N	0654969304
+8.0.0-updating-credential-data-not-oracle-fixed	keycloak	META-INF/jpa-changelog-8.0.0.xml	2024-07-10 23:42:54.384233	73	EXECUTED	9:1ae6be29bab7c2aa376f6983b932be37	update tableName=CREDENTIAL; update tableName=CREDENTIAL; update tableName=CREDENTIAL; update tableName=FED_USER_CREDENTIAL; update tableName=FED_USER_CREDENTIAL; update tableName=FED_USER_CREDENTIAL		\N	4.25.1	\N	\N	0654969304
+8.0.0-updating-credential-data-oracle-fixed	keycloak	META-INF/jpa-changelog-8.0.0.xml	2024-07-10 23:42:54.388733	74	MARK_RAN	9:14706f286953fc9a25286dbd8fb30d97	update tableName=CREDENTIAL; update tableName=CREDENTIAL; update tableName=CREDENTIAL; update tableName=FED_USER_CREDENTIAL; update tableName=FED_USER_CREDENTIAL; update tableName=FED_USER_CREDENTIAL		\N	4.25.1	\N	\N	0654969304
+8.0.0-credential-cleanup-fixed	keycloak	META-INF/jpa-changelog-8.0.0.xml	2024-07-10 23:42:54.426784	75	EXECUTED	9:2b9cc12779be32c5b40e2e67711a218b	dropDefaultValue columnName=COUNTER, tableName=CREDENTIAL; dropDefaultValue columnName=DIGITS, tableName=CREDENTIAL; dropDefaultValue columnName=PERIOD, tableName=CREDENTIAL; dropDefaultValue columnName=ALGORITHM, tableName=CREDENTIAL; dropColumn ...		\N	4.25.1	\N	\N	0654969304
+8.0.0-resource-tag-support	keycloak	META-INF/jpa-changelog-8.0.0.xml	2024-07-10 23:42:54.440353	76	EXECUTED	9:91fa186ce7a5af127a2d7a91ee083cc5	addColumn tableName=MIGRATION_MODEL; createIndex indexName=IDX_UPDATE_TIME, tableName=MIGRATION_MODEL		\N	4.25.1	\N	\N	0654969304
+9.0.0-always-display-client	keycloak	META-INF/jpa-changelog-9.0.0.xml	2024-07-10 23:42:54.447429	77	EXECUTED	9:6335e5c94e83a2639ccd68dd24e2e5ad	addColumn tableName=CLIENT		\N	4.25.1	\N	\N	0654969304
+9.0.0-drop-constraints-for-column-increase	keycloak	META-INF/jpa-changelog-9.0.0.xml	2024-07-10 23:42:54.451032	78	MARK_RAN	9:6bdb5658951e028bfe16fa0a8228b530	dropUniqueConstraint constraintName=UK_FRSR6T700S9V50BU18WS5PMT, tableName=RESOURCE_SERVER_PERM_TICKET; dropUniqueConstraint constraintName=UK_FRSR6T700S9V50BU18WS5HA6, tableName=RESOURCE_SERVER_RESOURCE; dropPrimaryKey constraintName=CONSTRAINT_O...		\N	4.25.1	\N	\N	0654969304
+9.0.0-increase-column-size-federated-fk	keycloak	META-INF/jpa-changelog-9.0.0.xml	2024-07-10 23:42:54.492482	79	EXECUTED	9:d5bc15a64117ccad481ce8792d4c608f	modifyDataType columnName=CLIENT_ID, tableName=FED_USER_CONSENT; modifyDataType columnName=CLIENT_REALM_CONSTRAINT, tableName=KEYCLOAK_ROLE; modifyDataType columnName=OWNER, tableName=RESOURCE_SERVER_POLICY; modifyDataType columnName=CLIENT_ID, ta...		\N	4.25.1	\N	\N	0654969304
+9.0.0-recreate-constraints-after-column-increase	keycloak	META-INF/jpa-changelog-9.0.0.xml	2024-07-10 23:42:54.496219	80	MARK_RAN	9:077cba51999515f4d3e7ad5619ab592c	addNotNullConstraint columnName=CLIENT_ID, tableName=OFFLINE_CLIENT_SESSION; addNotNullConstraint columnName=OWNER, tableName=RESOURCE_SERVER_PERM_TICKET; addNotNullConstraint columnName=REQUESTER, tableName=RESOURCE_SERVER_PERM_TICKET; addNotNull...		\N	4.25.1	\N	\N	0654969304
+9.0.1-add-index-to-client.client_id	keycloak	META-INF/jpa-changelog-9.0.1.xml	2024-07-10 23:42:54.509934	81	EXECUTED	9:be969f08a163bf47c6b9e9ead8ac2afb	createIndex indexName=IDX_CLIENT_ID, tableName=CLIENT		\N	4.25.1	\N	\N	0654969304
+9.0.1-KEYCLOAK-12579-drop-constraints	keycloak	META-INF/jpa-changelog-9.0.1.xml	2024-07-10 23:42:54.513367	82	MARK_RAN	9:6d3bb4408ba5a72f39bd8a0b301ec6e3	dropUniqueConstraint constraintName=SIBLING_NAMES, tableName=KEYCLOAK_GROUP		\N	4.25.1	\N	\N	0654969304
+9.0.1-KEYCLOAK-12579-add-not-null-constraint	keycloak	META-INF/jpa-changelog-9.0.1.xml	2024-07-10 23:42:54.523944	83	EXECUTED	9:966bda61e46bebf3cc39518fbed52fa7	addNotNullConstraint columnName=PARENT_GROUP, tableName=KEYCLOAK_GROUP		\N	4.25.1	\N	\N	0654969304
+9.0.1-KEYCLOAK-12579-recreate-constraints	keycloak	META-INF/jpa-changelog-9.0.1.xml	2024-07-10 23:42:54.527109	84	MARK_RAN	9:8dcac7bdf7378e7d823cdfddebf72fda	addUniqueConstraint constraintName=SIBLING_NAMES, tableName=KEYCLOAK_GROUP		\N	4.25.1	\N	\N	0654969304
+9.0.1-add-index-to-events	keycloak	META-INF/jpa-changelog-9.0.1.xml	2024-07-10 23:42:54.539626	85	EXECUTED	9:7d93d602352a30c0c317e6a609b56599	createIndex indexName=IDX_EVENT_TIME, tableName=EVENT_ENTITY		\N	4.25.1	\N	\N	0654969304
+map-remove-ri	keycloak	META-INF/jpa-changelog-11.0.0.xml	2024-07-10 23:42:54.546342	86	EXECUTED	9:71c5969e6cdd8d7b6f47cebc86d37627	dropForeignKeyConstraint baseTableName=REALM, constraintName=FK_TRAF444KK6QRKMS7N56AIWQ5Y; dropForeignKeyConstraint baseTableName=KEYCLOAK_ROLE, constraintName=FK_KJHO5LE2C0RAL09FL8CM9WFW9		\N	4.25.1	\N	\N	0654969304
+map-remove-ri	keycloak	META-INF/jpa-changelog-12.0.0.xml	2024-07-10 23:42:54.555574	87	EXECUTED	9:a9ba7d47f065f041b7da856a81762021	dropForeignKeyConstraint baseTableName=REALM_DEFAULT_GROUPS, constraintName=FK_DEF_GROUPS_GROUP; dropForeignKeyConstraint baseTableName=REALM_DEFAULT_ROLES, constraintName=FK_H4WPD7W4HSOOLNI3H0SW7BTJE; dropForeignKeyConstraint baseTableName=CLIENT...		\N	4.25.1	\N	\N	0654969304
+12.1.0-add-realm-localization-table	keycloak	META-INF/jpa-changelog-12.0.0.xml	2024-07-10 23:42:54.576967	88	EXECUTED	9:fffabce2bc01e1a8f5110d5278500065	createTable tableName=REALM_LOCALIZATIONS; addPrimaryKey tableName=REALM_LOCALIZATIONS		\N	4.25.1	\N	\N	0654969304
+default-roles	keycloak	META-INF/jpa-changelog-13.0.0.xml	2024-07-10 23:42:54.61746	89	EXECUTED	9:fa8a5b5445e3857f4b010bafb5009957	addColumn tableName=REALM; customChange		\N	4.25.1	\N	\N	0654969304
+default-roles-cleanup	keycloak	META-INF/jpa-changelog-13.0.0.xml	2024-07-10 23:42:54.692185	90	EXECUTED	9:67ac3241df9a8582d591c5ed87125f39	dropTable tableName=REALM_DEFAULT_ROLES; dropTable tableName=CLIENT_DEFAULT_ROLES		\N	4.25.1	\N	\N	0654969304
+13.0.0-KEYCLOAK-16844	keycloak	META-INF/jpa-changelog-13.0.0.xml	2024-07-10 23:42:54.71104	91	EXECUTED	9:ad1194d66c937e3ffc82386c050ba089	createIndex indexName=IDX_OFFLINE_USS_PRELOAD, tableName=OFFLINE_USER_SESSION		\N	4.25.1	\N	\N	0654969304
+map-remove-ri-13.0.0	keycloak	META-INF/jpa-changelog-13.0.0.xml	2024-07-10 23:42:54.719296	92	EXECUTED	9:d9be619d94af5a2f5d07b9f003543b91	dropForeignKeyConstraint baseTableName=DEFAULT_CLIENT_SCOPE, constraintName=FK_R_DEF_CLI_SCOPE_SCOPE; dropForeignKeyConstraint baseTableName=CLIENT_SCOPE_CLIENT, constraintName=FK_C_CLI_SCOPE_SCOPE; dropForeignKeyConstraint baseTableName=CLIENT_SC...		\N	4.25.1	\N	\N	0654969304
+13.0.0-KEYCLOAK-17992-drop-constraints	keycloak	META-INF/jpa-changelog-13.0.0.xml	2024-07-10 23:42:54.722417	93	MARK_RAN	9:544d201116a0fcc5a5da0925fbbc3bde	dropPrimaryKey constraintName=C_CLI_SCOPE_BIND, tableName=CLIENT_SCOPE_CLIENT; dropIndex indexName=IDX_CLSCOPE_CL, tableName=CLIENT_SCOPE_CLIENT; dropIndex indexName=IDX_CL_CLSCOPE, tableName=CLIENT_SCOPE_CLIENT		\N	4.25.1	\N	\N	0654969304
+13.0.0-increase-column-size-federated	keycloak	META-INF/jpa-changelog-13.0.0.xml	2024-07-10 23:42:54.756742	94	EXECUTED	9:43c0c1055b6761b4b3e89de76d612ccf	modifyDataType columnName=CLIENT_ID, tableName=CLIENT_SCOPE_CLIENT; modifyDataType columnName=SCOPE_ID, tableName=CLIENT_SCOPE_CLIENT		\N	4.25.1	\N	\N	0654969304
+13.0.0-KEYCLOAK-17992-recreate-constraints	keycloak	META-INF/jpa-changelog-13.0.0.xml	2024-07-10 23:42:54.760308	95	MARK_RAN	9:8bd711fd0330f4fe980494ca43ab1139	addNotNullConstraint columnName=CLIENT_ID, tableName=CLIENT_SCOPE_CLIENT; addNotNullConstraint columnName=SCOPE_ID, tableName=CLIENT_SCOPE_CLIENT; addPrimaryKey constraintName=C_CLI_SCOPE_BIND, tableName=CLIENT_SCOPE_CLIENT; createIndex indexName=...		\N	4.25.1	\N	\N	0654969304
+json-string-accomodation-fixed	keycloak	META-INF/jpa-changelog-13.0.0.xml	2024-07-10 23:42:54.838755	96	EXECUTED	9:e07d2bc0970c348bb06fb63b1f82ddbf	addColumn tableName=REALM_ATTRIBUTE; update tableName=REALM_ATTRIBUTE; dropColumn columnName=VALUE, tableName=REALM_ATTRIBUTE; renameColumn newColumnName=VALUE, oldColumnName=VALUE_NEW, tableName=REALM_ATTRIBUTE		\N	4.25.1	\N	\N	0654969304
+14.0.0-KEYCLOAK-11019	keycloak	META-INF/jpa-changelog-14.0.0.xml	2024-07-10 23:42:54.896035	97	EXECUTED	9:24fb8611e97f29989bea412aa38d12b7	createIndex indexName=IDX_OFFLINE_CSS_PRELOAD, tableName=OFFLINE_CLIENT_SESSION; createIndex indexName=IDX_OFFLINE_USS_BY_USER, tableName=OFFLINE_USER_SESSION; createIndex indexName=IDX_OFFLINE_USS_BY_USERSESS, tableName=OFFLINE_USER_SESSION		\N	4.25.1	\N	\N	0654969304
+14.0.0-KEYCLOAK-18286	keycloak	META-INF/jpa-changelog-14.0.0.xml	2024-07-10 23:42:54.898701	98	MARK_RAN	9:259f89014ce2506ee84740cbf7163aa7	createIndex indexName=IDX_CLIENT_ATT_BY_NAME_VALUE, tableName=CLIENT_ATTRIBUTES		\N	4.25.1	\N	\N	0654969304
+14.0.0-KEYCLOAK-18286-revert	keycloak	META-INF/jpa-changelog-14.0.0.xml	2024-07-10 23:42:54.918684	99	MARK_RAN	9:04baaf56c116ed19951cbc2cca584022	dropIndex indexName=IDX_CLIENT_ATT_BY_NAME_VALUE, tableName=CLIENT_ATTRIBUTES		\N	4.25.1	\N	\N	0654969304
+14.0.0-KEYCLOAK-18286-supported-dbs	keycloak	META-INF/jpa-changelog-14.0.0.xml	2024-07-10 23:42:54.930654	100	EXECUTED	9:60ca84a0f8c94ec8c3504a5a3bc88ee8	createIndex indexName=IDX_CLIENT_ATT_BY_NAME_VALUE, tableName=CLIENT_ATTRIBUTES		\N	4.25.1	\N	\N	0654969304
+14.0.0-KEYCLOAK-18286-unsupported-dbs	keycloak	META-INF/jpa-changelog-14.0.0.xml	2024-07-10 23:42:54.934431	101	MARK_RAN	9:d3d977031d431db16e2c181ce49d73e9	createIndex indexName=IDX_CLIENT_ATT_BY_NAME_VALUE, tableName=CLIENT_ATTRIBUTES		\N	4.25.1	\N	\N	0654969304
+KEYCLOAK-17267-add-index-to-user-attributes	keycloak	META-INF/jpa-changelog-14.0.0.xml	2024-07-10 23:42:54.952961	102	EXECUTED	9:0b305d8d1277f3a89a0a53a659ad274c	createIndex indexName=IDX_USER_ATTRIBUTE_NAME, tableName=USER_ATTRIBUTE		\N	4.25.1	\N	\N	0654969304
+KEYCLOAK-18146-add-saml-art-binding-identifier	keycloak	META-INF/jpa-changelog-14.0.0.xml	2024-07-10 23:42:54.960903	103	EXECUTED	9:2c374ad2cdfe20e2905a84c8fac48460	customChange		\N	4.25.1	\N	\N	0654969304
+15.0.0-KEYCLOAK-18467	keycloak	META-INF/jpa-changelog-15.0.0.xml	2024-07-10 23:42:54.97174	104	EXECUTED	9:47a760639ac597360a8219f5b768b4de	addColumn tableName=REALM_LOCALIZATIONS; update tableName=REALM_LOCALIZATIONS; dropColumn columnName=TEXTS, tableName=REALM_LOCALIZATIONS; renameColumn newColumnName=TEXTS, oldColumnName=TEXTS_NEW, tableName=REALM_LOCALIZATIONS; addNotNullConstrai...		\N	4.25.1	\N	\N	0654969304
+17.0.0-9562	keycloak	META-INF/jpa-changelog-17.0.0.xml	2024-07-10 23:42:54.98224	105	EXECUTED	9:a6272f0576727dd8cad2522335f5d99e	createIndex indexName=IDX_USER_SERVICE_ACCOUNT, tableName=USER_ENTITY		\N	4.25.1	\N	\N	0654969304
+18.0.0-10625-IDX_ADMIN_EVENT_TIME	keycloak	META-INF/jpa-changelog-18.0.0.xml	2024-07-10 23:42:54.997442	106	EXECUTED	9:015479dbd691d9cc8669282f4828c41d	createIndex indexName=IDX_ADMIN_EVENT_TIME, tableName=ADMIN_EVENT_ENTITY		\N	4.25.1	\N	\N	0654969304
+19.0.0-10135	keycloak	META-INF/jpa-changelog-19.0.0.xml	2024-07-10 23:42:55.005062	107	EXECUTED	9:9518e495fdd22f78ad6425cc30630221	customChange		\N	4.25.1	\N	\N	0654969304
+20.0.0-12964-supported-dbs	keycloak	META-INF/jpa-changelog-20.0.0.xml	2024-07-10 23:42:55.017665	108	EXECUTED	9:e5f243877199fd96bcc842f27a1656ac	createIndex indexName=IDX_GROUP_ATT_BY_NAME_VALUE, tableName=GROUP_ATTRIBUTE		\N	4.25.1	\N	\N	0654969304
+20.0.0-12964-unsupported-dbs	keycloak	META-INF/jpa-changelog-20.0.0.xml	2024-07-10 23:42:55.020086	109	MARK_RAN	9:1a6fcaa85e20bdeae0a9ce49b41946a5	createIndex indexName=IDX_GROUP_ATT_BY_NAME_VALUE, tableName=GROUP_ATTRIBUTE		\N	4.25.1	\N	\N	0654969304
+client-attributes-string-accomodation-fixed	keycloak	META-INF/jpa-changelog-20.0.0.xml	2024-07-10 23:42:55.039726	110	EXECUTED	9:3f332e13e90739ed0c35b0b25b7822ca	addColumn tableName=CLIENT_ATTRIBUTES; update tableName=CLIENT_ATTRIBUTES; dropColumn columnName=VALUE, tableName=CLIENT_ATTRIBUTES; renameColumn newColumnName=VALUE, oldColumnName=VALUE_NEW, tableName=CLIENT_ATTRIBUTES		\N	4.25.1	\N	\N	0654969304
+21.0.2-17277	keycloak	META-INF/jpa-changelog-21.0.2.xml	2024-07-10 23:42:55.045973	111	EXECUTED	9:7ee1f7a3fb8f5588f171fb9a6ab623c0	customChange		\N	4.25.1	\N	\N	0654969304
+21.1.0-19404	keycloak	META-INF/jpa-changelog-21.1.0.xml	2024-07-10 23:42:55.270408	112	EXECUTED	9:3d7e830b52f33676b9d64f7f2b2ea634	modifyDataType columnName=DECISION_STRATEGY, tableName=RESOURCE_SERVER_POLICY; modifyDataType columnName=LOGIC, tableName=RESOURCE_SERVER_POLICY; modifyDataType columnName=POLICY_ENFORCE_MODE, tableName=RESOURCE_SERVER		\N	4.25.1	\N	\N	0654969304
+21.1.0-19404-2	keycloak	META-INF/jpa-changelog-21.1.0.xml	2024-07-10 23:42:55.281114	113	MARK_RAN	9:627d032e3ef2c06c0e1f73d2ae25c26c	addColumn tableName=RESOURCE_SERVER_POLICY; update tableName=RESOURCE_SERVER_POLICY; dropColumn columnName=DECISION_STRATEGY, tableName=RESOURCE_SERVER_POLICY; renameColumn newColumnName=DECISION_STRATEGY, oldColumnName=DECISION_STRATEGY_NEW, tabl...		\N	4.25.1	\N	\N	0654969304
+22.0.0-17484-updated	keycloak	META-INF/jpa-changelog-22.0.0.xml	2024-07-10 23:42:55.292055	114	EXECUTED	9:90af0bfd30cafc17b9f4d6eccd92b8b3	customChange		\N	4.25.1	\N	\N	0654969304
+22.0.5-24031	keycloak	META-INF/jpa-changelog-22.0.0.xml	2024-07-10 23:42:55.297618	115	MARK_RAN	9:a60d2d7b315ec2d3eba9e2f145f9df28	customChange		\N	4.25.1	\N	\N	0654969304
+23.0.0-12062	keycloak	META-INF/jpa-changelog-23.0.0.xml	2024-07-10 23:42:55.517095	116	EXECUTED	9:2168fbe728fec46ae9baf15bf80927b8	addColumn tableName=COMPONENT_CONFIG; update tableName=COMPONENT_CONFIG; dropColumn columnName=VALUE, tableName=COMPONENT_CONFIG; renameColumn newColumnName=VALUE, oldColumnName=VALUE_NEW, tableName=COMPONENT_CONFIG		\N	4.25.1	\N	\N	0654969304
+23.0.0-17258	keycloak	META-INF/jpa-changelog-23.0.0.xml	2024-07-10 23:42:55.533685	117	EXECUTED	9:36506d679a83bbfda85a27ea1864dca8	addColumn tableName=EVENT_ENTITY		\N	4.25.1	\N	\N	0654969304
+24.0.0-9758	keycloak	META-INF/jpa-changelog-24.0.0.xml	2024-07-10 23:42:55.650221	118	EXECUTED	9:502c557a5189f600f0f445a9b49ebbce	addColumn tableName=USER_ATTRIBUTE; addColumn tableName=FED_USER_ATTRIBUTE; createIndex indexName=USER_ATTR_LONG_VALUES, tableName=USER_ATTRIBUTE; createIndex indexName=FED_USER_ATTR_LONG_VALUES, tableName=FED_USER_ATTRIBUTE; createIndex indexName...		\N	4.25.1	\N	\N	0654969304
+24.0.0-26618-drop-index-if-present	keycloak	META-INF/jpa-changelog-24.0.0.xml	2024-07-10 23:42:55.664885	120	MARK_RAN	9:04baaf56c116ed19951cbc2cca584022	dropIndex indexName=IDX_CLIENT_ATT_BY_NAME_VALUE, tableName=CLIENT_ATTRIBUTES		\N	4.25.1	\N	\N	0654969304
+24.0.0-26618-reindex	keycloak	META-INF/jpa-changelog-24.0.0.xml	2024-07-10 23:42:55.704023	121	EXECUTED	9:08707c0f0db1cef6b352db03a60edc7f	createIndex indexName=IDX_CLIENT_ATT_BY_NAME_VALUE, tableName=CLIENT_ATTRIBUTES		\N	4.25.1	\N	\N	0654969304
+24.0.2-27228	keycloak	META-INF/jpa-changelog-24.0.2.xml	2024-07-10 23:42:55.713875	122	EXECUTED	9:eaee11f6b8aa25d2cc6a84fb86fc6238	customChange		\N	4.25.1	\N	\N	0654969304
+24.0.2-27967-drop-index-if-present	keycloak	META-INF/jpa-changelog-24.0.2.xml	2024-07-10 23:42:55.720165	123	MARK_RAN	9:04baaf56c116ed19951cbc2cca584022	dropIndex indexName=IDX_CLIENT_ATT_BY_NAME_VALUE, tableName=CLIENT_ATTRIBUTES		\N	4.25.1	\N	\N	0654969304
+24.0.2-27967-reindex	keycloak	META-INF/jpa-changelog-24.0.2.xml	2024-07-10 23:42:55.724372	124	MARK_RAN	9:d3d977031d431db16e2c181ce49d73e9	createIndex indexName=IDX_CLIENT_ATT_BY_NAME_VALUE, tableName=CLIENT_ATTRIBUTES		\N	4.25.1	\N	\N	0654969304
+1.0.0.Final-KEYCLOAK-5461	sthorger@redhat.com	META-INF/jpa-changelog-1.0.0.Final.xml	2024-07-10 23:42:50.137495	1	EXECUTED	9:6f1016664e21e16d26517a4418f5e3df	createTable tableName=APPLICATION_DEFAULT_ROLES; createTable tableName=CLIENT; createTable tableName=CLIENT_SESSION; createTable tableName=CLIENT_SESSION_ROLE; createTable tableName=COMPOSITE_ROLE; createTable tableName=CREDENTIAL; createTable tab...		\N	4.25.1	\N	\N	0654969304
+1.0.0.Final-KEYCLOAK-5461	sthorger@redhat.com	META-INF/db2-jpa-changelog-1.0.0.Final.xml	2024-07-10 23:42:50.156611	2	MARK_RAN	9:828775b1596a07d1200ba1d49e5e3941	createTable tableName=APPLICATION_DEFAULT_ROLES; createTable tableName=CLIENT; createTable tableName=CLIENT_SESSION; createTable tableName=CLIENT_SESSION_ROLE; createTable tableName=COMPOSITE_ROLE; createTable tableName=CREDENTIAL; createTable tab...		\N	4.25.1	\N	\N	0654969304
+1.1.0.Beta1	sthorger@redhat.com	META-INF/jpa-changelog-1.1.0.Beta1.xml	2024-07-10 23:42:50.416243	3	EXECUTED	9:5f090e44a7d595883c1fb61f4b41fd38	delete tableName=CLIENT_SESSION_ROLE; delete tableName=CLIENT_SESSION; delete tableName=USER_SESSION; createTable tableName=CLIENT_ATTRIBUTES; createTable tableName=CLIENT_SESSION_NOTE; createTable tableName=APP_NODE_REGISTRATIONS; addColumn table...		\N	4.25.1	\N	\N	0654969304
+1.1.0.Final	sthorger@redhat.com	META-INF/jpa-changelog-1.1.0.Final.xml	2024-07-10 23:42:50.425611	4	EXECUTED	9:c07e577387a3d2c04d1adc9aaad8730e	renameColumn newColumnName=EVENT_TIME, oldColumnName=TIME, tableName=EVENT_ENTITY		\N	4.25.1	\N	\N	0654969304
+1.2.0.Beta1	psilva@redhat.com	META-INF/jpa-changelog-1.2.0.Beta1.xml	2024-07-10 23:42:50.762414	5	EXECUTED	9:b68ce996c655922dbcd2fe6b6ae72686	delete tableName=CLIENT_SESSION_ROLE; delete tableName=CLIENT_SESSION_NOTE; delete tableName=CLIENT_SESSION; delete tableName=USER_SESSION; createTable tableName=PROTOCOL_MAPPER; createTable tableName=PROTOCOL_MAPPER_CONFIG; createTable tableName=...		\N	4.25.1	\N	\N	0654969304
+1.2.0.Beta1	psilva@redhat.com	META-INF/db2-jpa-changelog-1.2.0.Beta1.xml	2024-07-10 23:42:50.779551	6	MARK_RAN	9:543b5c9989f024fe35c6f6c5a97de88e	delete tableName=CLIENT_SESSION_ROLE; delete tableName=CLIENT_SESSION_NOTE; delete tableName=CLIENT_SESSION; delete tableName=USER_SESSION; createTable tableName=PROTOCOL_MAPPER; createTable tableName=PROTOCOL_MAPPER_CONFIG; createTable tableName=...		\N	4.25.1	\N	\N	0654969304
+1.2.0.RC1	bburke@redhat.com	META-INF/jpa-changelog-1.2.0.CR1.xml	2024-07-10 23:42:51.205963	7	EXECUTED	9:765afebbe21cf5bbca048e632df38336	delete tableName=CLIENT_SESSION_ROLE; delete tableName=CLIENT_SESSION_NOTE; delete tableName=CLIENT_SESSION; delete tableName=USER_SESSION_NOTE; delete tableName=USER_SESSION; createTable tableName=MIGRATION_MODEL; createTable tableName=IDENTITY_P...		\N	4.25.1	\N	\N	0654969304
+1.2.0.RC1	bburke@redhat.com	META-INF/db2-jpa-changelog-1.2.0.CR1.xml	2024-07-10 23:42:51.217186	8	MARK_RAN	9:db4a145ba11a6fdaefb397f6dbf829a1	delete tableName=CLIENT_SESSION_ROLE; delete tableName=CLIENT_SESSION_NOTE; delete tableName=CLIENT_SESSION; delete tableName=USER_SESSION_NOTE; delete tableName=USER_SESSION; createTable tableName=MIGRATION_MODEL; createTable tableName=IDENTITY_P...		\N	4.25.1	\N	\N	0654969304
+1.2.0.Final	keycloak	META-INF/jpa-changelog-1.2.0.Final.xml	2024-07-10 23:42:51.22428	9	EXECUTED	9:9d05c7be10cdb873f8bcb41bc3a8ab23	update tableName=CLIENT; update tableName=CLIENT; update tableName=CLIENT		\N	4.25.1	\N	\N	0654969304
+14.0.0-KEYCLOAK-18286-unsupported-dbs	keycloak	META-INF/jpa-changelog-14.0.0.xml	2024-07-10 23:42:54.934431	101	MARK_RAN	9:d3d977031d431db16e2c181ce49d73e9	createIndex indexName=IDX_CLIENT_ATT_BY_NAME_VALUE, tableName=CLIENT_ATTRIBUTES		\N	4.25.1	\N	\N	0654969304
+1.3.0	bburke@redhat.com	META-INF/jpa-changelog-1.3.0.xml	2024-07-10 23:42:51.562331	10	EXECUTED	9:18593702353128d53111f9b1ff0b82b8	delete tableName=CLIENT_SESSION_ROLE; delete tableName=CLIENT_SESSION_PROT_MAPPER; delete tableName=CLIENT_SESSION_NOTE; delete tableName=CLIENT_SESSION; delete tableName=USER_SESSION_NOTE; delete tableName=USER_SESSION; createTable tableName=ADMI...		\N	4.25.1	\N	\N	0654969304
+1.4.0	bburke@redhat.com	META-INF/jpa-changelog-1.4.0.xml	2024-07-10 23:42:51.722454	11	EXECUTED	9:6122efe5f090e41a85c0f1c9e52cbb62	delete tableName=CLIENT_SESSION_AUTH_STATUS; delete tableName=CLIENT_SESSION_ROLE; delete tableName=CLIENT_SESSION_PROT_MAPPER; delete tableName=CLIENT_SESSION_NOTE; delete tableName=CLIENT_SESSION; delete tableName=USER_SESSION_NOTE; delete table...		\N	4.25.1	\N	\N	0654969304
+1.4.0	bburke@redhat.com	META-INF/db2-jpa-changelog-1.4.0.xml	2024-07-10 23:42:51.733592	12	MARK_RAN	9:e1ff28bf7568451453f844c5d54bb0b5	delete tableName=CLIENT_SESSION_AUTH_STATUS; delete tableName=CLIENT_SESSION_ROLE; delete tableName=CLIENT_SESSION_PROT_MAPPER; delete tableName=CLIENT_SESSION_NOTE; delete tableName=CLIENT_SESSION; delete tableName=USER_SESSION_NOTE; delete table...		\N	4.25.1	\N	\N	0654969304
+1.5.0	bburke@redhat.com	META-INF/jpa-changelog-1.5.0.xml	2024-07-10 23:42:51.760427	13	EXECUTED	9:7af32cd8957fbc069f796b61217483fd	delete tableName=CLIENT_SESSION_AUTH_STATUS; delete tableName=CLIENT_SESSION_ROLE; delete tableName=CLIENT_SESSION_PROT_MAPPER; delete tableName=CLIENT_SESSION_NOTE; delete tableName=CLIENT_SESSION; delete tableName=USER_SESSION_NOTE; delete table...		\N	4.25.1	\N	\N	0654969304
+1.6.1_from15	mposolda@redhat.com	META-INF/jpa-changelog-1.6.1.xml	2024-07-10 23:42:51.814505	14	EXECUTED	9:6005e15e84714cd83226bf7879f54190	addColumn tableName=REALM; addColumn tableName=KEYCLOAK_ROLE; addColumn tableName=CLIENT; createTable tableName=OFFLINE_USER_SESSION; createTable tableName=OFFLINE_CLIENT_SESSION; addPrimaryKey constraintName=CONSTRAINT_OFFL_US_SES_PK2, tableName=...		\N	4.25.1	\N	\N	0654969304
+1.6.1_from16-pre	mposolda@redhat.com	META-INF/jpa-changelog-1.6.1.xml	2024-07-10 23:42:51.817727	15	MARK_RAN	9:bf656f5a2b055d07f314431cae76f06c	delete tableName=OFFLINE_CLIENT_SESSION; delete tableName=OFFLINE_USER_SESSION		\N	4.25.1	\N	\N	0654969304
+1.6.1_from16	mposolda@redhat.com	META-INF/jpa-changelog-1.6.1.xml	2024-07-10 23:42:51.820926	16	MARK_RAN	9:f8dadc9284440469dcf71e25ca6ab99b	dropPrimaryKey constraintName=CONSTRAINT_OFFLINE_US_SES_PK, tableName=OFFLINE_USER_SESSION; dropPrimaryKey constraintName=CONSTRAINT_OFFLINE_CL_SES_PK, tableName=OFFLINE_CLIENT_SESSION; addColumn tableName=OFFLINE_USER_SESSION; update tableName=OF...		\N	4.25.1	\N	\N	0654969304
+1.6.1	mposolda@redhat.com	META-INF/jpa-changelog-1.6.1.xml	2024-07-10 23:42:51.831141	17	EXECUTED	9:d41d8cd98f00b204e9800998ecf8427e	empty		\N	4.25.1	\N	\N	0654969304
+1.7.0	bburke@redhat.com	META-INF/jpa-changelog-1.7.0.xml	2024-07-10 23:42:52.007747	18	EXECUTED	9:3368ff0be4c2855ee2dd9ca813b38d8e	createTable tableName=KEYCLOAK_GROUP; createTable tableName=GROUP_ROLE_MAPPING; createTable tableName=GROUP_ATTRIBUTE; createTable tableName=USER_GROUP_MEMBERSHIP; createTable tableName=REALM_DEFAULT_GROUPS; addColumn tableName=IDENTITY_PROVIDER; ...		\N	4.25.1	\N	\N	0654969304
+1.8.0	mposolda@redhat.com	META-INF/jpa-changelog-1.8.0.xml	2024-07-10 23:42:52.243452	19	EXECUTED	9:8ac2fb5dd030b24c0570a763ed75ed20	addColumn tableName=IDENTITY_PROVIDER; createTable tableName=CLIENT_TEMPLATE; createTable tableName=CLIENT_TEMPLATE_ATTRIBUTES; createTable tableName=TEMPLATE_SCOPE_MAPPING; dropNotNullConstraint columnName=CLIENT_ID, tableName=PROTOCOL_MAPPER; ad...		\N	4.25.1	\N	\N	0654969304
+1.8.0-2	keycloak	META-INF/jpa-changelog-1.8.0.xml	2024-07-10 23:42:52.269569	20	EXECUTED	9:f91ddca9b19743db60e3057679810e6c	dropDefaultValue columnName=ALGORITHM, tableName=CREDENTIAL; update tableName=CREDENTIAL		\N	4.25.1	\N	\N	0654969304
+24.0.0-9758-2	keycloak	META-INF/jpa-changelog-24.0.0.xml	2024-07-10 23:42:55.658752	119	EXECUTED	9:bf0fdee10afdf597a987adbf291db7b2	customChange		\N	4.25.1	\N	\N	0654969304
+1.8.0	mposolda@redhat.com	META-INF/db2-jpa-changelog-1.8.0.xml	2024-07-10 23:42:52.273842	21	MARK_RAN	9:831e82914316dc8a57dc09d755f23c51	addColumn tableName=IDENTITY_PROVIDER; createTable tableName=CLIENT_TEMPLATE; createTable tableName=CLIENT_TEMPLATE_ATTRIBUTES; createTable tableName=TEMPLATE_SCOPE_MAPPING; dropNotNullConstraint columnName=CLIENT_ID, tableName=PROTOCOL_MAPPER; ad...		\N	4.25.1	\N	\N	0654969304
+1.8.0-2	keycloak	META-INF/db2-jpa-changelog-1.8.0.xml	2024-07-10 23:42:52.280893	22	MARK_RAN	9:f91ddca9b19743db60e3057679810e6c	dropDefaultValue columnName=ALGORITHM, tableName=CREDENTIAL; update tableName=CREDENTIAL		\N	4.25.1	\N	\N	0654969304
+1.9.0	mposolda@redhat.com	META-INF/jpa-changelog-1.9.0.xml	2024-07-10 23:42:52.317185	23	EXECUTED	9:bc3d0f9e823a69dc21e23e94c7a94bb1	update tableName=REALM; update tableName=REALM; update tableName=REALM; update tableName=REALM; update tableName=CREDENTIAL; update tableName=CREDENTIAL; update tableName=CREDENTIAL; update tableName=REALM; update tableName=REALM; customChange; dr...		\N	4.25.1	\N	\N	0654969304
+1.9.1	keycloak	META-INF/jpa-changelog-1.9.1.xml	2024-07-10 23:42:52.325334	24	EXECUTED	9:c9999da42f543575ab790e76439a2679	modifyDataType columnName=PRIVATE_KEY, tableName=REALM; modifyDataType columnName=PUBLIC_KEY, tableName=REALM; modifyDataType columnName=CERTIFICATE, tableName=REALM		\N	4.25.1	\N	\N	0654969304
+1.9.1	keycloak	META-INF/db2-jpa-changelog-1.9.1.xml	2024-07-10 23:42:52.327705	25	MARK_RAN	9:0d6c65c6f58732d81569e77b10ba301d	modifyDataType columnName=PRIVATE_KEY, tableName=REALM; modifyDataType columnName=CERTIFICATE, tableName=REALM		\N	4.25.1	\N	\N	0654969304
+1.9.2	keycloak	META-INF/jpa-changelog-1.9.2.xml	2024-07-10 23:42:52.399749	26	EXECUTED	9:fc576660fc016ae53d2d4778d84d86d0	createIndex indexName=IDX_USER_EMAIL, tableName=USER_ENTITY; createIndex indexName=IDX_USER_ROLE_MAPPING, tableName=USER_ROLE_MAPPING; createIndex indexName=IDX_USER_GROUP_MAPPING, tableName=USER_GROUP_MEMBERSHIP; createIndex indexName=IDX_USER_CO...		\N	4.25.1	\N	\N	0654969304
+authz-2.0.0	psilva@redhat.com	META-INF/jpa-changelog-authz-2.0.0.xml	2024-07-10 23:42:52.633093	27	EXECUTED	9:43ed6b0da89ff77206289e87eaa9c024	createTable tableName=RESOURCE_SERVER; addPrimaryKey constraintName=CONSTRAINT_FARS, tableName=RESOURCE_SERVER; addUniqueConstraint constraintName=UK_AU8TT6T700S9V50BU18WS5HA6, tableName=RESOURCE_SERVER; createTable tableName=RESOURCE_SERVER_RESOU...		\N	4.25.1	\N	\N	0654969304
+authz-2.5.1	psilva@redhat.com	META-INF/jpa-changelog-authz-2.5.1.xml	2024-07-10 23:42:52.645142	28	EXECUTED	9:44bae577f551b3738740281eceb4ea70	update tableName=RESOURCE_SERVER_POLICY		\N	4.25.1	\N	\N	0654969304
+2.1.0-KEYCLOAK-5461	bburke@redhat.com	META-INF/jpa-changelog-2.1.0.xml	2024-07-10 23:42:52.795264	29	EXECUTED	9:bd88e1f833df0420b01e114533aee5e8	createTable tableName=BROKER_LINK; createTable tableName=FED_USER_ATTRIBUTE; createTable tableName=FED_USER_CONSENT; createTable tableName=FED_USER_CONSENT_ROLE; createTable tableName=FED_USER_CONSENT_PROT_MAPPER; createTable tableName=FED_USER_CR...		\N	4.25.1	\N	\N	0654969304
+2.2.0	bburke@redhat.com	META-INF/jpa-changelog-2.2.0.xml	2024-07-10 23:42:52.826773	30	EXECUTED	9:a7022af5267f019d020edfe316ef4371	addColumn tableName=ADMIN_EVENT_ENTITY; createTable tableName=CREDENTIAL_ATTRIBUTE; createTable tableName=FED_CREDENTIAL_ATTRIBUTE; modifyDataType columnName=VALUE, tableName=CREDENTIAL; addForeignKeyConstraint baseTableName=FED_CREDENTIAL_ATTRIBU...		\N	4.25.1	\N	\N	0654969304
+2.3.0	bburke@redhat.com	META-INF/jpa-changelog-2.3.0.xml	2024-07-10 23:42:52.85627	31	EXECUTED	9:fc155c394040654d6a79227e56f5e25a	createTable tableName=FEDERATED_USER; addPrimaryKey constraintName=CONSTR_FEDERATED_USER, tableName=FEDERATED_USER; dropDefaultValue columnName=TOTP, tableName=USER_ENTITY; dropColumn columnName=TOTP, tableName=USER_ENTITY; addColumn tableName=IDE...		\N	4.25.1	\N	\N	0654969304
+2.4.0	bburke@redhat.com	META-INF/jpa-changelog-2.4.0.xml	2024-07-10 23:42:52.863165	32	EXECUTED	9:eac4ffb2a14795e5dc7b426063e54d88	customChange		\N	4.25.1	\N	\N	0654969304
+2.5.0	bburke@redhat.com	META-INF/jpa-changelog-2.5.0.xml	2024-07-10 23:42:52.870924	33	EXECUTED	9:54937c05672568c4c64fc9524c1e9462	customChange; modifyDataType columnName=USER_ID, tableName=OFFLINE_USER_SESSION		\N	4.25.1	\N	\N	0654969304
+2.5.0-unicode-oracle	hmlnarik@redhat.com	META-INF/jpa-changelog-2.5.0.xml	2024-07-10 23:42:52.873463	34	MARK_RAN	9:3a32bace77c84d7678d035a7f5a8084e	modifyDataType columnName=DESCRIPTION, tableName=AUTHENTICATION_FLOW; modifyDataType columnName=DESCRIPTION, tableName=CLIENT_TEMPLATE; modifyDataType columnName=DESCRIPTION, tableName=RESOURCE_SERVER_POLICY; modifyDataType columnName=DESCRIPTION,...		\N	4.25.1	\N	\N	0654969304
+2.5.0-unicode-other-dbs	hmlnarik@redhat.com	META-INF/jpa-changelog-2.5.0.xml	2024-07-10 23:42:52.922201	35	EXECUTED	9:33d72168746f81f98ae3a1e8e0ca3554	modifyDataType columnName=DESCRIPTION, tableName=AUTHENTICATION_FLOW; modifyDataType columnName=DESCRIPTION, tableName=CLIENT_TEMPLATE; modifyDataType columnName=DESCRIPTION, tableName=RESOURCE_SERVER_POLICY; modifyDataType columnName=DESCRIPTION,...		\N	4.25.1	\N	\N	0654969304
+2.5.0-duplicate-email-support	slawomir@dabek.name	META-INF/jpa-changelog-2.5.0.xml	2024-07-10 23:42:52.928458	36	EXECUTED	9:61b6d3d7a4c0e0024b0c839da283da0c	addColumn tableName=REALM		\N	4.25.1	\N	\N	0654969304
+2.5.0-unique-group-names	hmlnarik@redhat.com	META-INF/jpa-changelog-2.5.0.xml	2024-07-10 23:42:52.937732	37	EXECUTED	9:8dcac7bdf7378e7d823cdfddebf72fda	addUniqueConstraint constraintName=SIBLING_NAMES, tableName=KEYCLOAK_GROUP		\N	4.25.1	\N	\N	0654969304
+2.5.1	bburke@redhat.com	META-INF/jpa-changelog-2.5.1.xml	2024-07-10 23:42:52.943241	38	EXECUTED	9:a2b870802540cb3faa72098db5388af3	addColumn tableName=FED_USER_CONSENT		\N	4.25.1	\N	\N	0654969304
+3.0.0	bburke@redhat.com	META-INF/jpa-changelog-3.0.0.xml	2024-07-10 23:42:52.948102	39	EXECUTED	9:132a67499ba24bcc54fb5cbdcfe7e4c0	addColumn tableName=IDENTITY_PROVIDER		\N	4.25.1	\N	\N	0654969304
+3.2.0-fix	keycloak	META-INF/jpa-changelog-3.2.0.xml	2024-07-10 23:42:52.950108	40	MARK_RAN	9:938f894c032f5430f2b0fafb1a243462	addNotNullConstraint columnName=REALM_ID, tableName=CLIENT_INITIAL_ACCESS		\N	4.25.1	\N	\N	0654969304
+3.2.0-fix-with-keycloak-5416	keycloak	META-INF/jpa-changelog-3.2.0.xml	2024-07-10 23:42:52.952434	41	MARK_RAN	9:845c332ff1874dc5d35974b0babf3006	dropIndex indexName=IDX_CLIENT_INIT_ACC_REALM, tableName=CLIENT_INITIAL_ACCESS; addNotNullConstraint columnName=REALM_ID, tableName=CLIENT_INITIAL_ACCESS; createIndex indexName=IDX_CLIENT_INIT_ACC_REALM, tableName=CLIENT_INITIAL_ACCESS		\N	4.25.1	\N	\N	0654969304
+3.2.0-fix-offline-sessions	hmlnarik	META-INF/jpa-changelog-3.2.0.xml	2024-07-10 23:42:52.959399	42	EXECUTED	9:fc86359c079781adc577c5a217e4d04c	customChange		\N	4.25.1	\N	\N	0654969304
+3.2.0-fixed	keycloak	META-INF/jpa-changelog-3.2.0.xml	2024-07-10 23:42:53.244705	43	EXECUTED	9:59a64800e3c0d09b825f8a3b444fa8f4	addColumn tableName=REALM; dropPrimaryKey constraintName=CONSTRAINT_OFFL_CL_SES_PK2, tableName=OFFLINE_CLIENT_SESSION; dropColumn columnName=CLIENT_SESSION_ID, tableName=OFFLINE_CLIENT_SESSION; addPrimaryKey constraintName=CONSTRAINT_OFFL_CL_SES_P...		\N	4.25.1	\N	\N	0654969304
+3.3.0	keycloak	META-INF/jpa-changelog-3.3.0.xml	2024-07-10 23:42:53.252083	44	EXECUTED	9:d48d6da5c6ccf667807f633fe489ce88	addColumn tableName=USER_ENTITY		\N	4.25.1	\N	\N	0654969304
+authz-3.4.0.CR1-resource-server-pk-change-part1	glavoie@gmail.com	META-INF/jpa-changelog-authz-3.4.0.CR1.xml	2024-07-10 23:42:53.258022	45	EXECUTED	9:dde36f7973e80d71fceee683bc5d2951	addColumn tableName=RESOURCE_SERVER_POLICY; addColumn tableName=RESOURCE_SERVER_RESOURCE; addColumn tableName=RESOURCE_SERVER_SCOPE		\N	4.25.1	\N	\N	0654969304
+authz-3.4.0.CR1-resource-server-pk-change-part2-KEYCLOAK-6095	hmlnarik@redhat.com	META-INF/jpa-changelog-authz-3.4.0.CR1.xml	2024-07-10 23:42:53.265429	46	EXECUTED	9:b855e9b0a406b34fa323235a0cf4f640	customChange		\N	4.25.1	\N	\N	0654969304
+authz-3.4.0.CR1-resource-server-pk-change-part3-fixed	glavoie@gmail.com	META-INF/jpa-changelog-authz-3.4.0.CR1.xml	2024-07-10 23:42:53.26752	47	MARK_RAN	9:51abbacd7b416c50c4421a8cabf7927e	dropIndex indexName=IDX_RES_SERV_POL_RES_SERV, tableName=RESOURCE_SERVER_POLICY; dropIndex indexName=IDX_RES_SRV_RES_RES_SRV, tableName=RESOURCE_SERVER_RESOURCE; dropIndex indexName=IDX_RES_SRV_SCOPE_RES_SRV, tableName=RESOURCE_SERVER_SCOPE		\N	4.25.1	\N	\N	0654969304
+authz-3.4.0.CR1-resource-server-pk-change-part3-fixed-nodropindex	glavoie@gmail.com	META-INF/jpa-changelog-authz-3.4.0.CR1.xml	2024-07-10 23:42:53.353602	48	EXECUTED	9:bdc99e567b3398bac83263d375aad143	addNotNullConstraint columnName=RESOURCE_SERVER_CLIENT_ID, tableName=RESOURCE_SERVER_POLICY; addNotNullConstraint columnName=RESOURCE_SERVER_CLIENT_ID, tableName=RESOURCE_SERVER_RESOURCE; addNotNullConstraint columnName=RESOURCE_SERVER_CLIENT_ID, ...		\N	4.25.1	\N	\N	0654969304
+authn-3.4.0.CR1-refresh-token-max-reuse	glavoie@gmail.com	META-INF/jpa-changelog-authz-3.4.0.CR1.xml	2024-07-10 23:42:53.361863	49	EXECUTED	9:d198654156881c46bfba39abd7769e69	addColumn tableName=REALM		\N	4.25.1	\N	\N	0654969304
+3.4.0	keycloak	META-INF/jpa-changelog-3.4.0.xml	2024-07-10 23:42:53.477374	50	EXECUTED	9:cfdd8736332ccdd72c5256ccb42335db	addPrimaryKey constraintName=CONSTRAINT_REALM_DEFAULT_ROLES, tableName=REALM_DEFAULT_ROLES; addPrimaryKey constraintName=CONSTRAINT_COMPOSITE_ROLE, tableName=COMPOSITE_ROLE; addPrimaryKey constraintName=CONSTR_REALM_DEFAULT_GROUPS, tableName=REALM...		\N	4.25.1	\N	\N	0654969304
+3.4.0-KEYCLOAK-5230	hmlnarik@redhat.com	META-INF/jpa-changelog-3.4.0.xml	2024-07-10 23:42:53.543976	51	EXECUTED	9:7c84de3d9bd84d7f077607c1a4dcb714	createIndex indexName=IDX_FU_ATTRIBUTE, tableName=FED_USER_ATTRIBUTE; createIndex indexName=IDX_FU_CONSENT, tableName=FED_USER_CONSENT; createIndex indexName=IDX_FU_CONSENT_RU, tableName=FED_USER_CONSENT; createIndex indexName=IDX_FU_CREDENTIAL, t...		\N	4.25.1	\N	\N	0654969304
+3.4.1	psilva@redhat.com	META-INF/jpa-changelog-3.4.1.xml	2024-07-10 23:42:53.548333	52	EXECUTED	9:5a6bb36cbefb6a9d6928452c0852af2d	modifyDataType columnName=VALUE, tableName=CLIENT_ATTRIBUTES		\N	4.25.1	\N	\N	0654969304
+3.4.2	keycloak	META-INF/jpa-changelog-3.4.2.xml	2024-07-10 23:42:53.551911	53	EXECUTED	9:8f23e334dbc59f82e0a328373ca6ced0	update tableName=REALM		\N	4.25.1	\N	\N	0654969304
+3.4.2-KEYCLOAK-5172	mkanis@redhat.com	META-INF/jpa-changelog-3.4.2.xml	2024-07-10 23:42:53.556029	54	EXECUTED	9:9156214268f09d970cdf0e1564d866af	update tableName=CLIENT		\N	4.25.1	\N	\N	0654969304
+4.0.0-KEYCLOAK-6335	bburke@redhat.com	META-INF/jpa-changelog-4.0.0.xml	2024-07-10 23:42:53.567132	55	EXECUTED	9:db806613b1ed154826c02610b7dbdf74	createTable tableName=CLIENT_AUTH_FLOW_BINDINGS; addPrimaryKey constraintName=C_CLI_FLOW_BIND, tableName=CLIENT_AUTH_FLOW_BINDINGS		\N	4.25.1	\N	\N	0654969304
+4.0.0-CLEANUP-UNUSED-TABLE	bburke@redhat.com	META-INF/jpa-changelog-4.0.0.xml	2024-07-10 23:42:53.57746	56	EXECUTED	9:229a041fb72d5beac76bb94a5fa709de	dropTable tableName=CLIENT_IDENTITY_PROV_MAPPING		\N	4.25.1	\N	\N	0654969304
+4.0.0-KEYCLOAK-6228	bburke@redhat.com	META-INF/jpa-changelog-4.0.0.xml	2024-07-10 23:42:53.614704	57	EXECUTED	9:079899dade9c1e683f26b2aa9ca6ff04	dropUniqueConstraint constraintName=UK_JKUWUVD56ONTGSUHOGM8UEWRT, tableName=USER_CONSENT; dropNotNullConstraint columnName=CLIENT_ID, tableName=USER_CONSENT; addColumn tableName=USER_CONSENT; addUniqueConstraint constraintName=UK_JKUWUVD56ONTGSUHO...		\N	4.25.1	\N	\N	0654969304
+4.0.0-KEYCLOAK-5579-fixed	mposolda@redhat.com	META-INF/jpa-changelog-4.0.0.xml	2024-07-10 23:42:54.020307	58	EXECUTED	9:139b79bcbbfe903bb1c2d2a4dbf001d9	dropForeignKeyConstraint baseTableName=CLIENT_TEMPLATE_ATTRIBUTES, constraintName=FK_CL_TEMPL_ATTR_TEMPL; renameTable newTableName=CLIENT_SCOPE_ATTRIBUTES, oldTableName=CLIENT_TEMPLATE_ATTRIBUTES; renameColumn newColumnName=SCOPE_ID, oldColumnName...		\N	4.25.1	\N	\N	0654969304
+authz-4.0.0.CR1	psilva@redhat.com	META-INF/jpa-changelog-authz-4.0.0.CR1.xml	2024-07-10 23:42:54.162355	59	EXECUTED	9:b55738ad889860c625ba2bf483495a04	createTable tableName=RESOURCE_SERVER_PERM_TICKET; addPrimaryKey constraintName=CONSTRAINT_FAPMT, tableName=RESOURCE_SERVER_PERM_TICKET; addForeignKeyConstraint baseTableName=RESOURCE_SERVER_PERM_TICKET, constraintName=FK_FRSRHO213XCX4WNKOG82SSPMT...		\N	4.25.1	\N	\N	0654969304
+authz-4.0.0.Beta3	psilva@redhat.com	META-INF/jpa-changelog-authz-4.0.0.Beta3.xml	2024-07-10 23:42:54.179609	60	EXECUTED	9:e0057eac39aa8fc8e09ac6cfa4ae15fe	addColumn tableName=RESOURCE_SERVER_POLICY; addColumn tableName=RESOURCE_SERVER_PERM_TICKET; addForeignKeyConstraint baseTableName=RESOURCE_SERVER_PERM_TICKET, constraintName=FK_FRSRPO2128CX4WNKOG82SSRFY, referencedTableName=RESOURCE_SERVER_POLICY		\N	4.25.1	\N	\N	0654969304
+authz-4.2.0.Final	mhajas@redhat.com	META-INF/jpa-changelog-authz-4.2.0.Final.xml	2024-07-10 23:42:54.200768	61	EXECUTED	9:42a33806f3a0443fe0e7feeec821326c	createTable tableName=RESOURCE_URIS; addForeignKeyConstraint baseTableName=RESOURCE_URIS, constraintName=FK_RESOURCE_SERVER_URIS, referencedTableName=RESOURCE_SERVER_RESOURCE; customChange; dropColumn columnName=URI, tableName=RESOURCE_SERVER_RESO...		\N	4.25.1	\N	\N	0654969304
+authz-4.2.0.Final-KEYCLOAK-9944	hmlnarik@redhat.com	META-INF/jpa-changelog-authz-4.2.0.Final.xml	2024-07-10 23:42:54.215337	62	EXECUTED	9:9968206fca46eecc1f51db9c024bfe56	addPrimaryKey constraintName=CONSTRAINT_RESOUR_URIS_PK, tableName=RESOURCE_URIS		\N	4.25.1	\N	\N	0654969304
+4.2.0-KEYCLOAK-6313	wadahiro@gmail.com	META-INF/jpa-changelog-4.2.0.xml	2024-07-10 23:42:54.22302	63	EXECUTED	9:92143a6daea0a3f3b8f598c97ce55c3d	addColumn tableName=REQUIRED_ACTION_PROVIDER		\N	4.25.1	\N	\N	0654969304
+4.3.0-KEYCLOAK-7984	wadahiro@gmail.com	META-INF/jpa-changelog-4.3.0.xml	2024-07-10 23:42:54.231767	64	EXECUTED	9:82bab26a27195d889fb0429003b18f40	update tableName=REQUIRED_ACTION_PROVIDER		\N	4.25.1	\N	\N	0654969304
+4.6.0-KEYCLOAK-7950	psilva@redhat.com	META-INF/jpa-changelog-4.6.0.xml	2024-07-10 23:42:54.23731	65	EXECUTED	9:e590c88ddc0b38b0ae4249bbfcb5abc3	update tableName=RESOURCE_SERVER_RESOURCE		\N	4.25.1	\N	\N	0654969304
+4.6.0-KEYCLOAK-8377	keycloak	META-INF/jpa-changelog-4.6.0.xml	2024-07-10 23:42:54.294076	66	EXECUTED	9:5c1f475536118dbdc38d5d7977950cc0	createTable tableName=ROLE_ATTRIBUTE; addPrimaryKey constraintName=CONSTRAINT_ROLE_ATTRIBUTE_PK, tableName=ROLE_ATTRIBUTE; addForeignKeyConstraint baseTableName=ROLE_ATTRIBUTE, constraintName=FK_ROLE_ATTRIBUTE_ID, referencedTableName=KEYCLOAK_ROLE...		\N	4.25.1	\N	\N	0654969304
+4.6.0-KEYCLOAK-8555	gideonray@gmail.com	META-INF/jpa-changelog-4.6.0.xml	2024-07-10 23:42:54.309051	67	EXECUTED	9:e7c9f5f9c4d67ccbbcc215440c718a17	createIndex indexName=IDX_COMPONENT_PROVIDER_TYPE, tableName=COMPONENT		\N	4.25.1	\N	\N	0654969304
+4.7.0-KEYCLOAK-1267	sguilhen@redhat.com	META-INF/jpa-changelog-4.7.0.xml	2024-07-10 23:42:54.317403	68	EXECUTED	9:88e0bfdda924690d6f4e430c53447dd5	addColumn tableName=REALM		\N	4.25.1	\N	\N	0654969304
+4.7.0-KEYCLOAK-7275	keycloak	META-INF/jpa-changelog-4.7.0.xml	2024-07-10 23:42:54.343453	69	EXECUTED	9:f53177f137e1c46b6a88c59ec1cb5218	renameColumn newColumnName=CREATED_ON, oldColumnName=LAST_SESSION_REFRESH, tableName=OFFLINE_USER_SESSION; addNotNullConstraint columnName=CREATED_ON, tableName=OFFLINE_USER_SESSION; addColumn tableName=OFFLINE_USER_SESSION; customChange; createIn...		\N	4.25.1	\N	\N	0654969304
+4.8.0-KEYCLOAK-8835	sguilhen@redhat.com	META-INF/jpa-changelog-4.8.0.xml	2024-07-10 23:42:54.354756	70	EXECUTED	9:a74d33da4dc42a37ec27121580d1459f	addNotNullConstraint columnName=SSO_MAX_LIFESPAN_REMEMBER_ME, tableName=REALM; addNotNullConstraint columnName=SSO_IDLE_TIMEOUT_REMEMBER_ME, tableName=REALM		\N	4.25.1	\N	\N	0654969304
+authz-7.0.0-KEYCLOAK-10443	psilva@redhat.com	META-INF/jpa-changelog-authz-7.0.0.xml	2024-07-10 23:42:54.361354	71	EXECUTED	9:fd4ade7b90c3b67fae0bfcfcb42dfb5f	addColumn tableName=RESOURCE_SERVER		\N	4.25.1	\N	\N	0654969304
+8.0.0-adding-credential-columns	keycloak	META-INF/jpa-changelog-8.0.0.xml	2024-07-10 23:42:54.37	72	EXECUTED	9:aa072ad090bbba210d8f18781b8cebf4	addColumn tableName=CREDENTIAL; addColumn tableName=FED_USER_CREDENTIAL		\N	4.25.1	\N	\N	0654969304
+8.0.0-updating-credential-data-not-oracle-fixed	keycloak	META-INF/jpa-changelog-8.0.0.xml	2024-07-10 23:42:54.384233	73	EXECUTED	9:1ae6be29bab7c2aa376f6983b932be37	update tableName=CREDENTIAL; update tableName=CREDENTIAL; update tableName=CREDENTIAL; update tableName=FED_USER_CREDENTIAL; update tableName=FED_USER_CREDENTIAL; update tableName=FED_USER_CREDENTIAL		\N	4.25.1	\N	\N	0654969304
+8.0.0-updating-credential-data-oracle-fixed	keycloak	META-INF/jpa-changelog-8.0.0.xml	2024-07-10 23:42:54.388733	74	MARK_RAN	9:14706f286953fc9a25286dbd8fb30d97	update tableName=CREDENTIAL; update tableName=CREDENTIAL; update tableName=CREDENTIAL; update tableName=FED_USER_CREDENTIAL; update tableName=FED_USER_CREDENTIAL; update tableName=FED_USER_CREDENTIAL		\N	4.25.1	\N	\N	0654969304
+8.0.0-credential-cleanup-fixed	keycloak	META-INF/jpa-changelog-8.0.0.xml	2024-07-10 23:42:54.426784	75	EXECUTED	9:2b9cc12779be32c5b40e2e67711a218b	dropDefaultValue columnName=COUNTER, tableName=CREDENTIAL; dropDefaultValue columnName=DIGITS, tableName=CREDENTIAL; dropDefaultValue columnName=PERIOD, tableName=CREDENTIAL; dropDefaultValue columnName=ALGORITHM, tableName=CREDENTIAL; dropColumn ...		\N	4.25.1	\N	\N	0654969304
+8.0.0-resource-tag-support	keycloak	META-INF/jpa-changelog-8.0.0.xml	2024-07-10 23:42:54.440353	76	EXECUTED	9:91fa186ce7a5af127a2d7a91ee083cc5	addColumn tableName=MIGRATION_MODEL; createIndex indexName=IDX_UPDATE_TIME, tableName=MIGRATION_MODEL		\N	4.25.1	\N	\N	0654969304
+9.0.0-always-display-client	keycloak	META-INF/jpa-changelog-9.0.0.xml	2024-07-10 23:42:54.447429	77	EXECUTED	9:6335e5c94e83a2639ccd68dd24e2e5ad	addColumn tableName=CLIENT		\N	4.25.1	\N	\N	0654969304
+9.0.0-drop-constraints-for-column-increase	keycloak	META-INF/jpa-changelog-9.0.0.xml	2024-07-10 23:42:54.451032	78	MARK_RAN	9:6bdb5658951e028bfe16fa0a8228b530	dropUniqueConstraint constraintName=UK_FRSR6T700S9V50BU18WS5PMT, tableName=RESOURCE_SERVER_PERM_TICKET; dropUniqueConstraint constraintName=UK_FRSR6T700S9V50BU18WS5HA6, tableName=RESOURCE_SERVER_RESOURCE; dropPrimaryKey constraintName=CONSTRAINT_O...		\N	4.25.1	\N	\N	0654969304
+9.0.0-increase-column-size-federated-fk	keycloak	META-INF/jpa-changelog-9.0.0.xml	2024-07-10 23:42:54.492482	79	EXECUTED	9:d5bc15a64117ccad481ce8792d4c608f	modifyDataType columnName=CLIENT_ID, tableName=FED_USER_CONSENT; modifyDataType columnName=CLIENT_REALM_CONSTRAINT, tableName=KEYCLOAK_ROLE; modifyDataType columnName=OWNER, tableName=RESOURCE_SERVER_POLICY; modifyDataType columnName=CLIENT_ID, ta...		\N	4.25.1	\N	\N	0654969304
+9.0.0-recreate-constraints-after-column-increase	keycloak	META-INF/jpa-changelog-9.0.0.xml	2024-07-10 23:42:54.496219	80	MARK_RAN	9:077cba51999515f4d3e7ad5619ab592c	addNotNullConstraint columnName=CLIENT_ID, tableName=OFFLINE_CLIENT_SESSION; addNotNullConstraint columnName=OWNER, tableName=RESOURCE_SERVER_PERM_TICKET; addNotNullConstraint columnName=REQUESTER, tableName=RESOURCE_SERVER_PERM_TICKET; addNotNull...		\N	4.25.1	\N	\N	0654969304
+9.0.1-add-index-to-client.client_id	keycloak	META-INF/jpa-changelog-9.0.1.xml	2024-07-10 23:42:54.509934	81	EXECUTED	9:be969f08a163bf47c6b9e9ead8ac2afb	createIndex indexName=IDX_CLIENT_ID, tableName=CLIENT		\N	4.25.1	\N	\N	0654969304
+9.0.1-KEYCLOAK-12579-drop-constraints	keycloak	META-INF/jpa-changelog-9.0.1.xml	2024-07-10 23:42:54.513367	82	MARK_RAN	9:6d3bb4408ba5a72f39bd8a0b301ec6e3	dropUniqueConstraint constraintName=SIBLING_NAMES, tableName=KEYCLOAK_GROUP		\N	4.25.1	\N	\N	0654969304
+9.0.1-KEYCLOAK-12579-add-not-null-constraint	keycloak	META-INF/jpa-changelog-9.0.1.xml	2024-07-10 23:42:54.523944	83	EXECUTED	9:966bda61e46bebf3cc39518fbed52fa7	addNotNullConstraint columnName=PARENT_GROUP, tableName=KEYCLOAK_GROUP		\N	4.25.1	\N	\N	0654969304
+9.0.1-KEYCLOAK-12579-recreate-constraints	keycloak	META-INF/jpa-changelog-9.0.1.xml	2024-07-10 23:42:54.527109	84	MARK_RAN	9:8dcac7bdf7378e7d823cdfddebf72fda	addUniqueConstraint constraintName=SIBLING_NAMES, tableName=KEYCLOAK_GROUP		\N	4.25.1	\N	\N	0654969304
+9.0.1-add-index-to-events	keycloak	META-INF/jpa-changelog-9.0.1.xml	2024-07-10 23:42:54.539626	85	EXECUTED	9:7d93d602352a30c0c317e6a609b56599	createIndex indexName=IDX_EVENT_TIME, tableName=EVENT_ENTITY		\N	4.25.1	\N	\N	0654969304
+map-remove-ri	keycloak	META-INF/jpa-changelog-11.0.0.xml	2024-07-10 23:42:54.546342	86	EXECUTED	9:71c5969e6cdd8d7b6f47cebc86d37627	dropForeignKeyConstraint baseTableName=REALM, constraintName=FK_TRAF444KK6QRKMS7N56AIWQ5Y; dropForeignKeyConstraint baseTableName=KEYCLOAK_ROLE, constraintName=FK_KJHO5LE2C0RAL09FL8CM9WFW9		\N	4.25.1	\N	\N	0654969304
+map-remove-ri	keycloak	META-INF/jpa-changelog-12.0.0.xml	2024-07-10 23:42:54.555574	87	EXECUTED	9:a9ba7d47f065f041b7da856a81762021	dropForeignKeyConstraint baseTableName=REALM_DEFAULT_GROUPS, constraintName=FK_DEF_GROUPS_GROUP; dropForeignKeyConstraint baseTableName=REALM_DEFAULT_ROLES, constraintName=FK_H4WPD7W4HSOOLNI3H0SW7BTJE; dropForeignKeyConstraint baseTableName=CLIENT...		\N	4.25.1	\N	\N	0654969304
+12.1.0-add-realm-localization-table	keycloak	META-INF/jpa-changelog-12.0.0.xml	2024-07-10 23:42:54.576967	88	EXECUTED	9:fffabce2bc01e1a8f5110d5278500065	createTable tableName=REALM_LOCALIZATIONS; addPrimaryKey tableName=REALM_LOCALIZATIONS		\N	4.25.1	\N	\N	0654969304
+default-roles	keycloak	META-INF/jpa-changelog-13.0.0.xml	2024-07-10 23:42:54.61746	89	EXECUTED	9:fa8a5b5445e3857f4b010bafb5009957	addColumn tableName=REALM; customChange		\N	4.25.1	\N	\N	0654969304
+default-roles-cleanup	keycloak	META-INF/jpa-changelog-13.0.0.xml	2024-07-10 23:42:54.692185	90	EXECUTED	9:67ac3241df9a8582d591c5ed87125f39	dropTable tableName=REALM_DEFAULT_ROLES; dropTable tableName=CLIENT_DEFAULT_ROLES		\N	4.25.1	\N	\N	0654969304
+13.0.0-KEYCLOAK-16844	keycloak	META-INF/jpa-changelog-13.0.0.xml	2024-07-10 23:42:54.71104	91	EXECUTED	9:ad1194d66c937e3ffc82386c050ba089	createIndex indexName=IDX_OFFLINE_USS_PRELOAD, tableName=OFFLINE_USER_SESSION		\N	4.25.1	\N	\N	0654969304
+map-remove-ri-13.0.0	keycloak	META-INF/jpa-changelog-13.0.0.xml	2024-07-10 23:42:54.719296	92	EXECUTED	9:d9be619d94af5a2f5d07b9f003543b91	dropForeignKeyConstraint baseTableName=DEFAULT_CLIENT_SCOPE, constraintName=FK_R_DEF_CLI_SCOPE_SCOPE; dropForeignKeyConstraint baseTableName=CLIENT_SCOPE_CLIENT, constraintName=FK_C_CLI_SCOPE_SCOPE; dropForeignKeyConstraint baseTableName=CLIENT_SC...		\N	4.25.1	\N	\N	0654969304
+13.0.0-KEYCLOAK-17992-drop-constraints	keycloak	META-INF/jpa-changelog-13.0.0.xml	2024-07-10 23:42:54.722417	93	MARK_RAN	9:544d201116a0fcc5a5da0925fbbc3bde	dropPrimaryKey constraintName=C_CLI_SCOPE_BIND, tableName=CLIENT_SCOPE_CLIENT; dropIndex indexName=IDX_CLSCOPE_CL, tableName=CLIENT_SCOPE_CLIENT; dropIndex indexName=IDX_CL_CLSCOPE, tableName=CLIENT_SCOPE_CLIENT		\N	4.25.1	\N	\N	0654969304
+13.0.0-increase-column-size-federated	keycloak	META-INF/jpa-changelog-13.0.0.xml	2024-07-10 23:42:54.756742	94	EXECUTED	9:43c0c1055b6761b4b3e89de76d612ccf	modifyDataType columnName=CLIENT_ID, tableName=CLIENT_SCOPE_CLIENT; modifyDataType columnName=SCOPE_ID, tableName=CLIENT_SCOPE_CLIENT		\N	4.25.1	\N	\N	0654969304
+13.0.0-KEYCLOAK-17992-recreate-constraints	keycloak	META-INF/jpa-changelog-13.0.0.xml	2024-07-10 23:42:54.760308	95	MARK_RAN	9:8bd711fd0330f4fe980494ca43ab1139	addNotNullConstraint columnName=CLIENT_ID, tableName=CLIENT_SCOPE_CLIENT; addNotNullConstraint columnName=SCOPE_ID, tableName=CLIENT_SCOPE_CLIENT; addPrimaryKey constraintName=C_CLI_SCOPE_BIND, tableName=CLIENT_SCOPE_CLIENT; createIndex indexName=...		\N	4.25.1	\N	\N	0654969304
+json-string-accomodation-fixed	keycloak	META-INF/jpa-changelog-13.0.0.xml	2024-07-10 23:42:54.838755	96	EXECUTED	9:e07d2bc0970c348bb06fb63b1f82ddbf	addColumn tableName=REALM_ATTRIBUTE; update tableName=REALM_ATTRIBUTE; dropColumn columnName=VALUE, tableName=REALM_ATTRIBUTE; renameColumn newColumnName=VALUE, oldColumnName=VALUE_NEW, tableName=REALM_ATTRIBUTE		\N	4.25.1	\N	\N	0654969304
+14.0.0-KEYCLOAK-11019	keycloak	META-INF/jpa-changelog-14.0.0.xml	2024-07-10 23:42:54.896035	97	EXECUTED	9:24fb8611e97f29989bea412aa38d12b7	createIndex indexName=IDX_OFFLINE_CSS_PRELOAD, tableName=OFFLINE_CLIENT_SESSION; createIndex indexName=IDX_OFFLINE_USS_BY_USER, tableName=OFFLINE_USER_SESSION; createIndex indexName=IDX_OFFLINE_USS_BY_USERSESS, tableName=OFFLINE_USER_SESSION		\N	4.25.1	\N	\N	0654969304
+14.0.0-KEYCLOAK-18286	keycloak	META-INF/jpa-changelog-14.0.0.xml	2024-07-10 23:42:54.898701	98	MARK_RAN	9:259f89014ce2506ee84740cbf7163aa7	createIndex indexName=IDX_CLIENT_ATT_BY_NAME_VALUE, tableName=CLIENT_ATTRIBUTES		\N	4.25.1	\N	\N	0654969304
+14.0.0-KEYCLOAK-18286-revert	keycloak	META-INF/jpa-changelog-14.0.0.xml	2024-07-10 23:42:54.918684	99	MARK_RAN	9:04baaf56c116ed19951cbc2cca584022	dropIndex indexName=IDX_CLIENT_ATT_BY_NAME_VALUE, tableName=CLIENT_ATTRIBUTES		\N	4.25.1	\N	\N	0654969304
+14.0.0-KEYCLOAK-18286-supported-dbs	keycloak	META-INF/jpa-changelog-14.0.0.xml	2024-07-10 23:42:54.930654	100	EXECUTED	9:60ca84a0f8c94ec8c3504a5a3bc88ee8	createIndex indexName=IDX_CLIENT_ATT_BY_NAME_VALUE, tableName=CLIENT_ATTRIBUTES		\N	4.25.1	\N	\N	0654969304
+14.0.0-KEYCLOAK-18286-unsupported-dbs	keycloak	META-INF/jpa-changelog-14.0.0.xml	2024-07-10 23:42:54.934431	101	MARK_RAN	9:d3d977031d431db16e2c181ce49d73e9	createIndex indexName=IDX_CLIENT_ATT_BY_NAME_VALUE, tableName=CLIENT_ATTRIBUTES		\N	4.25.1	\N	\N	0654969304
+KEYCLOAK-17267-add-index-to-user-attributes	keycloak	META-INF/jpa-changelog-14.0.0.xml	2024-07-10 23:42:54.952961	102	EXECUTED	9:0b305d8d1277f3a89a0a53a659ad274c	createIndex indexName=IDX_USER_ATTRIBUTE_NAME, tableName=USER_ATTRIBUTE		\N	4.25.1	\N	\N	0654969304
+KEYCLOAK-18146-add-saml-art-binding-identifier	keycloak	META-INF/jpa-changelog-14.0.0.xml	2024-07-10 23:42:54.960903	103	EXECUTED	9:2c374ad2cdfe20e2905a84c8fac48460	customChange		\N	4.25.1	\N	\N	0654969304
+15.0.0-KEYCLOAK-18467	keycloak	META-INF/jpa-changelog-15.0.0.xml	2024-07-10 23:42:54.97174	104	EXECUTED	9:47a760639ac597360a8219f5b768b4de	addColumn tableName=REALM_LOCALIZATIONS; update tableName=REALM_LOCALIZATIONS; dropColumn columnName=TEXTS, tableName=REALM_LOCALIZATIONS; renameColumn newColumnName=TEXTS, oldColumnName=TEXTS_NEW, tableName=REALM_LOCALIZATIONS; addNotNullConstrai...		\N	4.25.1	\N	\N	0654969304
+17.0.0-9562	keycloak	META-INF/jpa-changelog-17.0.0.xml	2024-07-10 23:42:54.98224	105	EXECUTED	9:a6272f0576727dd8cad2522335f5d99e	createIndex indexName=IDX_USER_SERVICE_ACCOUNT, tableName=USER_ENTITY		\N	4.25.1	\N	\N	0654969304
+18.0.0-10625-IDX_ADMIN_EVENT_TIME	keycloak	META-INF/jpa-changelog-18.0.0.xml	2024-07-10 23:42:54.997442	106	EXECUTED	9:015479dbd691d9cc8669282f4828c41d	createIndex indexName=IDX_ADMIN_EVENT_TIME, tableName=ADMIN_EVENT_ENTITY		\N	4.25.1	\N	\N	0654969304
+19.0.0-10135	keycloak	META-INF/jpa-changelog-19.0.0.xml	2024-07-10 23:42:55.005062	107	EXECUTED	9:9518e495fdd22f78ad6425cc30630221	customChange		\N	4.25.1	\N	\N	0654969304
+20.0.0-12964-supported-dbs	keycloak	META-INF/jpa-changelog-20.0.0.xml	2024-07-10 23:42:55.017665	108	EXECUTED	9:e5f243877199fd96bcc842f27a1656ac	createIndex indexName=IDX_GROUP_ATT_BY_NAME_VALUE, tableName=GROUP_ATTRIBUTE		\N	4.25.1	\N	\N	0654969304
+20.0.0-12964-unsupported-dbs	keycloak	META-INF/jpa-changelog-20.0.0.xml	2024-07-10 23:42:55.020086	109	MARK_RAN	9:1a6fcaa85e20bdeae0a9ce49b41946a5	createIndex indexName=IDX_GROUP_ATT_BY_NAME_VALUE, tableName=GROUP_ATTRIBUTE		\N	4.25.1	\N	\N	0654969304
+client-attributes-string-accomodation-fixed	keycloak	META-INF/jpa-changelog-20.0.0.xml	2024-07-10 23:42:55.039726	110	EXECUTED	9:3f332e13e90739ed0c35b0b25b7822ca	addColumn tableName=CLIENT_ATTRIBUTES; update tableName=CLIENT_ATTRIBUTES; dropColumn columnName=VALUE, tableName=CLIENT_ATTRIBUTES; renameColumn newColumnName=VALUE, oldColumnName=VALUE_NEW, tableName=CLIENT_ATTRIBUTES		\N	4.25.1	\N	\N	0654969304
+21.0.2-17277	keycloak	META-INF/jpa-changelog-21.0.2.xml	2024-07-10 23:42:55.045973	111	EXECUTED	9:7ee1f7a3fb8f5588f171fb9a6ab623c0	customChange		\N	4.25.1	\N	\N	0654969304
+21.1.0-19404	keycloak	META-INF/jpa-changelog-21.1.0.xml	2024-07-10 23:42:55.270408	112	EXECUTED	9:3d7e830b52f33676b9d64f7f2b2ea634	modifyDataType columnName=DECISION_STRATEGY, tableName=RESOURCE_SERVER_POLICY; modifyDataType columnName=LOGIC, tableName=RESOURCE_SERVER_POLICY; modifyDataType columnName=POLICY_ENFORCE_MODE, tableName=RESOURCE_SERVER		\N	4.25.1	\N	\N	0654969304
+21.1.0-19404-2	keycloak	META-INF/jpa-changelog-21.1.0.xml	2024-07-10 23:42:55.281114	113	MARK_RAN	9:627d032e3ef2c06c0e1f73d2ae25c26c	addColumn tableName=RESOURCE_SERVER_POLICY; update tableName=RESOURCE_SERVER_POLICY; dropColumn columnName=DECISION_STRATEGY, tableName=RESOURCE_SERVER_POLICY; renameColumn newColumnName=DECISION_STRATEGY, oldColumnName=DECISION_STRATEGY_NEW, tabl...		\N	4.25.1	\N	\N	0654969304
+22.0.0-17484-updated	keycloak	META-INF/jpa-changelog-22.0.0.xml	2024-07-10 23:42:55.292055	114	EXECUTED	9:90af0bfd30cafc17b9f4d6eccd92b8b3	customChange		\N	4.25.1	\N	\N	0654969304
+22.0.5-24031	keycloak	META-INF/jpa-changelog-22.0.0.xml	2024-07-10 23:42:55.297618	115	MARK_RAN	9:a60d2d7b315ec2d3eba9e2f145f9df28	customChange		\N	4.25.1	\N	\N	0654969304
+23.0.0-12062	keycloak	META-INF/jpa-changelog-23.0.0.xml	2024-07-10 23:42:55.517095	116	EXECUTED	9:2168fbe728fec46ae9baf15bf80927b8	addColumn tableName=COMPONENT_CONFIG; update tableName=COMPONENT_CONFIG; dropColumn columnName=VALUE, tableName=COMPONENT_CONFIG; renameColumn newColumnName=VALUE, oldColumnName=VALUE_NEW, tableName=COMPONENT_CONFIG		\N	4.25.1	\N	\N	0654969304
+23.0.0-17258	keycloak	META-INF/jpa-changelog-23.0.0.xml	2024-07-10 23:42:55.533685	117	EXECUTED	9:36506d679a83bbfda85a27ea1864dca8	addColumn tableName=EVENT_ENTITY		\N	4.25.1	\N	\N	0654969304
+24.0.0-9758	keycloak	META-INF/jpa-changelog-24.0.0.xml	2024-07-10 23:42:55.650221	118	EXECUTED	9:502c557a5189f600f0f445a9b49ebbce	addColumn tableName=USER_ATTRIBUTE; addColumn tableName=FED_USER_ATTRIBUTE; createIndex indexName=USER_ATTR_LONG_VALUES, tableName=USER_ATTRIBUTE; createIndex indexName=FED_USER_ATTR_LONG_VALUES, tableName=FED_USER_ATTRIBUTE; createIndex indexName...		\N	4.25.1	\N	\N	0654969304
+24.0.0-26618-drop-index-if-present	keycloak	META-INF/jpa-changelog-24.0.0.xml	2024-07-10 23:42:55.664885	120	MARK_RAN	9:04baaf56c116ed19951cbc2cca584022	dropIndex indexName=IDX_CLIENT_ATT_BY_NAME_VALUE, tableName=CLIENT_ATTRIBUTES		\N	4.25.1	\N	\N	0654969304
+24.0.0-26618-reindex	keycloak	META-INF/jpa-changelog-24.0.0.xml	2024-07-10 23:42:55.704023	121	EXECUTED	9:08707c0f0db1cef6b352db03a60edc7f	createIndex indexName=IDX_CLIENT_ATT_BY_NAME_VALUE, tableName=CLIENT_ATTRIBUTES		\N	4.25.1	\N	\N	0654969304
+24.0.2-27228	keycloak	META-INF/jpa-changelog-24.0.2.xml	2024-07-10 23:42:55.713875	122	EXECUTED	9:eaee11f6b8aa25d2cc6a84fb86fc6238	customChange		\N	4.25.1	\N	\N	0654969304
+24.0.2-27967-drop-index-if-present	keycloak	META-INF/jpa-changelog-24.0.2.xml	2024-07-10 23:42:55.720165	123	MARK_RAN	9:04baaf56c116ed19951cbc2cca584022	dropIndex indexName=IDX_CLIENT_ATT_BY_NAME_VALUE, tableName=CLIENT_ATTRIBUTES		\N	4.25.1	\N	\N	0654969304
+24.0.2-27967-reindex	keycloak	META-INF/jpa-changelog-24.0.2.xml	2024-07-10 23:42:55.724372	124	MARK_RAN	9:d3d977031d431db16e2c181ce49d73e9	createIndex indexName=IDX_CLIENT_ATT_BY_NAME_VALUE, tableName=CLIENT_ATTRIBUTES		\N	4.25.1	\N	\N	0654969304
+1.0.0.Final-KEYCLOAK-5461	sthorger@redhat.com	META-INF/jpa-changelog-1.0.0.Final.xml	2024-07-10 23:42:50.137495	1	EXECUTED	9:6f1016664e21e16d26517a4418f5e3df	createTable tableName=APPLICATION_DEFAULT_ROLES; createTable tableName=CLIENT; createTable tableName=CLIENT_SESSION; createTable tableName=CLIENT_SESSION_ROLE; createTable tableName=COMPOSITE_ROLE; createTable tableName=CREDENTIAL; createTable tab...		\N	4.25.1	\N	\N	0654969304
+1.0.0.Final-KEYCLOAK-5461	sthorger@redhat.com	META-INF/db2-jpa-changelog-1.0.0.Final.xml	2024-07-10 23:42:50.156611	2	MARK_RAN	9:828775b1596a07d1200ba1d49e5e3941	createTable tableName=APPLICATION_DEFAULT_ROLES; createTable tableName=CLIENT; createTable tableName=CLIENT_SESSION; createTable tableName=CLIENT_SESSION_ROLE; createTable tableName=COMPOSITE_ROLE; createTable tableName=CREDENTIAL; createTable tab...		\N	4.25.1	\N	\N	0654969304
+1.1.0.Beta1	sthorger@redhat.com	META-INF/jpa-changelog-1.1.0.Beta1.xml	2024-07-10 23:42:50.416243	3	EXECUTED	9:5f090e44a7d595883c1fb61f4b41fd38	delete tableName=CLIENT_SESSION_ROLE; delete tableName=CLIENT_SESSION; delete tableName=USER_SESSION; createTable tableName=CLIENT_ATTRIBUTES; createTable tableName=CLIENT_SESSION_NOTE; createTable tableName=APP_NODE_REGISTRATIONS; addColumn table...		\N	4.25.1	\N	\N	0654969304
+1.1.0.Final	sthorger@redhat.com	META-INF/jpa-changelog-1.1.0.Final.xml	2024-07-10 23:42:50.425611	4	EXECUTED	9:c07e577387a3d2c04d1adc9aaad8730e	renameColumn newColumnName=EVENT_TIME, oldColumnName=TIME, tableName=EVENT_ENTITY		\N	4.25.1	\N	\N	0654969304
+1.2.0.Beta1	psilva@redhat.com	META-INF/jpa-changelog-1.2.0.Beta1.xml	2024-07-10 23:42:50.762414	5	EXECUTED	9:b68ce996c655922dbcd2fe6b6ae72686	delete tableName=CLIENT_SESSION_ROLE; delete tableName=CLIENT_SESSION_NOTE; delete tableName=CLIENT_SESSION; delete tableName=USER_SESSION; createTable tableName=PROTOCOL_MAPPER; createTable tableName=PROTOCOL_MAPPER_CONFIG; createTable tableName=...		\N	4.25.1	\N	\N	0654969304
+1.2.0.Beta1	psilva@redhat.com	META-INF/db2-jpa-changelog-1.2.0.Beta1.xml	2024-07-10 23:42:50.779551	6	MARK_RAN	9:543b5c9989f024fe35c6f6c5a97de88e	delete tableName=CLIENT_SESSION_ROLE; delete tableName=CLIENT_SESSION_NOTE; delete tableName=CLIENT_SESSION; delete tableName=USER_SESSION; createTable tableName=PROTOCOL_MAPPER; createTable tableName=PROTOCOL_MAPPER_CONFIG; createTable tableName=...		\N	4.25.1	\N	\N	0654969304
+KEYCLOAK-17267-add-index-to-user-attributes	keycloak	META-INF/jpa-changelog-14.0.0.xml	2024-07-10 23:42:54.952961	102	EXECUTED	9:0b305d8d1277f3a89a0a53a659ad274c	createIndex indexName=IDX_USER_ATTRIBUTE_NAME, tableName=USER_ATTRIBUTE		\N	4.25.1	\N	\N	0654969304
+1.2.0.RC1	bburke@redhat.com	META-INF/jpa-changelog-1.2.0.CR1.xml	2024-07-10 23:42:51.205963	7	EXECUTED	9:765afebbe21cf5bbca048e632df38336	delete tableName=CLIENT_SESSION_ROLE; delete tableName=CLIENT_SESSION_NOTE; delete tableName=CLIENT_SESSION; delete tableName=USER_SESSION_NOTE; delete tableName=USER_SESSION; createTable tableName=MIGRATION_MODEL; createTable tableName=IDENTITY_P...		\N	4.25.1	\N	\N	0654969304
+1.2.0.RC1	bburke@redhat.com	META-INF/db2-jpa-changelog-1.2.0.CR1.xml	2024-07-10 23:42:51.217186	8	MARK_RAN	9:db4a145ba11a6fdaefb397f6dbf829a1	delete tableName=CLIENT_SESSION_ROLE; delete tableName=CLIENT_SESSION_NOTE; delete tableName=CLIENT_SESSION; delete tableName=USER_SESSION_NOTE; delete tableName=USER_SESSION; createTable tableName=MIGRATION_MODEL; createTable tableName=IDENTITY_P...		\N	4.25.1	\N	\N	0654969304
+1.2.0.Final	keycloak	META-INF/jpa-changelog-1.2.0.Final.xml	2024-07-10 23:42:51.22428	9	EXECUTED	9:9d05c7be10cdb873f8bcb41bc3a8ab23	update tableName=CLIENT; update tableName=CLIENT; update tableName=CLIENT		\N	4.25.1	\N	\N	0654969304
+1.3.0	bburke@redhat.com	META-INF/jpa-changelog-1.3.0.xml	2024-07-10 23:42:51.562331	10	EXECUTED	9:18593702353128d53111f9b1ff0b82b8	delete tableName=CLIENT_SESSION_ROLE; delete tableName=CLIENT_SESSION_PROT_MAPPER; delete tableName=CLIENT_SESSION_NOTE; delete tableName=CLIENT_SESSION; delete tableName=USER_SESSION_NOTE; delete tableName=USER_SESSION; createTable tableName=ADMI...		\N	4.25.1	\N	\N	0654969304
+1.4.0	bburke@redhat.com	META-INF/jpa-changelog-1.4.0.xml	2024-07-10 23:42:51.722454	11	EXECUTED	9:6122efe5f090e41a85c0f1c9e52cbb62	delete tableName=CLIENT_SESSION_AUTH_STATUS; delete tableName=CLIENT_SESSION_ROLE; delete tableName=CLIENT_SESSION_PROT_MAPPER; delete tableName=CLIENT_SESSION_NOTE; delete tableName=CLIENT_SESSION; delete tableName=USER_SESSION_NOTE; delete table...		\N	4.25.1	\N	\N	0654969304
+1.4.0	bburke@redhat.com	META-INF/db2-jpa-changelog-1.4.0.xml	2024-07-10 23:42:51.733592	12	MARK_RAN	9:e1ff28bf7568451453f844c5d54bb0b5	delete tableName=CLIENT_SESSION_AUTH_STATUS; delete tableName=CLIENT_SESSION_ROLE; delete tableName=CLIENT_SESSION_PROT_MAPPER; delete tableName=CLIENT_SESSION_NOTE; delete tableName=CLIENT_SESSION; delete tableName=USER_SESSION_NOTE; delete table...		\N	4.25.1	\N	\N	0654969304
+1.5.0	bburke@redhat.com	META-INF/jpa-changelog-1.5.0.xml	2024-07-10 23:42:51.760427	13	EXECUTED	9:7af32cd8957fbc069f796b61217483fd	delete tableName=CLIENT_SESSION_AUTH_STATUS; delete tableName=CLIENT_SESSION_ROLE; delete tableName=CLIENT_SESSION_PROT_MAPPER; delete tableName=CLIENT_SESSION_NOTE; delete tableName=CLIENT_SESSION; delete tableName=USER_SESSION_NOTE; delete table...		\N	4.25.1	\N	\N	0654969304
+1.6.1_from15	mposolda@redhat.com	META-INF/jpa-changelog-1.6.1.xml	2024-07-10 23:42:51.814505	14	EXECUTED	9:6005e15e84714cd83226bf7879f54190	addColumn tableName=REALM; addColumn tableName=KEYCLOAK_ROLE; addColumn tableName=CLIENT; createTable tableName=OFFLINE_USER_SESSION; createTable tableName=OFFLINE_CLIENT_SESSION; addPrimaryKey constraintName=CONSTRAINT_OFFL_US_SES_PK2, tableName=...		\N	4.25.1	\N	\N	0654969304
+1.6.1_from16-pre	mposolda@redhat.com	META-INF/jpa-changelog-1.6.1.xml	2024-07-10 23:42:51.817727	15	MARK_RAN	9:bf656f5a2b055d07f314431cae76f06c	delete tableName=OFFLINE_CLIENT_SESSION; delete tableName=OFFLINE_USER_SESSION		\N	4.25.1	\N	\N	0654969304
+1.6.1_from16	mposolda@redhat.com	META-INF/jpa-changelog-1.6.1.xml	2024-07-10 23:42:51.820926	16	MARK_RAN	9:f8dadc9284440469dcf71e25ca6ab99b	dropPrimaryKey constraintName=CONSTRAINT_OFFLINE_US_SES_PK, tableName=OFFLINE_USER_SESSION; dropPrimaryKey constraintName=CONSTRAINT_OFFLINE_CL_SES_PK, tableName=OFFLINE_CLIENT_SESSION; addColumn tableName=OFFLINE_USER_SESSION; update tableName=OF...		\N	4.25.1	\N	\N	0654969304
+1.6.1	mposolda@redhat.com	META-INF/jpa-changelog-1.6.1.xml	2024-07-10 23:42:51.831141	17	EXECUTED	9:d41d8cd98f00b204e9800998ecf8427e	empty		\N	4.25.1	\N	\N	0654969304
+1.7.0	bburke@redhat.com	META-INF/jpa-changelog-1.7.0.xml	2024-07-10 23:42:52.007747	18	EXECUTED	9:3368ff0be4c2855ee2dd9ca813b38d8e	createTable tableName=KEYCLOAK_GROUP; createTable tableName=GROUP_ROLE_MAPPING; createTable tableName=GROUP_ATTRIBUTE; createTable tableName=USER_GROUP_MEMBERSHIP; createTable tableName=REALM_DEFAULT_GROUPS; addColumn tableName=IDENTITY_PROVIDER; ...		\N	4.25.1	\N	\N	0654969304
+1.8.0	mposolda@redhat.com	META-INF/jpa-changelog-1.8.0.xml	2024-07-10 23:42:52.243452	19	EXECUTED	9:8ac2fb5dd030b24c0570a763ed75ed20	addColumn tableName=IDENTITY_PROVIDER; createTable tableName=CLIENT_TEMPLATE; createTable tableName=CLIENT_TEMPLATE_ATTRIBUTES; createTable tableName=TEMPLATE_SCOPE_MAPPING; dropNotNullConstraint columnName=CLIENT_ID, tableName=PROTOCOL_MAPPER; ad...		\N	4.25.1	\N	\N	0654969304
+1.8.0-2	keycloak	META-INF/jpa-changelog-1.8.0.xml	2024-07-10 23:42:52.269569	20	EXECUTED	9:f91ddca9b19743db60e3057679810e6c	dropDefaultValue columnName=ALGORITHM, tableName=CREDENTIAL; update tableName=CREDENTIAL		\N	4.25.1	\N	\N	0654969304
+24.0.0-9758-2	keycloak	META-INF/jpa-changelog-24.0.0.xml	2024-07-10 23:42:55.658752	119	EXECUTED	9:bf0fdee10afdf597a987adbf291db7b2	customChange		\N	4.25.1	\N	\N	0654969304
+1.8.0	mposolda@redhat.com	META-INF/db2-jpa-changelog-1.8.0.xml	2024-07-10 23:42:52.273842	21	MARK_RAN	9:831e82914316dc8a57dc09d755f23c51	addColumn tableName=IDENTITY_PROVIDER; createTable tableName=CLIENT_TEMPLATE; createTable tableName=CLIENT_TEMPLATE_ATTRIBUTES; createTable tableName=TEMPLATE_SCOPE_MAPPING; dropNotNullConstraint columnName=CLIENT_ID, tableName=PROTOCOL_MAPPER; ad...		\N	4.25.1	\N	\N	0654969304
+1.8.0-2	keycloak	META-INF/db2-jpa-changelog-1.8.0.xml	2024-07-10 23:42:52.280893	22	MARK_RAN	9:f91ddca9b19743db60e3057679810e6c	dropDefaultValue columnName=ALGORITHM, tableName=CREDENTIAL; update tableName=CREDENTIAL		\N	4.25.1	\N	\N	0654969304
+1.9.0	mposolda@redhat.com	META-INF/jpa-changelog-1.9.0.xml	2024-07-10 23:42:52.317185	23	EXECUTED	9:bc3d0f9e823a69dc21e23e94c7a94bb1	update tableName=REALM; update tableName=REALM; update tableName=REALM; update tableName=REALM; update tableName=CREDENTIAL; update tableName=CREDENTIAL; update tableName=CREDENTIAL; update tableName=REALM; update tableName=REALM; customChange; dr...		\N	4.25.1	\N	\N	0654969304
+1.9.1	keycloak	META-INF/jpa-changelog-1.9.1.xml	2024-07-10 23:42:52.325334	24	EXECUTED	9:c9999da42f543575ab790e76439a2679	modifyDataType columnName=PRIVATE_KEY, tableName=REALM; modifyDataType columnName=PUBLIC_KEY, tableName=REALM; modifyDataType columnName=CERTIFICATE, tableName=REALM		\N	4.25.1	\N	\N	0654969304
+1.9.1	keycloak	META-INF/db2-jpa-changelog-1.9.1.xml	2024-07-10 23:42:52.327705	25	MARK_RAN	9:0d6c65c6f58732d81569e77b10ba301d	modifyDataType columnName=PRIVATE_KEY, tableName=REALM; modifyDataType columnName=CERTIFICATE, tableName=REALM		\N	4.25.1	\N	\N	0654969304
+1.9.2	keycloak	META-INF/jpa-changelog-1.9.2.xml	2024-07-10 23:42:52.399749	26	EXECUTED	9:fc576660fc016ae53d2d4778d84d86d0	createIndex indexName=IDX_USER_EMAIL, tableName=USER_ENTITY; createIndex indexName=IDX_USER_ROLE_MAPPING, tableName=USER_ROLE_MAPPING; createIndex indexName=IDX_USER_GROUP_MAPPING, tableName=USER_GROUP_MEMBERSHIP; createIndex indexName=IDX_USER_CO...		\N	4.25.1	\N	\N	0654969304
+authz-2.0.0	psilva@redhat.com	META-INF/jpa-changelog-authz-2.0.0.xml	2024-07-10 23:42:52.633093	27	EXECUTED	9:43ed6b0da89ff77206289e87eaa9c024	createTable tableName=RESOURCE_SERVER; addPrimaryKey constraintName=CONSTRAINT_FARS, tableName=RESOURCE_SERVER; addUniqueConstraint constraintName=UK_AU8TT6T700S9V50BU18WS5HA6, tableName=RESOURCE_SERVER; createTable tableName=RESOURCE_SERVER_RESOU...		\N	4.25.1	\N	\N	0654969304
+authz-2.5.1	psilva@redhat.com	META-INF/jpa-changelog-authz-2.5.1.xml	2024-07-10 23:42:52.645142	28	EXECUTED	9:44bae577f551b3738740281eceb4ea70	update tableName=RESOURCE_SERVER_POLICY		\N	4.25.1	\N	\N	0654969304
+2.1.0-KEYCLOAK-5461	bburke@redhat.com	META-INF/jpa-changelog-2.1.0.xml	2024-07-10 23:42:52.795264	29	EXECUTED	9:bd88e1f833df0420b01e114533aee5e8	createTable tableName=BROKER_LINK; createTable tableName=FED_USER_ATTRIBUTE; createTable tableName=FED_USER_CONSENT; createTable tableName=FED_USER_CONSENT_ROLE; createTable tableName=FED_USER_CONSENT_PROT_MAPPER; createTable tableName=FED_USER_CR...		\N	4.25.1	\N	\N	0654969304
+2.2.0	bburke@redhat.com	META-INF/jpa-changelog-2.2.0.xml	2024-07-10 23:42:52.826773	30	EXECUTED	9:a7022af5267f019d020edfe316ef4371	addColumn tableName=ADMIN_EVENT_ENTITY; createTable tableName=CREDENTIAL_ATTRIBUTE; createTable tableName=FED_CREDENTIAL_ATTRIBUTE; modifyDataType columnName=VALUE, tableName=CREDENTIAL; addForeignKeyConstraint baseTableName=FED_CREDENTIAL_ATTRIBU...		\N	4.25.1	\N	\N	0654969304
+2.3.0	bburke@redhat.com	META-INF/jpa-changelog-2.3.0.xml	2024-07-10 23:42:52.85627	31	EXECUTED	9:fc155c394040654d6a79227e56f5e25a	createTable tableName=FEDERATED_USER; addPrimaryKey constraintName=CONSTR_FEDERATED_USER, tableName=FEDERATED_USER; dropDefaultValue columnName=TOTP, tableName=USER_ENTITY; dropColumn columnName=TOTP, tableName=USER_ENTITY; addColumn tableName=IDE...		\N	4.25.1	\N	\N	0654969304
+2.4.0	bburke@redhat.com	META-INF/jpa-changelog-2.4.0.xml	2024-07-10 23:42:52.863165	32	EXECUTED	9:eac4ffb2a14795e5dc7b426063e54d88	customChange		\N	4.25.1	\N	\N	0654969304
+2.5.0	bburke@redhat.com	META-INF/jpa-changelog-2.5.0.xml	2024-07-10 23:42:52.870924	33	EXECUTED	9:54937c05672568c4c64fc9524c1e9462	customChange; modifyDataType columnName=USER_ID, tableName=OFFLINE_USER_SESSION		\N	4.25.1	\N	\N	0654969304
+2.5.0-unicode-oracle	hmlnarik@redhat.com	META-INF/jpa-changelog-2.5.0.xml	2024-07-10 23:42:52.873463	34	MARK_RAN	9:3a32bace77c84d7678d035a7f5a8084e	modifyDataType columnName=DESCRIPTION, tableName=AUTHENTICATION_FLOW; modifyDataType columnName=DESCRIPTION, tableName=CLIENT_TEMPLATE; modifyDataType columnName=DESCRIPTION, tableName=RESOURCE_SERVER_POLICY; modifyDataType columnName=DESCRIPTION,...		\N	4.25.1	\N	\N	0654969304
+2.5.0-unicode-other-dbs	hmlnarik@redhat.com	META-INF/jpa-changelog-2.5.0.xml	2024-07-10 23:42:52.922201	35	EXECUTED	9:33d72168746f81f98ae3a1e8e0ca3554	modifyDataType columnName=DESCRIPTION, tableName=AUTHENTICATION_FLOW; modifyDataType columnName=DESCRIPTION, tableName=CLIENT_TEMPLATE; modifyDataType columnName=DESCRIPTION, tableName=RESOURCE_SERVER_POLICY; modifyDataType columnName=DESCRIPTION,...		\N	4.25.1	\N	\N	0654969304
+2.5.0-duplicate-email-support	slawomir@dabek.name	META-INF/jpa-changelog-2.5.0.xml	2024-07-10 23:42:52.928458	36	EXECUTED	9:61b6d3d7a4c0e0024b0c839da283da0c	addColumn tableName=REALM		\N	4.25.1	\N	\N	0654969304
+2.5.0-unique-group-names	hmlnarik@redhat.com	META-INF/jpa-changelog-2.5.0.xml	2024-07-10 23:42:52.937732	37	EXECUTED	9:8dcac7bdf7378e7d823cdfddebf72fda	addUniqueConstraint constraintName=SIBLING_NAMES, tableName=KEYCLOAK_GROUP		\N	4.25.1	\N	\N	0654969304
+2.5.1	bburke@redhat.com	META-INF/jpa-changelog-2.5.1.xml	2024-07-10 23:42:52.943241	38	EXECUTED	9:a2b870802540cb3faa72098db5388af3	addColumn tableName=FED_USER_CONSENT		\N	4.25.1	\N	\N	0654969304
+3.0.0	bburke@redhat.com	META-INF/jpa-changelog-3.0.0.xml	2024-07-10 23:42:52.948102	39	EXECUTED	9:132a67499ba24bcc54fb5cbdcfe7e4c0	addColumn tableName=IDENTITY_PROVIDER		\N	4.25.1	\N	\N	0654969304
+3.2.0-fix	keycloak	META-INF/jpa-changelog-3.2.0.xml	2024-07-10 23:42:52.950108	40	MARK_RAN	9:938f894c032f5430f2b0fafb1a243462	addNotNullConstraint columnName=REALM_ID, tableName=CLIENT_INITIAL_ACCESS		\N	4.25.1	\N	\N	0654969304
+3.2.0-fix-with-keycloak-5416	keycloak	META-INF/jpa-changelog-3.2.0.xml	2024-07-10 23:42:52.952434	41	MARK_RAN	9:845c332ff1874dc5d35974b0babf3006	dropIndex indexName=IDX_CLIENT_INIT_ACC_REALM, tableName=CLIENT_INITIAL_ACCESS; addNotNullConstraint columnName=REALM_ID, tableName=CLIENT_INITIAL_ACCESS; createIndex indexName=IDX_CLIENT_INIT_ACC_REALM, tableName=CLIENT_INITIAL_ACCESS		\N	4.25.1	\N	\N	0654969304
+3.2.0-fix-offline-sessions	hmlnarik	META-INF/jpa-changelog-3.2.0.xml	2024-07-10 23:42:52.959399	42	EXECUTED	9:fc86359c079781adc577c5a217e4d04c	customChange		\N	4.25.1	\N	\N	0654969304
+3.2.0-fixed	keycloak	META-INF/jpa-changelog-3.2.0.xml	2024-07-10 23:42:53.244705	43	EXECUTED	9:59a64800e3c0d09b825f8a3b444fa8f4	addColumn tableName=REALM; dropPrimaryKey constraintName=CONSTRAINT_OFFL_CL_SES_PK2, tableName=OFFLINE_CLIENT_SESSION; dropColumn columnName=CLIENT_SESSION_ID, tableName=OFFLINE_CLIENT_SESSION; addPrimaryKey constraintName=CONSTRAINT_OFFL_CL_SES_P...		\N	4.25.1	\N	\N	0654969304
+3.3.0	keycloak	META-INF/jpa-changelog-3.3.0.xml	2024-07-10 23:42:53.252083	44	EXECUTED	9:d48d6da5c6ccf667807f633fe489ce88	addColumn tableName=USER_ENTITY		\N	4.25.1	\N	\N	0654969304
+authz-3.4.0.CR1-resource-server-pk-change-part1	glavoie@gmail.com	META-INF/jpa-changelog-authz-3.4.0.CR1.xml	2024-07-10 23:42:53.258022	45	EXECUTED	9:dde36f7973e80d71fceee683bc5d2951	addColumn tableName=RESOURCE_SERVER_POLICY; addColumn tableName=RESOURCE_SERVER_RESOURCE; addColumn tableName=RESOURCE_SERVER_SCOPE		\N	4.25.1	\N	\N	0654969304
+authz-3.4.0.CR1-resource-server-pk-change-part2-KEYCLOAK-6095	hmlnarik@redhat.com	META-INF/jpa-changelog-authz-3.4.0.CR1.xml	2024-07-10 23:42:53.265429	46	EXECUTED	9:b855e9b0a406b34fa323235a0cf4f640	customChange		\N	4.25.1	\N	\N	0654969304
+authz-3.4.0.CR1-resource-server-pk-change-part3-fixed	glavoie@gmail.com	META-INF/jpa-changelog-authz-3.4.0.CR1.xml	2024-07-10 23:42:53.26752	47	MARK_RAN	9:51abbacd7b416c50c4421a8cabf7927e	dropIndex indexName=IDX_RES_SERV_POL_RES_SERV, tableName=RESOURCE_SERVER_POLICY; dropIndex indexName=IDX_RES_SRV_RES_RES_SRV, tableName=RESOURCE_SERVER_RESOURCE; dropIndex indexName=IDX_RES_SRV_SCOPE_RES_SRV, tableName=RESOURCE_SERVER_SCOPE		\N	4.25.1	\N	\N	0654969304
+authz-3.4.0.CR1-resource-server-pk-change-part3-fixed-nodropindex	glavoie@gmail.com	META-INF/jpa-changelog-authz-3.4.0.CR1.xml	2024-07-10 23:42:53.353602	48	EXECUTED	9:bdc99e567b3398bac83263d375aad143	addNotNullConstraint columnName=RESOURCE_SERVER_CLIENT_ID, tableName=RESOURCE_SERVER_POLICY; addNotNullConstraint columnName=RESOURCE_SERVER_CLIENT_ID, tableName=RESOURCE_SERVER_RESOURCE; addNotNullConstraint columnName=RESOURCE_SERVER_CLIENT_ID, ...		\N	4.25.1	\N	\N	0654969304
+authn-3.4.0.CR1-refresh-token-max-reuse	glavoie@gmail.com	META-INF/jpa-changelog-authz-3.4.0.CR1.xml	2024-07-10 23:42:53.361863	49	EXECUTED	9:d198654156881c46bfba39abd7769e69	addColumn tableName=REALM		\N	4.25.1	\N	\N	0654969304
+3.4.0	keycloak	META-INF/jpa-changelog-3.4.0.xml	2024-07-10 23:42:53.477374	50	EXECUTED	9:cfdd8736332ccdd72c5256ccb42335db	addPrimaryKey constraintName=CONSTRAINT_REALM_DEFAULT_ROLES, tableName=REALM_DEFAULT_ROLES; addPrimaryKey constraintName=CONSTRAINT_COMPOSITE_ROLE, tableName=COMPOSITE_ROLE; addPrimaryKey constraintName=CONSTR_REALM_DEFAULT_GROUPS, tableName=REALM...		\N	4.25.1	\N	\N	0654969304
+3.4.0-KEYCLOAK-5230	hmlnarik@redhat.com	META-INF/jpa-changelog-3.4.0.xml	2024-07-10 23:42:53.543976	51	EXECUTED	9:7c84de3d9bd84d7f077607c1a4dcb714	createIndex indexName=IDX_FU_ATTRIBUTE, tableName=FED_USER_ATTRIBUTE; createIndex indexName=IDX_FU_CONSENT, tableName=FED_USER_CONSENT; createIndex indexName=IDX_FU_CONSENT_RU, tableName=FED_USER_CONSENT; createIndex indexName=IDX_FU_CREDENTIAL, t...		\N	4.25.1	\N	\N	0654969304
+3.4.1	psilva@redhat.com	META-INF/jpa-changelog-3.4.1.xml	2024-07-10 23:42:53.548333	52	EXECUTED	9:5a6bb36cbefb6a9d6928452c0852af2d	modifyDataType columnName=VALUE, tableName=CLIENT_ATTRIBUTES		\N	4.25.1	\N	\N	0654969304
+3.4.2	keycloak	META-INF/jpa-changelog-3.4.2.xml	2024-07-10 23:42:53.551911	53	EXECUTED	9:8f23e334dbc59f82e0a328373ca6ced0	update tableName=REALM		\N	4.25.1	\N	\N	0654969304
+3.4.2-KEYCLOAK-5172	mkanis@redhat.com	META-INF/jpa-changelog-3.4.2.xml	2024-07-10 23:42:53.556029	54	EXECUTED	9:9156214268f09d970cdf0e1564d866af	update tableName=CLIENT		\N	4.25.1	\N	\N	0654969304
+4.0.0-KEYCLOAK-6335	bburke@redhat.com	META-INF/jpa-changelog-4.0.0.xml	2024-07-10 23:42:53.567132	55	EXECUTED	9:db806613b1ed154826c02610b7dbdf74	createTable tableName=CLIENT_AUTH_FLOW_BINDINGS; addPrimaryKey constraintName=C_CLI_FLOW_BIND, tableName=CLIENT_AUTH_FLOW_BINDINGS		\N	4.25.1	\N	\N	0654969304
+4.0.0-CLEANUP-UNUSED-TABLE	bburke@redhat.com	META-INF/jpa-changelog-4.0.0.xml	2024-07-10 23:42:53.57746	56	EXECUTED	9:229a041fb72d5beac76bb94a5fa709de	dropTable tableName=CLIENT_IDENTITY_PROV_MAPPING		\N	4.25.1	\N	\N	0654969304
+4.0.0-KEYCLOAK-6228	bburke@redhat.com	META-INF/jpa-changelog-4.0.0.xml	2024-07-10 23:42:53.614704	57	EXECUTED	9:079899dade9c1e683f26b2aa9ca6ff04	dropUniqueConstraint constraintName=UK_JKUWUVD56ONTGSUHOGM8UEWRT, tableName=USER_CONSENT; dropNotNullConstraint columnName=CLIENT_ID, tableName=USER_CONSENT; addColumn tableName=USER_CONSENT; addUniqueConstraint constraintName=UK_JKUWUVD56ONTGSUHO...		\N	4.25.1	\N	\N	0654969304
+4.0.0-KEYCLOAK-5579-fixed	mposolda@redhat.com	META-INF/jpa-changelog-4.0.0.xml	2024-07-10 23:42:54.020307	58	EXECUTED	9:139b79bcbbfe903bb1c2d2a4dbf001d9	dropForeignKeyConstraint baseTableName=CLIENT_TEMPLATE_ATTRIBUTES, constraintName=FK_CL_TEMPL_ATTR_TEMPL; renameTable newTableName=CLIENT_SCOPE_ATTRIBUTES, oldTableName=CLIENT_TEMPLATE_ATTRIBUTES; renameColumn newColumnName=SCOPE_ID, oldColumnName...		\N	4.25.1	\N	\N	0654969304
+authz-4.0.0.CR1	psilva@redhat.com	META-INF/jpa-changelog-authz-4.0.0.CR1.xml	2024-07-10 23:42:54.162355	59	EXECUTED	9:b55738ad889860c625ba2bf483495a04	createTable tableName=RESOURCE_SERVER_PERM_TICKET; addPrimaryKey constraintName=CONSTRAINT_FAPMT, tableName=RESOURCE_SERVER_PERM_TICKET; addForeignKeyConstraint baseTableName=RESOURCE_SERVER_PERM_TICKET, constraintName=FK_FRSRHO213XCX4WNKOG82SSPMT...		\N	4.25.1	\N	\N	0654969304
+authz-4.0.0.Beta3	psilva@redhat.com	META-INF/jpa-changelog-authz-4.0.0.Beta3.xml	2024-07-10 23:42:54.179609	60	EXECUTED	9:e0057eac39aa8fc8e09ac6cfa4ae15fe	addColumn tableName=RESOURCE_SERVER_POLICY; addColumn tableName=RESOURCE_SERVER_PERM_TICKET; addForeignKeyConstraint baseTableName=RESOURCE_SERVER_PERM_TICKET, constraintName=FK_FRSRPO2128CX4WNKOG82SSRFY, referencedTableName=RESOURCE_SERVER_POLICY		\N	4.25.1	\N	\N	0654969304
+authz-4.2.0.Final	mhajas@redhat.com	META-INF/jpa-changelog-authz-4.2.0.Final.xml	2024-07-10 23:42:54.200768	61	EXECUTED	9:42a33806f3a0443fe0e7feeec821326c	createTable tableName=RESOURCE_URIS; addForeignKeyConstraint baseTableName=RESOURCE_URIS, constraintName=FK_RESOURCE_SERVER_URIS, referencedTableName=RESOURCE_SERVER_RESOURCE; customChange; dropColumn columnName=URI, tableName=RESOURCE_SERVER_RESO...		\N	4.25.1	\N	\N	0654969304
+authz-4.2.0.Final-KEYCLOAK-9944	hmlnarik@redhat.com	META-INF/jpa-changelog-authz-4.2.0.Final.xml	2024-07-10 23:42:54.215337	62	EXECUTED	9:9968206fca46eecc1f51db9c024bfe56	addPrimaryKey constraintName=CONSTRAINT_RESOUR_URIS_PK, tableName=RESOURCE_URIS		\N	4.25.1	\N	\N	0654969304
+4.2.0-KEYCLOAK-6313	wadahiro@gmail.com	META-INF/jpa-changelog-4.2.0.xml	2024-07-10 23:42:54.22302	63	EXECUTED	9:92143a6daea0a3f3b8f598c97ce55c3d	addColumn tableName=REQUIRED_ACTION_PROVIDER		\N	4.25.1	\N	\N	0654969304
+4.3.0-KEYCLOAK-7984	wadahiro@gmail.com	META-INF/jpa-changelog-4.3.0.xml	2024-07-10 23:42:54.231767	64	EXECUTED	9:82bab26a27195d889fb0429003b18f40	update tableName=REQUIRED_ACTION_PROVIDER		\N	4.25.1	\N	\N	0654969304
+4.6.0-KEYCLOAK-7950	psilva@redhat.com	META-INF/jpa-changelog-4.6.0.xml	2024-07-10 23:42:54.23731	65	EXECUTED	9:e590c88ddc0b38b0ae4249bbfcb5abc3	update tableName=RESOURCE_SERVER_RESOURCE		\N	4.25.1	\N	\N	0654969304
+4.6.0-KEYCLOAK-8377	keycloak	META-INF/jpa-changelog-4.6.0.xml	2024-07-10 23:42:54.294076	66	EXECUTED	9:5c1f475536118dbdc38d5d7977950cc0	createTable tableName=ROLE_ATTRIBUTE; addPrimaryKey constraintName=CONSTRAINT_ROLE_ATTRIBUTE_PK, tableName=ROLE_ATTRIBUTE; addForeignKeyConstraint baseTableName=ROLE_ATTRIBUTE, constraintName=FK_ROLE_ATTRIBUTE_ID, referencedTableName=KEYCLOAK_ROLE...		\N	4.25.1	\N	\N	0654969304
+4.6.0-KEYCLOAK-8555	gideonray@gmail.com	META-INF/jpa-changelog-4.6.0.xml	2024-07-10 23:42:54.309051	67	EXECUTED	9:e7c9f5f9c4d67ccbbcc215440c718a17	createIndex indexName=IDX_COMPONENT_PROVIDER_TYPE, tableName=COMPONENT		\N	4.25.1	\N	\N	0654969304
+4.7.0-KEYCLOAK-1267	sguilhen@redhat.com	META-INF/jpa-changelog-4.7.0.xml	2024-07-10 23:42:54.317403	68	EXECUTED	9:88e0bfdda924690d6f4e430c53447dd5	addColumn tableName=REALM		\N	4.25.1	\N	\N	0654969304
+4.7.0-KEYCLOAK-7275	keycloak	META-INF/jpa-changelog-4.7.0.xml	2024-07-10 23:42:54.343453	69	EXECUTED	9:f53177f137e1c46b6a88c59ec1cb5218	renameColumn newColumnName=CREATED_ON, oldColumnName=LAST_SESSION_REFRESH, tableName=OFFLINE_USER_SESSION; addNotNullConstraint columnName=CREATED_ON, tableName=OFFLINE_USER_SESSION; addColumn tableName=OFFLINE_USER_SESSION; customChange; createIn...		\N	4.25.1	\N	\N	0654969304
+4.8.0-KEYCLOAK-8835	sguilhen@redhat.com	META-INF/jpa-changelog-4.8.0.xml	2024-07-10 23:42:54.354756	70	EXECUTED	9:a74d33da4dc42a37ec27121580d1459f	addNotNullConstraint columnName=SSO_MAX_LIFESPAN_REMEMBER_ME, tableName=REALM; addNotNullConstraint columnName=SSO_IDLE_TIMEOUT_REMEMBER_ME, tableName=REALM		\N	4.25.1	\N	\N	0654969304
+authz-7.0.0-KEYCLOAK-10443	psilva@redhat.com	META-INF/jpa-changelog-authz-7.0.0.xml	2024-07-10 23:42:54.361354	71	EXECUTED	9:fd4ade7b90c3b67fae0bfcfcb42dfb5f	addColumn tableName=RESOURCE_SERVER		\N	4.25.1	\N	\N	0654969304
+8.0.0-adding-credential-columns	keycloak	META-INF/jpa-changelog-8.0.0.xml	2024-07-10 23:42:54.37	72	EXECUTED	9:aa072ad090bbba210d8f18781b8cebf4	addColumn tableName=CREDENTIAL; addColumn tableName=FED_USER_CREDENTIAL		\N	4.25.1	\N	\N	0654969304
+8.0.0-updating-credential-data-not-oracle-fixed	keycloak	META-INF/jpa-changelog-8.0.0.xml	2024-07-10 23:42:54.384233	73	EXECUTED	9:1ae6be29bab7c2aa376f6983b932be37	update tableName=CREDENTIAL; update tableName=CREDENTIAL; update tableName=CREDENTIAL; update tableName=FED_USER_CREDENTIAL; update tableName=FED_USER_CREDENTIAL; update tableName=FED_USER_CREDENTIAL		\N	4.25.1	\N	\N	0654969304
+8.0.0-updating-credential-data-oracle-fixed	keycloak	META-INF/jpa-changelog-8.0.0.xml	2024-07-10 23:42:54.388733	74	MARK_RAN	9:14706f286953fc9a25286dbd8fb30d97	update tableName=CREDENTIAL; update tableName=CREDENTIAL; update tableName=CREDENTIAL; update tableName=FED_USER_CREDENTIAL; update tableName=FED_USER_CREDENTIAL; update tableName=FED_USER_CREDENTIAL		\N	4.25.1	\N	\N	0654969304
+8.0.0-credential-cleanup-fixed	keycloak	META-INF/jpa-changelog-8.0.0.xml	2024-07-10 23:42:54.426784	75	EXECUTED	9:2b9cc12779be32c5b40e2e67711a218b	dropDefaultValue columnName=COUNTER, tableName=CREDENTIAL; dropDefaultValue columnName=DIGITS, tableName=CREDENTIAL; dropDefaultValue columnName=PERIOD, tableName=CREDENTIAL; dropDefaultValue columnName=ALGORITHM, tableName=CREDENTIAL; dropColumn ...		\N	4.25.1	\N	\N	0654969304
+KEYCLOAK-18146-add-saml-art-binding-identifier	keycloak	META-INF/jpa-changelog-14.0.0.xml	2024-07-10 23:42:54.960903	103	EXECUTED	9:2c374ad2cdfe20e2905a84c8fac48460	customChange		\N	4.25.1	\N	\N	0654969304
+8.0.0-resource-tag-support	keycloak	META-INF/jpa-changelog-8.0.0.xml	2024-07-10 23:42:54.440353	76	EXECUTED	9:91fa186ce7a5af127a2d7a91ee083cc5	addColumn tableName=MIGRATION_MODEL; createIndex indexName=IDX_UPDATE_TIME, tableName=MIGRATION_MODEL		\N	4.25.1	\N	\N	0654969304
+9.0.0-always-display-client	keycloak	META-INF/jpa-changelog-9.0.0.xml	2024-07-10 23:42:54.447429	77	EXECUTED	9:6335e5c94e83a2639ccd68dd24e2e5ad	addColumn tableName=CLIENT		\N	4.25.1	\N	\N	0654969304
+9.0.0-drop-constraints-for-column-increase	keycloak	META-INF/jpa-changelog-9.0.0.xml	2024-07-10 23:42:54.451032	78	MARK_RAN	9:6bdb5658951e028bfe16fa0a8228b530	dropUniqueConstraint constraintName=UK_FRSR6T700S9V50BU18WS5PMT, tableName=RESOURCE_SERVER_PERM_TICKET; dropUniqueConstraint constraintName=UK_FRSR6T700S9V50BU18WS5HA6, tableName=RESOURCE_SERVER_RESOURCE; dropPrimaryKey constraintName=CONSTRAINT_O...		\N	4.25.1	\N	\N	0654969304
+9.0.0-increase-column-size-federated-fk	keycloak	META-INF/jpa-changelog-9.0.0.xml	2024-07-10 23:42:54.492482	79	EXECUTED	9:d5bc15a64117ccad481ce8792d4c608f	modifyDataType columnName=CLIENT_ID, tableName=FED_USER_CONSENT; modifyDataType columnName=CLIENT_REALM_CONSTRAINT, tableName=KEYCLOAK_ROLE; modifyDataType columnName=OWNER, tableName=RESOURCE_SERVER_POLICY; modifyDataType columnName=CLIENT_ID, ta...		\N	4.25.1	\N	\N	0654969304
+9.0.0-recreate-constraints-after-column-increase	keycloak	META-INF/jpa-changelog-9.0.0.xml	2024-07-10 23:42:54.496219	80	MARK_RAN	9:077cba51999515f4d3e7ad5619ab592c	addNotNullConstraint columnName=CLIENT_ID, tableName=OFFLINE_CLIENT_SESSION; addNotNullConstraint columnName=OWNER, tableName=RESOURCE_SERVER_PERM_TICKET; addNotNullConstraint columnName=REQUESTER, tableName=RESOURCE_SERVER_PERM_TICKET; addNotNull...		\N	4.25.1	\N	\N	0654969304
+9.0.1-add-index-to-client.client_id	keycloak	META-INF/jpa-changelog-9.0.1.xml	2024-07-10 23:42:54.509934	81	EXECUTED	9:be969f08a163bf47c6b9e9ead8ac2afb	createIndex indexName=IDX_CLIENT_ID, tableName=CLIENT		\N	4.25.1	\N	\N	0654969304
+9.0.1-KEYCLOAK-12579-drop-constraints	keycloak	META-INF/jpa-changelog-9.0.1.xml	2024-07-10 23:42:54.513367	82	MARK_RAN	9:6d3bb4408ba5a72f39bd8a0b301ec6e3	dropUniqueConstraint constraintName=SIBLING_NAMES, tableName=KEYCLOAK_GROUP		\N	4.25.1	\N	\N	0654969304
+9.0.1-KEYCLOAK-12579-add-not-null-constraint	keycloak	META-INF/jpa-changelog-9.0.1.xml	2024-07-10 23:42:54.523944	83	EXECUTED	9:966bda61e46bebf3cc39518fbed52fa7	addNotNullConstraint columnName=PARENT_GROUP, tableName=KEYCLOAK_GROUP		\N	4.25.1	\N	\N	0654969304
+9.0.1-KEYCLOAK-12579-recreate-constraints	keycloak	META-INF/jpa-changelog-9.0.1.xml	2024-07-10 23:42:54.527109	84	MARK_RAN	9:8dcac7bdf7378e7d823cdfddebf72fda	addUniqueConstraint constraintName=SIBLING_NAMES, tableName=KEYCLOAK_GROUP		\N	4.25.1	\N	\N	0654969304
+9.0.1-add-index-to-events	keycloak	META-INF/jpa-changelog-9.0.1.xml	2024-07-10 23:42:54.539626	85	EXECUTED	9:7d93d602352a30c0c317e6a609b56599	createIndex indexName=IDX_EVENT_TIME, tableName=EVENT_ENTITY		\N	4.25.1	\N	\N	0654969304
+map-remove-ri	keycloak	META-INF/jpa-changelog-11.0.0.xml	2024-07-10 23:42:54.546342	86	EXECUTED	9:71c5969e6cdd8d7b6f47cebc86d37627	dropForeignKeyConstraint baseTableName=REALM, constraintName=FK_TRAF444KK6QRKMS7N56AIWQ5Y; dropForeignKeyConstraint baseTableName=KEYCLOAK_ROLE, constraintName=FK_KJHO5LE2C0RAL09FL8CM9WFW9		\N	4.25.1	\N	\N	0654969304
+map-remove-ri	keycloak	META-INF/jpa-changelog-12.0.0.xml	2024-07-10 23:42:54.555574	87	EXECUTED	9:a9ba7d47f065f041b7da856a81762021	dropForeignKeyConstraint baseTableName=REALM_DEFAULT_GROUPS, constraintName=FK_DEF_GROUPS_GROUP; dropForeignKeyConstraint baseTableName=REALM_DEFAULT_ROLES, constraintName=FK_H4WPD7W4HSOOLNI3H0SW7BTJE; dropForeignKeyConstraint baseTableName=CLIENT...		\N	4.25.1	\N	\N	0654969304
+12.1.0-add-realm-localization-table	keycloak	META-INF/jpa-changelog-12.0.0.xml	2024-07-10 23:42:54.576967	88	EXECUTED	9:fffabce2bc01e1a8f5110d5278500065	createTable tableName=REALM_LOCALIZATIONS; addPrimaryKey tableName=REALM_LOCALIZATIONS		\N	4.25.1	\N	\N	0654969304
+default-roles	keycloak	META-INF/jpa-changelog-13.0.0.xml	2024-07-10 23:42:54.61746	89	EXECUTED	9:fa8a5b5445e3857f4b010bafb5009957	addColumn tableName=REALM; customChange		\N	4.25.1	\N	\N	0654969304
+default-roles-cleanup	keycloak	META-INF/jpa-changelog-13.0.0.xml	2024-07-10 23:42:54.692185	90	EXECUTED	9:67ac3241df9a8582d591c5ed87125f39	dropTable tableName=REALM_DEFAULT_ROLES; dropTable tableName=CLIENT_DEFAULT_ROLES		\N	4.25.1	\N	\N	0654969304
+13.0.0-KEYCLOAK-16844	keycloak	META-INF/jpa-changelog-13.0.0.xml	2024-07-10 23:42:54.71104	91	EXECUTED	9:ad1194d66c937e3ffc82386c050ba089	createIndex indexName=IDX_OFFLINE_USS_PRELOAD, tableName=OFFLINE_USER_SESSION		\N	4.25.1	\N	\N	0654969304
+map-remove-ri-13.0.0	keycloak	META-INF/jpa-changelog-13.0.0.xml	2024-07-10 23:42:54.719296	92	EXECUTED	9:d9be619d94af5a2f5d07b9f003543b91	dropForeignKeyConstraint baseTableName=DEFAULT_CLIENT_SCOPE, constraintName=FK_R_DEF_CLI_SCOPE_SCOPE; dropForeignKeyConstraint baseTableName=CLIENT_SCOPE_CLIENT, constraintName=FK_C_CLI_SCOPE_SCOPE; dropForeignKeyConstraint baseTableName=CLIENT_SC...		\N	4.25.1	\N	\N	0654969304
+13.0.0-KEYCLOAK-17992-drop-constraints	keycloak	META-INF/jpa-changelog-13.0.0.xml	2024-07-10 23:42:54.722417	93	MARK_RAN	9:544d201116a0fcc5a5da0925fbbc3bde	dropPrimaryKey constraintName=C_CLI_SCOPE_BIND, tableName=CLIENT_SCOPE_CLIENT; dropIndex indexName=IDX_CLSCOPE_CL, tableName=CLIENT_SCOPE_CLIENT; dropIndex indexName=IDX_CL_CLSCOPE, tableName=CLIENT_SCOPE_CLIENT		\N	4.25.1	\N	\N	0654969304
+13.0.0-increase-column-size-federated	keycloak	META-INF/jpa-changelog-13.0.0.xml	2024-07-10 23:42:54.756742	94	EXECUTED	9:43c0c1055b6761b4b3e89de76d612ccf	modifyDataType columnName=CLIENT_ID, tableName=CLIENT_SCOPE_CLIENT; modifyDataType columnName=SCOPE_ID, tableName=CLIENT_SCOPE_CLIENT		\N	4.25.1	\N	\N	0654969304
+13.0.0-KEYCLOAK-17992-recreate-constraints	keycloak	META-INF/jpa-changelog-13.0.0.xml	2024-07-10 23:42:54.760308	95	MARK_RAN	9:8bd711fd0330f4fe980494ca43ab1139	addNotNullConstraint columnName=CLIENT_ID, tableName=CLIENT_SCOPE_CLIENT; addNotNullConstraint columnName=SCOPE_ID, tableName=CLIENT_SCOPE_CLIENT; addPrimaryKey constraintName=C_CLI_SCOPE_BIND, tableName=CLIENT_SCOPE_CLIENT; createIndex indexName=...		\N	4.25.1	\N	\N	0654969304
+json-string-accomodation-fixed	keycloak	META-INF/jpa-changelog-13.0.0.xml	2024-07-10 23:42:54.838755	96	EXECUTED	9:e07d2bc0970c348bb06fb63b1f82ddbf	addColumn tableName=REALM_ATTRIBUTE; update tableName=REALM_ATTRIBUTE; dropColumn columnName=VALUE, tableName=REALM_ATTRIBUTE; renameColumn newColumnName=VALUE, oldColumnName=VALUE_NEW, tableName=REALM_ATTRIBUTE		\N	4.25.1	\N	\N	0654969304
+14.0.0-KEYCLOAK-11019	keycloak	META-INF/jpa-changelog-14.0.0.xml	2024-07-10 23:42:54.896035	97	EXECUTED	9:24fb8611e97f29989bea412aa38d12b7	createIndex indexName=IDX_OFFLINE_CSS_PRELOAD, tableName=OFFLINE_CLIENT_SESSION; createIndex indexName=IDX_OFFLINE_USS_BY_USER, tableName=OFFLINE_USER_SESSION; createIndex indexName=IDX_OFFLINE_USS_BY_USERSESS, tableName=OFFLINE_USER_SESSION		\N	4.25.1	\N	\N	0654969304
+14.0.0-KEYCLOAK-18286	keycloak	META-INF/jpa-changelog-14.0.0.xml	2024-07-10 23:42:54.898701	98	MARK_RAN	9:259f89014ce2506ee84740cbf7163aa7	createIndex indexName=IDX_CLIENT_ATT_BY_NAME_VALUE, tableName=CLIENT_ATTRIBUTES		\N	4.25.1	\N	\N	0654969304
+14.0.0-KEYCLOAK-18286-revert	keycloak	META-INF/jpa-changelog-14.0.0.xml	2024-07-10 23:42:54.918684	99	MARK_RAN	9:04baaf56c116ed19951cbc2cca584022	dropIndex indexName=IDX_CLIENT_ATT_BY_NAME_VALUE, tableName=CLIENT_ATTRIBUTES		\N	4.25.1	\N	\N	0654969304
 15.0.0-KEYCLOAK-18467	keycloak	META-INF/jpa-changelog-15.0.0.xml	2024-07-10 23:42:54.97174	104	EXECUTED	9:47a760639ac597360a8219f5b768b4de	addColumn tableName=REALM_LOCALIZATIONS; update tableName=REALM_LOCALIZATIONS; dropColumn columnName=TEXTS, tableName=REALM_LOCALIZATIONS; renameColumn newColumnName=TEXTS, oldColumnName=TEXTS_NEW, tableName=REALM_LOCALIZATIONS; addNotNullConstrai...		\N	4.25.1	\N	\N	0654969304
 17.0.0-9562	keycloak	META-INF/jpa-changelog-17.0.0.xml	2024-07-10 23:42:54.98224	105	EXECUTED	9:a6272f0576727dd8cad2522335f5d99e	createIndex indexName=IDX_USER_SERVICE_ACCOUNT, tableName=USER_ENTITY		\N	4.25.1	\N	\N	0654969304
 18.0.0-10625-IDX_ADMIN_EVENT_TIME	keycloak	META-INF/jpa-changelog-18.0.0.xml	2024-07-10 23:42:54.997442	106	EXECUTED	9:015479dbd691d9cc8669282f4828c41d	createIndex indexName=IDX_ADMIN_EVENT_TIME, tableName=ADMIN_EVENT_ENTITY		\N	4.25.1	\N	\N	0654969304
