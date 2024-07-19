@@ -1,13 +1,13 @@
 package danieldjgomes.larica.infrastructure.keycloak;
 
-import danieldjgomes.larica.infrastructure.KeycloakUserClient;
 import danieldjgomes.larica.infrastructure.TokenKeycloakAutenticacao;
-import danieldjgomes.larica.infrastructure.TokenMapper;
 import danieldjgomes.larica.infrastructure.keycloak.dto.CriarUsuarioRequestDTO;
 import danieldjgomes.larica.infrastructure.keycloak.dto.LoginUsuarioKeycloakModel;
 import danieldjgomes.larica.infrastructure.keycloak.exceptions.CriandoUsuarioDuplicadoException;
-import danieldjgomes.larica.infrastructure.model.LoginResponse;
-import danieldjgomes.larica.infrastructure.model.RevalidarTokenRequest;
+import danieldjgomes.larica.infrastructure.token.KeycloakUserClient;
+import danieldjgomes.larica.infrastructure.token.TokenMapper;
+import danieldjgomes.larica.infrastructure.token.model.LoginResponse;
+import danieldjgomes.larica.infrastructure.token.model.RevalidarTokenRequest;
 import jakarta.ws.rs.core.Response;
 import lombok.RequiredArgsConstructor;
 import org.keycloak.representations.idm.CredentialRepresentation;
@@ -65,8 +65,7 @@ public class KeycloakService {
         atributos.put("restaurante", Collections.singletonList(criarUsuarioRequestDTO.getRestaurante()));
         novoUsuario.setAttributes(atributos);
 
-        CredentialRepresentation credential = Credentials
-                .createPasswordCredentials(criarUsuarioRequestDTO.getSenha());
+        CredentialRepresentation credential = createPasswordCredentials(criarUsuarioRequestDTO.getSenha());
         credential.setTemporary(false);
         credential.setType(CredentialRepresentation.PASSWORD);
 
@@ -91,15 +90,22 @@ public class KeycloakService {
         return tokenMapper.toLoginResponse(tokenManager);
     }
 
-    public LoginResponse revalidarLogin(RevalidarTokenRequest revalidarToken){
+    public LoginResponse revalidarToken(RevalidarTokenRequest revalidarToken) {
         RevalidarTokenKeycloakModel revalidarTokenKeycloakModel = new RevalidarTokenKeycloakModel();
         revalidarTokenKeycloakModel.setRefreshToken(revalidarToken.getToken());
         revalidarTokenKeycloakModel.setClientId(clientId);
         revalidarTokenKeycloakModel.setClientSecret(clientSecret);
         revalidarTokenKeycloakModel.setGrantType("refresh_token");
 
-        TokenKeycloakAutenticacao tokenManager = keycloakUserClient.refreshToken(revalidarTokenKeycloakModel);
+        TokenKeycloakAutenticacao tokenManager = keycloakUserClient.refreshUserToken(revalidarTokenKeycloakModel);
         return tokenMapper.toLoginResponse(tokenManager);
     }
 
+    public static CredentialRepresentation createPasswordCredentials(String password) {
+        CredentialRepresentation passwordCredentials = new CredentialRepresentation();
+        passwordCredentials.setTemporary(false);
+        passwordCredentials.setType(CredentialRepresentation.PASSWORD);
+        passwordCredentials.setValue(password);
+        return passwordCredentials;
+    }
 }

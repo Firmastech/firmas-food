@@ -1,5 +1,6 @@
 package danieldjgomes.larica.infrastructure;
 
+import danieldjgomes.larica.core.restaurante.DTOMapper;
 import danieldjgomes.larica.core.restaurante.entity.Restaurante;
 import danieldjgomes.larica.core.usecases.RegistrarRestauranteUseCase;
 import jakarta.validation.Valid;

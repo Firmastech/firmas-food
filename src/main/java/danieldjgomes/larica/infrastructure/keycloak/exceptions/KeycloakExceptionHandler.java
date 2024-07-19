@@ -1,6 +1,6 @@
 package danieldjgomes.larica.infrastructure.keycloak.exceptions;
 
-import danieldjgomes.larica.infrastructure.ErrorResponse;
+import danieldjgomes.larica.infrastructure.expectionHandler.model.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;

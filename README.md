@@ -30,9 +30,12 @@ Antes de começar, certifique-se de ter instalado em sua máquina:
    git clone https://github.com/Firmastech/firmas-food.git
    cd firmas-food
    ```
-2. **Execute o setup.bat**
-
-3. **Execute o projeto**
+2. **Execute o projeto**
 ```
  docker-compose up    
 ```
+
+
+## Persistindo as mudancas de banco
+ - Salve suas mudancas no arquivo `resources/sql/firmas_food_db.sql`
+ - Execute o arquivo `backup_db.sh` e commite com os novos arquivos gerados.
