@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.Optional;
 import java.util.UUID;
 
-public interface DescontoRepository extends JpaRepository<Desconto, UUID> {
+public interface DescontoRepository extends JpaRepository<Desconto, String> {
 
 }

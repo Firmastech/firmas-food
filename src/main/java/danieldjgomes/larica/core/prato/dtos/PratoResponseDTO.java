@@ -14,10 +14,12 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PratoResponseDTO {
-    private UUID id;
+
+    private String id;
     private String nome;
     private String descricao;
+    private Double preco;
+    private String categoria;
     private String urlImagem;
-    private BigDecimal preco;
-    private Desconto desconto;
+    private Double porcentagemDesconto;
 }

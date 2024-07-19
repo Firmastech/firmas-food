@@ -29,7 +29,7 @@ public class DescontoUseCaseImpl implements DescontoUseCase {
         return DescontoMapper.INSTANCE.toDto(desconto);
     }
 
-    public Optional<DescontoResponseDTO> getDescontoById(UUID id) {
+    public Optional<DescontoResponseDTO> getDescontoById(String id) {
         return descontoRepository.findById(id)
                 .map(DescontoMapper.INSTANCE::toDto);
     }
@@ -41,7 +41,7 @@ public class DescontoUseCaseImpl implements DescontoUseCase {
                 .collect(Collectors.toList());
     }
 
-    public Optional<DescontoResponseDTO> updateDesconto(UUID id, DescontoRequestDTO dto) {
+    public Optional<DescontoResponseDTO> updateDesconto(String id, DescontoRequestDTO dto) {
         Desconto existingDesconto = getExistingDesconto(id);
         Desconto updatedDesconto = DescontoMapper.INSTANCE.toEntity(dto);
         updatedDesconto.setId(existingDesconto.getId());
@@ -50,7 +50,7 @@ public class DescontoUseCaseImpl implements DescontoUseCase {
     }
 
     @Override
-    public void deleteDesconto(UUID id) {
+    public void deleteDesconto(String id) {
         Desconto existingDesconto = getExistingDesconto(id);
         descontoRepository.delete(existingDesconto);
     }
@@ -63,7 +63,7 @@ public class DescontoUseCaseImpl implements DescontoUseCase {
         return Optional.of(valorDescontado.setScale(2, BigDecimal.ROUND_HALF_UP));
     }
 
-    private Desconto getExistingDesconto(UUID id) {
+    private Desconto getExistingDesconto(String id) {
         return descontoRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Desconto not found with id: " + id));
     }

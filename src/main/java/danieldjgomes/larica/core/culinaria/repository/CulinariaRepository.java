@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.UUID;
 
-public interface CulinariaRepository extends JpaRepository<Culinaria, UUID> {
+public interface CulinariaRepository extends JpaRepository<Culinaria, String> {
 }

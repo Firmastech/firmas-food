@@ -27,7 +27,7 @@ public class CulinariaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CulinariaResponseDTO> getCulinariaById(@PathVariable UUID id) {
+    public ResponseEntity<CulinariaResponseDTO> getCulinariaById(@PathVariable String id) {
         Optional<CulinariaResponseDTO> culinaria = culinariaService.getCulinariaById(id);
         return culinaria.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
@@ -39,13 +39,13 @@ public class CulinariaController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<CulinariaResponseDTO> updateCulinaria(@PathVariable UUID id, @RequestBody @Valid CulinariaRequestDTO request) {
+    public ResponseEntity<CulinariaResponseDTO> updateCulinaria(@PathVariable String id, @RequestBody @Valid CulinariaRequestDTO request) {
         Optional<CulinariaResponseDTO> culinaria = culinariaService.updateCulinaria(id, request);
         return culinaria.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteCulinaria(@PathVariable UUID id) {
+    public ResponseEntity<Void> deleteCulinaria(@PathVariable String id) {
         culinariaService.deleteCulinaria(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

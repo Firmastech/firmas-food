@@ -24,7 +24,7 @@ public class ModelMapperConfig {
         Converter<String, Desconto> stringToDescontoConverter = new AbstractConverter<String, Desconto>() {
             @Override
             protected Desconto convert(String source) {
-                UUID descontoId = UUID.fromString(source);
+                String descontoId = String.valueOf(UUID.fromString(source));
                 Desconto desconto = new Desconto();
                 desconto.setId(descontoId);
                 return desconto;

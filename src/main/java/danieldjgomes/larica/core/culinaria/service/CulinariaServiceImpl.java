@@ -27,7 +27,7 @@ public class CulinariaServiceImpl implements CulinariaUseCase {
         return culinariaMapper.toDto(culinaria);
     }
 
-    public Optional<CulinariaResponseDTO> getCulinariaById(UUID id) {
+    public Optional<CulinariaResponseDTO> getCulinariaById(String id) {
         return culinariaRepository.findById(id)
                 .map(culinariaMapper::toDto);
     }
@@ -37,7 +37,7 @@ public class CulinariaServiceImpl implements CulinariaUseCase {
         return culinariaMapper.toDtoList(culinarias);
     }
 
-    public Optional<CulinariaResponseDTO> updateCulinaria(UUID id, CulinariaRequestDTO culinariaRequest) {
+    public Optional<CulinariaResponseDTO> updateCulinaria(String id, CulinariaRequestDTO culinariaRequest) {
         Culinaria existingCulinaria = getExistingCulinaria(id);
         Culinaria updatedCulinaria = culinariaMapper.toEntity(culinariaRequest);
         updatedCulinaria.setCulinariaId(existingCulinaria.getCulinariaId());
@@ -45,12 +45,12 @@ public class CulinariaServiceImpl implements CulinariaUseCase {
         return Optional.of(culinariaMapper.toDto(updatedCulinaria));
     }
 
-    public void deleteCulinaria(UUID id) {
+    public void deleteCulinaria(String id) {
         Culinaria existingCulinaria = getExistingCulinaria(id);
         culinariaRepository.delete(existingCulinaria);
     }
 
-    private Culinaria getExistingCulinaria(UUID id) {
+    private Culinaria getExistingCulinaria(String id) {
         return culinariaRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Culinaria not found with id: " + id));
     }

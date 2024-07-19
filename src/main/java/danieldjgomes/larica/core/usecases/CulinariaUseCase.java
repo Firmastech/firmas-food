@@ -11,11 +11,11 @@ public interface CulinariaUseCase {
 
     CulinariaResponseDTO createCulinaria(CulinariaRequestDTO request);
 
-    Optional<CulinariaResponseDTO> getCulinariaById(UUID id);
+    Optional<CulinariaResponseDTO> getCulinariaById(String id);
 
     List<CulinariaResponseDTO> listAllCulinarias();
 
-    Optional<CulinariaResponseDTO> updateCulinaria(UUID id, CulinariaRequestDTO request);
+    Optional<CulinariaResponseDTO> updateCulinaria(String id, CulinariaRequestDTO request);
 
-    void deleteCulinaria(UUID id);
+    void deleteCulinaria(String id);
 }

@@ -28,14 +28,14 @@ public class DescontoController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<DescontoResponseDTO> updateDesconto(@PathVariable UUID id, @RequestBody @Valid DescontoRequestDTO descontoRequest) {
+    public ResponseEntity<DescontoResponseDTO> updateDesconto(@PathVariable String id, @RequestBody @Valid DescontoRequestDTO descontoRequest) {
         Optional<DescontoResponseDTO> updatedDesconto = descontoUseCaseImpl.updateDesconto(id, descontoRequest);
         return updatedDesconto.map(response -> new ResponseEntity<>(response, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @GetMapping("/{id}")
-    public Optional<DescontoResponseDTO> getDescontoById(@PathVariable UUID id) {
+    public Optional<DescontoResponseDTO> getDescontoById(@PathVariable String id) {
         Optional<DescontoResponseDTO> desconto = descontoUseCaseImpl.getDescontoById(id);
         return desconto;
     }
@@ -46,7 +46,7 @@ public class DescontoController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteDesconto(@PathVariable UUID id) {
+    public ResponseEntity<Void> deleteDesconto(@PathVariable String id) {
         descontoUseCaseImpl.deleteDesconto(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

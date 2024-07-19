@@ -27,20 +27,20 @@ public class PratoController {
     }
 
     @PostMapping("/{pratoId}/aplicar-desconto/{descontoId}")
-    public ResponseEntity<PratoResponseDTO> aplicarDescontoAoPrato(@PathVariable UUID pratoId, @PathVariable UUID descontoId) {
+    public ResponseEntity<PratoResponseDTO> aplicarDescontoAoPrato(@PathVariable String pratoId, @PathVariable String descontoId) {
         PratoResponseDTO pratoComDesconto = pratoService.applayDescontoToPrato(pratoId, descontoId);
         return ResponseEntity.ok(pratoComDesconto);
     }
 
     @PutMapping("/{id}/remove-desconto") //TODO Está removendo desconto, porém ele não está retornando com o preço original
-    public ResponseEntity<PratoResponseDTO> removeDesconto(@PathVariable UUID id) {
+    public ResponseEntity<PratoResponseDTO> removeDesconto(@PathVariable String id) {
         Optional<PratoResponseDTO> pratoResponseDTO = pratoService.removeDesconto(id);
         return pratoResponseDTO.map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PratoResponseDTO> getPratoById(@PathVariable UUID id) {
+    public ResponseEntity<PratoResponseDTO> getPratoById(@PathVariable String id) {
         Optional<PratoResponseDTO> prato = pratoService.getPratoById(id);
         return prato.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
@@ -52,13 +52,13 @@ public class PratoController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<PratoResponseDTO> updatePrato(@PathVariable UUID id, @RequestBody @Valid PratoRequestDTO updatedPrato) {
+    public ResponseEntity<PratoResponseDTO> updatePrato(@PathVariable String id, @RequestBody @Valid PratoRequestDTO updatedPrato) {
         Optional<PratoResponseDTO> prato = pratoService.updatePrato(id, updatedPrato);
         return prato.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deletePrato(@PathVariable UUID id) {
+    public ResponseEntity<Void> deletePrato(@PathVariable String id) {
         pratoService.deletePrato(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

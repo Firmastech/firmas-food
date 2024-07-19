@@ -20,7 +20,7 @@ public class Desconto {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "desconto_id")
-    private UUID id;
+    private String id;
 
     @Column(name = "nome", length = 100)
     private String nome;

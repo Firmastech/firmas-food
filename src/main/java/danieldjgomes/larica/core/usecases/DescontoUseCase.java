@@ -13,13 +13,13 @@ public interface DescontoUseCase {
 
     DescontoResponseDTO createDesconto(DescontoRequestDTO dto);
 
-    Optional<DescontoResponseDTO> getDescontoById(UUID id);
+    Optional<DescontoResponseDTO> getDescontoById(String id);
 
     List<DescontoResponseDTO> listAllDescontos();
 
-    Optional<DescontoResponseDTO> updateDesconto(UUID id, DescontoRequestDTO dto);
+    Optional<DescontoResponseDTO> updateDesconto(String id, DescontoRequestDTO dto);
 
-    void deleteDesconto(UUID id);
+    void deleteDesconto(String id);
 
     Optional<BigDecimal> aplicarDesconto(BigDecimal valorOriginal, BigDecimal porcentagemDesconto);
 }

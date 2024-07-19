@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.UUID;
 
-public interface PratoRepository extends JpaRepository<Prato, UUID> {
+public interface PratoRepository extends JpaRepository<Prato, String> {
 }

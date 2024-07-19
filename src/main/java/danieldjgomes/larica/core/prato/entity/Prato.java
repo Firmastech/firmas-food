@@ -19,9 +19,9 @@ import java.util.UUID;
 public class Prato {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", updatable = false, nullable = false)
-    private UUID id;
+    private String id;
 
     @Column(nullable = false, length = 100)
     private String nome;

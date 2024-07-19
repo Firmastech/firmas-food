@@ -1,8 +1,6 @@
-package danieldjgomes.larica.core.cardapio.dtos;
+package danieldjgomes.larica.core.cardapio.dtos.request;
 
 
-import danieldjgomes.larica.core.culinaria.entity.Culinaria;
-import danieldjgomes.larica.core.prato.entity.Prato;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,8 +14,10 @@ import lombok.Setter;
 public class CardapioRequestDTO {
 
     @NotNull
-    private Prato pratoId;
-
+    private String restauranteId;
     @NotNull
-    private Culinaria tipoCulinariaId;
+    private String nome;
+    private String descricao;
+
+
 }

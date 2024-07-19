@@ -32,7 +32,7 @@ public class PratoUseCaseImpl implements PratoUseCase {
     }
 
 
-    public PratoResponseDTO applayDescontoToPrato(UUID pratoId, UUID descontoId) {
+    public PratoResponseDTO applayDescontoToPrato(String pratoId, String descontoId) {
         Prato prato = getExistingPrato(pratoId);
         Desconto desconto = findDescontoById(descontoId);
         prato.setDesconto(desconto);
@@ -46,7 +46,7 @@ public class PratoUseCaseImpl implements PratoUseCase {
         return PratoMapper.INSTANCE.toDto(savedPrato);
     }
 
-    public Optional<PratoResponseDTO> removeDesconto(UUID id) {
+    public Optional<PratoResponseDTO> removeDesconto(String id) {
         Optional<Prato> optionalPrato = Optional.ofNullable(getExistingPrato(id));
         if (optionalPrato.isEmpty()) {
             return Optional.empty();
@@ -58,7 +58,7 @@ public class PratoUseCaseImpl implements PratoUseCase {
         return Optional.of(PratoMapper.INSTANCE.toDto(prato));
     }
 
-    public Optional<PratoResponseDTO> getPratoById(UUID id) {
+    public Optional<PratoResponseDTO> getPratoById(String id) {
         return pratoRepository.findById(id)
                 .map(PratoMapper.INSTANCE::toDto);
     }
@@ -70,7 +70,7 @@ public class PratoUseCaseImpl implements PratoUseCase {
                 .toList();
     }
 
-    public Optional<PratoResponseDTO> updatePrato(UUID id, PratoRequestDTO pratoRequest) {
+    public Optional<PratoResponseDTO> updatePrato(String id, PratoRequestDTO pratoRequest) {
         Prato existingPrato = getExistingPrato(id);
         Prato updatedPrato = PratoMapper.INSTANCE.toEntity(pratoRequest);
         updatedPrato.setId(existingPrato.getId());
@@ -80,17 +80,17 @@ public class PratoUseCaseImpl implements PratoUseCase {
         return Optional.of(PratoMapper.INSTANCE.toDto(updatedPrato));
     }
 
-    public void deletePrato(UUID id) {
+    public void deletePrato(String  id) {
         Prato existingPrato = getExistingPrato(id);
         pratoRepository.delete(existingPrato);
     }
 
-    private Prato getExistingPrato(UUID id) {
+    private Prato getExistingPrato(String id) {
         return pratoRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Prato not found with id: " + id));
     }
 
-    private Desconto findDescontoById(UUID descontoId) {
+    private Desconto findDescontoById(String descontoId) {
         return descontoRepository.findById(descontoId)
                 .orElseThrow(() -> new EntityNotFoundException("Desconto not found with id: " + descontoId));
     }

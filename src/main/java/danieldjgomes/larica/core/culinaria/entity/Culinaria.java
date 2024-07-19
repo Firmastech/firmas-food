@@ -19,9 +19,9 @@ import java.util.UUID;
 public class Culinaria {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id")
-    private UUID culinariaId;
+    private String culinariaId;
 
     @Column(name = "tipo", nullable = false, length = 144)
     private String tipo;
