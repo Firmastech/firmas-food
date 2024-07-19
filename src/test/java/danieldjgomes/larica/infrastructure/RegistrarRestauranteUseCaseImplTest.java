@@ -52,7 +52,7 @@ class RegistrarRestauranteUseCaseImplTest {
 
     @Test
     void deveCadastrarUmRestauranteSemErros(){
-        when(restauranteRepository.save(restaurante)).thenReturn(restauranteEntity);
+        when(restauranteRepository.save(restauranteEntity)).thenReturn(restauranteEntity);
         when(mapper.toRestaurante(restauranteEntity)).thenReturn(restaurante);
 
         Restaurante restauranteCadastrado = registrarRestauranteUseCase.registrarRestaurante(restaurante);
@@ -62,7 +62,7 @@ class RegistrarRestauranteUseCaseImplTest {
         assertEquals(30, (int) restauranteCadastrado.getTempoEstimadoDeEntrega());
         assertEquals(StatusFuncionamento.INATIVO,restauranteCadastrado.getStatusFuncionamento());
 
-        verify(restauranteRepository).save(restaurante);
+        verify(restauranteRepository).save(restauranteEntity);
         verify(mapper).toRestaurante(restauranteEntity);
     }
 }

@@ -9,7 +9,7 @@ import java.util.UUID;
 
 public interface RestauranteRepository {
 
-    RestauranteEntity save(Restaurante restaurante);
+    RestauranteEntity save(RestauranteEntity restaurante);
 
     Optional<RestauranteEntity> findById(UUID id);
 

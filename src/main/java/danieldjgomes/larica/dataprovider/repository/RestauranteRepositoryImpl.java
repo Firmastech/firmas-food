@@ -28,8 +28,8 @@ public class RestauranteRepositoryImpl implements RestauranteRepository {
     }
 
     @Override
-    public RestauranteEntity save(Restaurante restaurante) {
-        RestauranteEntity entity = restauranteMapper.toEntity(restaurante);
+    public RestauranteEntity save(RestauranteEntity restaurante) {
+        RestauranteEntity entity = restaurante;
         entity.setIsActive(true);
         entity.setDataInclusao(LocalDateTime.now());
         return restauranteDao.save(entity);
