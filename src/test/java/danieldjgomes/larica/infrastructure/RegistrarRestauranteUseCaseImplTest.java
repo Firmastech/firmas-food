@@ -54,6 +54,7 @@ class RegistrarRestauranteUseCaseImplTest {
     void deveCadastrarUmRestauranteSemErros(){
         when(restauranteRepository.save(restauranteEntity)).thenReturn(restauranteEntity);
         when(mapper.toRestaurante(restauranteEntity)).thenReturn(restaurante);
+        when(mapper.toEntity(restaurante)).thenReturn(restauranteEntity);
 
         Restaurante restauranteCadastrado = registrarRestauranteUseCase.registrarRestaurante(restaurante);
 
