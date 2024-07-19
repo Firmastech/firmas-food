@@ -55,4 +55,3 @@ volumes:
 
 networks:
   local:
-    external: true
