@@ -3,13 +3,10 @@ package danieldjgomes.larica.infrastructure.keycloak.dto;
 import lombok.Getter;
 
 @Getter
-public class LoginUsuarioKeycloakModel {
+public class LoginUsuarioKeycloakModelDTO {
     private String client_secret;
-
     private String client_id;
-
     private String grant_type;
-
     private String username;
 
     private String password;

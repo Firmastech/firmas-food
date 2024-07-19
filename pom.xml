@@ -23,7 +23,7 @@
 		<sonar.version>4.0.0.4121</sonar.version>
 		<maven.version>3.8.0</maven.version>
 		<lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
-		<jacoco.version>0.8.8</jacoco.version>
+		<jacoco.version>0.8.12</jacoco.version>
 		<!-- Porcentagem de cobertura dos testes JACOCO-->
 		<jacoco.coverage.ratio>0.80</jacoco.coverage.ratio>
 		<!-- SonarCloud config -->
@@ -35,16 +35,17 @@
 		<sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
 		<!-- Sonar Ignore -->
 		<sonar.coverage.exclusions>
-			**/core/cardapio/entity/**
-			**/core/culinaria/entity/**
-			**/core/endereco/entity/**
-			**/core/prato/entity/**
-			**/core/restaurante/entity/**
-			**/dataprovider/repository/entity**
-			**/dataprovider/repository/RestauranteDao*
-			**/dataprovider/repository/RestauranteMapper*
-			**/infrastructure/**
-			**/LaricaApplication.java
+            **/core/cardapio/entity/**
+            **/core/culinaria/entity/**
+            **/core/endereco/entity/**
+            **/core/prato/entity/**
+            **/core/restaurante/entity/**
+            **/dataprovider/repository/entity/**
+            **/*Dao*.class*
+            **/*Config*.class*
+            **/app/LaricaApplication*
+            **/*Mapper*.class
+            **/*MapperImpl*.class
 		</sonar.coverage.exclusions>
 	</properties>
 	<dependencies>
@@ -134,10 +135,11 @@
 						<exclude>**/core/prato/entity/**</exclude>
 						<exclude>**/core/restaurante/entity/**</exclude>
 						<exclude>**/dataprovider/repository/entity/**</exclude>
-						<exclude>**/infrastructure/**</exclude>
-						<exclude>**/app/LaricaApplication*</exclude>
-						<exclude>**/dataprovider/repository/RestauranteDao*</exclude>
-						<exclude>**/dataprovider/repository/RestauranteMapper*</exclude>
+						<exclude>**/*Dao*.class*</exclude>
+						<exclude>**/*Config*.class*</exclude>
+                        <exclude>**/app/LaricaApplication*</exclude>
+						<exclude>**/*Mapper*.class</exclude>
+						<exclude>**/*MapperImpl*.class</exclude>
 					</excludes>
 				</configuration>
 				<executions>

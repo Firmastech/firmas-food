@@ -1,8 +1,9 @@
 package danieldjgomes.larica.infrastructure.keycloak;
 
-import danieldjgomes.larica.infrastructure.TokenKeycloakAutenticacao;
+import danieldjgomes.larica.infrastructure.keycloak.dto.TokenAutenticacaoKeycloakModelResponseDTO;
 import danieldjgomes.larica.infrastructure.keycloak.dto.CriarUsuarioRequestDTO;
-import danieldjgomes.larica.infrastructure.keycloak.dto.LoginUsuarioKeycloakModel;
+import danieldjgomes.larica.infrastructure.keycloak.dto.LoginUsuarioKeycloakModelDTO;
+import danieldjgomes.larica.infrastructure.keycloak.dto.RevalidarTokenKeycloakModelDTO;
 import danieldjgomes.larica.infrastructure.keycloak.exceptions.CriandoUsuarioDuplicadoException;
 import danieldjgomes.larica.infrastructure.token.KeycloakUserClient;
 import danieldjgomes.larica.infrastructure.token.TokenMapper;
@@ -79,25 +80,25 @@ public class KeycloakService {
     }
 
     public LoginResponse logarUsuario(String usuarioId, String senha) {
-        LoginUsuarioKeycloakModel loginUsuarioKeycloakModel = new LoginUsuarioKeycloakModel();
-        loginUsuarioKeycloakModel.setClientSecret(clientSecret);
-        loginUsuarioKeycloakModel.setClientId(clientId);
-        loginUsuarioKeycloakModel.setGrantType("password");
-        loginUsuarioKeycloakModel.setUsername(usuarioId);
-        loginUsuarioKeycloakModel.setPassword(senha);
+        LoginUsuarioKeycloakModelDTO loginUsuarioKeycloakModelDTO = new LoginUsuarioKeycloakModelDTO();
+        loginUsuarioKeycloakModelDTO.setClientSecret(clientSecret);
+        loginUsuarioKeycloakModelDTO.setClientId(clientId);
+        loginUsuarioKeycloakModelDTO.setGrantType("password");
+        loginUsuarioKeycloakModelDTO.setUsername(usuarioId);
+        loginUsuarioKeycloakModelDTO.setPassword(senha);
 
-        TokenKeycloakAutenticacao tokenManager = keycloakUserClient.getUserToken(loginUsuarioKeycloakModel);
+        TokenAutenticacaoKeycloakModelResponseDTO tokenManager = keycloakUserClient.getUserToken(loginUsuarioKeycloakModelDTO);
         return tokenMapper.toLoginResponse(tokenManager);
     }
 
     public LoginResponse revalidarToken(RevalidarTokenRequest revalidarToken) {
-        RevalidarTokenKeycloakModel revalidarTokenKeycloakModel = new RevalidarTokenKeycloakModel();
-        revalidarTokenKeycloakModel.setRefreshToken(revalidarToken.getToken());
-        revalidarTokenKeycloakModel.setClientId(clientId);
-        revalidarTokenKeycloakModel.setClientSecret(clientSecret);
-        revalidarTokenKeycloakModel.setGrantType("refresh_token");
+        RevalidarTokenKeycloakModelDTO revalidarTokenKeycloakModelDTO = new RevalidarTokenKeycloakModelDTO();
+        revalidarTokenKeycloakModelDTO.setRefreshToken(revalidarToken.getToken());
+        revalidarTokenKeycloakModelDTO.setClientId(clientId);
+        revalidarTokenKeycloakModelDTO.setClientSecret(clientSecret);
+        revalidarTokenKeycloakModelDTO.setGrantType("refresh_token");
 
-        TokenKeycloakAutenticacao tokenManager = keycloakUserClient.refreshUserToken(revalidarTokenKeycloakModel);
+        TokenAutenticacaoKeycloakModelResponseDTO tokenManager = keycloakUserClient.refreshUserToken(revalidarTokenKeycloakModelDTO);
         return tokenMapper.toLoginResponse(tokenManager);
     }
 

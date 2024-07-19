@@ -1,9 +1,9 @@
-package danieldjgomes.larica.infrastructure.keycloak;
+package danieldjgomes.larica.infrastructure.keycloak.dto;
 
 import lombok.Getter;
 
 @Getter
-public class RevalidarTokenKeycloakModel {
+public class RevalidarTokenKeycloakModelDTO {
 
     private String client_id;
     private String grant_type;
