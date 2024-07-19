@@ -1,25 +1,11 @@
 version: '3'
 services:
-  postgres:
-    image: postgres:latest
-    restart: always
-    ports:
-      - "5432:5432"
-    volumes:
-      - ./postgres_data:/var/lib/postgresql/data  # Assuming you've extracted into ./postgres_data
-    environment:
-      POSTGRES_DB: keycloak
-      POSTGRES_USER: keycloak
-      POSTGRES_PASSWORD: password
-    networks:
-      - local
-
   keycloak:
     image: quay.io/keycloak/keycloak:24.0.3
     command: start-dev
     restart: always
-    links:
-      - postgres
+    depends_on:
+      - initdb
     ports:
       - "9081:8080"
     environment:
@@ -28,11 +14,38 @@ services:
       KEYCLOAK_ADMIN_PASSWORD: admin@1234
       KC_DB: postgres
       KC_DB_SCHEMA: public
-      KC_DB_USERNAME: keycloak
-      KC_DB_PASSWORD: password
+      KC_DB_USERNAME: keycloak_user
+      KC_DB_PASSWORD: secure_password
       KC_DB_URL: jdbc:postgresql://postgres:5432/keycloak
     volumes:
-      - ./keycloak_data:/opt/keycloak/data  # Assuming you've extracted into ./keycloak_data
+      - ./keycloak_data:/opt/keycloak/data
+    networks:
+      - local
+
+  postgres:
+    image: postgres:latest
+    container_name: postgres_firma
+    environment:
+      POSTGRES_PASSWORD: sua_senha
+    ports:
+      - "5432:5432"
+    networks:
+      - local
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  initdb:
+    image: postgres:latest
+    depends_on:
+       - postgres
+    volumes:
+      - ./dump.sql:/docker-entrypoint-initdb.d/dump.sql
+    entrypoint: ["sh", "-c", "sleep 10 && cat /docker-entrypoint-initdb.d/dump.sql | psql -U postgres -h postgres"]
     networks:
       - local
 
@@ -42,3 +55,4 @@ volumes:
 
 networks:
   local:
+    external: true

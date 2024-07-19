@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.1.11</version>
+		<version>3.2.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>danieldjgomes</groupId>
@@ -23,7 +23,7 @@
 		<sonar.version>4.0.0.4121</sonar.version>
 		<maven.version>3.8.0</maven.version>
 		<lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
-		<jacoco.version>0.8.8</jacoco.version>
+		<jacoco.version>0.8.12</jacoco.version>
 		<!-- Porcentagem de cobertura dos testes JACOCO-->
 		<jacoco.coverage.ratio>0.80</jacoco.coverage.ratio>
 		<!-- SonarCloud config -->
@@ -35,16 +35,17 @@
 		<sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
 		<!-- Sonar Ignore -->
 		<sonar.coverage.exclusions>
-			**/core/cardapio/entity/**
-			**/core/culinaria/entity/**
-			**/core/endereco/entity/**
-			**/core/prato/entity/**
-			**/core/restaurante/entity/**
-			**/dataprovider/repository/entity**
-			**/dataprovider/repository/RestauranteDao*
-			**/dataprovider/repository/RestauranteMapper*
-			**/infrastructure/**
-			**/LaricaApplication.java
+            **/core/cardapio/entity/**
+            **/core/culinaria/entity/**
+            **/core/endereco/entity/**
+            **/core/prato/entity/**
+            **/core/restaurante/entity/**
+            **/dataprovider/repository/entity/**
+            **/*Dao*.class*
+            **/*Config*.class*
+            **/app/LaricaApplication*
+            **/*Mapper*.class
+            **/*MapperImpl*.class
 		</sonar.coverage.exclusions>
 	</properties>
 	<dependencies>
@@ -85,11 +86,6 @@
             <version>${postgresql.version}</version>
         </dependency>
 		<dependency>
-			<groupId>org.modelmapper</groupId>
-			<artifactId>modelmapper</artifactId>
-			<version>3.1.1</version>
-		</dependency>
-		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
@@ -114,14 +110,12 @@
             <artifactId>keycloak-admin-client</artifactId>
             <version>${keycloak.version}</version>
         </dependency>
-		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-junit-jupiter</artifactId>
-			<version>2.17.0</version>
-			<scope>test</scope>
-		</dependency>
-    </dependencies>
-
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <version>4.1.3</version>
+        </dependency>
+	</dependencies>
 	<build>
 		<plugins>
 			<plugin>
@@ -141,10 +135,11 @@
 						<exclude>**/core/prato/entity/**</exclude>
 						<exclude>**/core/restaurante/entity/**</exclude>
 						<exclude>**/dataprovider/repository/entity/**</exclude>
-						<exclude>**/infrastructure/**</exclude>
-						<exclude>**/app/LaricaApplication*</exclude>
-						<exclude>**/dataprovider/repository/RestauranteDao*</exclude>
-						<exclude>**/dataprovider/repository/RestauranteMapper*</exclude>
+						<exclude>**/*Dao*.class*</exclude>
+						<exclude>**/*Config*.class*</exclude>
+                        <exclude>**/app/LaricaApplication*</exclude>
+						<exclude>**/*Mapper*.class</exclude>
+						<exclude>**/*MapperImpl*.class</exclude>
 					</excludes>
 				</configuration>
 				<executions>
