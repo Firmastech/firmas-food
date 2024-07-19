@@ -28,6 +28,7 @@ public class Cardapio {
     @Column(name = "descricao", length = 8000)
     private String descricao;
 
+    @ManyToOne
     @Column(name = "restaurante_id", nullable = false)
     private String restauranteId;
 

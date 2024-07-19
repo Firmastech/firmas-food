@@ -5,8 +5,6 @@ import danieldjgomes.larica.core.cardapio.dtos.response.CardapioResponseDTO;
 import danieldjgomes.larica.core.cardapio.dtos.request.CardapioUpdateRequestDTO;
 import danieldjgomes.larica.core.cardapio.entity.Cardapio;
 import danieldjgomes.larica.core.cardapio.repository.CardapioRepository;
-import danieldjgomes.larica.core.culinaria.entity.Culinaria;
-import danieldjgomes.larica.core.culinaria.repository.CulinariaRepository;
 import danieldjgomes.larica.core.exception.EntityNotFoundException;
 import danieldjgomes.larica.core.prato.entity.Prato;
 import danieldjgomes.larica.core.prato.repository.PratoRepository;

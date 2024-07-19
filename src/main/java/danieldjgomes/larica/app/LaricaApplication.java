@@ -6,8 +6,8 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan({"danieldjgomes.larica.*"})
-@EnableFeignClients({"danieldjgomes.larica.*"})
+//@ComponentScan({"danieldjgomes.larica.*"})
+//@EnableFeignClients({"danieldjgomes.larica.*"})
 public class LaricaApplication {
 
 	public static void main(String[] args) {

@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -18,8 +17,9 @@ public class PratoResponseDTO {
     private String id;
     private String nome;
     private String descricao;
-    private Double preco;
+    private BigDecimal preco;
     private String categoria;
     private String urlImagem;
-    private Double porcentagemDesconto;
+    private Desconto desconto;
+
 }
