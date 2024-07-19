@@ -85,7 +85,7 @@ class RestauranteControllerTest {
     }
 
     @Test
-    void deveRetornarStatus201_ErealizarChamadaAoUseCase_RegistrarRestaurante() throws Exception {
+    void deveRetornarStatus201RealizarChamadaAoUseCaseRegistrarRestaurante() throws Exception {
         CriarRestauranteRequestDTO dto = dtoBuilder();
         Restaurante restaurante = restauranteBuilder();
         when(mapper.toRestaurante(dto)).thenReturn(restaurante);
@@ -103,7 +103,7 @@ class RestauranteControllerTest {
     }
 
     @Test
-    void deveRetornarStatus200_ErealizarChamadaAoUseCase_ConsultarRestaurante() throws Exception {
+    void deveRetornarStatus200RealizarChamadaAoUseCaseConsultarRestaurante() throws Exception {
         UUID id = UUID.randomUUID();
 
         mockMvc.perform(get("/api/restaurantes/"+ id)
@@ -114,7 +114,7 @@ class RestauranteControllerTest {
     }
 
     @Test
-    void deveRetornarStatus204_E_realizarChamadaAoUseCase_InativarRestaurante() throws Exception {
+    void deveRetornarStatus204RealizarChamadaAoUseCaseInativarRestaurante() throws Exception {
         doReturn(new Restaurante()).when(mapper).toRestaurante((AtualizarRestauranteRequestDTO) any());
 
         AtualizarRestauranteRequestDTO dto = dtoAtualizarBuilder();
@@ -132,7 +132,7 @@ class RestauranteControllerTest {
     }
 
     @Test
-    void deveRelizarChamadaAoUseCase_ComIdPassado_RetornarStatus204() throws Exception {
+    void deveRetornarStatus204RelizarChamadaAoUseCaseComIdPassado() throws Exception {
         UUID id = UUID.randomUUID();
 
         mockMvc.perform(delete("/api/restaurantes/"+id))
@@ -142,7 +142,7 @@ class RestauranteControllerTest {
     }
 
     @Test
-    void deveRetornarStatus400_quandoPassarAtributosNulos() throws Exception {
+    void deveRetornarStatus400QuandoPassarAtributosNulos() throws Exception {
         CriarRestauranteRequestDTO dto = dtoBuilder();
         dto.setNome(null);
         dto.setTempoEstimadoDeEntrega(null);
@@ -159,7 +159,7 @@ class RestauranteControllerTest {
     }
 
     @Test
-    void deveRetornarStatus400_quandoPassarIdNulo_No_UseCaseAtualizarRestaurante() throws Exception {
+    void deveRetornarStatus400QuandoPassarIdNuloUseCaseAtualizarRestaurante() throws Exception {
         doReturn(new Restaurante()).when(mapper).toRestaurante((AtualizarRestauranteRequestDTO) any());
 
         AtualizarRestauranteRequestDTO dto = dtoAtualizarBuilder();
@@ -176,7 +176,7 @@ class RestauranteControllerTest {
     }
 
     @Test
-    void deveRetornar405_QuandoNaoInformarID_noPath_MetodoGET() throws Exception {
+    void deveRetornar405QuandoNaoInformarIDnoPath() throws Exception {
         mockMvc.perform(get("/api/restaurantes/")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isMethodNotAllowed());
@@ -184,7 +184,7 @@ class RestauranteControllerTest {
     }
 
     @Test
-    void deveRetornar405_QuandoNaoInformarID_noPath_MetodoDELETE() throws Exception {
+    void deveRetornar405QuandoNaoInformarIDnoPathDeDelete() throws Exception {
         mockMvc.perform(delete("/api/restaurantes"))
                 .andExpect(status().isMethodNotAllowed());
 
