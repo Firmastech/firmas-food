@@ -35,6 +35,15 @@
 		<sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
 		<!-- Sonar Ignore -->
 		<sonar.coverage.exclusions>
+			**/danieldjgomes/larica/app/adapter/database/pedidos/model/**
+			**/danieldjgomes/larica/app/adapter/database/pedidos/repository/**
+			**/danieldjgomes/larica/app/usecase/pedido/config/**
+			**/danieldjgomes/larica/app/usecase/pedido/enums/**
+			**/danieldjgomes/larica/app/usecase/pedido/port/**
+			**/danieldjgomes/larica/app/usecase/pedido/request/**
+			**/danieldjgomes/larica/app/usecase/pedido/response/**
+			**/danieldjgomes/larica/app/usecase/pedido/validation/**
+			**/danieldjgomes/larica/app/util/**
 			**/core/cardapio/entity/**
 			**/core/culinaria/entity/**
 			**/core/endereco/entity/**
@@ -44,7 +53,8 @@
 			**/dataprovider/repository/RestauranteDao*
 			**/dataprovider/repository/RestauranteMapper*
 			**/infrastructure/**
-			**/LaricaApplication.java
+			**/danieldjgomes/larica/app/LaricaApplication*
+			**/core/**
 		</sonar.coverage.exclusions>
 	</properties>
 	<dependencies>
@@ -135,16 +145,26 @@
 				<version>${jacoco.version}</version>
 				<configuration>
 					<excludes>
+						<exclude>**/danieldjgomes/larica/app/adapter/database/pedidos/model/**</exclude>
+						<exclude>**/danieldjgomes/larica/app/adapter/database/pedidos/repository/**</exclude>
+						<exclude>**/danieldjgomes/larica/app/usecase/pedido/enums/**</exclude>
+						<exclude>**/danieldjgomes/larica/app/usecase/pedido/port/**</exclude>
+						<exclude>**/danieldjgomes/larica/app/usecase/pedido/request/**</exclude>
+						<exclude>**/danieldjgomes/larica/app/usecase/pedido/config/**</exclude>
+						<exclude>**/danieldjgomes/larica/app/usecase/pedido/response/**</exclude>
+						<exclude>**/danieldjgomes/larica/app/usecase/pedido/validation/**</exclude>
 						<exclude>**/core/cardapio/entity/**</exclude>
 						<exclude>**/core/culinaria/entity/**</exclude>
 						<exclude>**/core/endereco/entity/**</exclude>
 						<exclude>**/core/prato/entity/**</exclude>
 						<exclude>**/core/restaurante/entity/**</exclude>
 						<exclude>**/dataprovider/repository/entity/**</exclude>
-						<exclude>**/infrastructure/**</exclude>
-						<exclude>**/app/LaricaApplication*</exclude>
 						<exclude>**/dataprovider/repository/RestauranteDao*</exclude>
 						<exclude>**/dataprovider/repository/RestauranteMapper*</exclude>
+						<exclude>**/infrastructure/**</exclude>
+						<exclude>**/danieldjgomes/larica/app/LaricaApplication*</exclude>
+						<exclude>**/core/**</exclude>
+						<exclude>**/danieldjgomes/larica/app/util/**</exclude>
 					</excludes>
 				</configuration>
 				<executions>
