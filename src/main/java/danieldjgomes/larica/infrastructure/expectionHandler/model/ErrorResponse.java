@@ -1,4 +1,4 @@
-package danieldjgomes.larica.infrastructure;
+package danieldjgomes.larica.infrastructure.expectionHandler.model;
 
 import lombok.Data;
 

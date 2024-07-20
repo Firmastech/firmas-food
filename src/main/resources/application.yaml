@@ -3,8 +3,13 @@ spring:
     name: larica
   datasource:
     url: jdbc:postgresql://localhost:5432/db_restaurante
-    username: keycloak
-    password: password
+    username: restaurante_user
+    password: secure_password
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
   security:
     oauth2:
       client:
@@ -29,4 +34,5 @@ keycloak:
   resource: admin-cli
   auth-server-url:  http://localhost:9081
   realm: firmas-food-dev
+  token-url: ${spring.security.oauth2.client.provider.keycloak.issuer-uri}/protocol/openid-connect
 

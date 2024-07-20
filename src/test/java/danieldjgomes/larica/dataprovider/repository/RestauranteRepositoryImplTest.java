@@ -2,6 +2,7 @@ package danieldjgomes.larica.dataprovider.repository;
 
 import danieldjgomes.larica.core.restaurante.entity.enums.StatusFuncionamento;
 import danieldjgomes.larica.dataprovider.repository.entity.RestauranteEntity;
+import danieldjgomes.larica.dataprovider.repository.impl.RestauranteRepositoryImpl;
 import danieldjgomes.larica.dataprovider.repository.mapper.RestauranteMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
