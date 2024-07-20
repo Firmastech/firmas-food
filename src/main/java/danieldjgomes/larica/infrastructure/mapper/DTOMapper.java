@@ -2,9 +2,9 @@ package danieldjgomes.larica.infrastructure.mapper;
 
 import danieldjgomes.larica.core.endereco.entity.Endereco;
 import danieldjgomes.larica.core.restaurante.entity.Restaurante;
-import danieldjgomes.larica.infrastructure.dto.restaurante.request.AtualizarRestauranteRequestDTO;
-import danieldjgomes.larica.infrastructure.dto.restaurante.request.CadastrarEnderecoRequest;
-import danieldjgomes.larica.infrastructure.dto.restaurante.request.CriarRestauranteRequestDTO;
+import danieldjgomes.larica.usecase.restaurante.request.AtualizarRestauranteRequestDTO;
+import danieldjgomes.larica.usecase.restaurante.request.CadastrarEnderecoRequest;
+import danieldjgomes.larica.usecase.restaurante.request.CriarRestauranteRequestDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

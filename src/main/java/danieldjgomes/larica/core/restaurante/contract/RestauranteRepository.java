@@ -1,21 +1,19 @@
 package danieldjgomes.larica.core.restaurante.contract;
 
-import danieldjgomes.larica.core.restaurante.entity.Restaurante;
-import danieldjgomes.larica.dataprovider.repository.entity.RestauranteEntity;
-import danieldjgomes.larica.infrastructure.dto.restaurante.response.ConsultarRestauranteResponseDTO;
+import danieldjgomes.larica.adapter.database.restaurante.model.RestauranteModel;
 
 import java.util.Optional;
 import java.util.UUID;
 
 public interface RestauranteRepository {
 
-    RestauranteEntity save(RestauranteEntity restaurante);
+    RestauranteModel save(RestauranteModel restaurante);
 
-    Optional<RestauranteEntity> findById(UUID id);
+    Optional<RestauranteModel> findById(UUID id);
 
-    RestauranteEntity update(RestauranteEntity entity);
+    RestauranteModel update(RestauranteModel entity);
 
-    void delete(RestauranteEntity entity);
+    void delete(RestauranteModel entity);
 
-    Optional<RestauranteEntity> findByNome(String nome);
+    Optional<RestauranteModel> findByNome(String nome);
 }

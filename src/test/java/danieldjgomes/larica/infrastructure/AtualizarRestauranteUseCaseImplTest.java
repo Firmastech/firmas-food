@@ -4,8 +4,9 @@ import danieldjgomes.larica.core.restaurante.contract.RestauranteRepository;
 import danieldjgomes.larica.core.restaurante.entity.Restaurante;
 import danieldjgomes.larica.core.restaurante.entity.enums.StatusFuncionamento;
 import danieldjgomes.larica.core.restaurante.exceptions.EntityNotFoundException;
-import danieldjgomes.larica.dataprovider.repository.entity.RestauranteEntity;
-import danieldjgomes.larica.dataprovider.repository.mapper.RestauranteMapper;
+import danieldjgomes.larica.adapter.database.restaurante.model.RestauranteModel;
+import danieldjgomes.larica.adapter.mapper.RestauranteMapper;
+import danieldjgomes.larica.usecase.restaurante.AtualizarRestauranteUseCaseImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -33,7 +34,7 @@ class AtualizarRestauranteUseCaseImplTest {
 
     private Restaurante restaurante;
 
-    private RestauranteEntity restauranteEntity;
+    private RestauranteModel restauranteEntity;
 
     private final String messageExceptionExpected = "Restaurante nao encontrado";
 
@@ -46,7 +47,7 @@ class AtualizarRestauranteUseCaseImplTest {
         restaurante.setTempoEstimadoDeEntrega(30);
         restaurante.setStatusFuncionamento(StatusFuncionamento.ABERTO);
 
-        restauranteEntity = new RestauranteEntity();
+        restauranteEntity = new RestauranteModel();
         restauranteEntity.setId(id);
         restauranteEntity.setNome("Restaurante Desatualizado");
         restauranteEntity.setTempoEstimadoDeEntrega(45);

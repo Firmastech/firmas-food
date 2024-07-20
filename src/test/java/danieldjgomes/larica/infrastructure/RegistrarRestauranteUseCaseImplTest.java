@@ -1,10 +1,11 @@
 package danieldjgomes.larica.infrastructure;
 
+import danieldjgomes.larica.adapter.database.restaurante.model.RestauranteModel;
 import danieldjgomes.larica.core.restaurante.contract.RestauranteRepository;
 import danieldjgomes.larica.core.restaurante.entity.Restaurante;
 import danieldjgomes.larica.core.restaurante.entity.enums.StatusFuncionamento;
-import danieldjgomes.larica.dataprovider.repository.entity.RestauranteEntity;
-import danieldjgomes.larica.dataprovider.repository.mapper.RestauranteMapper;
+import danieldjgomes.larica.adapter.mapper.RestauranteMapper;
+import danieldjgomes.larica.usecase.restaurante.RegistrarRestauranteUseCaseImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,7 +13,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Optional;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -33,7 +33,7 @@ class RegistrarRestauranteUseCaseImplTest {
 
     private Restaurante restaurante;
 
-    private RestauranteEntity restauranteEntity;
+    private RestauranteModel restauranteEntity;
 
     @BeforeEach
     void carregarRestaurantes(){
@@ -43,7 +43,7 @@ class RegistrarRestauranteUseCaseImplTest {
         restaurante.setTempoEstimadoDeEntrega(30);
         restaurante.setStatusFuncionamento(StatusFuncionamento.INATIVO);
 
-        restauranteEntity = new RestauranteEntity();
+        restauranteEntity = new RestauranteModel();
         restauranteEntity.setId(id);
         restauranteEntity.setNome("Restaurante Novo");
         restauranteEntity.setTempoEstimadoDeEntrega(30);
