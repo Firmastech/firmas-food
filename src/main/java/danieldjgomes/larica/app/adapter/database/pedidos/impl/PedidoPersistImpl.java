@@ -2,10 +2,10 @@ package danieldjgomes.larica.app.adapter.database.pedidos.impl;
 
 import danieldjgomes.larica.app.adapter.database.pedidos.model.ItemPedidoEntity;
 import danieldjgomes.larica.app.adapter.database.pedidos.model.PedidoEntity;
+import danieldjgomes.larica.app.adapter.database.pedidos.model.UsuarioEntity;
 import danieldjgomes.larica.app.adapter.database.pedidos.repository.PedidoRepository;
+import danieldjgomes.larica.app.adapter.database.pedidos.repository.UsuarioRepository;
 import danieldjgomes.larica.app.ports.database.PedidoPersist;
-import danieldjgomes.larica.app.usecase.pedido.exceptions.CreatePedidoException;
-import danieldjgomes.larica.app.usecase.pedido.exceptions.ParseEntityException;
 import danieldjgomes.larica.app.usecase.pedido.exceptions.PedidoNaoEncontradoException;
 import danieldjgomes.larica.app.usecase.pedido.request.PratosRequestList;
 import danieldjgomes.larica.app.usecase.pedido.request.ProcessarPedidoRequest;
@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -22,78 +21,72 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class PedidoPersistImpl implements PedidoPersist {
     private final PedidoRepository pedidoRepository;
+    private final UsuarioRepository usuarioRepository;
 
     @Override
     public void createPedido(ProcessarPedidoRequest pedido) {
-        try {
-            pedidoRepository.save(toPedidoEntity(pedido));
-        } catch (Exception e) {
-            throw new CreatePedidoException(e);
-        }
+        PedidoEntity pedidoEntity = convertRequestToEntity(pedido);
+        pedidoRepository.save(pedidoEntity);
     }
 
     @Override
     public ProcessarPedidoRequest getPedidoById(UUID pedidoId) {
-        Optional<PedidoEntity> optionalPedidoEntity = pedidoRepository.findById(pedidoId);
-        if (optionalPedidoEntity.isPresent()) {
-            return toProcessarPedidoRequest(optionalPedidoEntity.get())
-                    .orElseThrow(ParseEntityException::new);
-        } else {
-            throw new PedidoNaoEncontradoException();
-        }
+        PedidoEntity pedidoEntity = findPedidoEntityById(pedidoId.toString());
+        return convertEntityToRequest(pedidoEntity);
     }
 
     @Override
     public void atualizarPedidoById(ProcessarPedidoRequest pedido) {
-        PedidoEntity pedidoEntity = pedidoRepository.findById(UUID.fromString(pedido.getId().toString()))
-                .orElseThrow(PedidoNaoEncontradoException::new);
+        PedidoEntity pedidoEntity = findPedidoEntityById(pedido.getId());
         pedidoEntity.setStatus("PEDIDO_CRIADO");
         pedidoRepository.save(pedidoEntity);
     }
 
-    public Optional<ProcessarPedidoRequest> toProcessarPedidoRequest(PedidoEntity pedidoEntity) {
-        if (pedidoEntity == null) {
-            return Optional.empty();
-        }
-        return Optional.of(ProcessarPedidoRequest.builder()
-                .id(UUID.fromString(pedidoEntity.getId()))
-                .usuarioId(pedidoEntity.getUsuarioId())
-                .itensList(toItemPedidoRequestList(pedidoEntity.getItens()))
-                .build());
-
-    }
-
-    public List<PratosRequestList> toItemPedidoRequestList(List<ItemPedidoEntity> itensPedidoDB) {
-        return itensPedidoDB.stream()
-                .map(itemPedidoEntity -> PratosRequestList.builder()
-                        .pratoId(UUID.fromString(itemPedidoEntity.getPratoId()))
-                        .quantidade(itemPedidoEntity.getQuantidade())
-                        .build())
-                .collect(Collectors.toList());
-    }
-
-    public PedidoEntity toPedidoEntity(ProcessarPedidoRequest pedidoRequest) {
-        if (pedidoRequest == null) {
-            return null;
-        }
-        List<ItemPedidoEntity> itensPedidoDB = toItemPedidoEntityList(pedidoRequest.getItensList());
+    private PedidoEntity convertRequestToEntity(ProcessarPedidoRequest pedidoRequest) {
+        List<ItemPedidoEntity> itensPedidoDB = convertRequestItemsToEntityItems(pedidoRequest.getItensList());
+        //UsuarioEntity usuarioEntity = findUsuarioEntityById(pedidoRequest.getUsuarioId());
+        pedidoRequest.setId(UUID.randomUUID().toString());
         return PedidoEntity.builder()
-                .id(pedidoRequest.getId().toString())
-                .usuarioId(pedidoRequest.getUsuarioId())
+                .id(pedidoRequest.getId())
+                .usuarioId(null)
                 .dataHoraPedido(LocalDateTime.now())
                 .status("PEDIDO_CRIADO")
                 .itens(itensPedidoDB)
                 .build();
     }
 
-    public List<ItemPedidoEntity> toItemPedidoEntityList(List<PratosRequestList> itensPedidoRequestList) {
-        if (itensPedidoRequestList == null) {
-            return null;
-        }
+    private List<ItemPedidoEntity> convertRequestItemsToEntityItems(List<PratosRequestList> itensPedidoRequestList) {
         return itensPedidoRequestList.stream()
                 .map(itemPedidoRequest -> ItemPedidoEntity.builder()
-                        .pratoId(itemPedidoRequest.getPratoId().toString())
+                        .pratoId(itemPedidoRequest.getPratoId())
                         .quantidade(itemPedidoRequest.getQuantidade())
+                        .build())
+                .collect(Collectors.toList());
+    }
+
+    private UsuarioEntity findUsuarioEntityById(String id) {
+        return usuarioRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+    }
+
+    private PedidoEntity findPedidoEntityById(String id) {
+        return pedidoRepository.findById(id)
+                .orElseThrow(PedidoNaoEncontradoException::new);
+    }
+
+    private ProcessarPedidoRequest convertEntityToRequest(PedidoEntity pedidoEntity) {
+        return ProcessarPedidoRequest.builder()
+                .id(String.valueOf(pedidoEntity.getId()))
+                .usuarioId(pedidoEntity.getUsuarioId().getId())
+                .itensList(convertEntityItemsToRequestItems(pedidoEntity.getItens()))
+                .build();
+    }
+
+    private List<PratosRequestList> convertEntityItemsToRequestItems(List<ItemPedidoEntity> itensPedidoDB) {
+        return itensPedidoDB.stream()
+                .map(itemPedidoEntity -> PratosRequestList.builder()
+                        .pratoId(itemPedidoEntity.getPratoId())
+                        .quantidade(itemPedidoEntity.getQuantidade())
                         .build())
                 .collect(Collectors.toList());
     }

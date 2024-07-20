@@ -5,7 +5,6 @@ import danieldjgomes.larica.app.usecase.pedido.port.ProcessarPedidoUsecase;
 import danieldjgomes.larica.app.usecase.pedido.request.ProcessarPedidoRequest;
 import danieldjgomes.larica.app.util.DynamicLog;
 import jakarta.validation.Valid;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

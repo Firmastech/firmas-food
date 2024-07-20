@@ -10,6 +10,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.UUID;
+
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 @ExtendWith(MockitoExtension.class)
@@ -26,7 +28,7 @@ class ConcluirPedidoUsecaseTest {
     @BeforeEach
     void setUp() {
         pedidoRequest = ObjectBuilder.buildProcessarPedidoRequestSucesso();
-        pedidoPersistImpl.getPedidoById(pedidoRequest.getId());
+        pedidoPersistImpl.getPedidoById(UUID.fromString(pedidoRequest.getId()));
     }
 
     @Test

@@ -10,15 +10,15 @@ public class ObjectBuilder {
 
     public static ProcessarPedidoRequest buildProcessarPedidoRequestSucesso(){
         return ProcessarPedidoRequest.builder()
-                .usuarioId(UUID.fromString("123e4567-e89b-12d3-a456-426614174000"))
-                .id(UUID.fromString("123e4567-e89b-12d3-a456-426614175000"))
+                .usuarioId("123e4567-e89b-12d3-a456-426614174000")
+                .id("123e4567-e89b-12d3-a456-426614175000")
                 .itensList(buildPratosRequestListSucesso())
                 .build();
     }
 
     public static List<PratosRequestList> buildPratosRequestListSucesso(){
         return List.of(PratosRequestList.builder()
-                .pratoId(UUID.fromString("123e4567-e89b-12d3-a456-426614179000"))
+                .pratoId("123e4567-e89b-12d3-a456-426614179000")
                 .descricao("descricao")
                 .quantidade(1)
                 .build());

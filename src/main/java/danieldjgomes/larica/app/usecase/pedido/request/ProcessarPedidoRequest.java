@@ -17,11 +17,10 @@ import java.util.UUID;
 @AllArgsConstructor
 public class ProcessarPedidoRequest {
 
-    @NotNull(message = "O campo id não pode ser nulo")
-    private UUID id;
+    private String id;
 
     @NotNull(message = "O campo usuarioId não pode ser nulo")
-    private UUID usuarioId;
+    private String usuarioId;
 
     @Valid
     @NotEmpty(message = "A lista de itens não pode estar vazia")

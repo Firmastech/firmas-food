@@ -7,7 +7,6 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -24,7 +23,7 @@ public class PedidoEntity {
 
     @ManyToOne
     @JoinColumn(name = "usuario_id", referencedColumnName = "id", nullable = false)
-    private UUID usuarioId;
+    private UsuarioEntity usuarioId;
 
     @Column(name = "restaurante_id", length = 36, nullable = false)
     private String restauranteId;
@@ -36,7 +35,7 @@ public class PedidoEntity {
     @Column(nullable = false)
     private BigDecimal valor;
 
-    @Column(length = 255, nullable = false)
+    @Column( nullable = false)
     private String status;
 
     @Column(name = "data_hora_confirmacao")

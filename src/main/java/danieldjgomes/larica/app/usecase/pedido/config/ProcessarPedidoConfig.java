@@ -4,7 +4,6 @@ import danieldjgomes.larica.app.adapter.database.pedidos.impl.PedidoPersistImpl;
 import danieldjgomes.larica.app.usecase.pedido.*;
 import danieldjgomes.larica.app.usecase.pedido.port.EtapaProcessamento;
 import danieldjgomes.larica.app.usecase.pedido.port.ProcessarPedidoUsecase;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

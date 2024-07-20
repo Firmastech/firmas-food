@@ -1,6 +1,6 @@
 package danieldjgomes.larica.core.exception;
 
-import danieldjgomes.larica.infrastructure.ErrorResponse;
+import danieldjgomes.larica.infrastructure.expectionHandler.model.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -18,6 +18,6 @@ public class UsuarioEntity {
     @Column(length = 255, nullable = false)
     private String id;
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "usuarioId", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PedidoEntity> pedidos;
 }

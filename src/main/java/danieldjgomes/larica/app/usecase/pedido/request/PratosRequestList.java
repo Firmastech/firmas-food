@@ -14,7 +14,7 @@ import java.util.UUID;
 public class PratosRequestList {
 
     @NotNull(message = "O campo pratoId não pode ser nulo")
-    private UUID pratoId;
+    private String pratoId;
 
     @NotBlank(message = "O campo descricao não pode estar vazio")
     private String descricao;

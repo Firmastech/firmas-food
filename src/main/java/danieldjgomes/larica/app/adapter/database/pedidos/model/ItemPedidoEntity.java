@@ -19,13 +19,13 @@ public class ItemPedidoEntity {
     @Column(name = "prato_id", length = 36, nullable = false)
     private String pratoId;
 
-    @Column(length = 600, nullable = false)
+    @Column(name = "observacao", length = 600, nullable = false)
     private String observacao;
 
     @ManyToOne
     @JoinColumn(name = "pedido_id", referencedColumnName = "id", nullable = false)
     private PedidoEntity pedido;
 
-    @Column(nullable = false)
-    private int quantidade;
+    @Column(name = "quantidade", nullable = false)
+    private Integer quantidade;
 }
