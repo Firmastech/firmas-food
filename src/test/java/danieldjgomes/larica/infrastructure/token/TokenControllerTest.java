@@ -2,14 +2,14 @@
 //
 //import com.fasterxml.jackson.databind.ObjectMapper;
 //import com.nimbusds.jose.shaded.gson.Gson;
-//import danieldjgomes.larica.adapter.controller.TokenController;
-//import danieldjgomes.larica.infrastructure.keycloak.dto.LoginUsuarioKeycloakModelDTO;
-//import danieldjgomes.larica.infrastructure.keycloak.dto.TokenAutenticacaoKeycloakModelResponseDTO;
-//import danieldjgomes.larica.usecase.port.token.BuscarTokenUsuarioUseCaseImpl;
-//import danieldjgomes.larica.usecase.port.token.RenovarTokenUsuarioUseCaseImpl;
-//import danieldjgomes.larica.usecase.port.token.request.LoginUsuarioRequest;
-//import danieldjgomes.larica.usecase.port.token.request.RevalidarTokenRequest;
-//import danieldjgomes.larica.usecase.port.token.response.TokenResponse;
+//import danieldjgomes.larica.app.adapter.controller.TokenController;
+//import danieldjgomes.larica.app.usecase.usuario.request.external.LoginUsuarioKeycloakModelDTO;
+//import danieldjgomes.larica.app.usecase.usuario.request.external.TokenAutenticacaoKeycloakModelResponseDTO;
+//import danieldjgomes.larica.app.usecase.token.BuscarTokenUsuarioUseCaseImpl;
+//import danieldjgomes.larica.app.usecase.token.RenovarTokenUsuarioUseCaseImpl;
+//import danieldjgomes.larica.app.usecase.request.token.LoginUsuarioRequest;
+//import danieldjgomes.larica.app.usecase.request.token.RevalidarTokenRequest;
+//import danieldjgomes.larica.app.usecase.response.token.TokenResponse;
 //import org.junit.jupiter.api.BeforeEach;
 //import org.junit.jupiter.api.Test;
 //import org.junit.jupiter.api.extension.ExtendWith;
