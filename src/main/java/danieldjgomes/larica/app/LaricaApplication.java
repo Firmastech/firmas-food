@@ -11,6 +11,7 @@ public class LaricaApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(LaricaApplication.class, args);
+
 	}
 
 }

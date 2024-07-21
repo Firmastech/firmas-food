@@ -1,29 +1,42 @@
 package danieldjgomes.larica.dataprovider.repository.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.util.UUID;
 
 @Entity
 @Table(name = "restaurante")
-public class RestauranteEntity {
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+public class RestauranteEntity extends BaseEntity{
+
     @Id
-    @Column(name = "id", nullable = false, length = 36)
-    private String id;
+    @Column(name = "id", nullable = false)
+    private UUID id;
 
     @Column(name = "nome", nullable = false, length = 100)
     private String nome;
 
-    @JoinColumn(name = "enderecoid", referencedColumnName = "id")
-    @OneToOne
-    private EnderecoEntity endereco;
-
     @Column(name = "tempoEstimado", nullable = false)
-    private int tempoEstimado;
+    private int tempoEstimadoDeEntrega;
 
-    @Column(name = "statusFuncionamento", nullable = false, length = 10)
+    @Column(name = "statusFuncionamento", nullable = false)
     private String statusFuncionamento;
 
-    @JoinColumn(name = "cardapioid", referencedColumnName = "id")
-    @OneToOne
-    private CardapioEntity cardapio;
+
+
+    //@JoinColumn(name = "cardapioid", referencedColumnName = "id")
+    //@OneToOne
+    //private CardapioEntity cardapio;
+
+    //@JoinColumn(name = "enderecoid", referencedColumnName = "id")
+    //@OneToOne
+    //private EnderecoEntity endereco;
 
 }
