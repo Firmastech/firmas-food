@@ -1,4 +1,4 @@
-package danieldjgomes.larica.infrastructure.token.model;
+package danieldjgomes.larica.usecase.port.token.request;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
@@ -7,7 +7,9 @@ import lombok.Data;
 public class LoginUsuarioRequest {
 
     @NotBlank
-    private String usuarioId;
+    private String email;
     @NotBlank
     private String senha;
+    @NotBlank
+    private String restaurante;
 }

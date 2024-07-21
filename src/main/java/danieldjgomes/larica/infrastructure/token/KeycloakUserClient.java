@@ -1,7 +1,7 @@
 package danieldjgomes.larica.infrastructure.token;
 
 import danieldjgomes.larica.infrastructure.keycloak.dto.TokenAutenticacaoKeycloakModelResponseDTO;
-import danieldjgomes.larica.infrastructure.keycloak.dto.RevalidarTokenKeycloakModelDTO;
+import danieldjgomes.larica.infrastructure.keycloak.dto.RenovarTokenUsuarioKeycloakModelDTO;
 import danieldjgomes.larica.infrastructure.keycloak.dto.LoginUsuarioKeycloakModelDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,8 +13,8 @@ import static org.springframework.http.MediaType.APPLICATION_FORM_URLENCODED_VAL
 public interface KeycloakUserClient {
 
     @PostMapping(value ="/token", consumes = APPLICATION_FORM_URLENCODED_VALUE)
-    TokenAutenticacaoKeycloakModelResponseDTO getUserToken(@RequestBody LoginUsuarioKeycloakModelDTO form);
+    TokenAutenticacaoKeycloakModelResponseDTO buscarTokenUsuario(@RequestBody LoginUsuarioKeycloakModelDTO form);
 
     @PostMapping(value ="/token", consumes = APPLICATION_FORM_URLENCODED_VALUE)
-    TokenAutenticacaoKeycloakModelResponseDTO refreshUserToken(@RequestBody RevalidarTokenKeycloakModelDTO form);
+    TokenAutenticacaoKeycloakModelResponseDTO revalidarTokenUsuario(@RequestBody RenovarTokenUsuarioKeycloakModelDTO form);
 }

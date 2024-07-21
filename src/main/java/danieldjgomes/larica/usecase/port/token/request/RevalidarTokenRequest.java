@@ -1,4 +1,4 @@
-package danieldjgomes.larica.infrastructure.token.model;
+package danieldjgomes.larica.usecase.port.token.request;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;

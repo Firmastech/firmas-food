@@ -3,7 +3,7 @@ package danieldjgomes.larica.infrastructure.keycloak.dto;
 import lombok.Getter;
 
 @Getter
-public class RevalidarTokenKeycloakModelDTO {
+public class RenovarTokenUsuarioKeycloakModelDTO {
 
     private String client_id;
     private String grant_type;

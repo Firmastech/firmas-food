@@ -1,9 +1,9 @@
-package danieldjgomes.larica.infrastructure.token.model;
+package danieldjgomes.larica.usecase.port.token.response;
 
 import lombok.Data;
 
 @Data
-public class LoginResponse {
+public class TokenResponse {
 
     private Token accessToken;
     private Token refreshToken;

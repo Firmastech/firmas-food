@@ -36,3 +36,7 @@ keycloak:
   realm: firmas-food-dev
   token-url: ${spring.security.oauth2.client.provider.keycloak.issuer-uri}/protocol/openid-connect
 
+
+logging:
+  level:
+    root: DEBUG

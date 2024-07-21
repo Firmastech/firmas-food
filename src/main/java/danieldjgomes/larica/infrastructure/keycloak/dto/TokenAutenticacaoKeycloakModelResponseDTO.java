@@ -9,11 +9,11 @@ import lombok.Data;
 public class TokenAutenticacaoKeycloakModelResponseDTO {
 
     private String accessToken;
-    private int expiresIn;
-    private int refreshExpiresIn;
+    private Integer expiresIn;
+    private Integer refreshExpiresIn;
     private String refreshToken;
     private String tokenType;
-    private int notBeforePolicy;
+    private Integer notBeforePolicy;
     private String sessionState;
     private String scope;
 }
