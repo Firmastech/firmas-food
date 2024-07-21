@@ -362,10 +362,6 @@ COPY public.categoria_prato (id, nome, restaurante_id, criado, atualizado, esta_
 --
 
 COPY public.endereco (id, rua, numero, cep, cidade, uf, pontoreferencia) FROM stdin;
-123e4567-e89b-12d3-a456-426614174000	Rua das Flores	123	12345-678	São Paulo	SP	Próximo ao parque
-223e4567-e89b-12d3-a456-426614174001	Avenida Paulista	456	98765-432	São Paulo	SP	Em frente ao museu
-323e4567-e89b-12d3-a456-426614174002	Rua XV de Novembro	789	11223-445	Curitiba	PR	Perto da praça
-423e4567-e89b-12d3-a456-426614174003	Rua da Praia	101	22334-556	Porto Alegre	RS	\N
 \.
 
 
@@ -574,7 +570,7 @@ GRANT USAGE ON SCHEMA public TO restaurante_user;
 
 REVOKE ALL ON TABLE public.cardapio FROM dbo;
 GRANT REFERENCES,TRIGGER,TRUNCATE ON TABLE public.cardapio TO dbo;
-GRANT SELECT,INSERT ON TABLE public.cardapio TO restaurante_user;
+GRANT SELECT ON TABLE public.cardapio TO restaurante_user;
 
 
 --
@@ -583,7 +579,7 @@ GRANT SELECT,INSERT ON TABLE public.cardapio TO restaurante_user;
 
 REVOKE ALL ON TABLE public.cardapio_prato FROM dbo;
 GRANT REFERENCES,TRIGGER,TRUNCATE ON TABLE public.cardapio_prato TO dbo;
-GRANT SELECT,INSERT ON TABLE public.cardapio_prato TO restaurante_user;
+GRANT SELECT ON TABLE public.cardapio_prato TO restaurante_user;
 
 
 --
@@ -592,7 +588,7 @@ GRANT SELECT,INSERT ON TABLE public.cardapio_prato TO restaurante_user;
 
 REVOKE ALL ON TABLE public.categoria_prato FROM dbo;
 GRANT REFERENCES,TRIGGER,TRUNCATE ON TABLE public.categoria_prato TO dbo;
-GRANT SELECT,INSERT ON TABLE public.categoria_prato TO restaurante_user;
+GRANT SELECT ON TABLE public.categoria_prato TO restaurante_user;
 
 
 --
@@ -601,7 +597,7 @@ GRANT SELECT,INSERT ON TABLE public.categoria_prato TO restaurante_user;
 
 REVOKE ALL ON TABLE public.endereco FROM dbo;
 GRANT REFERENCES,TRIGGER,TRUNCATE ON TABLE public.endereco TO dbo;
-GRANT SELECT,INSERT ON TABLE public.endereco TO restaurante_user;
+GRANT SELECT ON TABLE public.endereco TO restaurante_user;
 
 
 --
@@ -610,7 +606,7 @@ GRANT SELECT,INSERT ON TABLE public.endereco TO restaurante_user;
 
 REVOKE ALL ON TABLE public.item_pedido FROM dbo;
 GRANT REFERENCES,TRIGGER,TRUNCATE ON TABLE public.item_pedido TO dbo;
-GRANT SELECT,INSERT ON TABLE public.item_pedido TO restaurante_user;
+GRANT SELECT ON TABLE public.item_pedido TO restaurante_user;
 
 
 --
@@ -619,7 +615,7 @@ GRANT SELECT,INSERT ON TABLE public.item_pedido TO restaurante_user;
 
 REVOKE ALL ON TABLE public.pedido FROM dbo;
 GRANT REFERENCES,TRIGGER,TRUNCATE ON TABLE public.pedido TO dbo;
-GRANT SELECT,INSERT ON TABLE public.pedido TO restaurante_user;
+GRANT SELECT ON TABLE public.pedido TO restaurante_user;
 
 
 --
@@ -628,7 +624,7 @@ GRANT SELECT,INSERT ON TABLE public.pedido TO restaurante_user;
 
 REVOKE ALL ON TABLE public.prato FROM dbo;
 GRANT REFERENCES,TRIGGER,TRUNCATE ON TABLE public.prato TO dbo;
-GRANT SELECT,INSERT ON TABLE public.prato TO restaurante_user;
+GRANT SELECT ON TABLE public.prato TO restaurante_user;
 
 
 --
@@ -637,7 +633,7 @@ GRANT SELECT,INSERT ON TABLE public.prato TO restaurante_user;
 
 REVOKE ALL ON TABLE public.restaurante FROM dbo;
 GRANT REFERENCES,TRIGGER,TRUNCATE ON TABLE public.restaurante TO dbo;
-GRANT SELECT,INSERT ON TABLE public.restaurante TO restaurante_user;
+GRANT SELECT ON TABLE public.restaurante TO restaurante_user;
 
 
 --
@@ -646,7 +642,7 @@ GRANT SELECT,INSERT ON TABLE public.restaurante TO restaurante_user;
 
 REVOKE ALL ON TABLE public.usuario FROM dbo;
 GRANT REFERENCES,TRIGGER,TRUNCATE ON TABLE public.usuario TO dbo;
-GRANT SELECT,INSERT ON TABLE public.usuario TO restaurante_user;
+GRANT SELECT ON TABLE public.usuario TO restaurante_user;
 
 
 --
@@ -2899,8 +2895,6 @@ f4e266f8-9f0f-4352-8a3b-3c05b91f9dc1	af20813b-efa1-4862-8ed5-5bb4092a3112
 COPY public.credential (id, salt, type, user_id, created_date, user_label, secret_data, credential_data, priority) FROM stdin;
 f9c99bce-6ee6-445a-b719-34c78555a026	\N	password	ecf7cc4b-da42-4c7d-95b0-2b272378e3a4	1720654979680	\N	{"value":"awhpfQfeLITOEk42Lcy6xFzQVO4w0eV00qKb3ulLARxR8tV+noTGE1GnDG1lHAYz+KcROck+3AgNS4Ml+kLZTA==","salt":"0B/7/Fc7Bmg8itJmcL5DRw==","additionalParameters":{}}	{"hashIterations":210000,"algorithm":"pbkdf2-sha512","additionalParameters":{}}	10
 cb57e64d-0b0d-4e10-b147-654005eb8401	\N	password	9f446447-edbf-49a9-b0ce-ab4d74a7426e	1721441530370	\N	{"value":"Kk0SvWj1GbJbI5zpqRkWDYytdNCYvLaJr7+Nw2UFkKoZMjfodahsvgJKyG5vExjRIsZ3V+MFk6uiG5DeTKHvjA==","salt":"zOssO2xjaOBJk2p11Taezw==","additionalParameters":{}}	{"hashIterations":210000,"algorithm":"pbkdf2-sha512","additionalParameters":{}}	10
-070d1c70-fdda-49cf-b1ec-96228e4b250a	\N	password	bedc479d-1dd9-4b4e-a565-ae6ce62e34d8	1721589178237	\N	{"value":"MG1lt+tuEDAMY9oW5atkNwGvu43HLBTIt8ULPsRidPLmaTGBbADB3U6C114GKTLtGvis5aiFzwyFKh1xBCzenw==","salt":"9wdOiQWDwb2zXb0eIK8EZQ==","additionalParameters":{}}	{"hashIterations":210000,"algorithm":"pbkdf2-sha512","additionalParameters":{}}	10
-fd0d318e-db02-4748-a3d5-34b666b8adf1	\N	password	ece0cac4-bd7c-44bd-ab7b-e840e403d96b	1721590317177	\N	{"value":"4YO9jv2pB6l9j/ERCcySC4/Ke22mHJedFor64pxbA9xLm6iW3DVoy+brvjxNEfb6vTFXf2II+XJOdP+OSR35kg==","salt":"B1an38ga/0pTwJUlRK0lYg==","additionalParameters":{}}	{"hashIterations":210000,"algorithm":"pbkdf2-sha512","additionalParameters":{}}	10
 \.
 
 
@@ -4446,7 +4440,7 @@ cb44639b-1dae-496f-ba23-c6f83d0b1cd1	true	userinfo.token.claim
 
 COPY public.realm (id, access_code_lifespan, user_action_lifespan, access_token_lifespan, account_theme, admin_theme, email_theme, enabled, events_enabled, events_expiration, login_theme, name, not_before, password_policy, registration_allowed, remember_me, reset_password_allowed, social, ssl_required, sso_idle_timeout, sso_max_lifespan, update_profile_on_soc_login, verify_email, master_admin_client, login_lifespan, internationalization_enabled, default_locale, reg_email_as_username, admin_events_enabled, admin_events_details_enabled, edit_username_allowed, otp_policy_counter, otp_policy_window, otp_policy_period, otp_policy_digits, otp_policy_alg, otp_policy_type, browser_flow, registration_flow, direct_grant_flow, reset_credentials_flow, client_auth_flow, offline_session_idle_timeout, revoke_refresh_token, access_token_life_implicit, login_with_email_allowed, duplicate_emails_allowed, docker_auth_flow, refresh_token_max_reuse, allow_user_managed_access, sso_max_lifespan_remember_me, sso_idle_timeout_remember_me, default_role) FROM stdin;
 d5be0b10-5b50-455d-a9e0-a7c62d0334e5	60	300	60	\N	\N	\N	t	f	0	\N	master	0	\N	f	f	f	f	EXTERNAL	1800	36000	f	f	122557f0-b934-4094-a8f5-36579c416a87	1800	f	\N	f	f	f	f	0	1	30	6	HmacSHA1	totp	d8811f56-e82f-41ce-988b-c2fda3bf34f2	5d0bc900-ffc9-4784-96a5-7c9702a3aecd	9bbd3553-f605-4afe-bb24-a5e48875ef43	63066cc3-55aa-4fdc-a6e2-b2d9ba0ac862	72f31022-3844-49bc-ae87-48bd47e58680	2592000	f	900	t	f	f313d64f-617c-4f1f-9ef6-c4043335ce0c	0	f	0	0	1f0f7753-5ef0-4083-8641-173682edf64d
-43c36b1e-22ce-4293-8d6e-181a68f70b2a	60	300	300	\N	\N	\N	t	f	0	\N	firmas-food-dev	0	\N	f	f	f	f	EXTERNAL	1800	36000	f	f	7cdf5822-e39c-4b10-a5da-bc906b38f4ba	1800	f	\N	f	f	f	f	0	1	30	6	HmacSHA1	totp	d2297650-b0c7-4e35-99a6-3b8864aca1f5	9b3d29f8-295f-43c5-b6d2-e5cc34e402c3	b9a5f815-36aa-45bf-a5a5-702ce4ab093d	f4f059a1-55a8-4469-b047-ef0df376de0f	841698fe-1b21-43e0-9182-f5f552558cfa	2592000	f	900	f	t	97c9b442-8a95-4510-9477-25ad65d795d6	0	f	0	0	889ae762-90c3-4660-a1ab-116b97c91387
+43c36b1e-22ce-4293-8d6e-181a68f70b2a	60	300	300	\N	\N	\N	t	f	0	\N	firmas-food-dev	0	\N	f	f	f	f	EXTERNAL	1800	36000	f	f	7cdf5822-e39c-4b10-a5da-bc906b38f4ba	1800	f	\N	f	f	f	f	0	1	30	6	HmacSHA1	totp	d2297650-b0c7-4e35-99a6-3b8864aca1f5	9b3d29f8-295f-43c5-b6d2-e5cc34e402c3	b9a5f815-36aa-45bf-a5a5-702ce4ab093d	f4f059a1-55a8-4469-b047-ef0df376de0f	841698fe-1b21-43e0-9182-f5f552558cfa	2592000	f	900	f	f	97c9b442-8a95-4510-9477-25ad65d795d6	0	f	0	0	889ae762-90c3-4660-a1ab-116b97c91387
 \.
 
 
@@ -4760,8 +4754,6 @@ COPY public.scope_policy (scope_id, policy_id) FROM stdin;
 
 COPY public.user_attribute (name, value, user_id, id, long_value_hash, long_value_hash_lower_case, long_value) FROM stdin;
 restaurante	lalala	9f446447-edbf-49a9-b0ce-ab4d74a7426e	4d2aae3a-3963-4ad3-a80d-5f0f0a7fc82f	\N	\N	\N
-restaurante	nellys	bedc479d-1dd9-4b4e-a565-ae6ce62e34d8	3c742ec4-fb3d-4232-8f01-60db3ae33b44	\N	\N	\N
-restaurante	lubella	ece0cac4-bd7c-44bd-ab7b-e840e403d96b	38e35e63-f375-42f2-b8c7-99841b0460ee	\N	\N	\N
 \.
 
 
@@ -4790,8 +4782,6 @@ ecf7cc4b-da42-4c7d-95b0-2b272378e3a4	\N	82d38e99-5947-4db5-842a-4282aaeefd2f	f	t
 b3c6c468-bc37-44e7-ab87-c97d3e25069f	\N	66a9c4e3-8b85-4f99-8ed0-78dd4c2ed8ab	f	t	\N	\N	\N	43c36b1e-22ce-4293-8d6e-181a68f70b2a	service-account-admin-cli	1720657609603	c91b6aba-8136-4311-b037-bcc7f590dc7e	0
 840361cd-d110-4a57-b321-252a0682bffe	\N	3e20acf0-4560-4b53-91c4-04e87fea726f	f	t	\N	\N	\N	43c36b1e-22ce-4293-8d6e-181a68f70b2a	service-account-firmas-food	1720657385671	1f97db26-efee-41e7-ac44-e6fa35fd1fa0	0
 9f446447-edbf-49a9-b0ce-ab4d74a7426e	daniel2.djgomes@outlook.com	ace2b7bb-a174-4663-a6b8-62eebb4f67e4	f	t	\N	user2111	user	43c36b1e-22ce-4293-8d6e-181a68f70b2a	lalala_daniel2.djgomes@outlook.com	1721441530081	\N	0
-bedc479d-1dd9-4b4e-a565-ae6ce62e34d8	test1@email.com	test1@email.com	f	t	\N	Daniel	Gomes	43c36b1e-22ce-4293-8d6e-181a68f70b2a	677382d4-d639-4670-8135-0cb7096a4ede	1721589177896	\N	0
-ece0cac4-bd7c-44bd-ab7b-e840e403d96b	test1@email.com	b93b6bb2-54b8-4aef-9c56-07a937a84df7	f	t	\N	Daniel	Gomes	43c36b1e-22ce-4293-8d6e-181a68f70b2a	e932cf29-293e-4784-a648-6ad5721a42d8	1721590316898	\N	0
 \.
 
 
@@ -4872,8 +4862,6 @@ a0ace9e3-7276-4734-9501-7f1213bfb65d	ecf7cc4b-da42-4c7d-95b0-2b272378e3a4
 00d13db5-59d0-46fe-8dfa-3473f82dc34e	ecf7cc4b-da42-4c7d-95b0-2b272378e3a4
 72670e98-92aa-440c-8a37-5765552ae6c1	ecf7cc4b-da42-4c7d-95b0-2b272378e3a4
 889ae762-90c3-4660-a1ab-116b97c91387	9f446447-edbf-49a9-b0ce-ab4d74a7426e
-889ae762-90c3-4660-a1ab-116b97c91387	bedc479d-1dd9-4b4e-a565-ae6ce62e34d8
-889ae762-90c3-4660-a1ab-116b97c91387	ece0cac4-bd7c-44bd-ab7b-e840e403d96b
 \.
 
 
