@@ -1,7 +1,7 @@
 package danieldjgomes.larica.infrastructure.controller;
 
 import danieldjgomes.larica.core.restaurante.exceptions.EntityNotFoundException;
-import danieldjgomes.larica.infrastructure.dto.error.ErrorResponse;
+import danieldjgomes.larica.infrastructure.expectionHandler.model.ErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -9,19 +9,16 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.servlet.View;
-import java.time.LocalDateTime;
+
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 @ControllerAdvice
+@Deprecated
 public class GlobalExceptionHandler {
 
-    private final View error;
-
-    public GlobalExceptionHandler(View error) {
-        this.error = error;
-    }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -35,9 +32,8 @@ public class GlobalExceptionHandler {
         });
 
         ErrorResponse dto = ErrorResponse.builder()
-                .id(null)
-                .message(String.join(", ",errors))
-                .timestamp(LocalDateTime.now())
+                .mensagens(errors)
+                .timestamp(new Date())
                 .build();
         return new ResponseEntity<>(dto, HttpStatus.BAD_REQUEST);
     }
@@ -47,9 +43,8 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> exceptionHandler(EntityNotFoundException exception) {
 
         ErrorResponse dto = ErrorResponse.builder()
-                .id(null)
-                .message(exception.getMessage())
-                .timestamp(LocalDateTime.now())
+                .mensagens(Collections.singletonList(exception.getMessage()))
+                .timestamp(new Date())
                 .build();
         return new ResponseEntity<>(dto, HttpStatus.BAD_REQUEST);
     }
