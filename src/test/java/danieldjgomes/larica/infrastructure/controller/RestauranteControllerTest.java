@@ -9,9 +9,9 @@ import danieldjgomes.larica.core.usecases.restaurante.AtualizarRestauranteUseCas
 import danieldjgomes.larica.core.usecases.restaurante.ConsultarRestauranteUseCase;
 import danieldjgomes.larica.core.usecases.restaurante.RegistrarRestauranteUseCase;
 import danieldjgomes.larica.core.usecases.restaurante.InativarRestauranteUseCase;
-import danieldjgomes.larica.usecase.restaurante.request.AtualizarRestauranteRequestDTO;
+import danieldjgomes.larica.usecase.restaurante.request.AtualizarRestauranteRequest;
 import danieldjgomes.larica.usecase.restaurante.request.CadastrarEnderecoRequest;
-import danieldjgomes.larica.usecase.restaurante.request.CriarRestauranteRequestDTO;
+import danieldjgomes.larica.usecase.restaurante.request.CriarRestauranteRequest;
 import danieldjgomes.larica.infrastructure.mapper.DTOMapper;
 import jakarta.ws.rs.core.MediaType;
 import org.junit.jupiter.api.BeforeEach;
@@ -58,8 +58,8 @@ class RestauranteControllerTest {
         mockMvc = MockMvcBuilders.standaloneSetup(restauranteController).build();
     }
 
-    private CriarRestauranteRequestDTO dtoBuilder(){
-        CriarRestauranteRequestDTO dto = new CriarRestauranteRequestDTO();
+    private CriarRestauranteRequest dtoBuilder(){
+        CriarRestauranteRequest dto = new CriarRestauranteRequest();
         dto.setNome("Restaurante Teste");
         dto.setTempoEstimadoDeEntrega(60);
         dto.setStatusFuncionamento(StatusFuncionamento.INATIVO);
@@ -67,8 +67,8 @@ class RestauranteControllerTest {
         return dto;
     }
 
-    private AtualizarRestauranteRequestDTO dtoAtualizarBuilder(){
-        AtualizarRestauranteRequestDTO dto = new AtualizarRestauranteRequestDTO();
+    private AtualizarRestauranteRequest dtoAtualizarBuilder(){
+        AtualizarRestauranteRequest dto = new AtualizarRestauranteRequest();
         dto.setId(UUID.randomUUID().toString());
         dto.setNome("Restaurante Atualizado");
         dto.setTempoEstimadoDeEntrega(120);
@@ -87,7 +87,7 @@ class RestauranteControllerTest {
 
     @Test
     void deveRetornarStatus201RealizarChamadaAoUseCaseRegistrarRestaurante() throws Exception {
-        CriarRestauranteRequestDTO dto = dtoBuilder();
+        CriarRestauranteRequest dto = dtoBuilder();
         Restaurante restaurante = restauranteBuilder();
         when(mapper.toRestaurante(dto)).thenReturn(restaurante);
 
@@ -105,7 +105,7 @@ class RestauranteControllerTest {
 
     @Test
     void deveRetornarStatus200RealizarChamadaAoUseCaseConsultarRestaurante() throws Exception {
-        UUID id = UUID.randomUUID();
+        String id = UUID.randomUUID().toString();
 
         mockMvc.perform(get("/api/restaurantes/"+ id)
                         .contentType(MediaType.APPLICATION_JSON))
@@ -116,9 +116,9 @@ class RestauranteControllerTest {
 
     @Test
     void deveRetornarStatus204RealizarChamadaAoUseCaseInativarRestaurante() throws Exception {
-        doReturn(new Restaurante()).when(mapper).toRestaurante((AtualizarRestauranteRequestDTO) any());
+        doReturn(new Restaurante()).when(mapper).toRestaurante((AtualizarRestauranteRequest) any());
 
-        AtualizarRestauranteRequestDTO dto = dtoAtualizarBuilder();
+        AtualizarRestauranteRequest dto = dtoAtualizarBuilder();
         Restaurante restaurante = mapper.toRestaurante(dto);
 
         ObjectMapper objectMapper = new ObjectMapper();
@@ -134,7 +134,7 @@ class RestauranteControllerTest {
 
     @Test
     void deveRetornarStatus204RelizarChamadaAoUseCaseComIdPassado() throws Exception {
-        UUID id = UUID.randomUUID();
+        String id = UUID.randomUUID().toString();
 
         mockMvc.perform(delete("/api/restaurantes/"+id))
                 .andExpect(status().isNoContent());
@@ -144,7 +144,7 @@ class RestauranteControllerTest {
 
     @Test
     void deveRetornarStatus400QuandoPassarAtributosNulos() throws Exception {
-        CriarRestauranteRequestDTO dto = dtoBuilder();
+        CriarRestauranteRequest dto = dtoBuilder();
         dto.setNome(null);
         dto.setTempoEstimadoDeEntrega(null);
         dto.setStatusFuncionamento(null);
@@ -161,9 +161,9 @@ class RestauranteControllerTest {
 
     @Test
     void deveRetornarStatus400QuandoPassarIdNuloUseCaseAtualizarRestaurante() throws Exception {
-        doReturn(new Restaurante()).when(mapper).toRestaurante((AtualizarRestauranteRequestDTO) any());
+        doReturn(new Restaurante()).when(mapper).toRestaurante((AtualizarRestauranteRequest) any());
 
-        AtualizarRestauranteRequestDTO dto = dtoAtualizarBuilder();
+        AtualizarRestauranteRequest dto = dtoAtualizarBuilder();
         dto.setId(null);
         Restaurante restaurante = mapper.toRestaurante(dto);
 

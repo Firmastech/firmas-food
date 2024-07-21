@@ -1,7 +1,7 @@
 package danieldjgomes.larica.infrastructure;
 
 import danieldjgomes.larica.adapter.database.restaurante.model.RestauranteModel;
-import danieldjgomes.larica.core.restaurante.contract.RestauranteRepository;
+import danieldjgomes.larica.ports.database.RestaurantePersist;
 import danieldjgomes.larica.core.restaurante.entity.Restaurante;
 import danieldjgomes.larica.core.restaurante.entity.enums.StatusFuncionamento;
 import danieldjgomes.larica.adapter.mapper.RestauranteMapper;
@@ -23,7 +23,7 @@ import static org.mockito.Mockito.when;
 class RegistrarRestauranteUseCaseImplTest {
 
     @Mock
-    private RestauranteRepository restauranteRepository;
+    private RestaurantePersist restaurantePersist;
 
     @Mock
     private RestauranteMapper mapper;
@@ -52,7 +52,7 @@ class RegistrarRestauranteUseCaseImplTest {
 
     @Test
     void deveCadastrarUmRestauranteSemErros(){
-        when(restauranteRepository.save(restauranteEntity)).thenReturn(restauranteEntity);
+        when(restaurantePersist.save(restauranteEntity)).thenReturn(restauranteEntity);
         when(mapper.toRestaurante(restauranteEntity)).thenReturn(restaurante);
         when(mapper.toEntity(restaurante)).thenReturn(restauranteEntity);
 
@@ -63,7 +63,7 @@ class RegistrarRestauranteUseCaseImplTest {
         assertEquals(30, (int) restauranteCadastrado.getTempoEstimadoDeEntrega());
         assertEquals(StatusFuncionamento.INATIVO,restauranteCadastrado.getStatusFuncionamento());
 
-        verify(restauranteRepository).save(restauranteEntity);
+        verify(restaurantePersist).save(restauranteEntity);
         verify(mapper).toRestaurante(restauranteEntity);
     }
 }

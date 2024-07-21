@@ -5,7 +5,7 @@ import jakarta.validation.constraints.*;
 import lombok.Data;
 
 @Data
-public class CriarRestauranteRequestDTO {
+public class CriarRestauranteRequest {
 
     @NotBlank
     private String nome;

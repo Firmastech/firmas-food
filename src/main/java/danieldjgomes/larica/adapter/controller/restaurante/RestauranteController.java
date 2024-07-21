@@ -5,8 +5,8 @@ import danieldjgomes.larica.core.usecases.restaurante.AtualizarRestauranteUseCas
 import danieldjgomes.larica.core.usecases.restaurante.ConsultarRestauranteUseCase;
 import danieldjgomes.larica.core.usecases.restaurante.InativarRestauranteUseCase;
 import danieldjgomes.larica.core.usecases.restaurante.RegistrarRestauranteUseCase;
-import danieldjgomes.larica.usecase.restaurante.request.AtualizarRestauranteRequestDTO;
-import danieldjgomes.larica.usecase.restaurante.request.CriarRestauranteRequestDTO;
+import danieldjgomes.larica.usecase.restaurante.request.AtualizarRestauranteRequest;
+import danieldjgomes.larica.usecase.restaurante.request.CriarRestauranteRequest;
 import danieldjgomes.larica.infrastructure.mapper.DTOMapper;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
@@ -32,7 +32,7 @@ public class RestauranteController {
     private final DTOMapper mapper;
 
     @PostMapping
-    public ResponseEntity registrarRestaurante(@RequestBody @Valid CriarRestauranteRequestDTO dto) {
+    public ResponseEntity registrarRestaurante(@RequestBody @Valid CriarRestauranteRequest dto) {
         Restaurante restaurante = mapper.toRestaurante(dto);
         registrarRestauranteInterador.registrarRestaurante(restaurante);
         return ResponseEntity.status(HttpStatus.CREATED).build();
@@ -41,12 +41,12 @@ public class RestauranteController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Restaurante> consultarRestaurante(@PathVariable @NotBlank @NotNull String id) {
-        return ResponseEntity.ok(consultarRestauranteUseCase.consultar(UUID.fromString(id)));
+        return ResponseEntity.ok(consultarRestauranteUseCase.consultar(id));
 
     }
 
     @PutMapping
-    public ResponseEntity atualizarRestaurante(@RequestBody @Valid AtualizarRestauranteRequestDTO dto) {
+    public ResponseEntity atualizarRestaurante(@RequestBody @Valid AtualizarRestauranteRequest dto) {
         Restaurante restaurante = mapper.toRestaurante(dto);
         atualizarRestauranteUseCase.update(restaurante);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
@@ -54,7 +54,7 @@ public class RestauranteController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity inativarRestaurante(@PathVariable @NotBlank @NotNull String id) {
-        inativarRestauranteUseCase.inativarRestaurante(UUID.fromString(id));
+        inativarRestauranteUseCase.inativarRestaurante(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 

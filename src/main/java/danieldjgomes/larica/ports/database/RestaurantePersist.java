@@ -1,15 +1,14 @@
-package danieldjgomes.larica.core.restaurante.contract;
+package danieldjgomes.larica.ports.database;
 
 import danieldjgomes.larica.adapter.database.restaurante.model.RestauranteModel;
 
 import java.util.Optional;
-import java.util.UUID;
 
-public interface RestauranteRepository {
+public interface RestaurantePersist {
 
     RestauranteModel save(RestauranteModel restaurante);
 
-    Optional<RestauranteModel> findById(UUID id);
+    Optional<RestauranteModel> findById(String id);
 
     RestauranteModel update(RestauranteModel entity);
 

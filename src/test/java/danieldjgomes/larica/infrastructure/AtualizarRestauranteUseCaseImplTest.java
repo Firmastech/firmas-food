@@ -1,9 +1,9 @@
 package danieldjgomes.larica.infrastructure;
 
-import danieldjgomes.larica.core.restaurante.contract.RestauranteRepository;
+import danieldjgomes.larica.ports.database.RestaurantePersist;
 import danieldjgomes.larica.core.restaurante.entity.Restaurante;
 import danieldjgomes.larica.core.restaurante.entity.enums.StatusFuncionamento;
-import danieldjgomes.larica.core.restaurante.exceptions.EntityNotFoundException;
+import danieldjgomes.larica.usecase.restaurante.exceptions.RestauranteNotFoundException;
 import danieldjgomes.larica.adapter.database.restaurante.model.RestauranteModel;
 import danieldjgomes.larica.adapter.mapper.RestauranteMapper;
 import danieldjgomes.larica.usecase.restaurante.AtualizarRestauranteUseCaseImpl;
@@ -24,7 +24,7 @@ import static org.mockito.Mockito.*;
 class AtualizarRestauranteUseCaseImplTest {
 
     @Mock
-    private RestauranteRepository restauranteRepository;
+    private RestaurantePersist restaurantePersist;
 
     @Mock
     private RestauranteMapper mapper;
@@ -56,8 +56,8 @@ class AtualizarRestauranteUseCaseImplTest {
 
     @Test
     void deveAtualizarUmRestauranteSemErros(){
-        when(restauranteRepository.findById(restaurante.getId())).thenReturn(Optional.of(restauranteEntity));
-        when(restauranteRepository.update(restauranteEntity)).thenReturn(restauranteEntity);
+        when(restaurantePersist.findById(restaurante.getId())).thenReturn(Optional.of(restauranteEntity));
+        when(restaurantePersist.update(restauranteEntity)).thenReturn(restauranteEntity);
         when(mapper.toRestaurante(restauranteEntity)).thenReturn(restaurante);
 
         Restaurante updatedRestaurante = atualizarRestauranteUseCase.update(restaurante);
@@ -66,22 +66,22 @@ class AtualizarRestauranteUseCaseImplTest {
         assertEquals(30, (int) updatedRestaurante.getTempoEstimadoDeEntrega());
         assertEquals(StatusFuncionamento.ABERTO,updatedRestaurante.getStatusFuncionamento());
 
-        verify(restauranteRepository).findById(restaurante.getId());
-        verify(restauranteRepository).update(restauranteEntity);
+        verify(restaurantePersist).findById(restaurante.getId());
+        verify(restaurantePersist).update(restauranteEntity);
         verify(mapper).toRestaurante(restauranteEntity);
     }
 
     @Test
     void deveLancarUmaExceptionQuandoNaoEncontrarRestaurante(){
-        when(restauranteRepository.findById(restaurante.getId())).thenReturn(Optional.empty());
+        when(restaurantePersist.findById(restaurante.getId())).thenReturn(Optional.empty());
 
-        EntityNotFoundException exception = assertThrows(EntityNotFoundException.class,()->{
+        RestauranteNotFoundException exception = assertThrows(RestauranteNotFoundException.class,()->{
             atualizarRestauranteUseCase.update(restaurante);
         });
 
         assertEquals(messageExceptionExpected,exception.getMessage());
-        verify(restauranteRepository).findById(restaurante.getId());
-        verify(restauranteRepository,never()).update(any());
+        verify(restaurantePersist).findById(restaurante.getId());
+        verify(restaurantePersist,never()).update(any());
         verify(mapper,never()).toRestaurante(any());
     }
 }

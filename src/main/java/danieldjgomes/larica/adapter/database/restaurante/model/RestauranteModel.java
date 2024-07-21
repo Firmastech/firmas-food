@@ -19,7 +19,7 @@ public class RestauranteModel extends BaseModel {
 
     @Id
     @Column(name = "id", nullable = false)
-    private UUID id;
+    private String id;
 
     @Column(name = "nome", nullable = false, length = 100)
     private String nome;

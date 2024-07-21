@@ -4,5 +4,5 @@ import java.util.UUID;
 
 public interface InativarRestauranteUseCase {
 
-    void inativarRestaurante(UUID ID);
+    void inativarRestaurante(String ID);
 }

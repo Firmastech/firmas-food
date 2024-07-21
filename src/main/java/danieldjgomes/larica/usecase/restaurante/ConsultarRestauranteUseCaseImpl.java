@@ -1,9 +1,9 @@
 package danieldjgomes.larica.usecase.restaurante;
 
 import danieldjgomes.larica.adapter.database.restaurante.model.RestauranteModel;
-import danieldjgomes.larica.core.restaurante.contract.RestauranteRepository;
+import danieldjgomes.larica.ports.database.RestaurantePersist;
 import danieldjgomes.larica.core.restaurante.entity.Restaurante;
-import danieldjgomes.larica.core.restaurante.exceptions.EntityNotFoundException;
+import danieldjgomes.larica.usecase.restaurante.exceptions.RestauranteNotFoundException;
 import danieldjgomes.larica.core.usecases.restaurante.ConsultarRestauranteUseCase;
 import danieldjgomes.larica.adapter.mapper.RestauranteMapper;
 import lombok.AllArgsConstructor;
@@ -15,13 +15,13 @@ import java.util.UUID;
 @AllArgsConstructor
 public class ConsultarRestauranteUseCaseImpl implements ConsultarRestauranteUseCase {
 
-    private final RestauranteRepository restauranteRepository;
+    private final RestaurantePersist restaurantePersist;
     private final RestauranteMapper mapper;
 
     @Override
-     public Restaurante consultar(UUID ID) {
-        RestauranteModel entity = restauranteRepository.findById(ID).orElseThrow(
-                ()-> new EntityNotFoundException("Restaurante nao encontrado")
+     public Restaurante consultar(String ID) {
+        RestauranteModel entity = restaurantePersist.findById(ID).orElseThrow(
+                ()-> new RestauranteNotFoundException("Restaurante nao encontrado")
         );
         return mapper.toRestaurante(entity);
      }

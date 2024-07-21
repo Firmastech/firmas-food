@@ -3,6 +3,7 @@ package danieldjgomes.larica.adapter.database.restaurante.impl;
 import danieldjgomes.larica.adapter.database.restaurante.model.RestauranteModel;
 import danieldjgomes.larica.adapter.database.restaurante.repository.RestauranteRepository;
 import danieldjgomes.larica.adapter.mapper.RestauranteMapper;
+import danieldjgomes.larica.ports.database.RestaurantePersist;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import java.time.LocalDateTime;
@@ -11,13 +12,13 @@ import java.util.UUID;
 
 @Component
 @AllArgsConstructor
-public class RestaurantePersistImpl implements danieldjgomes.larica.core.restaurante.contract.RestauranteRepository {
+public class RestaurantePersistImpl implements RestaurantePersist {
 
     private final RestauranteRepository restauranteRepository;
     private final RestauranteMapper restauranteMapper;
 
     @Override
-    public Optional<RestauranteModel> findById(UUID id) {
+    public Optional<RestauranteModel> findById(String id) {
         return restauranteRepository.findById(id);
     }
 
@@ -29,21 +30,21 @@ public class RestaurantePersistImpl implements danieldjgomes.larica.core.restaur
     @Override
     public RestauranteModel save(RestauranteModel restaurante) {
         RestauranteModel entity = restaurante;
-        entity.setIsActive(true);
-        entity.setDataInclusao(LocalDateTime.now());
+        entity.setAtivo(true);
+        entity.setCriadoEm(LocalDateTime.now());
         return restauranteRepository.save(entity);
     }
 
     @Override
     public RestauranteModel update(RestauranteModel entityToUpdate) {
-        entityToUpdate.setDataAtualizacao(LocalDateTime.now());
+        entityToUpdate.setAtualizadoEm(LocalDateTime.now());
         return restauranteRepository.save(entityToUpdate);
     }
 
     @Override
     public void delete(RestauranteModel entityToDelete) {
-        entityToDelete.setDataExclusao(LocalDateTime.now());
-        entityToDelete.setIsActive(false);
+        entityToDelete.setDeletadoEm(LocalDateTime.now());
+        entityToDelete.setAtivo(false);
         restauranteRepository.save(entityToDelete);
     }
 }

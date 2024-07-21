@@ -30,11 +30,11 @@ class RestaurantePersistImplTest {
 
     private RestauranteModel restauranteEntity;
 
-    private UUID id;
+    private String id;
 
     @BeforeEach
     void setUp() {
-        id = UUID.randomUUID();
+        id = UUID.randomUUID().toString();
         restauranteEntity = new RestauranteModel();
         restauranteEntity.setId(id);
         restauranteEntity.setNome("Restaurante Novo");
@@ -80,8 +80,8 @@ class RestaurantePersistImplTest {
         RestauranteModel entityToCreate = mock(RestauranteModel.class);
         repository.save(entityToCreate);
 
-        verify(entityToCreate).setDataInclusao(any(LocalDateTime.class));
-        verify(entityToCreate).setIsActive(true);
+        verify(entityToCreate).setCriadoEm(any(LocalDateTime.class));
+        verify(entityToCreate).setAtivo(true);
         verify(restauranteRepository).save(entityToCreate);
     }
 
@@ -89,7 +89,7 @@ class RestaurantePersistImplTest {
     void deveRetornarUmaEntityComOsDadosDeControleDeAtualizacao() {
         RestauranteModel entityToUpdate = mock(RestauranteModel.class);
         repository.update(entityToUpdate);
-        verify(entityToUpdate).setDataAtualizacao(any(LocalDateTime.class));
+        verify(entityToUpdate).setAtualizadoEm(any(LocalDateTime.class));
         verify(restauranteRepository).save(entityToUpdate);
     }
 
@@ -97,8 +97,8 @@ class RestaurantePersistImplTest {
     void deveSetarOsDadosDeAtivoAndDataExclusao() {
         RestauranteModel entityToDelete = mock(RestauranteModel.class);
         repository.delete(entityToDelete);
-        verify(entityToDelete).setDataExclusao(any(LocalDateTime.class));
-        verify(entityToDelete).setIsActive(false);
+        verify(entityToDelete).setDeletadoEm(any(LocalDateTime.class));
+        verify(entityToDelete).setAtivo(false);
         verify(restauranteRepository).save(entityToDelete);
     }
 }

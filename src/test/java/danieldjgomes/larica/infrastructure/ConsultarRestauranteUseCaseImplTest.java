@@ -1,10 +1,10 @@
 package danieldjgomes.larica.infrastructure;
 
 import danieldjgomes.larica.adapter.database.restaurante.model.RestauranteModel;
-import danieldjgomes.larica.core.restaurante.contract.RestauranteRepository;
+import danieldjgomes.larica.ports.database.RestaurantePersist;
 import danieldjgomes.larica.core.restaurante.entity.Restaurante;
 import danieldjgomes.larica.core.restaurante.entity.enums.StatusFuncionamento;
-import danieldjgomes.larica.core.restaurante.exceptions.EntityNotFoundException;
+import danieldjgomes.larica.usecase.restaurante.exceptions.RestauranteNotFoundException;
 import danieldjgomes.larica.adapter.mapper.RestauranteMapper;
 import danieldjgomes.larica.usecase.restaurante.ConsultarRestauranteUseCaseImpl;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,7 +26,7 @@ import static org.mockito.Mockito.never;
 class ConsultarRestauranteUseCaseImplTest {
 
     @Mock
-    private RestauranteRepository restauranteRepository;
+    private RestaurantePersist restaurantePersist;
 
     @Mock
     private RestauranteMapper mapper;
@@ -42,7 +42,7 @@ class ConsultarRestauranteUseCaseImplTest {
 
     @BeforeEach
     void carregarRestaurantes(){
-        UUID id = UUID.randomUUID();
+        String id = UUID.randomUUID().toString();
         restaurante = new Restaurante();
         restaurante.setId(id);
         restaurante.setNome("Restaurante Consultado");
@@ -58,8 +58,8 @@ class ConsultarRestauranteUseCaseImplTest {
 
     @Test
     void deveConsultarUmRestauranteSemErros(){
-        UUID id = restaurante.getId();
-        when(restauranteRepository.findById(id)).thenReturn(Optional.of(restauranteEntity));
+        String id = restaurante.getId();
+        when(restaurantePersist.findById(id)).thenReturn(Optional.of(restauranteEntity));
         when(mapper.toRestaurante(restauranteEntity)).thenReturn(restaurante);
 
         Restaurante restauranteConsultado = consultarRestauranteUseCase.consultar(id);
@@ -69,21 +69,21 @@ class ConsultarRestauranteUseCaseImplTest {
         assertEquals(restaurante.getStatusFuncionamento(),restauranteConsultado.getStatusFuncionamento());
         assertEquals(restaurante.getTempoEstimadoDeEntrega(),restauranteConsultado.getTempoEstimadoDeEntrega());
 
-        verify(restauranteRepository).findById(id);
+        verify(restaurantePersist).findById(id);
         verify(mapper).toRestaurante(restauranteEntity);
     }
 
     @Test
     void deveLancarUmaExceptionQuandoNaoEncontrarRestaurante(){
-        UUID id = restaurante.getId();
-        when(restauranteRepository.findById(restaurante.getId())).thenReturn(Optional.empty());
+        String id = restaurante.getId();
+        when(restaurantePersist.findById(restaurante.getId())).thenReturn(Optional.empty());
 
-        EntityNotFoundException exception = assertThrows(EntityNotFoundException.class,()->{
+        RestauranteNotFoundException exception = assertThrows(RestauranteNotFoundException.class,()->{
             consultarRestauranteUseCase.consultar(id);
         });
 
         assertEquals(messageExceptionExpected,exception.getMessage());
-        verify(restauranteRepository).findById(restaurante.getId());
+        verify(restaurantePersist).findById(restaurante.getId());
         verify(mapper,never()).toRestaurante(any());
     }
 }
