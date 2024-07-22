@@ -1,7 +1,6 @@
 package danieldjgomes.larica.core.cardapio.entity;
 
-import danieldjgomes.larica.core.prato.entity.Prato;
-import danieldjgomes.larica.core.restaurante.entity.Restaurante;
+import danieldjgomes.larica.adapter.database.restaurante.model.RestauranteModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,7 +28,7 @@ public class Cardapio {
 
     @ManyToOne
     @JoinColumn(name = "restaurante_id", nullable = false)
-    private Restaurante restaurante;
+    private RestauranteModel restaurante;
 
     @Column(nullable = false)
     private LocalDateTime criado = LocalDateTime.now();

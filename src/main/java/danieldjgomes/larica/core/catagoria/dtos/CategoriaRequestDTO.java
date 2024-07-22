@@ -1,18 +1,16 @@
-package danieldjgomes.larica.core.culinaria.dtos;
+package danieldjgomes.larica.core.catagoria.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.UUID;
-
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CulinariaResponseDTO {
+public class CategoriaRequestDTO {
 
-    private UUID culinariaId;
-    private String tipo;
+    private String nome;
+    private String restauranteId;
 }

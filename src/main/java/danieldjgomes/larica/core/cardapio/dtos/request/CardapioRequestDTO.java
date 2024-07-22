@@ -13,11 +13,8 @@ import lombok.Setter;
 @NoArgsConstructor
 public class CardapioRequestDTO {
 
-    @NotNull
     private String restauranteId;
-    @NotNull
     private String nome;
     private String descricao;
-
 
 }

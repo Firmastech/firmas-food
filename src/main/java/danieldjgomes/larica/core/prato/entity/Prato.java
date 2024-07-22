@@ -23,14 +23,16 @@ public class Prato {
     @Column(name = "id", nullable = false)
     private String id;
 
+    @Column(name = "descricao")
     private String descricao;
 
-    @Column(nullable = false)
+    @Column(name = "nome", nullable = false)
     private String nome;
 
-    @Column(nullable = false)
+    @Column(name = "preco", nullable = false)
     private BigDecimal preco;
 
+    @Column(name = "categoria")
     private String categoria;
 
     @Column(name = "url_imagem")
@@ -39,16 +41,16 @@ public class Prato {
     @Column(name = "porcentagem_desconto")
     private BigDecimal porcentagemDesconto;
 
-    @Column(nullable = false)
+    @Column(name = "criado", nullable = false)
     private LocalDateTime criado = LocalDateTime.now();
 
-    @Column(nullable = false)
+    @Column(name = "atualizado", nullable = false)
     private LocalDateTime atualizado = LocalDateTime.now();
 
     @Column(name = "esta_ativo", nullable = false)
     private Boolean estaAtivo = true;
 
+    @Column(name = "deletado")
     private LocalDateTime deletado;
-
 
 }

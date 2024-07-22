@@ -1,8 +1,5 @@
 package danieldjgomes.larica.core.prato.service;
 
-import danieldjgomes.larica.core.desconto.entity.Desconto;
-import danieldjgomes.larica.core.desconto.repository.DescontoRepository;
-import danieldjgomes.larica.core.exception.EntityNotFoundException;
 import danieldjgomes.larica.core.prato.dtos.PratoRequestDTO;
 import danieldjgomes.larica.core.prato.dtos.PratoResponseDTO;
 import danieldjgomes.larica.core.prato.entity.Prato;
@@ -12,86 +9,50 @@ import danieldjgomes.larica.infrastructure.mapper.PratoMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class PratoUseCaseImpl implements PratoUseCase {
 
     private final PratoRepository pratoRepository;
-    private final DescontoRepository descontoRepository;
-
 
     public PratoResponseDTO createPrato(PratoRequestDTO pratoRequest) {
         Prato prato = PratoMapper.INSTANCE.toEntity(pratoRequest);
         Prato savedPrato = pratoRepository.save(prato);
-        return PratoMapper.INSTANCE.toDto(savedPrato);
-    }
-
-
-    public PratoResponseDTO applayDescontoToPrato(String pratoId, String descontoId) {
-        Prato prato = getExistingPrato(pratoId);
-        Desconto desconto = findDescontoById(descontoId);
-        prato.setDesconto(desconto);
-        BigDecimal precoOriginal = prato.getPreco();
-        BigDecimal porcentagemDesconto = desconto.getPorcentagemDesconto();
-        BigDecimal valorDesconto = precoOriginal.multiply(porcentagemDesconto).divide(BigDecimal.valueOf(100));
-        BigDecimal precoFinal = precoOriginal.subtract(valorDesconto);
-        prato.setPreco(precoFinal);
-
-        Prato savedPrato = pratoRepository.save(prato);
-        return PratoMapper.INSTANCE.toDto(savedPrato);
-    }
-
-    public Optional<PratoResponseDTO> removeDesconto(String id) {
-        Optional<Prato> optionalPrato = Optional.ofNullable(getExistingPrato(id));
-        if (optionalPrato.isEmpty()) {
-            return Optional.empty();
-        }
-
-        Prato prato = optionalPrato.get();
-        prato.setDesconto(null);
-        pratoRepository.save(prato);
-        return Optional.of(PratoMapper.INSTANCE.toDto(prato));
+        return PratoMapper.INSTANCE.toResponseDTO(savedPrato);
     }
 
     public Optional<PratoResponseDTO> getPratoById(String id) {
-        return pratoRepository.findById(id)
-                .map(PratoMapper.INSTANCE::toDto);
+        Prato prato = pratoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Prato não encontrado"));
+        return Optional.ofNullable(PratoMapper.INSTANCE.toResponseDTO(prato));
     }
 
-    public List<PratoResponseDTO> listAllPratos() {
-        return pratoRepository.findAll()
-                .stream()
-                .map(PratoMapper.INSTANCE::toDto)
-                .toList();
+    public List<PratoResponseDTO> getAllPratos() {
+        return pratoRepository.findAll().stream()
+                .map(PratoMapper.INSTANCE::toResponseDTO)
+                .collect(Collectors.toList());
     }
 
-    public Optional<PratoResponseDTO> updatePrato(String id, PratoRequestDTO pratoRequest) {
-        Prato existingPrato = getExistingPrato(id);
-        Prato updatedPrato = PratoMapper.INSTANCE.toEntity(pratoRequest);
-        updatedPrato.setId(existingPrato.getId());
-        Desconto desconto = findDescontoById(pratoRequest.getDesconto().getId());
-        updatedPrato.setDesconto(desconto);
-        pratoRepository.save(updatedPrato);
-        return Optional.of(PratoMapper.INSTANCE.toDto(updatedPrato));
+    public Optional<PratoResponseDTO> updatePrato(String id, PratoRequestDTO pratoRequestDTO) {
+        Prato existingPrato = pratoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Prato não encontrado"));
+
+        PratoMapper.INSTANCE.updateEntityFromDTO(pratoRequestDTO, existingPrato);
+        existingPrato.setAtualizado(LocalDateTime.now());
+        Prato updatedPrato = pratoRepository.save(existingPrato);
+
+        return Optional.ofNullable(PratoMapper.INSTANCE.toResponseDTO(updatedPrato));
     }
 
-    public void deletePrato(String  id) {
-        Prato existingPrato = getExistingPrato(id);
-        pratoRepository.delete(existingPrato);
+    public void deletePrato(String id) {
+        Prato prato = pratoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Prato não encontrado"));
+        pratoRepository.delete(prato);
     }
 
-    private Prato getExistingPrato(String id) {
-        return pratoRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Prato not found with id: " + id));
-    }
-
-    private Desconto findDescontoById(String descontoId) {
-        return descontoRepository.findById(descontoId)
-                .orElseThrow(() -> new EntityNotFoundException("Desconto not found with id: " + descontoId));
-    }
 }
