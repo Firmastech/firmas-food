@@ -2,14 +2,14 @@ spring:
   application:
     name: larica
   datasource:
-    url: jdbc:postgresql://localhost:5432/db_restaurante
+    url: jdbc:postgresql://144.22.152.131:5432/db_restaurante
     username: restaurante_user
     password: secure_password
     driver-class-name: org.postgresql.Driver
   jpa:
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
+        dialect: org.hibernate.dialect.PostgreSQLD  ialect
   security:
     oauth2:
       client:
