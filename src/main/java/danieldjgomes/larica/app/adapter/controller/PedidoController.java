@@ -28,7 +28,7 @@ public class PedidoController {
     @PostMapping
     public ResponseEntity<Void> createPedido(@Valid @RequestBody ProcessarPedidoRequest pedido) {
         DynamicLog.destroy();
-        pedidoPersist.createPedido(pedido);
+        pedidoPersist.postPedido(pedido);
         DynamicLog.put("pedido-payload", pedido);
         log.info("Pedido criado com sucesso");
         return ResponseEntity.ok().build();

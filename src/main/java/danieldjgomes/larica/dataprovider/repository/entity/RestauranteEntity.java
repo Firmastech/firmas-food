@@ -18,15 +18,15 @@ public class RestauranteEntity extends BaseEntity{
 
     @Id
     @Column(name = "id", nullable = false)
-    private UUID id;
+    private String id;
 
     @Column(name = "nome", nullable = false, length = 100)
     private String nome;
 
-    @Column(name = "tempoEstimado", nullable = false)
+    @Column(name = "tempo_estimado", nullable = false)
     private int tempoEstimadoDeEntrega;
 
-    @Column(name = "statusFuncionamento", nullable = false)
+    @Column(name = "status_funcionamento", nullable = false)
     private String statusFuncionamento;
 
 

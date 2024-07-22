@@ -57,14 +57,14 @@ class PedidoControllerTest {
     void createPedidoSucesso() throws Exception {
         ProcessarPedidoRequest pedidoRequest = ObjectBuilder.buildProcessarPedidoRequestSucesso();
 
-        doNothing().when(pedidoPersist).createPedido(pedidoRequest);
+        doNothing().when(pedidoPersist).postPedido(pedidoRequest);
 
         mockMvc.perform(post("/pedidos")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(new ObjectMapper().writeValueAsString(pedidoRequest)))
                 .andExpect(status().isOk());
 
-        verify(pedidoPersist, times(1)).createPedido(any());
+        verify(pedidoPersist, times(1)).postPedido(any());
         verifyNoMoreInteractions(pedidoPersist);
     }
 
@@ -125,7 +125,7 @@ class PedidoControllerTest {
     void testaCreatePedidoComErrosEsperados(HttpStatus httpStatus, Exception exception, String mensagemDeErroEsperada) throws Exception {
         ProcessarPedidoRequest pedidoRequest = ObjectBuilder.buildProcessarPedidoRequestSucesso();
 
-        doThrow(exception).when(pedidoPersist).createPedido(any());
+        doThrow(exception).when(pedidoPersist).postPedido(any());
 
         String actualErrorMessage = Objects.requireNonNull(mockMvc.perform(post("/pedidos")
                                 .contentType(MediaType.APPLICATION_JSON)

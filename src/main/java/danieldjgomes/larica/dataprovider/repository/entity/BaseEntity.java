@@ -17,13 +17,13 @@ import java.time.LocalDateTime;
 @MappedSuperclass
 public abstract class BaseEntity {
 
-    @Column(name = "data_inclusao")
+    @Column(name = "criado")
     private LocalDateTime dataInclusao;
 
-    @Column(name = "data_atualizacao")
+    @Column(name = "atualizado")
     private LocalDateTime dataAtualizacao;
 
-    @Column(name = "data_exclusao")
+    @Column(name = "deletado")
     private LocalDateTime dataExclusao;
 
     @Column(name = "ativo", nullable = false, length = 10)

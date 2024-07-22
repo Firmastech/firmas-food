@@ -6,7 +6,7 @@ import java.util.UUID;
 
 public interface PedidoPersist {
 
-    void createPedido(ProcessarPedidoRequest pedido);
+    void postPedido(ProcessarPedidoRequest pedido);
 
     ProcessarPedidoRequest getPedidoById(UUID pedidoId);
 
