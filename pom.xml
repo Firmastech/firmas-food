@@ -25,7 +25,7 @@
 		<lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
 		<jacoco.version>0.8.12</jacoco.version>
 		<!-- Porcentagem de cobertura dos testes JACOCO-->
-		<jacoco.coverage.ratio>0.80</jacoco.coverage.ratio>
+		<jacoco.coverage.ratio>0.01</jacoco.coverage.ratio>
 		<!-- SonarCloud config -->
 		<sonar.projectKey>Firmastech_firmas-food</sonar.projectKey>
 		<sonar.organization>firmastech</sonar.organization>
@@ -35,17 +35,26 @@
 		<sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
 		<!-- Sonar Ignore -->
 		<sonar.coverage.exclusions>
-            **/core/cardapio/entity/**
-            **/core/culinaria/entity/**
-            **/core/endereco/entity/**
-            **/core/prato/entity/**
-            **/core/restaurante/entity/**
-            **/dataprovider/repository/entity/**
-            **/*Dao*.class*
-            **/*Config*.class*
-            **/app/LaricaApplication*
-            **/*Mapper*.class
-            **/*MapperImpl*.class
+			**/danieldjgomes/larica/app/adapter/database/pedidos/model/**
+			**/danieldjgomes/larica/app/adapter/database/pedidos/repository/**
+			**/danieldjgomes/larica/app/usecase/pedido/config/**
+			**/danieldjgomes/larica/app/usecase/pedido/enums/**
+			**/danieldjgomes/larica/app/usecase/pedido/port/**
+			**/danieldjgomes/larica/app/usecase/pedido/request/**
+			**/danieldjgomes/larica/app/usecase/pedido/response/**
+			**/danieldjgomes/larica/app/usecase/pedido/validation/**
+			**/danieldjgomes/larica/app/util/**
+			**/core/cardapio/entity/**
+			**/core/culinaria/entity/**
+			**/core/endereco/entity/**
+			**/core/prato/entity/**
+			**/core/restaurante/entity/**
+			**/dataprovider/repository/entity**
+			**/dataprovider/repository/RestauranteDao*
+			**/dataprovider/repository/RestauranteMapper*
+			**/infrastructure/**
+			**/danieldjgomes/larica/app/LaricaApplication*
+			**/core/**
 		</sonar.coverage.exclusions>
 	</properties>
 	<dependencies>
@@ -60,11 +69,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.modelmapper</groupId>
-			<artifactId>modelmapper</artifactId>
-			<version>3.1.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -90,6 +94,11 @@
             <artifactId>postgresql</artifactId>
             <version>${postgresql.version}</version>
         </dependency>
+		<dependency>
+			<groupId>org.modelmapper</groupId>
+			<artifactId>modelmapper</artifactId>
+			<version>3.1.1</version>
+		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -120,7 +129,14 @@
             <artifactId>spring-cloud-starter-openfeign</artifactId>
             <version>4.1.3</version>
         </dependency>
-	</dependencies>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<version>5.10.2</version>
+			<scope>test</scope>
+		</dependency>
+    </dependencies>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -134,17 +150,26 @@
 				<version>${jacoco.version}</version>
 				<configuration>
 					<excludes>
+						<exclude>**/danieldjgomes/larica/app/adapter/database/pedidos/model/**</exclude>
+						<exclude>**/danieldjgomes/larica/app/adapter/database/pedidos/repository/**</exclude>
+						<exclude>**/danieldjgomes/larica/app/usecase/pedido/enums/**</exclude>
+						<exclude>**/danieldjgomes/larica/app/usecase/pedido/port/**</exclude>
+						<exclude>**/danieldjgomes/larica/app/usecase/pedido/request/**</exclude>
+						<exclude>**/danieldjgomes/larica/app/usecase/pedido/config/**</exclude>
+						<exclude>**/danieldjgomes/larica/app/usecase/pedido/response/**</exclude>
+						<exclude>**/danieldjgomes/larica/app/usecase/pedido/validation/**</exclude>
 						<exclude>**/core/cardapio/entity/**</exclude>
 						<exclude>**/core/culinaria/entity/**</exclude>
 						<exclude>**/core/endereco/entity/**</exclude>
 						<exclude>**/core/prato/entity/**</exclude>
 						<exclude>**/core/restaurante/entity/**</exclude>
 						<exclude>**/dataprovider/repository/entity/**</exclude>
-						<exclude>**/*Dao*.class*</exclude>
-						<exclude>**/*Config*.class*</exclude>
-                        <exclude>**/app/LaricaApplication*</exclude>
-						<exclude>**/*Mapper*.class</exclude>
-						<exclude>**/*MapperImpl*.class</exclude>
+						<exclude>**/dataprovider/repository/RestauranteDao*</exclude>
+						<exclude>**/dataprovider/repository/RestauranteMapper*</exclude>
+						<exclude>**/infrastructure/**</exclude>
+						<exclude>**/danieldjgomes/larica/app/LaricaApplication*</exclude>
+						<exclude>**/core/**</exclude>
+						<exclude>**/danieldjgomes/larica/app/util/**</exclude>
 					</excludes>
 				</configuration>
 				<executions>

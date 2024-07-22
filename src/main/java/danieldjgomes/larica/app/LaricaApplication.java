@@ -5,13 +5,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
 
-@SpringBootApplication
-//@ComponentScan({"danieldjgomes.larica.*"})
-//@EnableFeignClients({"danieldjgomes.larica.*"})
+@SpringBootApplication(scanBasePackages = "danieldjgomes.larica")
+@EnableFeignClients({"danieldjgomes.larica.*"})
 public class LaricaApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(LaricaApplication.class, args);
+
 	}
 
 }
