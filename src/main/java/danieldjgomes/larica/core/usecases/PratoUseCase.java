@@ -11,15 +11,12 @@ public interface PratoUseCase {
 
     PratoResponseDTO createPrato(PratoRequestDTO pratoRequest);
 
-    PratoResponseDTO applayDescontoToPrato(UUID pratoId, UUID descontoId);
+    Optional<PratoResponseDTO> getPratoById(String id);
 
-    Optional<PratoResponseDTO> removeDesconto(UUID pratoId);
+    List<PratoResponseDTO> getAllPratos();
 
-    Optional<PratoResponseDTO> getPratoById(UUID id);
+    Optional<PratoResponseDTO> updatePrato(String id, PratoRequestDTO pratoRequest);
 
-    List<PratoResponseDTO> listAllPratos();
+    void deletePrato(String id);
 
-    Optional<PratoResponseDTO> updatePrato(UUID id, PratoRequestDTO pratoRequest);
-
-    void deletePrato(UUID id);
 }

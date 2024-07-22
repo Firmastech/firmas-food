@@ -15,7 +15,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public class Restaurante {
 
-    private UUID id;
+    private String id;
     private String nome;
     private Integer tempoEstimadoDeEntrega;
     private StatusFuncionamento statusFuncionamento;

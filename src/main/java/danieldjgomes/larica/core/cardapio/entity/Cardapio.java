@@ -1,33 +1,44 @@
 package danieldjgomes.larica.core.cardapio.entity;
 
-import danieldjgomes.larica.core.culinaria.entity.Culinaria;
-import danieldjgomes.larica.core.prato.entity.Prato;
+import danieldjgomes.larica.adapter.database.restaurante.model.RestauranteModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.UUID;
+import java.time.LocalDateTime;
 
+@Entity
 @Getter
 @Setter
-@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "cardapio")
 public class Cardapio {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private UUID cardapioId;
+    private String id;
+
+    @Column(nullable = false)
+    private String nome;
+
+    @Column(length = 8000)
+    private String descricao;
 
     @ManyToOne
-    @JoinColumn(name = "prato_id", nullable = false)
-    private Prato pratoId;
+    @JoinColumn(name = "restaurante_id", nullable = false)
+    private RestauranteModel restaurante;
 
-    @ManyToOne
-    @JoinColumn(name = "tipo_culinaria_id", nullable = false)
-    private Culinaria tipoCulinariaId;
+    @Column(nullable = false)
+    private LocalDateTime criado = LocalDateTime.now();
+
+    @Column(nullable = false)
+    private LocalDateTime atualizado = LocalDateTime.now();
+
+    @Column(nullable = false)
+    private Boolean estaAtivo = true;
+
+    private LocalDateTime deletado;
+
 }

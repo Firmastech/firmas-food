@@ -1,7 +1,7 @@
 package danieldjgomes.larica.infrastructure.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import danieldjgomes.larica.adapter.controller.restaurante.RestauranteController;
 import danieldjgomes.larica.core.endereco.entity.Endereco;
 import danieldjgomes.larica.core.restaurante.entity.Restaurante;
 import danieldjgomes.larica.core.restaurante.entity.enums.StatusFuncionamento;
@@ -9,9 +9,9 @@ import danieldjgomes.larica.core.usecases.restaurante.AtualizarRestauranteUseCas
 import danieldjgomes.larica.core.usecases.restaurante.ConsultarRestauranteUseCase;
 import danieldjgomes.larica.core.usecases.restaurante.RegistrarRestauranteUseCase;
 import danieldjgomes.larica.core.usecases.restaurante.InativarRestauranteUseCase;
-import danieldjgomes.larica.infrastructure.dto.restaurante.request.AtualizarRestauranteRequestDTO;
-import danieldjgomes.larica.infrastructure.dto.restaurante.request.CriarRestauranteRequestDTO;
-import danieldjgomes.larica.infrastructure.dto.restaurante.request.EnderecoDTO;
+import danieldjgomes.larica.usecase.restaurante.request.AtualizarRestauranteRequest;
+import danieldjgomes.larica.usecase.restaurante.request.CadastrarEnderecoRequest;
+import danieldjgomes.larica.usecase.restaurante.request.CriarRestauranteRequest;
 import danieldjgomes.larica.infrastructure.mapper.DTOMapper;
 import jakarta.ws.rs.core.MediaType;
 import org.junit.jupiter.api.BeforeEach;
@@ -58,17 +58,17 @@ class RestauranteControllerTest {
         mockMvc = MockMvcBuilders.standaloneSetup(restauranteController).build();
     }
 
-    private CriarRestauranteRequestDTO dtoBuilder(){
-        CriarRestauranteRequestDTO dto = new CriarRestauranteRequestDTO();
+    private CriarRestauranteRequest dtoBuilder(){
+        CriarRestauranteRequest dto = new CriarRestauranteRequest();
         dto.setNome("Restaurante Teste");
         dto.setTempoEstimadoDeEntrega(60);
         dto.setStatusFuncionamento(StatusFuncionamento.INATIVO);
-        dto.setEndereco(new EnderecoDTO());
+        dto.setEndereco(new CadastrarEnderecoRequest());
         return dto;
     }
 
-    private AtualizarRestauranteRequestDTO dtoAtualizarBuilder(){
-        AtualizarRestauranteRequestDTO dto = new AtualizarRestauranteRequestDTO();
+    private AtualizarRestauranteRequest dtoAtualizarBuilder(){
+        AtualizarRestauranteRequest dto = new AtualizarRestauranteRequest();
         dto.setId(UUID.randomUUID().toString());
         dto.setNome("Restaurante Atualizado");
         dto.setTempoEstimadoDeEntrega(120);
@@ -86,8 +86,8 @@ class RestauranteControllerTest {
     }
 
     @Test
-    void deveRetornarStatus201_ErealizarChamadaAoUseCase_RegistrarRestaurante() throws Exception {
-        CriarRestauranteRequestDTO dto = dtoBuilder();
+    void deveRetornarStatus201RealizarChamadaAoUseCaseRegistrarRestaurante() throws Exception {
+        CriarRestauranteRequest dto = dtoBuilder();
         Restaurante restaurante = restauranteBuilder();
         when(mapper.toRestaurante(dto)).thenReturn(restaurante);
 
@@ -104,8 +104,8 @@ class RestauranteControllerTest {
     }
 
     @Test
-    void deveRetornarStatus200_ErealizarChamadaAoUseCase_ConsultarRestaurante() throws Exception {
-        UUID id = UUID.randomUUID();
+    void deveRetornarStatus200RealizarChamadaAoUseCaseConsultarRestaurante() throws Exception {
+        String id = UUID.randomUUID().toString();
 
         mockMvc.perform(get("/api/restaurantes/"+ id)
                         .contentType(MediaType.APPLICATION_JSON))
@@ -115,10 +115,10 @@ class RestauranteControllerTest {
     }
 
     @Test
-    void deveRetornarStatus204_E_realizarChamadaAoUseCase_InativarRestaurante() throws Exception {
-        doReturn(new Restaurante()).when(mapper).toRestaurante((AtualizarRestauranteRequestDTO) any());
+    void deveRetornarStatus204RealizarChamadaAoUseCaseInativarRestaurante() throws Exception {
+        doReturn(new Restaurante()).when(mapper).toRestaurante((AtualizarRestauranteRequest) any());
 
-        AtualizarRestauranteRequestDTO dto = dtoAtualizarBuilder();
+        AtualizarRestauranteRequest dto = dtoAtualizarBuilder();
         Restaurante restaurante = mapper.toRestaurante(dto);
 
         ObjectMapper objectMapper = new ObjectMapper();
@@ -133,8 +133,8 @@ class RestauranteControllerTest {
     }
 
     @Test
-    void deveRelizarChamadaAoUseCase_ComIdPassado_RetornarStatus204() throws Exception {
-        UUID id = UUID.randomUUID();
+    void deveRetornarStatus204RelizarChamadaAoUseCaseComIdPassado() throws Exception {
+        String id = UUID.randomUUID().toString();
 
         mockMvc.perform(delete("/api/restaurantes/"+id))
                 .andExpect(status().isNoContent());
@@ -143,8 +143,8 @@ class RestauranteControllerTest {
     }
 
     @Test
-    void deveRetornarStatus400_quandoPassarAtributosNulos() throws Exception {
-        CriarRestauranteRequestDTO dto = dtoBuilder();
+    void deveRetornarStatus400QuandoPassarAtributosNulos() throws Exception {
+        CriarRestauranteRequest dto = dtoBuilder();
         dto.setNome(null);
         dto.setTempoEstimadoDeEntrega(null);
         dto.setStatusFuncionamento(null);
@@ -160,10 +160,10 @@ class RestauranteControllerTest {
     }
 
     @Test
-    void deveRetornarStatus400_quandoPassarIdNulo_No_UseCaseAtualizarRestaurante() throws Exception {
-        doReturn(new Restaurante()).when(mapper).toRestaurante((AtualizarRestauranteRequestDTO) any());
+    void deveRetornarStatus400QuandoPassarIdNuloUseCaseAtualizarRestaurante() throws Exception {
+        doReturn(new Restaurante()).when(mapper).toRestaurante((AtualizarRestauranteRequest) any());
 
-        AtualizarRestauranteRequestDTO dto = dtoAtualizarBuilder();
+        AtualizarRestauranteRequest dto = dtoAtualizarBuilder();
         dto.setId(null);
         Restaurante restaurante = mapper.toRestaurante(dto);
 
@@ -177,7 +177,7 @@ class RestauranteControllerTest {
     }
 
     @Test
-    void deveRetornar405_QuandoNaoInformarID_noPath_MetodoGET() throws Exception {
+    void deveRetornar405QuandoNaoInformarIDnoPath() throws Exception {
         mockMvc.perform(get("/api/restaurantes/")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isMethodNotAllowed());
@@ -185,7 +185,7 @@ class RestauranteControllerTest {
     }
 
     @Test
-    void deveRetornar405_QuandoNaoInformarID_noPath_MetodoDELETE() throws Exception {
+    void deveRetornar405QuandoNaoInformarIDnoPathDeDelete() throws Exception {
         mockMvc.perform(delete("/api/restaurantes"))
                 .andExpect(status().isMethodNotAllowed());
 

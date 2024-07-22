@@ -1,21 +1,22 @@
 package danieldjgomes.larica.core.usecases;
 
-import danieldjgomes.larica.core.cardapio.dtos.CardapioRequestDTO;
-import danieldjgomes.larica.core.cardapio.dtos.CardapioResponseDTO;
+import danieldjgomes.larica.core.cardapio.dtos.request.CardapioRequestDTO;
+import danieldjgomes.larica.core.cardapio.dtos.request.CardapioUpdateRequestDTO;
+import danieldjgomes.larica.core.cardapio.dtos.response.CardapioResponseDTO;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
 
 public interface CardapioUseCase {
 
-    CardapioResponseDTO createCardapio(UUID pratoId, UUID tipoCulinariaId);
+    CardapioResponseDTO criarCardapio(CardapioRequestDTO cardapioRequestDTO);
 
-    List<CardapioResponseDTO> listAllCardapios();
+    void adicionarPratos(String cardapioId, List<String> pratoIds);
 
-    Optional<CardapioResponseDTO> getCardapioById(UUID id);
+    void removerPrato (String cardapioId, String pratoId);
 
-    Optional<CardapioResponseDTO> updateCardapio(UUID id, CardapioRequestDTO cardapioRequest);
+    CardapioResponseDTO atualizarCardapio(String id, CardapioUpdateRequestDTO cardapioUpdateRequestDTO);
 
-    void deleteCardapio(UUID id);
+    void desativarCardapio(String id);
+
+
 }
