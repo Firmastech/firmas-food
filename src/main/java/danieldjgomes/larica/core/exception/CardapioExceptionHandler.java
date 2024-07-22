@@ -20,11 +20,11 @@ public class CardapioExceptionHandler {
     @ExceptionHandler(EntityNotFoundException.class)
     @ResponseBody
     public ResponseEntity handleNotFoundException(EntityNotFoundException ex) {
-        ErrorResponse response = new ErrorResponse();
-        response.setTimestamp(new Date());
-        response.setMensagens(Collections.singletonList(ex.getMessage()));
+        ErrorResponse response = ErrorResponse.builder()
+                        .mensagens(Collections.singletonList(ex.getMessage()))
+                                .timestamp(new Date())
+                                        .build();
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-
     }
 
 }

@@ -236,24 +236,6 @@ CREATE TABLE public.categoria_prato (
 ALTER TABLE public.categoria_prato OWNER TO dbo;
 
 --
--- Name: contato; Type: TABLE; Schema: public; Owner: dbo
---
-
-CREATE TABLE public.contato (
-    id character varying(36) NOT NULL,
-    restaurante_id character varying(36) NOT NULL,
-    contato character varying(255) NOT NULL,
-    tipo_contato character varying(50) NOT NULL,
-    criado timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
-    atualizado timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
-    deletado timestamp without time zone,
-    ativo boolean DEFAULT true
-);
-
-
-ALTER TABLE public.contato OWNER TO dbo;
-
---
 -- Name: endereco; Type: TABLE; Schema: public; Owner: dbo
 --
 
@@ -264,11 +246,7 @@ CREATE TABLE public.endereco (
     cep character varying(9) NOT NULL,
     cidade character varying(100) NOT NULL,
     uf character(2) NOT NULL,
-    ponto_referencia character varying(144),
-    criado timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
-    atualizado timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
-    deletado timestamp without time zone,
-    ativo boolean DEFAULT true
+    pontoreferencia character varying(144)
 );
 
 
@@ -335,15 +313,10 @@ ALTER TABLE public.prato OWNER TO dbo;
 CREATE TABLE public.restaurante (
     id character varying(36) NOT NULL,
     nome character varying(100) NOT NULL,
-    endereco_id character varying(36) NOT NULL,
-    tempo_estimado integer NOT NULL,
-    status_funcionamento character varying(10) NOT NULL,
-    cardapio_id character varying(36),
-    criado timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
-    atualizado timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
-    deletado timestamp without time zone,
-    ativo boolean DEFAULT true,
-    CONSTRAINT restaurante_statusfuncionamento_check CHECK (((status_funcionamento)::text = ANY (ARRAY[('ABERTO'::character varying)::text, ('FECHADO'::character varying)::text, ('INATIVO'::character varying)::text])))
+    enderecoid character varying(36) NOT NULL,
+    tempoestimado integer NOT NULL,
+    statusfuncionamento character varying(10) NOT NULL,
+    CONSTRAINT restaurante_statusfuncionamento_check CHECK (((statusfuncionamento)::text = ANY (ARRAY[('ABERTO'::character varying)::text, ('FECHADO'::character varying)::text, ('INATIVO'::character varying)::text])))
 );
 
 
@@ -385,22 +358,14 @@ COPY public.categoria_prato (id, nome, restaurante_id, criado, atualizado, esta_
 
 
 --
--- Data for Name: contato; Type: TABLE DATA; Schema: public; Owner: dbo
---
-
-COPY public.contato (id, restaurante_id, contato, tipo_contato, criado, atualizado, deletado, ativo) FROM stdin;
-\.
-
-
---
 -- Data for Name: endereco; Type: TABLE DATA; Schema: public; Owner: dbo
 --
 
-COPY public.endereco (id, rua, numero, cep, cidade, uf, ponto_referencia, criado, atualizado, deletado, ativo) FROM stdin;
-123e4567-e89b-12d3-a456-426614174000	Rua das Flores	123	12345-678	São Paulo	SP	Próximo ao parque	2024-07-22 17:28:10.689658	2024-07-22 17:28:13.493045	\N	t
-223e4567-e89b-12d3-a456-426614174001	Avenida Paulista	456	98765-432	São Paulo	SP	Em frente ao museu	2024-07-22 17:28:10.689658	2024-07-22 17:28:13.493045	\N	t
-323e4567-e89b-12d3-a456-426614174002	Rua XV de Novembro	789	11223-445	Curitiba	PR	Perto da praça	2024-07-22 17:28:10.689658	2024-07-22 17:28:13.493045	\N	t
-423e4567-e89b-12d3-a456-426614174003	Rua da Praia	101	22334-556	Porto Alegre	RS	\N	2024-07-22 17:28:10.689658	2024-07-22 17:28:13.493045	\N	t
+COPY public.endereco (id, rua, numero, cep, cidade, uf, pontoreferencia) FROM stdin;
+123e4567-e89b-12d3-a456-426614174000	Rua das Flores	123	12345-678	São Paulo	SP	Próximo ao parque
+223e4567-e89b-12d3-a456-426614174001	Avenida Paulista	456	98765-432	São Paulo	SP	Em frente ao museu
+323e4567-e89b-12d3-a456-426614174002	Rua XV de Novembro	789	11223-445	Curitiba	PR	Perto da praça
+423e4567-e89b-12d3-a456-426614174003	Rua da Praia	101	22334-556	Porto Alegre	RS	\N
 \.
 
 
@@ -432,7 +397,7 @@ COPY public.prato (id, descricao, nome, preco, categoria, url_imagem, porcentage
 -- Data for Name: restaurante; Type: TABLE DATA; Schema: public; Owner: dbo
 --
 
-COPY public.restaurante (id, nome, endereco_id, tempo_estimado, status_funcionamento, cardapio_id, criado, atualizado, deletado, ativo) FROM stdin;
+COPY public.restaurante (id, nome, enderecoid, tempoestimado, statusfuncionamento) FROM stdin;
 \.
 
 
@@ -466,14 +431,6 @@ ALTER TABLE ONLY public.cardapio_prato
 
 ALTER TABLE ONLY public.categoria_prato
     ADD CONSTRAINT categoria_pkey PRIMARY KEY (id);
-
-
---
--- Name: contato contato_pkey; Type: CONSTRAINT; Schema: public; Owner: dbo
---
-
-ALTER TABLE ONLY public.contato
-    ADD CONSTRAINT contato_pkey PRIMARY KEY (id);
 
 
 --
@@ -541,14 +498,6 @@ ALTER TABLE ONLY public.cardapio_prato
 
 
 --
--- Name: contato fk_contato_restaurante_id; Type: FK CONSTRAINT; Schema: public; Owner: dbo
---
-
-ALTER TABLE ONLY public.contato
-    ADD CONSTRAINT fk_contato_restaurante_id FOREIGN KEY (restaurante_id) REFERENCES public.restaurante(id);
-
-
---
 -- Name: item_pedido fk_item_pedido; Type: FK CONSTRAINT; Schema: public; Owner: dbo
 --
 
@@ -581,14 +530,6 @@ ALTER TABLE ONLY public.cardapio_prato
 
 
 --
--- Name: restaurante fk_restaurante_cardapio_id; Type: FK CONSTRAINT; Schema: public; Owner: dbo
---
-
-ALTER TABLE ONLY public.restaurante
-    ADD CONSTRAINT fk_restaurante_cardapio_id FOREIGN KEY (cardapio_id) REFERENCES public.cardapio(id);
-
-
---
 -- Name: item_pedido item_pedido_pratoid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: dbo
 --
 
@@ -601,7 +542,7 @@ ALTER TABLE ONLY public.item_pedido
 --
 
 ALTER TABLE ONLY public.restaurante
-    ADD CONSTRAINT restaurante_enderecoid_fkey FOREIGN KEY (endereco_id) REFERENCES public.endereco(id);
+    ADD CONSTRAINT restaurante_enderecoid_fkey FOREIGN KEY (enderecoid) REFERENCES public.endereco(id);
 
 
 --
@@ -652,13 +593,6 @@ GRANT SELECT,INSERT ON TABLE public.cardapio_prato TO restaurante_user;
 REVOKE ALL ON TABLE public.categoria_prato FROM dbo;
 GRANT REFERENCES,TRIGGER,TRUNCATE ON TABLE public.categoria_prato TO dbo;
 GRANT SELECT,INSERT ON TABLE public.categoria_prato TO restaurante_user;
-
-
---
--- Name: TABLE contato; Type: ACL; Schema: public; Owner: dbo
---
-
-GRANT SELECT ON TABLE public.contato TO restaurante_user;
 
 
 --

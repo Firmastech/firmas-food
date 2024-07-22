@@ -107,3 +107,61 @@ CREATE TABLE public.item_pedido (
                                         CONSTRAINT fk_item_pedido FOREIGN KEY (pedido_id)
                                         REFERENCES public.pedido(id)
 );
+--Padronizando para snake_case
+ALTER TABLE public.endereco
+    RENAME COLUMN pontoReferencia TO ponto_referencia;
+
+ALTER TABLE public.restaurante
+    RENAME COLUMN enderecoId TO endereco_id;
+ALTER TABLE public.restaurante
+    RENAME COLUMN tempoEstimado TO tempo_estimado;
+ALTER TABLE public.restaurante
+    RENAME COLUMN statusFuncionamento TO status_funcionamento;
+
+-- Adicionar novas colunas
+ALTER TABLE public.restaurante
+    ADD COLUMN cardapio_id VARCHAR(36); -- Pode ser NULL
+
+ALTER TABLE public.restaurante
+    ADD COLUMN criado TIMESTAMP DEFAULT CURRENT_TIMESTAMP; -- Inicializado com o horário atual
+
+ALTER TABLE public.restaurante
+    ADD COLUMN atualizado TIMESTAMP DEFAULT CURRENT_TIMESTAMP; -- Inicializado com o horário atual
+
+ALTER TABLE public.restaurante
+    ADD COLUMN deletado TIMESTAMP; -- Pode ser NULL
+
+ALTER TABLE public.restaurante
+    ADD COLUMN ativo BOOLEAN DEFAULT TRUE;
+
+ALTER TABLE public.restaurante
+    ADD CONSTRAINT fk_restaurante_cardapio_id
+        FOREIGN KEY (cardapio_id) REFERENCES public.cardapio (id);
+
+-- Adicionar novas colunas
+ALTER TABLE public.endereco
+    ADD COLUMN criado TIMESTAMP DEFAULT CURRENT_TIMESTAMP; -- Inicializado com o horário atual
+
+ALTER TABLE public.endereco
+    ADD COLUMN atualizado TIMESTAMP DEFAULT CURRENT_TIMESTAMP; -- Inicializado com o horário atual
+
+ALTER TABLE public.endereco
+    ADD COLUMN deletado TIMESTAMP; -- Pode ser NULL
+
+ALTER TABLE public.endereco
+    ADD COLUMN ativo BOOLEAN DEFAULT TRUE;
+
+CREATE TABLE public.contato (
+                                id VARCHAR(36) NOT NULL PRIMARY KEY,
+                                restaurante_id VARCHAR(36) NOT NULL,
+                                contato VARCHAR(255) NOT NULL,
+                                tipo_contato VARCHAR(50) NOT NULL,
+                                criado TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Inicializado com o horário atual
+                                atualizado TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Inicializado com o horário atual
+                                deletado TIMESTAMP, -- Pode ser NULL
+                                ativo BOOLEAN DEFAULT TRUE -- Valor padrão TRUE
+);
+
+ALTER TABLE public.contato
+    ADD CONSTRAINT fk_contato_restaurante_id
+        FOREIGN KEY (restaurante_id) REFERENCES public.restaurante (id);

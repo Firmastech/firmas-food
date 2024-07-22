@@ -16,10 +16,10 @@ public class UsuarioControllerExceptionHandler {
 
     @ExceptionHandler(CriandoUsuarioDuplicadoException.class)
     ResponseEntity<ErrorResponse> handleCriandoUsuarioDuplicadoException(CriandoUsuarioDuplicadoException duplicadoException){
-        ErrorResponse response = new ErrorResponse();
-        response.setMensagens(Collections.singletonList(duplicadoException.getMessage()));
-        response.setTimestamp(new Date());
-
+        ErrorResponse response = ErrorResponse.builder()
+                        .mensagens(Collections.singletonList(duplicadoException.getMessage()))
+                                .timestamp(new Date())
+                                        .build();
         return new ResponseEntity<>(response,HttpStatus.CONFLICT);
     }
 }
