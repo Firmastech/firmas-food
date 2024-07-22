@@ -1,9 +1,9 @@
 package danieldjgomes.larica.infrastructure;
 
-import danieldjgomes.larica.core.restaurante.DTOMapper;
 import danieldjgomes.larica.core.restaurante.entity.Restaurante;
 import danieldjgomes.larica.core.usecases.restaurante.RegistrarRestauranteUseCase;
 import danieldjgomes.larica.infrastructure.dto.restaurante.request.CriarRestauranteRequestDTO;
+import danieldjgomes.larica.infrastructure.mapper.DTOMapper;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;

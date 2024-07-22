@@ -1,6 +1,5 @@
 package danieldjgomes.larica.core.prato.entity;
 
-import danieldjgomes.larica.core.desconto.entity.Desconto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,7 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.util.UUID;
+import java.time.LocalDateTime;
+
 
 @Getter
 @Setter
@@ -20,26 +20,35 @@ public class Prato {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "id", updatable = false, nullable = false)
+    @Column(name = "id", nullable = false)
     private String id;
 
-    @Column(nullable = false, length = 100)
-    private String nome;
-
-    @Column(nullable = false, length = 2000)
     private String descricao;
 
-    @Column(nullable = false, length = 8000)
-    private String urlImagem;
-
-    @Column(nullable = false, precision = 10, scale = 2)
-    private BigDecimal preco;
+    @Column(nullable = false)
+    private String nome;
 
     @Column(nullable = false)
+    private BigDecimal preco;
+
     private String categoria;
 
-    @ManyToOne
-    @JoinColumn(name = "tag_desconto_id")
-    private Desconto desconto;
+    @Column(name = "url_imagem")
+    private String urlImagem;
+
+    @Column(name = "porcentagem_desconto")
+    private BigDecimal porcentagemDesconto;
+
+    @Column(nullable = false)
+    private LocalDateTime criado = LocalDateTime.now();
+
+    @Column(nullable = false)
+    private LocalDateTime atualizado = LocalDateTime.now();
+
+    @Column(name = "esta_ativo", nullable = false)
+    private Boolean estaAtivo = true;
+
+    private LocalDateTime deletado;
+
 
 }
