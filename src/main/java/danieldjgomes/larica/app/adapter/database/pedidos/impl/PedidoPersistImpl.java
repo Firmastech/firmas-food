@@ -10,9 +10,10 @@ import danieldjgomes.larica.app.ports.database.PedidoPersist;
 import danieldjgomes.larica.app.usecase.pedido.exceptions.PedidoNaoEncontradoException;
 import danieldjgomes.larica.app.usecase.pedido.request.PratosRequestList;
 import danieldjgomes.larica.app.usecase.pedido.request.ProcessarPedidoRequest;
+import danieldjgomes.larica.app.usecase.pedido.response.PratosResponseList;
+import danieldjgomes.larica.app.usecase.pedido.response.ProcessarPedidoResponse;
 import danieldjgomes.larica.dataprovider.repository.entity.RestauranteEntity;
 import lombok.RequiredArgsConstructor;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -31,28 +32,53 @@ public class PedidoPersistImpl implements PedidoPersist {
 
     @Override
     public void postPedido(ProcessarPedidoRequest pedido) {
-        try {
             PedidoEntity pedidoEntity = convertRequestToEntity(pedido);
             pedidoRepository.save(pedidoEntity);
-        } catch (DataIntegrityViolationException e) {
-            String errorMessage = e.getMostSpecificCause().getMessage();
-            String fieldName = extractFieldNameFromErrorMessage(errorMessage);
-            throw new RuntimeException("Falha ao postar pedido. Campo com problema: " + fieldName, e);
-        } catch (Exception e) {
-            // Registre o erro aqui
-            throw new RuntimeException("Falha ao postar pedido", e);
-        }
     }
 
     @Override
-    public ProcessarPedidoRequest getPedidoById(UUID pedidoId) {
-        PedidoEntity pedidoEntity = findPedidoEntityById(pedidoId.toString());
-        return convertEntityToRequest(pedidoEntity);
+    public ProcessarPedidoResponse getPedidoById(String pedidoId) {
+        PedidoEntity pedidoEntity = findPedidoById(pedidoId);
+        return convertEntityToResponse(pedidoEntity);
     }
 
     @Override
     public void atualizarPedidoById(ProcessarPedidoRequest pedido) {
 
+    }
+
+    private UsuarioEntity findUsuarioEntityById(String usuarioId) {
+        return usuarioRepository.findById(usuarioId)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+    }
+
+    private PedidoEntity findPedidoById(String pedidoId) {
+        return pedidoRepository.findById(pedidoId)
+                .orElseThrow(() -> new PedidoNaoEncontradoException());
+    }
+
+    private ProcessarPedidoRequest convertEntityToRequest(PedidoEntity pedidoEntity) {
+        return null;}
+
+    private ProcessarPedidoResponse convertEntityToResponse(PedidoEntity pedidoEntity) {
+        return ProcessarPedidoResponse.builder()
+                .idPedido(pedidoEntity.getId())
+                .usuarioId(pedidoEntity.getUsuario().getId())
+                .statusPedido(pedidoEntity.getStatus())
+                .totalPedido(pedidoEntity.getValor())
+                .itensList(convertEntityItemsToRequestItems(pedidoEntity.getItens()))
+                .build();
+    }
+
+    private List<PratosResponseList> convertEntityItemsToRequestItems(List<ItemPedidoEntity> itensPedidoEntityList) {
+        return itensPedidoEntityList.stream()
+                .map(itemPedidoEntity -> PratosResponseList.builder()
+                        .pratoId(itemPedidoEntity.getPratoId())
+                        .restauranteId(itemPedidoEntity.getPedidoId().getRestauranteId())
+                        .quantidade(itemPedidoEntity.getQuantidade())
+                        .descricao(itemPedidoEntity.getObservacao())
+                        .build())
+                .collect(Collectors.toList());
     }
 
     private PedidoEntity convertRequestToEntity(ProcessarPedidoRequest pedidoRequest) {
@@ -82,30 +108,5 @@ public class PedidoPersistImpl implements PedidoPersist {
                         .observacao(itemPedidoRequest.getDescricao())
                         .build())
                 .collect(Collectors.toList());
-    }
-
-    private UsuarioEntity findUsuarioEntityById(String usuarioId) {
-        return usuarioRepository.findById(usuarioId)
-                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
-    }
-
-    private PedidoEntity findPedidoEntityById(String pedidoId) {
-        return pedidoRepository.findById(pedidoId)
-                .orElseThrow(() -> new PedidoNaoEncontradoException());
-    }
-
-    private ProcessarPedidoRequest convertEntityToRequest(PedidoEntity pedidoEntity) {
-        // Implementação do método de conversão
-        return null;}
-
-    private String extractFieldNameFromErrorMessage(String errorMessage) {
-        String prefix = "Column: ";
-        int index = errorMessage.indexOf(prefix);
-
-        if (index != -1) {
-            return errorMessage.substring(index + prefix.length());
-        }
-
-        return "Campo desconhecido";
     }
 }
