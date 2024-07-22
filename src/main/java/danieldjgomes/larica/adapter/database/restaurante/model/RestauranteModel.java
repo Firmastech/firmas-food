@@ -1,6 +1,7 @@
 package danieldjgomes.larica.adapter.database.restaurante.model;
 
 import danieldjgomes.larica.adapter.database.BaseModel;
+import danieldjgomes.larica.adapter.database.endereco.model.EnderecoModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,5 +30,11 @@ public class RestauranteModel extends BaseModel {
 
     @Column(name = "status_funcionamento", nullable = false)
     private String statusFuncionamento;
+
+    @Column(name = "endereco_id")
+    private String enderecoId;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private EnderecoModel endereco;
 
 }

@@ -14,7 +14,7 @@ import java.util.UUID;
 public class Endereco {
     private String id;
     private String rua;
-    private String numero;
+    private Integer numero;
     private String cep;
     private String cidade;
     private String uf;

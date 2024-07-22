@@ -1,5 +1,6 @@
 package danieldjgomes.larica.adapter.database.endereco.model;
 
+import danieldjgomes.larica.adapter.database.BaseModel;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -11,7 +12,7 @@ import lombok.Setter;
 @Table(name = "endereco")
 @Getter
 @Setter
-public class EnderecoModel {
+public class EnderecoModel extends BaseModel {
     @Id
     @Column(name = "id", length = 36, nullable = false, unique = true)
     private String id;
