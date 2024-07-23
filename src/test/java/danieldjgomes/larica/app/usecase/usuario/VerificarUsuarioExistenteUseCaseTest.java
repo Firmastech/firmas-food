@@ -24,8 +24,6 @@ class VerificarUsuarioExistenteUseCaseTest {
     @InjectMocks
     private VerificarUsuarioExistenteUseCase verificarUsuarioExistenteUseCase;
 
-    @InjectMocks
-
     TokenMockBuilder tokenMockBuilder = new TokenMockBuilder();
 
 

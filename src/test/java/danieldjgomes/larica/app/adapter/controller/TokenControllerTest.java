@@ -98,7 +98,7 @@ class TokenControllerTest {
         RevalidarTokenRequest request = new RevalidarTokenRequest();
         request.setToken("tokenValido");
         TokenResponse response = tokenMockBuilder.geraTokenResponseValido();
-        when(renovarTokenUsuarioUseCase.processar(any(RevalidarTokenRequest.class))).thenReturn(response);
+        when(renovarTokenUsuarioUseCase.processar(request)).thenReturn(response);
 
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/refresh")
                         .contentType(MediaType.APPLICATION_JSON)
