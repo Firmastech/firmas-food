@@ -8,26 +8,6 @@ SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 
 --
--- Drop databases (except postgres and template1)
---
-
-DROP DATABASE db_restaurante;
-DROP DATABASE keycloak;
-
-
-
-
---
--- Drop roles
---
-
-DROP ROLE dbo;
-DROP ROLE keycloak_user;
-DROP ROLE postgres;
-DROP ROLE restaurante_user;
-
-
---
 -- Roles
 --
 
@@ -59,12 +39,14 @@ ALTER ROLE restaurante_user WITH NOSUPERUSER INHERIT NOCREATEROLE NOCREATEDB LOG
 -- Database "template1" dump
 --
 
+\connect template1
+
 --
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 16.3 (Debian 16.3-1.pgdg120+1)
--- Dumped by pg_dump version 16.3 (Debian 16.3-1.pgdg120+1)
+-- Dumped from database version 16.3 (Ubuntu 16.3-1.pgdg24.04+1)
+-- Dumped by pg_dump version 16.3 (Ubuntu 16.3-1.pgdg24.04+1)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -76,65 +58,6 @@ SET check_function_bodies = false;
 SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
-
-UPDATE pg_catalog.pg_database SET datistemplate = false WHERE datname = 'template1';
-DROP DATABASE template1;
---
--- Name: template1; Type: DATABASE; Schema: -; Owner: dbo
---
-
-CREATE DATABASE template1 WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE_PROVIDER = libc LOCALE = 'en_US.utf8';
-
-
-ALTER DATABASE template1 OWNER TO dbo;
-
-\connect template1
-
-SET statement_timeout = 0;
-SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
-SET client_encoding = 'UTF8';
-SET standard_conforming_strings = on;
-SELECT pg_catalog.set_config('search_path', '', false);
-SET check_function_bodies = false;
-SET xmloption = content;
-SET client_min_messages = warning;
-SET row_security = off;
-
---
--- Name: DATABASE template1; Type: COMMENT; Schema: -; Owner: dbo
---
-
-COMMENT ON DATABASE template1 IS 'default template for new databases';
-
-
---
--- Name: template1; Type: DATABASE PROPERTIES; Schema: -; Owner: dbo
---
-
-ALTER DATABASE template1 IS_TEMPLATE = true;
-
-
-\connect template1
-
-SET statement_timeout = 0;
-SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
-SET client_encoding = 'UTF8';
-SET standard_conforming_strings = on;
-SELECT pg_catalog.set_config('search_path', '', false);
-SET check_function_bodies = false;
-SET xmloption = content;
-SET client_min_messages = warning;
-SET row_security = off;
-
---
--- Name: DATABASE template1; Type: ACL; Schema: -; Owner: dbo
---
-
-REVOKE CONNECT,TEMPORARY ON DATABASE template1 FROM PUBLIC;
-GRANT CONNECT ON DATABASE template1 TO PUBLIC;
-
 
 --
 -- PostgreSQL database dump complete
@@ -148,8 +71,8 @@ GRANT CONNECT ON DATABASE template1 TO PUBLIC;
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 16.3 (Debian 16.3-1.pgdg120+1)
--- Dumped by pg_dump version 16.3 (Debian 16.3-1.pgdg120+1)
+-- Dumped from database version 16.3 (Ubuntu 16.3-1.pgdg24.04+1)
+-- Dumped by pg_dump version 16.3 (Ubuntu 16.3-1.pgdg24.04+1)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -397,10 +320,11 @@ COPY public.contato (id, restaurante_id, contato, tipo_contato, criado, atualiza
 --
 
 COPY public.endereco (id, rua, numero, cep, cidade, uf, ponto_referencia, criado, atualizado, deletado, ativo) FROM stdin;
-123e4567-e89b-12d3-a456-426614174000	Rua das Flores	123	12345-678	São Paulo	SP	Próximo ao parque	2024-07-22 17:28:10.689658	2024-07-22 17:28:13.493045	\N	t
-223e4567-e89b-12d3-a456-426614174001	Avenida Paulista	456	98765-432	São Paulo	SP	Em frente ao museu	2024-07-22 17:28:10.689658	2024-07-22 17:28:13.493045	\N	t
-323e4567-e89b-12d3-a456-426614174002	Rua XV de Novembro	789	11223-445	Curitiba	PR	Perto da praça	2024-07-22 17:28:10.689658	2024-07-22 17:28:13.493045	\N	t
-423e4567-e89b-12d3-a456-426614174003	Rua da Praia	101	22334-556	Porto Alegre	RS	\N	2024-07-22 17:28:10.689658	2024-07-22 17:28:13.493045	\N	t
+123e4567-e89b-12d3-a456-426614174000	Rua das Flores	123	12345-678	São Paulo	SP	Próximo ao parque	2024-07-22 19:48:22.741949	2024-07-22 19:48:22.776537	\N	t
+223e4567-e89b-12d3-a456-426614174001	Avenida Paulista	456	98765-432	São Paulo	SP	Em frente ao museu	2024-07-22 19:48:22.741949	2024-07-22 19:48:22.776537	\N	t
+323e4567-e89b-12d3-a456-426614174002	Rua XV de Novembro	789	11223-445	Curitiba	PR	Perto da praça	2024-07-22 19:48:22.741949	2024-07-22 19:48:22.776537	\N	t
+423e4567-e89b-12d3-a456-426614174003	Rua da Praia	101	22334-556	Porto Alegre	RS	\N	2024-07-22 19:48:22.741949	2024-07-22 19:48:22.776537	\N	t
+123e4567-e89b-12d3-a456-426614174001	Nome da Rua	123	12345-678	Nome da Cidade	UF	\N	2024-07-22 19:48:22.741949	2024-07-22 19:48:22.776537	\N	t
 \.
 
 
@@ -425,6 +349,7 @@ COPY public.pedido (id, usuario_id, restaurante_id, valor, status, data_hora_con
 --
 
 COPY public.prato (id, descricao, nome, preco, categoria, url_imagem, porcentagem_desconto, criado, atualizado, esta_ativo, deletado) FROM stdin;
+95d68ac6-e54f-4723-b056-24fe373eabdd	Lasanha de frango com molho branco e queijo gratinado.	Lasanha de Frango	25.90	\N	https://example.com/images/lasanha-de-frango.jpg	\N	2024-07-22 15:28:32.022289	2024-07-22 15:28:32.022289	t	\N
 \.
 
 
@@ -433,6 +358,8 @@ COPY public.prato (id, descricao, nome, preco, categoria, url_imagem, porcentage
 --
 
 COPY public.restaurante (id, nome, endereco_id, tempo_estimado, status_funcionamento, cardapio_id, criado, atualizado, deletado, ativo) FROM stdin;
+123e4567-e89b-12d3-a456-426614174000	Nome do Restaurante	123e4567-e89b-12d3-a456-426614174001	30	ABERTO	\N	2024-07-22 19:48:22.548374	2024-07-22 19:48:22.588036	\N	t
+123e4567-e89b-12d3-a456-426614174011	Teu pai de Calcinha LTDA	123e4567-e89b-12d3-a456-426614174000	30	ABERTO	\N	2024-07-22 19:48:22.548374	2024-07-22 19:48:22.588036	\N	t
 \.
 
 
@@ -441,6 +368,7 @@ COPY public.restaurante (id, nome, endereco_id, tempo_estimado, status_funcionam
 --
 
 COPY public.usuario (id) FROM stdin;
+123e4567-e89b-12d3-a456-426614174000
 \.
 
 
@@ -741,8 +669,8 @@ ALTER DEFAULT PRIVILEGES FOR ROLE dbo IN SCHEMA public GRANT SELECT ON TABLES TO
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 16.3 (Debian 16.3-1.pgdg120+1)
--- Dumped by pg_dump version 16.3 (Debian 16.3-1.pgdg120+1)
+-- Dumped from database version 16.3 (Ubuntu 16.3-1.pgdg24.04+1)
+-- Dumped by pg_dump version 16.3 (Ubuntu 16.3-1.pgdg24.04+1)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -7713,12 +7641,14 @@ ALTER DEFAULT PRIVILEGES FOR ROLE dbo IN SCHEMA public GRANT ALL ON TABLES TO ke
 -- Database "postgres" dump
 --
 
+\connect postgres
+
 --
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 16.3 (Debian 16.3-1.pgdg120+1)
--- Dumped by pg_dump version 16.3 (Debian 16.3-1.pgdg120+1)
+-- Dumped from database version 16.3 (Ubuntu 16.3-1.pgdg24.04+1)
+-- Dumped by pg_dump version 16.3 (Ubuntu 16.3-1.pgdg24.04+1)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -7730,43 +7660,6 @@ SET check_function_bodies = false;
 SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
-
-DROP DATABASE postgres;
---
--- Name: postgres; Type: DATABASE; Schema: -; Owner: dbo
---
-
-CREATE DATABASE postgres WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE_PROVIDER = libc LOCALE = 'en_US.utf8';
-
-
-ALTER DATABASE postgres OWNER TO dbo;
-
-\connect postgres
-
-SET statement_timeout = 0;
-SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
-SET client_encoding = 'UTF8';
-SET standard_conforming_strings = on;
-SELECT pg_catalog.set_config('search_path', '', false);
-SET check_function_bodies = false;
-SET xmloption = content;
-SET client_min_messages = warning;
-SET row_security = off;
-
---
--- Name: DATABASE postgres; Type: COMMENT; Schema: -; Owner: dbo
---
-
-COMMENT ON DATABASE postgres IS 'default administrative connection database';
-
-
---
--- Name: DATABASE postgres; Type: ACL; Schema: -; Owner: dbo
---
-
-REVOKE ALL ON DATABASE postgres FROM dbo;
-
 
 --
 -- Name: SCHEMA public; Type: ACL; Schema: -; Owner: pg_database_owner
