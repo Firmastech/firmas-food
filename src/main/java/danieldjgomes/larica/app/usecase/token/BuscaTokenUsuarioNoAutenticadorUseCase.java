@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class BuscaTokenUsuarioNoKeycloak implements EtapaProcessoBuscarTokenUsuario {
+public class BuscaTokenUsuarioNoAutenticadorUseCase implements EtapaProcessoBuscarTokenUsuario {
 
     private final KeycloakUserClient keycloakUserClient;
     private final TokenMapper tokenMapper;
