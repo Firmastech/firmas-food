@@ -2,9 +2,8 @@ package danieldjgomes.larica.app.adapter.controller.exceptionHandler;
 
 import danieldjgomes.larica.adapter.handlers.restaurante.CommonExceptionHandler;
 import danieldjgomes.larica.app.adapter.controller.TokenController;
-import danieldjgomes.larica.app.adapter.controller.UsuarioController;
-import danieldjgomes.larica.app.usecase.usuario.exceptions.CriandoUsuarioDuplicadoException;
 import danieldjgomes.larica.infrastructure.expectionHandler.model.ErrorResponse;
+import danieldjgomes.larica.app.usecase.usuario.exceptions.CriandoUsuarioDuplicadoException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,20 +15,12 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import java.util.Collections;
 import java.util.Date;
 
-@ControllerAdvice(assignableTypes = {UsuarioController.class})
+@ControllerAdvice(assignableTypes = {TokenController.class})
 @RequiredArgsConstructor
-public class UsuarioControllerExceptionHandler {
+public class TokenControllerExceptionHandler {
 
     private final CommonExceptionHandler commonExceptionHandler;
 
-    @ExceptionHandler(CriandoUsuarioDuplicadoException.class)
-    ResponseEntity<ErrorResponse> handleCriandoUsuarioDuplicadoException(CriandoUsuarioDuplicadoException duplicadoException){
-        ErrorResponse response = ErrorResponse.builder()
-                        .mensagens(Collections.singletonList(duplicadoException.getMessage()))
-                                .timestamp(new Date())
-                                        .build();
-        return new ResponseEntity<>(response,HttpStatus.CONFLICT);
-    }
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<ErrorResponse> exceptionHandler(MethodArgumentNotValidException exception) {

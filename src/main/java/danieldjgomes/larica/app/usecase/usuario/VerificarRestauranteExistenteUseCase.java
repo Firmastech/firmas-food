@@ -11,8 +11,9 @@ public class VerificarRestauranteExistenteUseCase implements EtapaProcessoCriarU
 
     @Override
     public void processar(CriarUsuarioRequestDTO processo) {
-//        throw new RestauranteNaoEncontradoException();
-    }
+//      TODO: Requer Implementacao
+
+  }
 
 
 }
