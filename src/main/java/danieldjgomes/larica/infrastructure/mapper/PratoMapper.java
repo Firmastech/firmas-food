@@ -31,13 +31,5 @@ public interface PratoMapper {
     @Mapping(source = "porcentagemDesconto", target = "porcentagemDesconto")
     PratoResponseDTO toResponseDTO(Prato entity);
 
-    @Mapping(target = "id", ignore = true)
-    @Mapping(source = "descricao", target = "descricao")
-    @Mapping(source = "nome", target = "nome")
-    @Mapping(source = "preco", target = "preco")
-    @Mapping(source = "categoria", target = "categoria")
-    @Mapping(source = "urlImagem", target = "urlImagem")
-    @Mapping(source = "porcentagemDesconto", target = "porcentagemDesconto")
-    void updateEntityFromDTO(PratoRequestDTO dto, @MappingTarget Prato entity);
 
 }

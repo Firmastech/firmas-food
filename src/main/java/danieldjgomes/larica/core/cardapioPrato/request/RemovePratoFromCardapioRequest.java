@@ -1,6 +1,6 @@
-package danieldjgomes.larica.core.cardapio.dtos.request;
+package danieldjgomes.larica.core.cardapioPrato.request;
 
-import jakarta.validation.constraints.NotNull;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,11 +10,8 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class RemoverPratoRequestDTO {
+public class RemovePratoFromCardapioRequest {
 
-    @NotNull
     private String cardapioId;
-
-    @NotNull
     private String pratoId;
 }
