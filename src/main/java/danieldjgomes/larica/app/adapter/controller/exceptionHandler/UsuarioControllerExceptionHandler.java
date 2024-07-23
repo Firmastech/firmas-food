@@ -1,7 +1,6 @@
 package danieldjgomes.larica.app.adapter.controller.exceptionHandler;
 
 import danieldjgomes.larica.adapter.handlers.restaurante.CommonExceptionHandler;
-import danieldjgomes.larica.app.adapter.controller.TokenController;
 import danieldjgomes.larica.app.adapter.controller.UsuarioController;
 import danieldjgomes.larica.app.usecase.usuario.exceptions.CriandoUsuarioDuplicadoException;
 import danieldjgomes.larica.infrastructure.expectionHandler.model.ErrorResponse;
@@ -23,13 +22,14 @@ public class UsuarioControllerExceptionHandler {
     private final CommonExceptionHandler commonExceptionHandler;
 
     @ExceptionHandler(CriandoUsuarioDuplicadoException.class)
-    ResponseEntity<ErrorResponse> handleCriandoUsuarioDuplicadoException(CriandoUsuarioDuplicadoException duplicadoException){
+    ResponseEntity<ErrorResponse> handleCriandoUsuarioDuplicadoException(CriandoUsuarioDuplicadoException duplicadoException) {
         ErrorResponse response = ErrorResponse.builder()
-                        .mensagens(Collections.singletonList(duplicadoException.getMessage()))
-                                .timestamp(new Date())
-                                        .build();
-        return new ResponseEntity<>(response,HttpStatus.CONFLICT);
+                .mensagens(Collections.singletonList(duplicadoException.getMessage()))
+                .timestamp(new Date())
+                .build();
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
     }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<ErrorResponse> exceptionHandler(MethodArgumentNotValidException exception) {
