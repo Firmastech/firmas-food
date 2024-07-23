@@ -1,6 +1,5 @@
 package danieldjgomes.larica.adapter.database.restaurante.model;
 
-import danieldjgomes.larica.adapter.database.BaseModel;
 import danieldjgomes.larica.adapter.database.endereco.model.EnderecoModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -8,7 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.UUID;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "restaurante")
@@ -16,7 +15,7 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class RestauranteModel extends BaseModel {
+public class RestauranteModel {
 
     @Id
     @Column(name = "id", nullable = false)
@@ -31,10 +30,20 @@ public class RestauranteModel extends BaseModel {
     @Column(name = "status_funcionamento", nullable = false)
     private String statusFuncionamento;
 
-    @Column(name = "endereco_id")
-    private String enderecoId;
-
     @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "endereco_id")
     private EnderecoModel endereco;
+
+    @Column(name = "criado")
+    private LocalDateTime criadoEm;
+
+    @Column(name = "atualizado")
+    private LocalDateTime atualizadoEm;
+
+    @Column(name = "deletado")
+    private LocalDateTime deletadoEm;
+
+    @Column(name = "ativo", nullable = false, length = 10)
+    private Boolean ativo;
 
 }
