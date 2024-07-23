@@ -12,8 +12,8 @@ public class BuscaTokenUsuarioNoAutenticadorUseCase implements EtapaProcessoBusc
 
     private final KeycloakUserClient keycloakUserClient;
     private final TokenMapper tokenMapper;
-    private final String clientSecret = "**********";
-    private final String clientId = "firmas-food";
+    private static final String CLIENT_SECRET = "**********";
+    private static final String CLIENT_ID = "firmas-food";
 
     @Override
     public PegarTokenUsuarioProcessModel processar(PegarTokenUsuarioProcessModel process) {
@@ -26,8 +26,8 @@ public class BuscaTokenUsuarioNoAutenticadorUseCase implements EtapaProcessoBusc
 
     private LoginUsuarioKeycloakModelDTO buildModelBuscarTokenUsuarioKeycloak(String usuarioId, String senha) {
         LoginUsuarioKeycloakModelDTO loginUsuarioKeycloakModelDTO = new LoginUsuarioKeycloakModelDTO();
-        loginUsuarioKeycloakModelDTO.setClientSecret(clientSecret);
-        loginUsuarioKeycloakModelDTO.setClientId(clientId);
+        loginUsuarioKeycloakModelDTO.setClientSecret(CLIENT_SECRET);
+        loginUsuarioKeycloakModelDTO.setClientId(CLIENT_ID);
         loginUsuarioKeycloakModelDTO.setGrantType("password");
         loginUsuarioKeycloakModelDTO.setUsername(usuarioId);
         loginUsuarioKeycloakModelDTO.setPassword(senha);
