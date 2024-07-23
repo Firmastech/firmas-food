@@ -1,0 +1,26 @@
+version: '3'
+services:
+  keycloak:
+    image: quay.io/keycloak/keycloak:24.0.3
+    command: start-dev
+    restart: always
+    ports:
+      - "9081:8080"
+    environment:
+      KEYCLOAK_IMPORT: /opt/keycloak/import/realm-export.json
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin@1234
+      KC_DB: postgres
+      KC_DB_SCHEMA: public
+      KC_DB_USERNAME: keycloak_user
+      KC_DB_PASSWORD: secure_password
+      KC_DB_URL: jdbc:postgresql://144.22.152.131:5432/keycloak
+    volumes:
+      - ./keycloak_data:/opt/keycloak/data
+    networks:
+      - local
+volumes:
+  keycloak_data:
+
+networks:
+  local:

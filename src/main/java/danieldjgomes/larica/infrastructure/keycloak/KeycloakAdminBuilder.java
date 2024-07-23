@@ -30,6 +30,7 @@ public class KeycloakAdminBuilder {
                 .serverUrl(authUrl)
                 .clientId(clientId)
                 .clientSecret(secretKey)
+                .realm(realm)
                 .build()
                 .realm(realm);
     }
