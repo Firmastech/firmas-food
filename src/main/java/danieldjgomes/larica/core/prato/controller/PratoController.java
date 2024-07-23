@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/prato")
@@ -28,7 +27,7 @@ public class PratoController {
 
     @GetMapping("/{id}")
     public ResponseEntity<PratoResponseDTO> getPratoById(@PathVariable String id) {
-        Optional<PratoResponseDTO> prato = pratoService.getPratoById(id);
+        Optional<PratoResponseDTO> prato = pratoService.findPratoById(id);
         return prato.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
@@ -39,7 +38,8 @@ public class PratoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PratoResponseDTO> updatePrato(@PathVariable String id, @RequestBody @Valid PratoRequestDTO updatedPrato) {
+    public ResponseEntity<PratoResponseDTO> updatePrato(
+            @PathVariable String id, @RequestBody @Valid PratoRequestDTO updatedPrato) {
         Optional<PratoResponseDTO> prato = pratoService.updatePrato(id, updatedPrato);
         return prato.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
