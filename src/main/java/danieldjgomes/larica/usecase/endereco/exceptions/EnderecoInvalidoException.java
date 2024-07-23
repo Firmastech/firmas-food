@@ -1,4 +1,4 @@
-package danieldjgomes.larica.usecase.restaurante.exceptions;
+package danieldjgomes.larica.usecase.endereco.exceptions;
 
 public class EnderecoInvalidoException extends RuntimeException{
 

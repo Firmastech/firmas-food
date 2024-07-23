@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface CadastrarContatoUseCase {
 
-    List<ContatoModel> cadastrar(List<ContatoModel> contatoModels, String idRestaurante);
+    ContatoModel cadastrar(ContatoModel contatoModel);
 }

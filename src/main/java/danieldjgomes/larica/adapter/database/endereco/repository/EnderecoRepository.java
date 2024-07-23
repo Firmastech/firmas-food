@@ -9,5 +9,5 @@ import java.util.Optional;
 @Repository
 public interface EnderecoRepository extends JpaRepository<EnderecoModel,String> {
 
-    Optional<EnderecoModel> findByCepAndNumero(String cep, Integer numero);
+    Optional<EnderecoModel> findByCepAndNumero(String cep, String numero);
 }

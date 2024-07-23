@@ -1,8 +1,8 @@
 package danieldjgomes.larica.infrastructure.mapper;
 
-import danieldjgomes.larica.core.catagoria.dtos.CategoriaRequestDTO;
-import danieldjgomes.larica.core.catagoria.dtos.CategoriaResponseDTO;
-import danieldjgomes.larica.core.catagoria.entity.Categoria;
+import danieldjgomes.larica.core.categoria.dtos.CategoriaRequestDTO;
+import danieldjgomes.larica.core.categoria.dtos.CategoriaResponseDTO;
+import danieldjgomes.larica.core.categoria.entity.Categoria;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;

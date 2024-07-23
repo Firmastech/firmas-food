@@ -1,7 +1,7 @@
 package danieldjgomes.larica.core.usecases;
 
-import danieldjgomes.larica.core.catagoria.dtos.CategoriaRequestDTO;
-import danieldjgomes.larica.core.catagoria.dtos.CategoriaResponseDTO;
+import danieldjgomes.larica.core.categoria.dtos.CategoriaRequestDTO;
+import danieldjgomes.larica.core.categoria.dtos.CategoriaResponseDTO;
 
 import java.util.List;
 import java.util.Optional;

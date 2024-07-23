@@ -34,8 +34,8 @@ public class RestauranteController {
     @PostMapping
     public ResponseEntity registrarRestaurante(@RequestBody @Valid CriarRestauranteRequest dto) {
         Restaurante restaurante = mapper.toRestaurante(dto);
-        registrarRestauranteInterador.registrarRestaurante(restaurante);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        Restaurante restauranteCriado = registrarRestauranteInterador.registrarRestaurante(restaurante);
+        return ResponseEntity.status(HttpStatus.CREATED).body(restauranteCriado);
 
     }
 

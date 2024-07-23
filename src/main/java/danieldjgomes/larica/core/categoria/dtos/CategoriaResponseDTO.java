@@ -1,4 +1,4 @@
-package danieldjgomes.larica.core.catagoria.dtos;
+package danieldjgomes.larica.core.categoria.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

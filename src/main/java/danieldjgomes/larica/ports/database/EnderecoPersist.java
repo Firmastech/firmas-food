@@ -7,6 +7,6 @@ import java.util.Optional;
 
 public interface EnderecoPersist {
 
-    Optional<EnderecoModel> findByCEPandNumero(String CEP,Integer numero);
+    Optional<EnderecoModel> findByCEPandNumero(String cep,String numero);
     EnderecoModel save(EnderecoModel endereco);
 }

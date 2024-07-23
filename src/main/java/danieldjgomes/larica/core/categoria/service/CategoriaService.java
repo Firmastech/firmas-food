@@ -1,9 +1,9 @@
-package danieldjgomes.larica.core.catagoria.service;
+package danieldjgomes.larica.core.categoria.service;
 
-import danieldjgomes.larica.core.catagoria.dtos.CategoriaRequestDTO;
-import danieldjgomes.larica.core.catagoria.dtos.CategoriaResponseDTO;
-import danieldjgomes.larica.core.catagoria.entity.Categoria;
-import danieldjgomes.larica.core.catagoria.repository.CategoriaRepository;
+import danieldjgomes.larica.core.categoria.dtos.CategoriaRequestDTO;
+import danieldjgomes.larica.core.categoria.dtos.CategoriaResponseDTO;
+import danieldjgomes.larica.core.categoria.entity.Categoria;
+import danieldjgomes.larica.core.categoria.repository.CategoriaRepository;
 import danieldjgomes.larica.core.usecases.CategoriaUseCase;
 import danieldjgomes.larica.infrastructure.mapper.CategoriaMapper;
 import lombok.RequiredArgsConstructor;

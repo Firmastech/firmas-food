@@ -1,45 +1,46 @@
 package danieldjgomes.larica.usecase.restaurante;
 
-import danieldjgomes.larica.adapter.database.contato.model.ContatoModel;
+
 import danieldjgomes.larica.adapter.database.restaurante.model.RestauranteModel;
-import danieldjgomes.larica.core.endereco.entity.Endereco;
-import danieldjgomes.larica.core.usecases.contato.CadastrarContatoUseCase;
-import danieldjgomes.larica.core.usecases.endereco.CadastrarEnderecoUseCase;
+import danieldjgomes.larica.core.usecases.endereco.ConsultarEnderecoPorCepNumeroUseCase;
 import danieldjgomes.larica.ports.database.RestaurantePersist;
 import danieldjgomes.larica.core.restaurante.entity.Restaurante;
 import danieldjgomes.larica.core.usecases.restaurante.RegistrarRestauranteUseCase;
 import danieldjgomes.larica.adapter.mapper.RestauranteMapper;
+import danieldjgomes.larica.usecase.endereco.exceptions.EnderecoInvalidoException;
 import danieldjgomes.larica.usecase.restaurante.exceptions.RestauranteNomeInvalidoException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
+
+import java.util.Optional;
 import java.util.UUID;
 @Component
 @AllArgsConstructor
 public class RegistrarRestauranteUseCaseImpl implements RegistrarRestauranteUseCase {
 
     private final RestaurantePersist restaurantePersist;
-    private final CadastrarEnderecoUseCase cadastrarEnderecoUseCase;
-    private final CadastrarContatoUseCase cadastrarContatoUseCase;
+    private final ConsultarEnderecoPorCepNumeroUseCase consultarEnderecoPorCepNumeroUseCase;
     private final RestauranteMapper mapper;
 
     public Restaurante registrarRestaurante(final Restaurante restaurante) {
-        Endereco endereco = restaurante.getEndereco();
-        List<ContatoModel> contatoModels = restaurante.getContatoModels();
+        final String cep = restaurante.getEndereco().getCep();
+        final String numero = restaurante.getEndereco().getNumero();
 
-        restaurante.setId(UUID.randomUUID().toString());
+        Optional.ofNullable(consultarEnderecoPorCepNumeroUseCase.consultar(cep,numero))
+                .ifPresent((endereco)->{
+                   throw new EnderecoInvalidoException("Endereco Já Utilizado");
+                });
 
         restaurantePersist.findByNome(restaurante.getNome())
                 .ifPresent((nome)->{
-                    throw new RestauranteNomeInvalidoException("Nome já está em uso");
+                    throw new RestauranteNomeInvalidoException("Nome já Utilizado");
                 });
 
-        Endereco enderecoModel = cadastrarEnderecoUseCase.cadastrar(endereco);
+        restaurante.setId(UUID.randomUUID().toString());
+        restaurante.getEndereco().setId(UUID.randomUUID().toString());
         RestauranteModel restauranteModel = mapper.toEntity(restaurante);
-        restauranteModel.setEnderecoId(enderecoModel.getId());
         restauranteModel = restaurantePersist.save(restauranteModel);
-        cadastrarContatoUseCase.cadastrar(contatoModels, restaurante.getId());
         return mapper.toRestaurante(restauranteModel);
     }
 

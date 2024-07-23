@@ -1,6 +1,6 @@
-package danieldjgomes.larica.core.catagoria.repository;
+package danieldjgomes.larica.core.categoria.repository;
 
-import danieldjgomes.larica.core.catagoria.entity.Categoria;
+import danieldjgomes.larica.core.categoria.entity.Categoria;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

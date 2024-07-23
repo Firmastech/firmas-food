@@ -18,7 +18,7 @@ public class EnderecoPersistImpl implements EnderecoPersist {
     private EnderecoRepository enderecoRepository;
 
     @Override
-    public Optional<EnderecoModel> findByCEPandNumero(String CEP,Integer numero) {
+    public Optional<EnderecoModel> findByCEPandNumero(String CEP,String numero) {
         return enderecoRepository.findByCepAndNumero(CEP, numero);
     }
 

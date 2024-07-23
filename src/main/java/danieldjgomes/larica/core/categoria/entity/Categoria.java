@@ -1,7 +1,6 @@
-package danieldjgomes.larica.core.catagoria.entity;
+package danieldjgomes.larica.core.categoria.entity;
 
 import danieldjgomes.larica.adapter.database.restaurante.model.RestauranteModel;
-import danieldjgomes.larica.core.restaurante.entity.Restaurante;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
