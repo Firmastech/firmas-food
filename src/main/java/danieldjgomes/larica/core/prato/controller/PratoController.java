@@ -46,7 +46,7 @@ public class PratoController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePrato(@PathVariable String id) {
-        pratoService.deletePrato(id);
+        pratoService.disablePrato(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

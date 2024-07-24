@@ -9,6 +9,8 @@ import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface CardapioMapper {
 
@@ -24,6 +26,12 @@ public interface CardapioMapper {
     @Mapping(source = "nome", target = "nome")
     @Mapping(source = "descricao", target = "descricao")
     CardapioResponseDTO toDto(Cardapio entity);
+
+    @Mapping(source = "id", target = "id")
+    @Mapping(source = "nome", target = "nome")
+    @Mapping(source = "descricao", target = "descricao")
+    List<CardapioResponseDTO> listToDto(List<Cardapio> cardapios);
+
 
     @Mapping(source = "nome", target = "nome")
     @Mapping(source = "descricao", target = "descricao")

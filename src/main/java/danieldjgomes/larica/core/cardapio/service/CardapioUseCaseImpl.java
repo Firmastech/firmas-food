@@ -6,13 +6,12 @@ import danieldjgomes.larica.core.cardapio.dtos.response.CardapioResponseDTO;
 import danieldjgomes.larica.core.cardapio.entity.Cardapio;
 import danieldjgomes.larica.core.cardapio.repository.CardapioRepository;
 import danieldjgomes.larica.core.exception.EntityNotFoundException;
-import danieldjgomes.larica.core.prato.entity.Prato;
-import danieldjgomes.larica.core.prato.repository.PratoRepository;
 import danieldjgomes.larica.core.usecases.CardapioUseCase;
 import danieldjgomes.larica.infrastructure.mapper.CardapioMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -22,13 +21,20 @@ public class CardapioUseCaseImpl implements CardapioUseCase {
 
 
     private final CardapioRepository cardapioRepository;
-    private final PratoRepository pratoRepository;
 
     public CardapioResponseDTO criarCardapio(CardapioRequestDTO cardapioRequestDTO) {
         Cardapio cardapio = CardapioMapper.INSTANCE.toEntity(cardapioRequestDTO);
         cardapio.setId(UUID.randomUUID().toString());
         cardapio = cardapioRepository.save(cardapio);
         return CardapioMapper.INSTANCE.toDto(cardapio);
+    }
+
+    public List<CardapioResponseDTO> getAllCardapios() {
+        List<Cardapio> listCardapio = cardapioRepository.findAll()
+                .stream()
+                .filter(Cardapio::getEstaAtivo)
+                .toList();
+        return CardapioMapper.INSTANCE.listToDto(listCardapio);
     }
 
     public CardapioResponseDTO atualizarCardapio(String id, CardapioUpdateRequestDTO cardapioUpdateRequestDTO) {
@@ -39,31 +45,21 @@ public class CardapioUseCaseImpl implements CardapioUseCase {
     }
 
     public void desativarCardapio(String id) {
-        Cardapio cardapio = cardapioRepository
-                .findById(id).orElseThrow(() ->
-                        new EntityNotFoundException("Cardapio not found with id: " + id));
+        Cardapio cardapio = getExistingCardapio(id);
+        cardapio.setAtualizado(LocalDateTime.now());
+        cardapio.setDeletado(LocalDateTime.now());
         cardapio.setEstaAtivo(false);
         cardapioRepository.save(cardapio);
     }
 
     private Cardapio getExistingCardapio(String id) {
         return cardapioRepository.findById(id)
+                .stream()
+                .filter(Cardapio::getEstaAtivo)
+                .findFirst()
                 .orElseThrow(() ->
-                        new EntityNotFoundException("Cardapio not found with id: " + id));
+                        new EntityNotFoundException("Cardapio not found, or is disabled with id: " + id));
     }
 
-    private List<Prato> findAllPratosById(List<String> ids) {
-        List<Prato> pratos = pratoRepository.findAllById(ids);
-        if (pratos.size() != ids.size()) {
-            List<String> foundIds = pratos.stream()
-                    .map(Prato::getId)
-                    .toList();
-            List<String> notFoundIds = ids.stream()
-                    .filter(id -> !foundIds.contains(id))
-                    .toList();
-            throw new EntityNotFoundException("Pratos not found with ids: " + notFoundIds);
-        }
-        return pratos;
-    }
 
 }

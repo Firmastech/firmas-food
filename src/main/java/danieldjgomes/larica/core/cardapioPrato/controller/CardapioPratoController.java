@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/cardapios")
+@RequestMapping("/api/prato-cardapio")
 @RequiredArgsConstructor
 public class CardapioPratoController {
 
     private final CardapioPratoUseCase cardapioPratoUseCase;
 
-    @PostMapping("/{cardapioId}/pratos")
+    @PostMapping("/{cardapioId}")
     public ResponseEntity<AddPratosToCardapioRequest> addPratosToCardapio(
             @PathVariable String cardapioId,
             @RequestBody AddPratosToCardapioRequest request) {
@@ -31,7 +31,7 @@ public class CardapioPratoController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @DeleteMapping("/{cardapioId}/pratos")
+    @DeleteMapping("/{cardapioId}")
     public ResponseEntity<Void> removePratosFromCardapio(@PathVariable String cardapioId, @RequestBody List<String> pratoIds) {
         cardapioPratoUseCase.removePratosFromCardapio(cardapioId, pratoIds);
         return ResponseEntity.noContent().build();

@@ -16,6 +16,6 @@ public interface PratoUseCase {
 
     Optional<PratoResponseDTO> updatePrato(String id, PratoRequestDTO pratoRequest);
 
-    void deletePrato(String id);
+    void disablePrato(String id);
 
 }

@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/cardapio")
 @RequiredArgsConstructor
@@ -29,9 +31,15 @@ public class CardapioController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @DeleteMapping("/desativar")
-    public ResponseEntity<Void> desativarCardapio(@RequestBody DesativarCardapioRequestDTO dto) {
-        cardapioUseCase.desativarCardapio(dto.getCardapioId());
+    @GetMapping
+    public ResponseEntity<List<CardapioResponseDTO>> listarCardapios() {
+        List<CardapioResponseDTO> responseDTOList = cardapioUseCase.getAllCardapios();
+        return ResponseEntity.ok(responseDTOList);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> desativarCardapio(@PathVariable String id) {
+        cardapioUseCase.desativarCardapio(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 

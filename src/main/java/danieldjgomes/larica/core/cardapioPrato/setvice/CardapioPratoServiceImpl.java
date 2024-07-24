@@ -32,9 +32,12 @@ public class CardapioPratoServiceImpl implements CardapioPratoUseCase {
             throw new EntityNotFoundException("Cardapio not found with id: " + cardapioId);
         }
 
-        List<Prato> pratos = pratoRepository.findAllById(pratoIds);
+        List<Prato> pratos = pratoRepository.findAllById(pratoIds)
+                .stream()
+                .filter(Prato::getEstaAtivo)
+                .toList();
         if (pratos.size() != pratoIds.size()) {
-            throw new EntityNotFoundException("List of pratos not found with ids: " + pratoIds);
+            throw new EntityNotFoundException("List of pratos not found, or is disabled with ids: " + pratoIds);
         }
 
         for (String pratoId : pratoIds) {
@@ -46,15 +49,15 @@ public class CardapioPratoServiceImpl implements CardapioPratoUseCase {
     public CardapioResponseDTO getCardapioById(String cardapioId) {
         Cardapio cardapio = cardapioRepository.findById(cardapioId)
                 .filter(Cardapio::getEstaAtivo)
-                .orElseThrow(() -> new EntityNotFoundException("Cardápio não encontrado ou inativo"));
+                .orElseThrow(() -> new EntityNotFoundException("Cardápio not found, or is disabled"));
 
         List<CardapioPrato> cardapioPratos = cardapioPratoRepository.findByCardapioId(cardapioId);
         List<PratoResponseDTO> pratos = cardapioPratos.stream()
                 .map(cp -> pratoRepository.findById(cp.getPratoId())
                         .filter(Prato::getEstaAtivo)
                         .map(PratoMapper.INSTANCE::toResponseDTO)
-                        .orElseThrow(() -> new EntityNotFoundException("Prato não encontrado ou inativo: " + cp.getPratoId())))
-                .collect(Collectors.toList());
+                        .orElseThrow(() -> new EntityNotFoundException("Prato not found, or is disabled with id: " + cp.getPratoId())))
+                .toList();
 
         CardapioResponseDTO cardapioResponseDTO = CardapioMapper.INSTANCE.toDto(cardapio);
         cardapioResponseDTO.setPratos(pratos);

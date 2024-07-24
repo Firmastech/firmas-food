@@ -16,5 +16,5 @@ public interface CategoriaUseCase {
 
     Optional<CategoriaResponseDTO> updateCategoria(String id, CategoriaRequestDTO categoriaRequest);
 
-    void deleteCategoria(String id);
+    void disableCategoria(String id);
 }

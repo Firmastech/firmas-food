@@ -34,7 +34,9 @@ public class PratoUseCaseImpl implements PratoUseCase {
     }
 
     public List<PratoResponseDTO> getAllPratos() {
-        return pratoRepository.findAll().stream()
+        return pratoRepository.findAll()
+                .stream()
+                .filter(Prato::getEstaAtivo)
                 .map(PratoMapper.INSTANCE::toResponseDTO)
                 .toList();
     }
@@ -48,14 +50,20 @@ public class PratoUseCaseImpl implements PratoUseCase {
         return Optional.ofNullable(PratoMapper.INSTANCE.toResponseDTO(updatedPrato));
     }
 
-    public void deletePrato(String id) {
+    public void disablePrato(String id) {
         Prato prato = getPratoById(id);
-        pratoRepository.delete(prato);
+        prato.setAtualizado(LocalDateTime.now());
+        prato.setEstaAtivo(false);
+        prato.setDeletado(LocalDateTime.now());
+        pratoRepository.save(prato);
     }
 
     private Prato getPratoById(String id) {
         return pratoRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Prato não encontrado com id: " + id));
+                .stream()
+                .filter(Prato::getEstaAtivo)
+                .findFirst()
+                .orElseThrow(() -> new EntityNotFoundException("Prato not found, or is disabled with id: " + id));
     }
 
 }

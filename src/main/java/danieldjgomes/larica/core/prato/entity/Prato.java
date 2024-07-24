@@ -45,7 +45,7 @@ public class Prato {
     private LocalDateTime criado = LocalDateTime.now();
 
     @Column(name = "atualizado", nullable = false)
-    private LocalDateTime atualizado = LocalDateTime.now();
+    private LocalDateTime atualizado;
 
     @Column(name = "esta_ativo", nullable = false)
     private Boolean estaAtivo = true;

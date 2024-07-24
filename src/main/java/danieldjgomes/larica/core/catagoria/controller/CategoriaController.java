@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/categorias")
+@RequestMapping("/api/categoria")
 @RequiredArgsConstructor
 public class CategoriaController {
 
@@ -45,7 +45,7 @@ public class CategoriaController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteCategoria(@PathVariable String id) {
-        categoriaUseCase.deleteCategoria(id);
+        categoriaUseCase.disableCategoria(id);
         return ResponseEntity.noContent().build();
     }
 }
