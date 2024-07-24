@@ -20,7 +20,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "cardapio_prato")
 @IdClass(CardapioPratoId.class)
-public class CardapioPrato implements Serializable{
+public class CardapioPrato implements Serializable {
 
     @Id
     private String cardapioId;
