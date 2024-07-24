@@ -66,11 +66,7 @@ public class CardapioPratoServiceImpl implements CardapioPratoUseCase {
     }
 
     public void removePratosFromCardapio(String cardapioId, List<String> pratoIds) {
-        List<CardapioPrato> cardapioPratos = cardapioPratoRepository.findByCardapioIdAndPratoIdIn(cardapioId, pratoIds);
-        if (cardapioPratos.isEmpty()) {
-            throw new EntityNotFoundException("No matching relationships found between cardapio and pratos");
-        }
-        cardapioPratoRepository.deleteAll(cardapioPratos);
+        cardapioPratoRepository.deleteByCardapioIdAndPratoIdIn(cardapioId, pratoIds);
     }
 
 }
