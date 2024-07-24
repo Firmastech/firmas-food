@@ -1,6 +1,7 @@
 package danieldjgomes.larica.app.usecase.token;
 
 import danieldjgomes.larica.app.usecase.token.request.LoginUsuarioRequest;
+import danieldjgomes.larica.app.usecase.token.response.TokenResponse;
 import danieldjgomes.larica.app.usecase.usuario.request.external.TokenAutenticacaoKeycloakModelResponseDTO;
 import org.keycloak.representations.idm.CredentialRepresentation;
 import org.keycloak.representations.idm.FederatedIdentityRepresentation;
@@ -31,6 +32,30 @@ public class TokenMockBuilder {
         PegarTokenUsuarioProcessModel processModel = new PegarTokenUsuarioProcessModel(validLoginRequest);
         processModel.setUsuarioId("6f19009d-c91b-4106-8150-66f9bdd1a3ed");
         return processModel;
+    }
+
+        public LoginUsuarioRequest gerarRequestLoginValido() {
+        LoginUsuarioRequest validLoginRequest = new LoginUsuarioRequest();
+        validLoginRequest.setEmail("validUser@email.com");
+        validLoginRequest.setSenha("validPassword");
+        validLoginRequest.setRestaurante("villa bella");
+        return validLoginRequest;
+    }
+
+    public TokenResponse geraTokenResponseValido() {
+        TokenResponse.Token accessToken = new TokenResponse.Token();
+        accessToken.setValor("accessTokenValue");
+        accessToken.setExpiraEm(3600L); //
+
+        TokenResponse.Token refreshToken = new TokenResponse.Token();
+        refreshToken.setValor("refreshTokenValue");
+        refreshToken.setExpiraEm(7200L);
+
+        TokenResponse tokenResponse = new TokenResponse();
+        tokenResponse.setAccessToken(accessToken);
+        tokenResponse.setRefreshToken(refreshToken);
+
+        return tokenResponse;
     }
 
 
