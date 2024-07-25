@@ -11,10 +11,9 @@ import danieldjgomes.larica.usecase.endereco.exceptions.EnderecoInvalidoExceptio
 import danieldjgomes.larica.usecase.restaurante.exceptions.RestauranteNomeInvalidoException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-
-
 import java.util.Optional;
 import java.util.UUID;
+
 @Component
 @AllArgsConstructor
 public class RegistrarRestauranteUseCaseImpl implements RegistrarRestauranteUseCase {

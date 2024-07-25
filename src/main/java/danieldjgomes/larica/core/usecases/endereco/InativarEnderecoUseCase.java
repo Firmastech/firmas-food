@@ -2,7 +2,7 @@ package danieldjgomes.larica.core.usecases.endereco;
 
 import danieldjgomes.larica.core.endereco.entity.Endereco;
 
-public interface CadastrarEnderecoUseCase {
+public interface InativarEnderecoUseCase {
 
-    Endereco cadastrar (Endereco endereco);
+    void inativar(String id);
 }

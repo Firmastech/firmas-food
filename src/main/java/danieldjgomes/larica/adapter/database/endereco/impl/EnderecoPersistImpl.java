@@ -18,6 +18,11 @@ public class EnderecoPersistImpl implements EnderecoPersist {
     private EnderecoRepository enderecoRepository;
 
     @Override
+    public Optional<EnderecoModel> findById(String id) {
+        return enderecoRepository.findById(id);
+    }
+
+    @Override
     public Optional<EnderecoModel> findByCEPandNumero(String CEP,String numero) {
         return enderecoRepository.findByCepAndNumero(CEP, numero);
     }
@@ -27,6 +32,19 @@ public class EnderecoPersistImpl implements EnderecoPersist {
         endereco.setCriadoEm(LocalDateTime.now());
         endereco.setAtivo(true);
         return enderecoRepository.save(endereco);
+    }
+
+    @Override
+    public EnderecoModel update(EnderecoModel endereco) {
+        endereco.setAtualizadoEm(LocalDateTime.now());
+        return enderecoRepository.save(endereco);
+    }
+
+    @Override
+    public void inativar(EnderecoModel endereco) {
+        endereco.setDeletadoEm(LocalDateTime.now());
+        endereco.setAtivo(false);
+        enderecoRepository.save(endereco);
     }
 
 }

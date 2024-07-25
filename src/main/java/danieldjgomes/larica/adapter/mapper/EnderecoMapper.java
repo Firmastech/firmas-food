@@ -15,7 +15,7 @@ public interface EnderecoMapper {
     @Mapping(source = "cidade", target = "cidade")
     @Mapping(source = "uf", target = "uf")
     @Mapping(source = "pontoReferencia", target = "pontoReferencia")
-    EnderecoModel toEntity(Endereco endereco);
+    EnderecoModel toModel(Endereco endereco);
 
     @Mapping(source = "id", target = "id")
     @Mapping(source = "rua", target = "rua")

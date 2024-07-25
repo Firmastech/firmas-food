@@ -1,6 +1,7 @@
 package danieldjgomes.larica.usecase.restaurante.request;
 
 import danieldjgomes.larica.core.restaurante.entity.enums.StatusFuncionamento;
+import danieldjgomes.larica.usecase.endereco.request.CadastrarEnderecoRequest;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 

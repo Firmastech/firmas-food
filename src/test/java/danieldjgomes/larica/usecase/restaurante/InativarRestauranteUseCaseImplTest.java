@@ -1,11 +1,10 @@
-package danieldjgomes.larica.infrastructure;
+package danieldjgomes.larica.usecase.restaurante;
 
 import danieldjgomes.larica.adapter.database.restaurante.model.RestauranteModel;
 import danieldjgomes.larica.ports.database.RestaurantePersist;
 import danieldjgomes.larica.core.restaurante.entity.enums.StatusFuncionamento;
 import danieldjgomes.larica.usecase.restaurante.exceptions.RestauranteNotFoundException;
 
-import danieldjgomes.larica.usecase.restaurante.InativarRestauranteUseCaseImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -1,4 +1,4 @@
-package danieldjgomes.larica.usecase.restaurante.request;
+package danieldjgomes.larica.usecase.endereco.request;
 
 import jakarta.validation.constraints.*;
 import lombok.Data;
