@@ -1,6 +1,6 @@
 package danieldjgomes.larica.core.cardapioPrato.controller;
 
-import danieldjgomes.larica.core.cardapio.dtos.response.CardapioResponseDTO;
+import danieldjgomes.larica.app.usecase.cardapio.response.CardapioResponse;
 import danieldjgomes.larica.core.cardapioPrato.request.AddPratosToCardapioRequest;
 import danieldjgomes.larica.core.usecases.CardapioPratoUseCase;
 import lombok.RequiredArgsConstructor;
@@ -26,8 +26,8 @@ public class CardapioPratoController {
     }
 
     @GetMapping("/{cardapioId}")
-    public ResponseEntity<CardapioResponseDTO> getCardapioById(@PathVariable String cardapioId) {
-        CardapioResponseDTO response = cardapioPratoUseCase.getCardapioById(cardapioId);
+    public ResponseEntity<CardapioResponse> getCardapioById(@PathVariable String cardapioId) {
+        CardapioResponse response = cardapioPratoUseCase.getCardapioById(cardapioId);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 

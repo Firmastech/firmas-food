@@ -1,8 +1,8 @@
 package danieldjgomes.larica.core.cardapioPrato.setvice;
 
-import danieldjgomes.larica.core.cardapio.dtos.response.CardapioResponseDTO;
-import danieldjgomes.larica.core.cardapio.entity.Cardapio;
-import danieldjgomes.larica.core.cardapio.repository.CardapioRepository;
+import danieldjgomes.larica.app.usecase.cardapio.response.CardapioResponse;
+import danieldjgomes.larica.app.adapter.database.cardapio.model.CardapioEntity;
+import danieldjgomes.larica.app.adapter.database.cardapio.CardapioRepository;
 import danieldjgomes.larica.core.cardapioPrato.entity.CardapioPrato;
 import danieldjgomes.larica.core.cardapioPrato.repository.CardapioPratoRepository;
 import danieldjgomes.larica.core.exception.EntityNotFoundException;
@@ -45,9 +45,9 @@ public class CardapioPratoServiceImpl implements CardapioPratoUseCase {
 
     }
 
-    public CardapioResponseDTO getCardapioById(String cardapioId) {
-        Cardapio cardapio = cardapioRepository.findById(cardapioId)
-                .filter(Cardapio::getEstaAtivo)
+    public CardapioResponse getCardapioById(String cardapioId) {
+        CardapioEntity cardapio = cardapioRepository.findById(cardapioId)
+                .filter(CardapioEntity::getEstaAtivo)
                 .orElseThrow(() -> new EntityNotFoundException("Cardápio not found, or is disabled"));
 
         List<CardapioPrato> cardapioPratos = cardapioPratoRepository.findByCardapioId(cardapioId);
@@ -58,7 +58,7 @@ public class CardapioPratoServiceImpl implements CardapioPratoUseCase {
                         .orElseThrow(() -> new EntityNotFoundException("Prato not found, or is disabled with id: " + cp.getPratoId())))
                 .toList();
 
-        CardapioResponseDTO cardapioResponseDTO = CardapioMapper.INSTANCE.toDto(cardapio);
+        CardapioResponse cardapioResponseDTO = CardapioMapper.INSTANCE.criarCardapiotoResponse(cardapio);
         cardapioResponseDTO.setPratos(pratos);
 
         return cardapioResponseDTO;

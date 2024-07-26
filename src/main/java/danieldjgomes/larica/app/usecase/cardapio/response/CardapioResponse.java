@@ -1,4 +1,4 @@
-package danieldjgomes.larica.core.cardapio.dtos.response;
+package danieldjgomes.larica.app.usecase.cardapio.response;
 
 import danieldjgomes.larica.core.prato.dtos.PratoResponseDTO;
 import lombok.AllArgsConstructor;
@@ -12,12 +12,11 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CardapioResponseDTO {
+public class CardapioResponse {
 
     private String id;
     private String nome;
     private String descricao;
     private String restauranteId;
-    private boolean estaAtivo;
     private List<PratoResponseDTO> pratos;
 }

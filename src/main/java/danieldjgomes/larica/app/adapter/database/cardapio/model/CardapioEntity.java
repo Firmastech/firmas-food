@@ -1,4 +1,4 @@
-package danieldjgomes.larica.core.cardapio.entity;
+package danieldjgomes.larica.app.adapter.database.cardapio.model;
 
 import danieldjgomes.larica.adapter.database.restaurante.model.RestauranteModel;
 import jakarta.persistence.*;
@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Getter
@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "cardapio")
-public class Cardapio {
+public class CardapioEntity {
 
     @Id
     private String id;
@@ -31,14 +31,14 @@ public class Cardapio {
     private RestauranteModel restaurante;
 
     @Column(nullable = false)
-    private LocalDateTime criado = LocalDateTime.now();
+    private Date criado;
 
     @Column(nullable = false)
-    private LocalDateTime atualizado = LocalDateTime.now();
+    private Date atualizado;
 
     @Column(nullable = false)
     private Boolean estaAtivo = true;
 
-    private LocalDateTime deletado;
+    private Date deletado;
 
 }

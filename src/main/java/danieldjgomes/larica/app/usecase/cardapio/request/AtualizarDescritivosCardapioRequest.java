@@ -1,4 +1,4 @@
-package danieldjgomes.larica.core.cardapio.dtos.request;
+package danieldjgomes.larica.app.usecase.cardapio.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CardapioUpdateRequestDTO {
+public class AtualizarDescritivosCardapioRequest {
 
     private String nome;
     private String descricao;

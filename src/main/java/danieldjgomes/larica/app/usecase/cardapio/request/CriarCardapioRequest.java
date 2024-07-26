@@ -1,8 +1,7 @@
-package danieldjgomes.larica.core.cardapio.dtos.request;
+package danieldjgomes.larica.app.usecase.cardapio.request;
 
 
 import danieldjgomes.larica.adapter.database.restaurante.model.RestauranteModel;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,7 +11,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CardapioRequestDTO {
+public class CriarCardapioRequest {
 
     private RestauranteModel restauranteId;
     private String nome;
