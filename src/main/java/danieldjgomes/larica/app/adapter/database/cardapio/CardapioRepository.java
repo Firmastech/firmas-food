@@ -15,10 +15,10 @@ public interface CardapioRepository extends JpaRepository<CardapioEntity, String
     @Modifying
     @Query("""
             update CardapioEntity c
-            set c.nome = :nome, c.descricao = :descricao
-            where c.id = :id
+            set c.nome = :nome, c.descricao = :descricao, c.atualizado = :dataAtual
+            where c.id = :id and c.restaurante.id = :restauranteId
             """)
-    Integer atualizarDescritivos(String id, String nome, String descricao);
+    Integer atualizarDescritivos(String id, String nome, String descricao, String restauranteId, Date dataAtual);
 
     Optional<CardapioEntity> findCardapioByIdAndRestauranteIdAndEstaAtivoIsTrue(String id, String restaurante_id);
 

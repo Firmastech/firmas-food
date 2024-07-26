@@ -21,7 +21,7 @@ public class AtualizarDescritivoCardapioUseCaseImpl implements AtualizarDescriti
 
     public AtualizarCardapioResponse atualizarCardapio(String cardapioId, AtualizarDescritivosCardapioRequest atualizarDescritivosCardapioRequest, String restauranteId ) {
 
-        Integer cardapioAtualizado = cardapioPersist.atualizarDescritivos(cardapioId, atualizarDescritivosCardapioRequest.getNome(), atualizarDescritivosCardapioRequest.getDescricao());
+        Integer cardapioAtualizado = cardapioPersist.atualizarDescritivos(cardapioId, atualizarDescritivosCardapioRequest.getNome(), atualizarDescritivosCardapioRequest.getDescricao(), restauranteId);
         if (cardapioAtualizado >= 1) {
             CardapioResponse cardapioResponse = buscarCardapiosPertencentesAoRestauranteUseCase.buscarDetalheCardapio(cardapioId, restauranteId);
            return CardapioMapper.INSTANCE.toAtualizarCardapioResponse(cardapioResponse);

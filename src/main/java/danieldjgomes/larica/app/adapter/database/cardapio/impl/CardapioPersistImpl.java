@@ -1,12 +1,11 @@
 package danieldjgomes.larica.app.adapter.database.cardapio.impl;
 
+import danieldjgomes.larica.app.adapter.database.cardapio.CardapioRepository;
 import danieldjgomes.larica.app.adapter.database.cardapio.CardapioResumidoRepository;
-import danieldjgomes.larica.app.ports.database.CardapioPersist;
 import danieldjgomes.larica.app.adapter.database.cardapio.model.CardapioEntity;
 import danieldjgomes.larica.app.adapter.database.cardapio.model.CardapioResumidoEntity;
-import danieldjgomes.larica.app.adapter.database.cardapio.CardapioRepository;
+import danieldjgomes.larica.app.ports.database.CardapioPersist;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -29,8 +28,8 @@ public class CardapioPersistImpl implements CardapioPersist {
     }
 
     @Override
-        public Integer atualizarDescritivos(String id, String nome, String descricao) {
-        return cardapioRepository.atualizarDescritivos(id, nome, descricao);
+    public Integer atualizarDescritivos(String id, String nome, String descricao, String restauranteId) {
+        return cardapioRepository.atualizarDescritivos(id, nome, descricao, restauranteId, new Date());
     }
 
     @Override
@@ -40,7 +39,7 @@ public class CardapioPersistImpl implements CardapioPersist {
 
     @Override
     public Optional<CardapioEntity> buscarDetalheCardapio(String cardapioId, String restauranteId) {
-        return cardapioRepository.findCardapioByIdAndRestauranteIdAndEstaAtivoIsTrue(cardapioId,restauranteId);
+        return cardapioRepository.findCardapioByIdAndRestauranteIdAndEstaAtivoIsTrue(cardapioId, restauranteId);
     }
 
     @Override

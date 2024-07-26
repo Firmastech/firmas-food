@@ -9,8 +9,7 @@ import java.util.Optional;
 public interface CardapioPersist {
     CardapioEntity criar(CardapioEntity cardapio);
 
-    Integer atualizarDescritivos(String id, String nome, String descricao);
-
+    Integer atualizarDescritivos(String id, String nome, String descricao, String restauranteId);
     List<CardapioResumidoEntity> buscarCardapios(String restauranteId);
 
     Optional<CardapioEntity> buscarDetalheCardapio(String cardapioId, String restauranteId);
