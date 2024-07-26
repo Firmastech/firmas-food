@@ -32,8 +32,10 @@ public class CardapioController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<AtualizarCardapioResponse> atualizarCardapio(@PathVariable String id, @RequestBody AtualizarDescritivosCardapioRequest dto) {
-        AtualizarCardapioResponse response = atualizarDescritivoCardapioUseCase.atualizarCardapio(id, dto);
+    public ResponseEntity<AtualizarCardapioResponse> atualizarCardapio(@PathVariable String id,
+                                                                       @RequestBody AtualizarDescritivosCardapioRequest dto,
+                                                                       @RequestHeader String restauranteId) {
+        AtualizarCardapioResponse response = atualizarDescritivoCardapioUseCase.atualizarCardapio(id, dto, restauranteId);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

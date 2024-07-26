@@ -28,4 +28,6 @@ public interface CardapioMapper {
 
 
     CardapioResponse toResponse(CardapioEntity cardapio);
+
+    AtualizarCardapioResponse toAtualizarCardapioResponse(CardapioResponse cardapioResponse);
 }

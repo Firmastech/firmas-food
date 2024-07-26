@@ -2,6 +2,7 @@ package danieldjgomes.larica.app.usecase.cardapio.impl;
 
 import danieldjgomes.larica.app.ports.database.CardapioPersist;
 import danieldjgomes.larica.app.usecase.cardapio.BuscarCardapiosPertencentesAoRestauranteUseCase;
+import danieldjgomes.larica.app.usecase.cardapio.exception.CardapioNotFoundException;
 import danieldjgomes.larica.app.usecase.cardapio.response.ResumoCardapioResponse;
 import danieldjgomes.larica.app.usecase.cardapio.response.CardapioResponse;
 import danieldjgomes.larica.app.adapter.database.cardapio.model.CardapioEntity;
@@ -12,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
@@ -22,11 +24,14 @@ public class BuscarCardapiosPertencentesAoRestauranteUseCaseImpl implements Busc
 
     public List<ResumoCardapioResponse> buscarCardapio(String restauranteId) {
         List<CardapioResumidoEntity> cardapioResumido = cardapioPersist.buscarCardapios(restauranteId);
-        return cardapioResumido.stream().map(CardapioMapper.INSTANCE::toResponse).collect(Collectors.toList());
+        return cardapioResumido.stream().map(CardapioMapper.INSTANCE::toResponse).toList();
     }
 
     public CardapioResponse buscarDetalheCardapio(String cardapioId, String restauranteId) {
-        CardapioEntity cardapio = cardapioPersist.buscarDetalheCardapio(cardapioId, restauranteId);
-        return CardapioMapper.INSTANCE.toResponse(cardapio);
+        Optional<CardapioEntity> cardapio = cardapioPersist.buscarDetalheCardapio(cardapioId, restauranteId);
+        if (cardapio.isPresent()) {
+            return CardapioMapper.INSTANCE.toResponse(cardapio.get());
+        }
+        throw new CardapioNotFoundException();
     }
 }

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
@@ -28,7 +29,7 @@ public class CardapioPersistImpl implements CardapioPersist {
     }
 
     @Override
-    public CardapioEntity atualizarDescritivos(String id, String nome, String descricao) {
+        public Integer atualizarDescritivos(String id, String nome, String descricao) {
         return cardapioRepository.atualizarDescritivos(id, nome, descricao);
     }
 
@@ -38,7 +39,7 @@ public class CardapioPersistImpl implements CardapioPersist {
     }
 
     @Override
-    public CardapioEntity buscarDetalheCardapio(String cardapioId, String restauranteId) {
+    public Optional<CardapioEntity> buscarDetalheCardapio(String cardapioId, String restauranteId) {
         return cardapioRepository.findCardapioByIdAndRestauranteIdAndEstaAtivoIsTrue(cardapioId,restauranteId);
     }
 
@@ -46,4 +47,5 @@ public class CardapioPersistImpl implements CardapioPersist {
     public void desativarCardapio(String cardapioId) {
         cardapioRepository.desativarCardapio(cardapioId, new Date());
     }
+
 }
