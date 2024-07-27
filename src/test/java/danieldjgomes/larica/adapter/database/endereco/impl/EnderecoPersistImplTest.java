@@ -2,8 +2,6 @@ package danieldjgomes.larica.adapter.database.endereco.impl;
 
 import danieldjgomes.larica.adapter.database.endereco.model.EnderecoModel;
 import danieldjgomes.larica.adapter.database.endereco.repository.EnderecoRepository;
-import danieldjgomes.larica.adapter.database.restaurante.model.RestauranteModel;
-import danieldjgomes.larica.core.restaurante.entity.enums.StatusFuncionamento;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -11,7 +9,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -58,7 +56,7 @@ class EnderecoPersistImplTest {
         assertEquals(modelExpected.getUf(),modelConsultada.getUf());
         assertEquals(modelExpected.getPontoReferencia(),modelConsultada.getPontoReferencia());
         assertEquals(modelExpected.getRua(),modelConsultada.getRua());
-        verify(enderecoRepository).findByCepAndNumero(cep,numero);
+        verify(enderecoRepository).findByCepAndNumeroAndAtivo(cep,numero,true);
     }
 
     @Test
@@ -66,7 +64,7 @@ class EnderecoPersistImplTest {
         EnderecoModel entityToCreate = mock(EnderecoModel.class);
         enderecoPersist.save(entityToCreate);
 
-        verify(entityToCreate).setCriadoEm(any(LocalDateTime.class));
+        verify(entityToCreate).setCriadoEm(any(Date.class));
         verify(entityToCreate).setAtivo(true);
         verify(enderecoRepository).save(entityToCreate);
     }
@@ -75,7 +73,7 @@ class EnderecoPersistImplTest {
     void deveRetornarUmaEntityComOsDadosDeControleDeAtualizacao() {
         EnderecoModel entityToUpdate = mock(EnderecoModel.class);
         enderecoPersist.update(entityToUpdate);
-        verify(entityToUpdate).setAtualizadoEm(any(LocalDateTime.class));
+        verify(entityToUpdate).setAtualizadoEm(any(Date.class));
         verify(enderecoRepository).save(entityToUpdate);
     }
 
@@ -83,7 +81,7 @@ class EnderecoPersistImplTest {
     void deveSetarOsDadosDeAtivoAndDataExclusao() {
         EnderecoModel entityToDelete = mock(EnderecoModel.class);
         enderecoPersist.inativar(entityToDelete);
-        verify(entityToDelete).setDeletadoEm(any(LocalDateTime.class));
+        verify(entityToDelete).setDeletadoEm(any(Date.class));
         verify(entityToDelete).setAtivo(false);
         verify(enderecoRepository).save(entityToDelete);
     }

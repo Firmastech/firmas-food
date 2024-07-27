@@ -7,6 +7,7 @@ import danieldjgomes.larica.ports.database.RestaurantePersist;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -19,31 +20,31 @@ public class RestaurantePersistImpl implements RestaurantePersist {
 
     @Override
     public Optional<RestauranteModel> findById(String id) {
-        return restauranteRepository.findById(id);
+        return restauranteRepository.findByIdAndAtivo(id,true);
     }
 
     @Override
     public Optional<RestauranteModel> findByNome(String nome) {
-        return restauranteRepository.findByNome(nome);
+        return restauranteRepository.findByNomeAndAtivo(nome,true);
     }
 
     @Override
     public RestauranteModel save(RestauranteModel restaurante) {
         RestauranteModel entity = restaurante;
         entity.setAtivo(true);
-        entity.setCriadoEm(LocalDateTime.now());
+        entity.setCriadoEm(new Date());
         return restauranteRepository.save(entity);
     }
 
     @Override
     public RestauranteModel update(RestauranteModel entityToUpdate) {
-        entityToUpdate.setAtualizadoEm(LocalDateTime.now());
+        entityToUpdate.setAtualizadoEm(new Date());
         return restauranteRepository.save(entityToUpdate);
     }
 
     @Override
     public void delete(RestauranteModel entityToDelete) {
-        entityToDelete.setDeletadoEm(LocalDateTime.now());
+        entityToDelete.setDeletadoEm(new Date());
         entityToDelete.setAtivo(false);
         restauranteRepository.save(entityToDelete);
     }

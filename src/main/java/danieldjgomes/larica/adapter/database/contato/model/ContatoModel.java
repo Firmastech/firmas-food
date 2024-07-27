@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -33,13 +34,13 @@ public class ContatoModel {
     private String restauranteId;
 
     @Column(name = "criado")
-    private LocalDateTime criadoEm;
+    private Date criadoEm;
 
     @Column(name = "atualizado")
-    private LocalDateTime atualizadoEm;
+    private Date atualizadoEm;
 
     @Column(name = "deletado")
-    private LocalDateTime deletadoEm;
+    private Date deletadoEm;
 
     @Column(name = "ativo", nullable = false, length = 10)
     private Boolean ativo;

@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Component
 @AllArgsConstructor
@@ -16,7 +17,7 @@ public class ContatoPersistImpl implements ContatoPersist {
 
     @Override
     public ContatoModel save(ContatoModel contatoModel) {
-        contatoModel.setCriadoEm(LocalDateTime.now());
+        contatoModel.setCriadoEm(new Date());
         contatoModel.setAtivo(true);
         return contatoRepository.save(contatoModel);
     }

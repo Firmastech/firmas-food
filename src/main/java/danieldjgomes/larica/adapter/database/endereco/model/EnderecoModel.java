@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Table(name = "endereco")
@@ -34,20 +35,20 @@ public class EnderecoModel {
     private String pontoReferencia;
 
     @Column(name = "criado")
-    private LocalDateTime criadoEm;
+    private Date criadoEm;
 
     @Column(name = "atualizado")
-    private LocalDateTime atualizadoEm;
+    private Date atualizadoEm;
 
     @Column(name = "deletado")
-    private LocalDateTime deletadoEm;
+    private Date deletadoEm;
 
     @Column(name = "ativo", nullable = false, length = 10)
     private Boolean ativo;
 
     @PrePersist
     protected void onCreate() {
-        criadoEm = LocalDateTime.now();
+        criadoEm = new Date();
         ativo = true;
     }
 

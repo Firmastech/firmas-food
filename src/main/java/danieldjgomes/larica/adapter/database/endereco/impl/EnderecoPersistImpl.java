@@ -2,14 +2,12 @@ package danieldjgomes.larica.adapter.database.endereco.impl;
 
 import danieldjgomes.larica.adapter.database.endereco.repository.EnderecoRepository;
 import danieldjgomes.larica.adapter.database.endereco.model.EnderecoModel;
-import danieldjgomes.larica.adapter.database.restaurante.model.RestauranteModel;
 import danieldjgomes.larica.ports.database.EnderecoPersist;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Optional;
-import java.util.UUID;
 
 @Component
 @AllArgsConstructor
@@ -24,25 +22,25 @@ public class EnderecoPersistImpl implements EnderecoPersist {
 
     @Override
     public Optional<EnderecoModel> findByCEPandNumero(String CEP,String numero) {
-        return enderecoRepository.findByCepAndNumero(CEP, numero);
+        return enderecoRepository.findByCepAndNumeroAndAtivo(CEP, numero,true);
     }
 
     @Override
     public EnderecoModel save(EnderecoModel endereco) {
-        endereco.setCriadoEm(LocalDateTime.now());
+        endereco.setCriadoEm(new Date());
         endereco.setAtivo(true);
         return enderecoRepository.save(endereco);
     }
 
     @Override
     public EnderecoModel update(EnderecoModel endereco) {
-        endereco.setAtualizadoEm(LocalDateTime.now());
+        endereco.setAtualizadoEm(new Date());
         return enderecoRepository.save(endereco);
     }
 
     @Override
     public void inativar(EnderecoModel endereco) {
-        endereco.setDeletadoEm(LocalDateTime.now());
+        endereco.setDeletadoEm(new Date());
         endereco.setAtivo(false);
         enderecoRepository.save(endereco);
     }

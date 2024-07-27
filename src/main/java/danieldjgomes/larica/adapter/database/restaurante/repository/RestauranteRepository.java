@@ -11,5 +11,7 @@ import java.util.Optional;
 @Repository
 public interface RestauranteRepository extends JpaRepository<RestauranteModel, String> {
 
-    Optional<RestauranteModel> findByNome(String nome);
+    Optional<RestauranteModel> findByNomeAndAtivo(String nome,boolean ativo);
+
+    Optional<RestauranteModel> findByIdAndAtivo(String id,boolean ativo);
 }
