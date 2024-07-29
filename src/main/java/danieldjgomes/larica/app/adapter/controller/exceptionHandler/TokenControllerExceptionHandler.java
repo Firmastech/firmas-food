@@ -1,6 +1,5 @@
 package danieldjgomes.larica.app.adapter.controller.exceptionHandler;
 
-import danieldjgomes.larica.adapter.handlers.restaurante.CommonExceptionHandler;
 import danieldjgomes.larica.app.adapter.controller.TokenController;
 import danieldjgomes.larica.infrastructure.expectionHandler.model.ErrorResponse;
 import lombok.RequiredArgsConstructor;

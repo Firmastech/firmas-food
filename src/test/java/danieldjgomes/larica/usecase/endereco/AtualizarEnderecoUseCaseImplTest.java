@@ -1,14 +1,14 @@
 package danieldjgomes.larica.usecase.endereco;
 
-import danieldjgomes.larica.adapter.database.endereco.model.EnderecoModel;
-import danieldjgomes.larica.adapter.mapper.EnderecoMapper;
-import danieldjgomes.larica.core.endereco.entity.Endereco;
-import danieldjgomes.larica.core.usecases.endereco.ConsultarEnderecoPorCepNumeroUseCase;
-import danieldjgomes.larica.core.usecases.endereco.ConsultarEnderecoPorIdUseCase;
-import danieldjgomes.larica.ports.database.EnderecoPersist;
-import danieldjgomes.larica.usecase.endereco.exceptions.EnderecoInvalidoException;
-import danieldjgomes.larica.usecase.endereco.exceptions.EnderecoNaoEncontradoException;
-import danieldjgomes.larica.usecase.restaurante.exceptions.RestauranteNotFoundException;
+import danieldjgomes.larica.app.adapter.database.endereco.model.EnderecoEntity;
+import danieldjgomes.larica.app.adapter.mapper.EnderecoMapper;
+import danieldjgomes.larica.app.usecase.endereco.AtualizarEnderecoUseCaseImpl;
+import danieldjgomes.larica.app.usecase.endereco.response.Endereco;
+import danieldjgomes.larica.app.usecase.endereco.port.ConsultarEnderecoPorCepNumeroUseCase;
+import danieldjgomes.larica.app.usecase.endereco.port.ConsultarEnderecoPorIdUseCase;
+import danieldjgomes.larica.app.ports.database.EnderecoPersist;
+import danieldjgomes.larica.app.usecase.endereco.exceptions.EnderecoInvalidoException;
+import danieldjgomes.larica.app.usecase.endereco.exceptions.EnderecoNaoEncontradoException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,7 +16,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Optional;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -43,7 +42,7 @@ class AtualizarEnderecoUseCaseImplTest {
 
     private Endereco enderecoAtual;
     private Endereco enderecoExpected;
-    private EnderecoModel modelExpected;
+    private EnderecoEntity modelExpected;
     private String id=UUID.randomUUID().toString();
 
     @BeforeEach
@@ -57,7 +56,7 @@ class AtualizarEnderecoUseCaseImplTest {
         enderecoAtual.setUf("SP");
         enderecoAtual.setPontoReferencia("Proximo ao trintao");
 
-        modelExpected= new EnderecoModel();
+        modelExpected= new EnderecoEntity();
         modelExpected.setId(id);
         modelExpected.setRua("Rua Atualizada");
         modelExpected.setNumero("4321A");

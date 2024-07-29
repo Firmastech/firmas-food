@@ -1,11 +1,11 @@
 package danieldjgomes.larica.usecase.endereco;
 
-import danieldjgomes.larica.adapter.database.endereco.model.EnderecoModel;
-import danieldjgomes.larica.adapter.mapper.EnderecoMapper;
-import danieldjgomes.larica.core.endereco.entity.Endereco;
-import danieldjgomes.larica.core.usecases.endereco.ConsultarEnderecoPorIdUseCase;
-import danieldjgomes.larica.ports.database.EnderecoPersist;
-import danieldjgomes.larica.usecase.endereco.exceptions.EnderecoNaoEncontradoException;
+import danieldjgomes.larica.app.adapter.database.endereco.model.EnderecoEntity;
+import danieldjgomes.larica.app.adapter.mapper.EnderecoMapper;
+import danieldjgomes.larica.app.usecase.endereco.ConsultarEnderecoPorIdUseCaseImpl;
+import danieldjgomes.larica.app.usecase.endereco.response.Endereco;
+import danieldjgomes.larica.app.ports.database.EnderecoPersist;
+import danieldjgomes.larica.app.usecase.endereco.exceptions.EnderecoNaoEncontradoException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -31,13 +31,13 @@ class ConsultarEnderecoPorIdUseCaseImplTest {
     @InjectMocks
     private ConsultarEnderecoPorIdUseCaseImpl consultarEnderecoPorIdUseCase;
 
-    private EnderecoModel modelExpected;
+    private EnderecoEntity modelExpected;
     private Endereco enderecoExpected;
     private String id = UUID.randomUUID().toString();
 
     @BeforeEach
     void setup(){
-        modelExpected = new EnderecoModel();
+        modelExpected = new EnderecoEntity();
         modelExpected.setId(id);
         modelExpected.setRua("Rua Atualizada");
         modelExpected.setNumero("4321A");

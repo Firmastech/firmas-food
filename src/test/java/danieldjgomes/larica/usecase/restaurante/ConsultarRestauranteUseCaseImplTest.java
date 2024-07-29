@@ -1,11 +1,12 @@
 package danieldjgomes.larica.usecase.restaurante;
 
-import danieldjgomes.larica.adapter.database.restaurante.model.RestauranteModel;
-import danieldjgomes.larica.ports.database.RestaurantePersist;
-import danieldjgomes.larica.core.restaurante.entity.Restaurante;
-import danieldjgomes.larica.core.restaurante.entity.enums.StatusFuncionamento;
-import danieldjgomes.larica.usecase.restaurante.exceptions.RestauranteNotFoundException;
-import danieldjgomes.larica.adapter.mapper.RestauranteMapper;
+import danieldjgomes.larica.app.adapter.database.restaurante.model.RestauranteEntity;
+import danieldjgomes.larica.app.usecase.restaurante.ConsultarRestauranteUseCaseImpl;
+import danieldjgomes.larica.app.ports.database.RestaurantePersist;
+import danieldjgomes.larica.app.usecase.restaurante.response.Restaurante;
+import danieldjgomes.larica.app.usecase.restaurante.enums.StatusFuncionamento;
+import danieldjgomes.larica.app.usecase.restaurante.exceptions.RestauranteNotFoundException;
+import danieldjgomes.larica.app.adapter.mapper.RestauranteMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -35,7 +36,7 @@ class ConsultarRestauranteUseCaseImplTest {
 
     private Restaurante restaurante;
 
-    private RestauranteModel restauranteEntity;
+    private RestauranteEntity restauranteEntity;
 
     private final String messageExceptionExpected = "Restaurante nao encontrado";
 
@@ -48,7 +49,7 @@ class ConsultarRestauranteUseCaseImplTest {
         restaurante.setTempoEstimadoDeEntrega(30);
         restaurante.setStatusFuncionamento(StatusFuncionamento.ABERTO);
 
-        restauranteEntity = new RestauranteModel();
+        restauranteEntity = new RestauranteEntity();
         restauranteEntity.setId(id);
         restauranteEntity.setNome("Restaurante Consultado");
         restauranteEntity.setTempoEstimadoDeEntrega(30);

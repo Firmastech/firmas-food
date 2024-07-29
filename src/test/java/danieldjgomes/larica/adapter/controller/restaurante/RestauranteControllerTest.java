@@ -1,16 +1,17 @@
 package danieldjgomes.larica.adapter.controller.restaurante;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import danieldjgomes.larica.core.endereco.entity.Endereco;
-import danieldjgomes.larica.core.restaurante.entity.Restaurante;
-import danieldjgomes.larica.core.restaurante.entity.enums.StatusFuncionamento;
-import danieldjgomes.larica.core.usecases.restaurante.AtualizarRestauranteUseCase;
-import danieldjgomes.larica.core.usecases.restaurante.ConsultarRestauranteUseCase;
-import danieldjgomes.larica.core.usecases.restaurante.RegistrarRestauranteUseCase;
-import danieldjgomes.larica.core.usecases.restaurante.InativarRestauranteUseCase;
-import danieldjgomes.larica.usecase.restaurante.request.AtualizarRestauranteRequest;
-import danieldjgomes.larica.usecase.endereco.request.CadastrarEnderecoRequest;
-import danieldjgomes.larica.usecase.restaurante.request.CriarRestauranteRequest;
+import danieldjgomes.larica.app.adapter.controller.restaurante.RestauranteController;
+import danieldjgomes.larica.app.usecase.endereco.response.Endereco;
+import danieldjgomes.larica.app.usecase.restaurante.response.Restaurante;
+import danieldjgomes.larica.app.usecase.restaurante.enums.StatusFuncionamento;
+import danieldjgomes.larica.app.usecase.restaurante.port.AtualizarRestauranteUseCase;
+import danieldjgomes.larica.app.usecase.restaurante.port.ConsultarRestauranteUseCase;
+import danieldjgomes.larica.app.usecase.restaurante.port.RegistrarRestauranteUseCase;
+import danieldjgomes.larica.app.usecase.restaurante.port.InativarRestauranteUseCase;
+import danieldjgomes.larica.app.usecase.restaurante.request.AtualizarRestauranteRequest;
+import danieldjgomes.larica.app.usecase.endereco.request.CadastrarEnderecoRequest;
+import danieldjgomes.larica.app.usecase.restaurante.request.CriarRestauranteRequest;
 import danieldjgomes.larica.infrastructure.mapper.DTOMapper;
 import jakarta.ws.rs.core.MediaType;
 import org.junit.jupiter.api.BeforeEach;

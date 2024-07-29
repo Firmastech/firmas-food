@@ -1,9 +1,10 @@
 package danieldjgomes.larica.usecase.endereco;
 
-import danieldjgomes.larica.adapter.database.endereco.model.EnderecoModel;
-import danieldjgomes.larica.adapter.mapper.EnderecoMapper;
-import danieldjgomes.larica.core.endereco.entity.Endereco;
-import danieldjgomes.larica.ports.database.EnderecoPersist;
+import danieldjgomes.larica.app.adapter.database.endereco.model.EnderecoEntity;
+import danieldjgomes.larica.app.adapter.mapper.EnderecoMapper;
+import danieldjgomes.larica.app.usecase.endereco.ConsultarEnderecoPorCepNumeroUseCaseImpl;
+import danieldjgomes.larica.app.usecase.endereco.response.Endereco;
+import danieldjgomes.larica.app.ports.database.EnderecoPersist;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -30,13 +31,13 @@ class ConsultarEnderecoPorCepNumeroUseCaseImplTest {
     @InjectMocks
     private ConsultarEnderecoPorCepNumeroUseCaseImpl consultarEnderecoPorCepNumeroUseCase;
 
-    private EnderecoModel modelExpected;
+    private EnderecoEntity modelExpected;
     private Endereco enderecoExpected;
     private String id = UUID.randomUUID().toString();
 
     @BeforeEach
     void setup(){
-        modelExpected = new EnderecoModel();
+        modelExpected = new EnderecoEntity();
         modelExpected.setId(id);
         modelExpected.setRua("Rua Atualizada");
         modelExpected.setNumero("4321A");

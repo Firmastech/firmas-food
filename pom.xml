@@ -150,8 +150,12 @@
 				<version>${jacoco.version}</version>
 				<configuration>
 					<excludes>
-						<exclude>**/danieldjgomes/larica/app/adapter/database/pedidos/model/**</exclude>
-						<exclude>**/danieldjgomes/larica/app/adapter/database/pedidos/repository/**</exclude>
+						<exclude>**/model/**</exclude>
+						<exclude>**/mapper/**</exclude>
+						<exclude>**/request/**</exclude>
+						<exclude>**/response/**</exclude>
+						<exclude>**/repository/**</exclude>
+
 						<exclude>**/danieldjgomes/larica/app/usecase/pedido/enums/**</exclude>
 						<exclude>**/danieldjgomes/larica/app/usecase/pedido/port/**</exclude>
 						<exclude>**/danieldjgomes/larica/app/usecase/pedido/request/**</exclude>

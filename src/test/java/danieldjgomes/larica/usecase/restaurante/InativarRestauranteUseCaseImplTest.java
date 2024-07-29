@@ -1,9 +1,10 @@
 package danieldjgomes.larica.usecase.restaurante;
 
-import danieldjgomes.larica.adapter.database.restaurante.model.RestauranteModel;
-import danieldjgomes.larica.ports.database.RestaurantePersist;
-import danieldjgomes.larica.core.restaurante.entity.enums.StatusFuncionamento;
-import danieldjgomes.larica.usecase.restaurante.exceptions.RestauranteNotFoundException;
+import danieldjgomes.larica.app.adapter.database.restaurante.model.RestauranteEntity;
+import danieldjgomes.larica.app.usecase.restaurante.InativarRestauranteUseCaseImpl;
+import danieldjgomes.larica.app.ports.database.RestaurantePersist;
+import danieldjgomes.larica.app.usecase.restaurante.enums.StatusFuncionamento;
+import danieldjgomes.larica.app.usecase.restaurante.exceptions.RestauranteNotFoundException;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,14 +30,14 @@ class InativarRestauranteUseCaseImplTest {
     @InjectMocks
     private InativarRestauranteUseCaseImpl inativarRestauranteUseCase;
 
-    private RestauranteModel restauranteEntity;
+    private RestauranteEntity restauranteEntity;
 
     private final String messageExceptionExpected = "Restaurante nao encontrado";
 
     @BeforeEach
     void carregarRestaurantes(){
         String id = UUID.randomUUID().toString();
-        restauranteEntity = new RestauranteModel();
+        restauranteEntity = new RestauranteEntity();
         restauranteEntity.setId(id);
         restauranteEntity.setNome("Restaurante Inativado");
         restauranteEntity.setTempoEstimadoDeEntrega(45);

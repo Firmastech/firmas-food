@@ -1,16 +1,13 @@
 package danieldjgomes.larica.adapter.controller.endereco;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import danieldjgomes.larica.core.endereco.entity.Endereco;
-import danieldjgomes.larica.core.restaurante.entity.Restaurante;
-import danieldjgomes.larica.core.restaurante.entity.enums.StatusFuncionamento;
-import danieldjgomes.larica.core.usecases.endereco.AtualizarEnderecoUseCase;
-import danieldjgomes.larica.core.usecases.endereco.ConsultarEnderecoPorIdUseCase;
-import danieldjgomes.larica.core.usecases.endereco.InativarEnderecoUseCase;
+import danieldjgomes.larica.app.adapter.controller.endereco.EnderecoController;
+import danieldjgomes.larica.app.usecase.endereco.response.Endereco;
+import danieldjgomes.larica.app.usecase.endereco.port.AtualizarEnderecoUseCase;
+import danieldjgomes.larica.app.usecase.endereco.port.ConsultarEnderecoPorIdUseCase;
+import danieldjgomes.larica.app.usecase.endereco.port.InativarEnderecoUseCase;
 import danieldjgomes.larica.infrastructure.mapper.DTOMapper;
-import danieldjgomes.larica.usecase.endereco.request.AtualizarEnderecoRequest;
-import danieldjgomes.larica.usecase.restaurante.request.AtualizarRestauranteRequest;
+import danieldjgomes.larica.app.usecase.endereco.request.AtualizarEnderecoRequest;
 import jakarta.ws.rs.core.MediaType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,7 +18,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import java.net.URISyntaxException;
 import java.util.UUID;
 
 import static org.mockito.Mockito.times;

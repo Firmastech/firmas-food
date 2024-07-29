@@ -1,12 +1,13 @@
 package danieldjgomes.larica.usecase.restaurante;
 
-import danieldjgomes.larica.adapter.database.restaurante.model.RestauranteModel;
-import danieldjgomes.larica.core.endereco.entity.Endereco;
-import danieldjgomes.larica.core.usecases.endereco.ConsultarEnderecoPorCepNumeroUseCase;
-import danieldjgomes.larica.ports.database.RestaurantePersist;
-import danieldjgomes.larica.core.restaurante.entity.Restaurante;
-import danieldjgomes.larica.core.restaurante.entity.enums.StatusFuncionamento;
-import danieldjgomes.larica.adapter.mapper.RestauranteMapper;
+import danieldjgomes.larica.app.adapter.database.restaurante.model.RestauranteEntity;
+import danieldjgomes.larica.app.usecase.restaurante.RegistrarRestauranteUseCaseImpl;
+import danieldjgomes.larica.app.usecase.endereco.response.Endereco;
+import danieldjgomes.larica.app.usecase.endereco.port.ConsultarEnderecoPorCepNumeroUseCase;
+import danieldjgomes.larica.app.ports.database.RestaurantePersist;
+import danieldjgomes.larica.app.usecase.restaurante.response.Restaurante;
+import danieldjgomes.larica.app.usecase.restaurante.enums.StatusFuncionamento;
+import danieldjgomes.larica.app.adapter.mapper.RestauranteMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -36,7 +37,7 @@ class RegistrarRestauranteUseCaseImplTest {
 
     private Restaurante restaurante;
 
-    private RestauranteModel restauranteEntity;
+    private RestauranteEntity restauranteEntity;
 
     @BeforeEach
     void carregarRestaurantes(){
@@ -52,7 +53,7 @@ class RegistrarRestauranteUseCaseImplTest {
         restaurante.setStatusFuncionamento(StatusFuncionamento.INATIVO);
         restaurante.setEndereco(endereco);
 
-        restauranteEntity = new RestauranteModel();
+        restauranteEntity = new RestauranteEntity();
         restauranteEntity.setId(id);
         restauranteEntity.setNome("Restaurante Novo");
         restauranteEntity.setTempoEstimadoDeEntrega(30);

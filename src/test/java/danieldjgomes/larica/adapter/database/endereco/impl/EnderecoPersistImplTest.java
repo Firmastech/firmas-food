@@ -1,7 +1,8 @@
 package danieldjgomes.larica.adapter.database.endereco.impl;
 
-import danieldjgomes.larica.adapter.database.endereco.model.EnderecoModel;
-import danieldjgomes.larica.adapter.database.endereco.repository.EnderecoRepository;
+import danieldjgomes.larica.app.adapter.database.endereco.impl.EnderecoPersistImpl;
+import danieldjgomes.larica.app.adapter.database.endereco.model.EnderecoEntity;
+import danieldjgomes.larica.app.adapter.database.endereco.repository.EnderecoRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,12 +28,12 @@ class EnderecoPersistImplTest {
     @InjectMocks
     private EnderecoPersistImpl enderecoPersist;
 
-    private EnderecoModel modelExpected;
+    private EnderecoEntity modelExpected;
     private String id = UUID.randomUUID().toString();
 
     @BeforeEach
     void setup(){
-        modelExpected= new EnderecoModel();
+        modelExpected= new EnderecoEntity();
         modelExpected.setId(id);
         modelExpected.setRua("Rua Atualizada");
         modelExpected.setNumero("4321A");
@@ -48,7 +49,7 @@ class EnderecoPersistImplTest {
         final String numero = modelExpected.getNumero();
         when(enderecoPersist.findByCEPandNumero(cep,numero)).thenReturn(Optional.of(modelExpected));
 
-        EnderecoModel modelConsultada = enderecoPersist.findByCEPandNumero(cep,numero).get();
+        EnderecoEntity modelConsultada = enderecoPersist.findByCEPandNumero(cep,numero).get();
 
         assertEquals(modelExpected.getId(),modelConsultada.getId());
         assertEquals(modelExpected.getCep(),modelConsultada.getCep());
@@ -61,7 +62,7 @@ class EnderecoPersistImplTest {
 
     @Test
     void deveRetornarUmaEntityComOsDadosDeControleCriado() {
-        EnderecoModel entityToCreate = mock(EnderecoModel.class);
+        EnderecoEntity entityToCreate = mock(EnderecoEntity.class);
         enderecoPersist.save(entityToCreate);
 
         verify(entityToCreate).setCriadoEm(any(Date.class));
@@ -71,7 +72,7 @@ class EnderecoPersistImplTest {
 
     @Test
     void deveRetornarUmaEntityComOsDadosDeControleDeAtualizacao() {
-        EnderecoModel entityToUpdate = mock(EnderecoModel.class);
+        EnderecoEntity entityToUpdate = mock(EnderecoEntity.class);
         enderecoPersist.update(entityToUpdate);
         verify(entityToUpdate).setAtualizadoEm(any(Date.class));
         verify(enderecoRepository).save(entityToUpdate);
@@ -79,7 +80,7 @@ class EnderecoPersistImplTest {
 
     @Test
     void deveSetarOsDadosDeAtivoAndDataExclusao() {
-        EnderecoModel entityToDelete = mock(EnderecoModel.class);
+        EnderecoEntity entityToDelete = mock(EnderecoEntity.class);
         enderecoPersist.inativar(entityToDelete);
         verify(entityToDelete).setDeletadoEm(any(Date.class));
         verify(entityToDelete).setAtivo(false);

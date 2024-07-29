@@ -1,6 +1,5 @@
 package danieldjgomes.larica.app.adapter.controller.exceptionHandler;
 
-import danieldjgomes.larica.adapter.handlers.restaurante.CommonExceptionHandler;
 import danieldjgomes.larica.app.adapter.controller.UsuarioController;
 import danieldjgomes.larica.app.usecase.usuario.exceptions.CriandoUsuarioDuplicadoException;
 import danieldjgomes.larica.infrastructure.expectionHandler.model.ErrorResponse;

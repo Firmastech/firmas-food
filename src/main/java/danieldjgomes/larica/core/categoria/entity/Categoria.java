@@ -1,6 +1,6 @@
 package danieldjgomes.larica.core.categoria.entity;
 
-import danieldjgomes.larica.adapter.database.restaurante.model.RestauranteModel;
+import danieldjgomes.larica.app.adapter.database.restaurante.model.RestauranteEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,7 +27,7 @@ public class Categoria {
 
     @ManyToOne
     @JoinColumn(name = "restaurante_id", nullable = false)
-    private RestauranteModel restaurante;
+    private RestauranteEntity restaurante;
 
     @Column(nullable = false)
     private LocalDateTime criado = LocalDateTime.now();

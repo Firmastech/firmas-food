@@ -1,7 +1,7 @@
 package danieldjgomes.larica.app.adapter.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import danieldjgomes.larica.adapter.handlers.restaurante.CommonExceptionHandler;
+import danieldjgomes.larica.app.adapter.controller.exceptionHandler.CommonExceptionHandler;
 import danieldjgomes.larica.app.adapter.controller.exceptionHandler.UsuarioControllerExceptionHandler;
 import danieldjgomes.larica.app.usecase.usuario.CriarUsuarioUseCase;
 import danieldjgomes.larica.app.usecase.usuario.request.CriarUsuarioRequestDTO;

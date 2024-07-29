@@ -1,9 +1,9 @@
 package danieldjgomes.larica.dataprovider.repository;
 
-import danieldjgomes.larica.adapter.database.restaurante.model.RestauranteModel;
-import danieldjgomes.larica.adapter.database.restaurante.repository.RestauranteRepository;
-import danieldjgomes.larica.core.restaurante.entity.enums.StatusFuncionamento;
-import danieldjgomes.larica.adapter.database.restaurante.impl.RestaurantePersistImpl;
+import danieldjgomes.larica.app.adapter.database.restaurante.model.RestauranteEntity;
+import danieldjgomes.larica.app.adapter.database.restaurante.repository.RestauranteRepository;
+import danieldjgomes.larica.app.usecase.restaurante.enums.StatusFuncionamento;
+import danieldjgomes.larica.app.adapter.database.restaurante.impl.RestaurantePersistImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -11,7 +11,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Optional;
 import java.util.UUID;
@@ -29,14 +28,14 @@ class RestaurantePersistImplTest {
     @InjectMocks
     private RestaurantePersistImpl repository;
 
-    private RestauranteModel restauranteEntity;
+    private RestauranteEntity restauranteEntity;
 
     private String id;
 
     @BeforeEach
     void setUp() {
         id = UUID.randomUUID().toString();
-        restauranteEntity = new RestauranteModel();
+        restauranteEntity = new RestauranteEntity();
         restauranteEntity.setId(id);
         restauranteEntity.setNome("Restaurante Novo");
         restauranteEntity.setTempoEstimadoDeEntrega(30);
@@ -48,7 +47,7 @@ class RestaurantePersistImplTest {
     void deveRetornarUmRestauranteEntity() {
         when(restauranteRepository.findByIdAndAtivo(id,true)).thenReturn(Optional.of(restauranteEntity));
 
-        RestauranteModel entity = repository.findById(id).get();
+        RestauranteEntity entity = repository.findById(id).get();
 
         assertNotNull(entity);
         assertEquals(id, entity.getId());
@@ -64,7 +63,7 @@ class RestaurantePersistImplTest {
     void deveRetornarUmRestauranteEntityComMesmoNomePesquisado() {
         when(restauranteRepository.findByNomeAndAtivo("Restaurante Novo",true)).thenReturn(Optional.of(restauranteEntity));
 
-        RestauranteModel entity = repository.findByNome("Restaurante Novo").get();
+        RestauranteEntity entity = repository.findByNome("Restaurante Novo").get();
 
         assertNotNull(entity);
         assertEquals(id, entity.getId());
@@ -78,7 +77,7 @@ class RestaurantePersistImplTest {
 
     @Test
     void deveRetornarUmaEntityComOsDadosDeControleCriado() {
-        RestauranteModel entityToCreate = mock(RestauranteModel.class);
+        RestauranteEntity entityToCreate = mock(RestauranteEntity.class);
         repository.save(entityToCreate);
 
         verify(entityToCreate).setCriadoEm(any(Date.class));
@@ -88,7 +87,7 @@ class RestaurantePersistImplTest {
 
     @Test
     void deveRetornarUmaEntityComOsDadosDeControleDeAtualizacao() {
-        RestauranteModel entityToUpdate = mock(RestauranteModel.class);
+        RestauranteEntity entityToUpdate = mock(RestauranteEntity.class);
         repository.update(entityToUpdate);
         verify(entityToUpdate).setAtualizadoEm(any(Date.class));
         verify(restauranteRepository).save(entityToUpdate);
@@ -96,7 +95,7 @@ class RestaurantePersistImplTest {
 
     @Test
     void deveSetarOsDadosDeAtivoAndDataExclusao() {
-        RestauranteModel entityToDelete = mock(RestauranteModel.class);
+        RestauranteEntity entityToDelete = mock(RestauranteEntity.class);
         repository.delete(entityToDelete);
         verify(entityToDelete).setDeletadoEm(any(Date.class));
         verify(entityToDelete).setAtivo(false);
