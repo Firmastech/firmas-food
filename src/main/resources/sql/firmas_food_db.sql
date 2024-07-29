@@ -165,3 +165,8 @@ CREATE TABLE public.contato (
 ALTER TABLE public.contato
     ADD CONSTRAINT fk_contato_restaurante_id
         FOREIGN KEY (restaurante_id) REFERENCES public.restaurante (id);
+
+alter table endereco
+    drop column numero;
+alter table endereco
+    add column numero varchar (12);

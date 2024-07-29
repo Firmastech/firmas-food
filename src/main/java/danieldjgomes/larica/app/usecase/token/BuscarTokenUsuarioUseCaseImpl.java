@@ -16,8 +16,8 @@ public class BuscarTokenUsuarioUseCaseImpl implements BuscarTokenUsuarioUseCase 
 
     public BuscarTokenUsuarioUseCaseImpl(KeycloakUserClient keycloakUserClient, TokenMapper tokenMapper, BuscarUsuarioPorEmailERestauranteUseCase buscarUsuarioPorEmailERestauranteUseCase) {
         this.etapas = Arrays.asList(
-                new EncontraIdentificadorDoUsuarioPorEmailERestaurante(buscarUsuarioPorEmailERestauranteUseCase),
-                new BuscaTokenUsuarioNoKeycloak(keycloakUserClient, tokenMapper)
+                new EncontraIdentificadorDoUsuarioPorEmailERestauranteUseCase(buscarUsuarioPorEmailERestauranteUseCase),
+                new BuscaTokenUsuarioNoAutenticadorUseCase(keycloakUserClient, tokenMapper)
         );
     }
 

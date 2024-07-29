@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class EncontraIdentificadorDoUsuarioPorEmailERestaurante implements EtapaProcessoBuscarTokenUsuario {
+public class EncontraIdentificadorDoUsuarioPorEmailERestauranteUseCase implements EtapaProcessoBuscarTokenUsuario {
 
     private final BuscarUsuarioPorEmailERestauranteUseCase buscarUsuarioPorEmailERestauranteUseCase;
 

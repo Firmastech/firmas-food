@@ -8,34 +8,34 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table(name = "pedido")
 @Getter
 @Setter
-@Entity
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "pedido")
+@Builder
 public class PedidoEntity {
 
     @Id
-    @Column(length = 36, nullable = false)
+    @Column(nullable = false)
     private String id;
 
     @ManyToOne
     @JoinColumn(name = "usuario_id", referencedColumnName = "id", nullable = false)
-    private UsuarioEntity usuarioId;
+    private UsuarioEntity usuario;
 
     @Column(name = "restaurante_id", length = 36, nullable = false)
     private String restauranteId;
 
-    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
-    @Builder.Default()
+    @OneToMany(mappedBy = "pedidoId", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
     private List<ItemPedidoEntity> itens = new ArrayList<>();
 
     @Column(nullable = false)
     private BigDecimal valor;
 
-    @Column( nullable = false)
+    @Column(nullable = false)
     private String status;
 
     @Column(name = "data_hora_confirmacao")

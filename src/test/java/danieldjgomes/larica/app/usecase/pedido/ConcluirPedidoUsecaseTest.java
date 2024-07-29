@@ -28,7 +28,7 @@ class ConcluirPedidoUsecaseTest {
     @BeforeEach
     void setUp() {
         pedidoRequest = ObjectBuilder.buildProcessarPedidoRequestSucesso();
-        pedidoPersistImpl.getPedidoById(UUID.fromString(pedidoRequest.getId()));
+        pedidoPersistImpl.getPedidoById(pedidoRequest.getId());
     }
 
     @Test
