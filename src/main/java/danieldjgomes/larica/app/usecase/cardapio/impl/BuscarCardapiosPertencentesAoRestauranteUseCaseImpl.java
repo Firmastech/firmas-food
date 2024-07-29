@@ -22,7 +22,7 @@ public class BuscarCardapiosPertencentesAoRestauranteUseCaseImpl implements Busc
 
     public List<ResumoCardapioResponse> buscarCardapio(String restauranteId) {
         List<CardapioResumidoEntity> cardapioResumido = cardapioPersist.buscarCardapios(restauranteId);
-        return cardapioResumido.stream().map(CardapioMapper.INSTANCE::toResponse).toList();
+        return cardapioResumido.stream().map(CardapioMapper.INSTANCE::toCardapioResumo).toList();
     }
 
     public CardapioResponse buscarDetalheCardapio(String cardapioId, String restauranteId) {

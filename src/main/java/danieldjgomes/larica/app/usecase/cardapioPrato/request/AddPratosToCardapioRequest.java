@@ -1,4 +1,4 @@
-package danieldjgomes.larica.core.cardapioPrato.request;
+package danieldjgomes.larica.app.usecase.cardapioPrato.request;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;

@@ -1,8 +1,11 @@
-package danieldjgomes.larica.core.cardapioPrato.controller;
+package danieldjgomes.larica.app.adapter.controller;
 
+import danieldjgomes.larica.app.ports.database.CardapioPratoPersist;
 import danieldjgomes.larica.app.usecase.cardapio.response.CardapioResponse;
-import danieldjgomes.larica.core.cardapioPrato.request.AddPratosToCardapioRequest;
-import danieldjgomes.larica.core.usecases.CardapioPratoUseCase;
+import danieldjgomes.larica.app.usecase.cardapioPrato.AddPratosToCardapioUseCase;
+import danieldjgomes.larica.app.usecase.cardapioPrato.BuscarCardapioByIdUseCase;
+import danieldjgomes.larica.app.usecase.cardapioPrato.RemovePratoFromCardapioUseCase;
+import danieldjgomes.larica.app.usecase.cardapioPrato.request.AddPratosToCardapioRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,25 +18,27 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CardapioPratoController {
 
-    private final CardapioPratoUseCase cardapioPratoUseCase;
+    private final AddPratosToCardapioUseCase addPratosToCardapio;
+    private final BuscarCardapioByIdUseCase buscarCardapioByIdUseCase;
+    private final RemovePratoFromCardapioUseCase removePratosFromCardapio;
 
     @PostMapping("/{cardapioId}")
     public ResponseEntity<AddPratosToCardapioRequest> addPratosToCardapio(
             @PathVariable String cardapioId,
             @RequestBody AddPratosToCardapioRequest request) {
-        cardapioPratoUseCase.addPratosToCardapio(cardapioId, request.getPratoIds());
+        addPratosToCardapio.addPratosToCardapio(cardapioId, request.getPratoIds());
         return ResponseEntity.ok(request);
     }
 
     @GetMapping("/{cardapioId}")
     public ResponseEntity<CardapioResponse> getCardapioById(@PathVariable String cardapioId) {
-        CardapioResponse response = cardapioPratoUseCase.getCardapioById(cardapioId);
+        CardapioResponse response = buscarCardapioByIdUseCase.buscarCardapioById(cardapioId);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @DeleteMapping("/{cardapioId}")
     public ResponseEntity<Void> removePratosFromCardapio(@PathVariable String cardapioId, @RequestBody List<String> pratoIds) {
-        cardapioPratoUseCase.removePratosFromCardapio(cardapioId, pratoIds);
+        removePratosFromCardapio.desativar(cardapioId, pratoIds);
         return ResponseEntity.noContent().build();
     }
 }

@@ -1,19 +1,16 @@
-package danieldjgomes.larica.core.cardapioPrato.request;
+package danieldjgomes.larica.app.usecase.cardapioPrato.request;
+
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.Objects;
 
+@NoArgsConstructor
+@AllArgsConstructor
 public class CardapioPratoId implements Serializable {
     private String cardapioId;
     private String pratoId;
-
-    public CardapioPratoId() {
-    }
-
-    public CardapioPratoId(String cardapioId, String pratoId) {
-        this.cardapioId = cardapioId;
-        this.pratoId = pratoId;
-    }
 
     @Override
     public boolean equals(Object o) {

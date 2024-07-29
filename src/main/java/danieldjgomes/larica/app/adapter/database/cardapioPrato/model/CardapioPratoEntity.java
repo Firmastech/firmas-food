@@ -1,7 +1,7 @@
-package danieldjgomes.larica.core.cardapioPrato.entity;
+package danieldjgomes.larica.app.adapter.database.cardapioPrato.model;
 
 
-import danieldjgomes.larica.core.cardapioPrato.request.CardapioPratoId;
+import danieldjgomes.larica.app.usecase.cardapioPrato.request.CardapioPratoId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
@@ -20,7 +20,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "cardapio_prato")
 @IdClass(CardapioPratoId.class)
-public class CardapioPrato implements Serializable {
+public class CardapioPratoEntity implements Serializable {
 
     @Id
     private String cardapioId;
