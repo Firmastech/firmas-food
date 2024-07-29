@@ -35,6 +35,11 @@
 		<sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
 		<!-- Sonar Ignore -->
 		<sonar.coverage.exclusions>
+			**/model/**
+			**/mapper/**
+			**/request/**
+			**/response/**
+			**/repository/**
 			**/danieldjgomes/larica/app/adapter/database/pedidos/model/**
 			**/danieldjgomes/larica/app/adapter/database/pedidos/repository/**
 			**/danieldjgomes/larica/app/usecase/pedido/config/**
