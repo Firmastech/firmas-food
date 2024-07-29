@@ -1,4 +1,4 @@
-package danieldjgomes.larica.core.prato.dtos;
+package danieldjgomes.larica.app.usecase.prato.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,12 +7,13 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class PratoResponseDTO {
+public class PratoResponse {
 
     private String id;
     private String descricao;
@@ -21,9 +22,5 @@ public class PratoResponseDTO {
     private String categoria;
     private String urlImagem;
     private BigDecimal porcentagemDesconto;
-    private LocalDateTime criado;
-    private LocalDateTime atualizado;
-    private Boolean estaAtivo;
-    private LocalDateTime deletado;
 
 }

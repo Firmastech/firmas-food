@@ -1,6 +1,6 @@
 package danieldjgomes.larica.app.usecase.cardapio.response;
 
-import danieldjgomes.larica.core.prato.dtos.PratoResponseDTO;
+import danieldjgomes.larica.app.usecase.prato.response.PratoResponse;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,5 +18,5 @@ public class CardapioResponse {
     private String nome;
     private String descricao;
     private String restauranteId;
-    private List<PratoResponseDTO> pratos;
+    private List<PratoResponse> pratos;
 }

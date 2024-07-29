@@ -22,7 +22,6 @@ public interface CardapioMapper {
     CardapioEntity toEntity(CriarCardapioRequest dto);
 
     CardapioResponse criarCardapiotoResponse(CardapioEntity entity);
-    AtualizarCardapioResponse atualizarCardapiotoResponse(CardapioEntity entity);
 
     ResumoCardapioResponse toCardapioResumo(CardapioResumidoEntity cardapios);
 

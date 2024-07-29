@@ -1,4 +1,4 @@
-package danieldjgomes.larica.core.prato.entity;
+package danieldjgomes.larica.app.adapter.database.prato.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 
 @Getter
@@ -16,11 +17,9 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "prato")
-public class Prato {
+public class PratoEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "id", nullable = false)
     private String id;
 
     @Column(name = "descricao")
@@ -42,15 +41,15 @@ public class Prato {
     private BigDecimal porcentagemDesconto;
 
     @Column(name = "criado", nullable = false)
-    private LocalDateTime criado = LocalDateTime.now();
+    private Date criado;
 
     @Column(name = "atualizado", nullable = false)
-    private LocalDateTime atualizado = LocalDateTime.now();
+    private Date atualizado;
 
     @Column(name = "esta_ativo", nullable = false)
     private Boolean estaAtivo = true;
 
     @Column(name = "deletado")
-    private LocalDateTime deletado;
+    private Date deletado;
 
 }

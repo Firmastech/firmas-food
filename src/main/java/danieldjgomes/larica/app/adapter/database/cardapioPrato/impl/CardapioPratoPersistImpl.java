@@ -4,12 +4,12 @@ import danieldjgomes.larica.app.adapter.database.cardapio.CardapioRepository;
 import danieldjgomes.larica.app.adapter.database.cardapio.model.CardapioEntity;
 import danieldjgomes.larica.app.adapter.database.cardapioPrato.model.CardapioPratoEntity;
 import danieldjgomes.larica.app.adapter.database.cardapioPrato.repository.CardapioPratoRepository;
+import danieldjgomes.larica.app.adapter.database.prato.model.PratoEntity;
 import danieldjgomes.larica.app.ports.database.CardapioPratoPersist;
 import danieldjgomes.larica.app.usecase.cardapio.response.CardapioResponse;
 import danieldjgomes.larica.app.usecase.cardapioPrato.exception.CardapioPratoNotFoundException;
-import danieldjgomes.larica.core.prato.dtos.PratoResponseDTO;
-import danieldjgomes.larica.core.prato.entity.Prato;
-import danieldjgomes.larica.core.prato.repository.PratoRepository;
+import danieldjgomes.larica.app.usecase.prato.response.PratoResponse;
+import danieldjgomes.larica.app.adapter.database.prato.repository.PratoRepository;
 import danieldjgomes.larica.infrastructure.mapper.CardapioMapper;
 import danieldjgomes.larica.infrastructure.mapper.PratoMapper;
 import lombok.RequiredArgsConstructor;
@@ -31,11 +31,11 @@ public class CardapioPratoPersistImpl implements CardapioPratoPersist {
             throw new CardapioPratoNotFoundException();
         }
 
-        List<Prato> pratos = pratoRepository.findAllById(pratoIds)
+        List<PratoEntity> pratoEntities = pratoRepository.findAllById(pratoIds)
                 .stream()
-                .filter(Prato::getEstaAtivo)
+                .filter(PratoEntity::getEstaAtivo)
                 .toList();
-        if (pratos.size() != pratoIds.size()) {
+        if (pratoEntities.size() != pratoIds.size()) {
             throw new CardapioPratoNotFoundException();
         }
 
@@ -51,10 +51,10 @@ public class CardapioPratoPersistImpl implements CardapioPratoPersist {
                 .orElseThrow(CardapioPratoNotFoundException::new);
 
         List<CardapioPratoEntity> cardapioPratoEntities = cardapioPratoRepository.findByCardapioId(cardapioId);
-        List<PratoResponseDTO> pratos = cardapioPratoEntities.stream()
+        List<PratoResponse> pratos = cardapioPratoEntities.stream()
                 .map(cp -> pratoRepository.findById(cp.getPratoId())
-                        .filter(Prato::getEstaAtivo)
-                        .map(PratoMapper.INSTANCE::toResponseDTO)
+                        .filter(PratoEntity::getEstaAtivo)
+                        .map(PratoMapper.INSTANCE::criarPratoResponse)
                         .orElseThrow(CardapioPratoNotFoundException::new))
                 .toList();
 

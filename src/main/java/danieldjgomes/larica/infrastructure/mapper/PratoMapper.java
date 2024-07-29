@@ -1,11 +1,10 @@
 package danieldjgomes.larica.infrastructure.mapper;
 
-import danieldjgomes.larica.core.prato.dtos.PratoRequestDTO;
-import danieldjgomes.larica.core.prato.dtos.PratoResponseDTO;
-import danieldjgomes.larica.core.prato.entity.Prato;
+import danieldjgomes.larica.app.adapter.database.prato.model.PratoEntity;
+import danieldjgomes.larica.app.usecase.prato.reqeust.CriarPratoRequest;
+import danieldjgomes.larica.app.usecase.prato.response.PratoResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
 
 
@@ -20,7 +19,7 @@ public interface PratoMapper {
     @Mapping(source = "categoria", target = "categoria")
     @Mapping(source = "urlImagem", target = "urlImagem")
     @Mapping(source = "porcentagemDesconto", target = "porcentagemDesconto")
-    Prato toEntity(PratoRequestDTO dto);
+    PratoEntity toEntity(CriarPratoRequest dto);
 
     @Mapping(source = "id", target = "id")
     @Mapping(source = "descricao", target = "descricao")
@@ -29,7 +28,9 @@ public interface PratoMapper {
     @Mapping(source = "categoria", target = "categoria")
     @Mapping(source = "urlImagem", target = "urlImagem")
     @Mapping(source = "porcentagemDesconto", target = "porcentagemDesconto")
-    PratoResponseDTO toResponseDTO(Prato entity);
+    PratoResponse criarPratoResponse(PratoEntity entity);
 
+    PratoResponse toAtualizarPratoResponse(PratoEntity entity);
 
+    PratoResponse toPratoResponse(PratoEntity pratoEntity);
 }

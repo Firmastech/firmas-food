@@ -1,4 +1,4 @@
-package danieldjgomes.larica.core.prato.dtos;
+package danieldjgomes.larica.app.usecase.prato.reqeust;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class PratoRequestDTO {
+public class AtualizarPratoRequest {
 
     private String descricao;
     private String nome;
@@ -19,5 +19,4 @@ public class PratoRequestDTO {
     private String categoria;
     private String urlImagem;
     private BigDecimal porcentagemDesconto;
-
 }

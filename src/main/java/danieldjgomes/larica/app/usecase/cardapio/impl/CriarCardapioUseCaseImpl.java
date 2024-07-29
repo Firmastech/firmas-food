@@ -16,8 +16,8 @@ public class CriarCardapioUseCaseImpl implements CriarCardapioUseCase {
     private final CardapioPersist cardapioPersist;
     private final GerarUUIDUseCase gerarUUIDUseCase;
 
-    public CardapioResponse criar(CriarCardapioRequest cardapioRequestDTO) {
-        CardapioEntity cardapio = CardapioMapper.INSTANCE.toEntity(cardapioRequestDTO);
+    public CardapioResponse criar(CriarCardapioRequest cardapioRequest) {
+        CardapioEntity cardapio = CardapioMapper.INSTANCE.toEntity(cardapioRequest);
         cardapio.setId(gerarUUIDUseCase.gerar());
         cardapio = cardapioPersist.criar(cardapio);
         return CardapioMapper.INSTANCE.criarCardapiotoResponse(cardapio);
