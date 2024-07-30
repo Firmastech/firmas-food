@@ -1,4 +1,4 @@
-package danieldjgomes.larica.core.catagoria.dtos;
+package danieldjgomes.larica.app.usecase.categoria.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,8 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CategoriaRequestDTO {
+public class AtualizarCategoriaRequest {
+
 
     private String nome;
     private String restauranteId;

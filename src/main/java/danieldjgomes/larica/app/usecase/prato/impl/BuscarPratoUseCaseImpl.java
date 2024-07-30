@@ -19,8 +19,8 @@ public class BuscarPratoUseCaseImpl implements BuscarPratosUseCase {
 
     public List<PratoResponse> buscarPratoList() {
         List<PratoEntity> prato = pratoPersist.getAllPratos();
-        return prato.stream()
-                .filter(PratoEntity::getEstaAtivo)
+        return prato
+                .stream()
                 .map(PratoMapper.INSTANCE::toPratoResponse)
                 .toList();
     }

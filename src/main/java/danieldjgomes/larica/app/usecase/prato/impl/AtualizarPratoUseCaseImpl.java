@@ -19,7 +19,6 @@ public class AtualizarPratoUseCaseImpl implements AtualizarPratoUseCase {
 
     public Optional<PratoResponse> updatePrato(String id, AtualizarPratoRequest pratoRequest) {
         Optional<PratoEntity> pratoAtualizado = pratoPersist.updatePrato(id, pratoRequest);
-
         return pratoAtualizado.map(PratoMapper.INSTANCE::toAtualizarPratoResponse);
     }
 

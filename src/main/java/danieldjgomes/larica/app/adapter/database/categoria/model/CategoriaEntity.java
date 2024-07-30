@@ -1,4 +1,4 @@
-package danieldjgomes.larica.core.catagoria.entity;
+package danieldjgomes.larica.app.adapter.database.categoria.model;
 
 import danieldjgomes.larica.adapter.database.restaurante.model.RestauranteModel;
 import jakarta.persistence.*;
@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Getter
@@ -15,7 +16,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "categoria_prato")
-public class Categoria {
+public class CategoriaEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -30,13 +31,13 @@ public class Categoria {
     private RestauranteModel restaurante;
 
     @Column(nullable = false)
-    private LocalDateTime criado = LocalDateTime.now();
+    private Date criado;
 
     @Column(nullable = false)
-    private LocalDateTime atualizado = LocalDateTime.now();
+    private Date atualizado;
 
     @Column(nullable = false)
     private Boolean estaAtivo = true;
 
-    private LocalDateTime deletado;
+    private Date deletado;
 }

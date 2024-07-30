@@ -20,6 +20,9 @@ public class PratoPersistImpl implements PratoPersist {
 
     @Override
     public PratoEntity createPrato(PratoEntity prato) {
+        Date dateAtual = new Date();
+        prato.setCriado(dateAtual);
+        prato.setAtualizado(dateAtual);
         return pratoRepository.save(prato);
     }
 
@@ -35,7 +38,7 @@ public class PratoPersistImpl implements PratoPersist {
 
     @Override
     public Optional<PratoEntity> updatePrato(String id, AtualizarPratoRequest pratoRequest) {
-        int updatedRows = pratoRepository.atualizarPrato(
+        Integer updatedRows = pratoRepository.atualizarPrato(
                 id,
                 pratoRequest.getNome(),
                 pratoRequest.getDescricao(),

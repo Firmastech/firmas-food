@@ -1,24 +1,25 @@
 package danieldjgomes.larica.infrastructure.mapper;
 
-import danieldjgomes.larica.core.catagoria.dtos.CategoriaRequestDTO;
-import danieldjgomes.larica.core.catagoria.dtos.CategoriaResponseDTO;
-import danieldjgomes.larica.core.catagoria.entity.Categoria;
+import danieldjgomes.larica.app.adapter.database.categoria.model.CategoriaEntity;
+import danieldjgomes.larica.app.usecase.categoria.request.CriarCategoriaRequest;
+import danieldjgomes.larica.app.usecase.categoria.response.CategoriaResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.MappingTarget;
+import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring")
 public interface CategoriaMapper {
 
+    CategoriaMapper INSTANCE = Mappers.getMapper(CategoriaMapper.class);
+
+
     @Mapping(target = "id", ignore = true)
     @Mapping(source = "restauranteId", target = "restaurante.id")
-    Categoria toEntity(CategoriaRequestDTO dto);
+    CategoriaEntity toEntity(CriarCategoriaRequest dto);
 
     @Mapping(source = "restaurante.id", target = "restauranteId")
-    CategoriaResponseDTO toResponseDTO(Categoria entity);
+    CategoriaResponse toResponse(CategoriaEntity entity);
 
-    @Mapping(target = "id", ignore = true)
-    @Mapping(source = "nome", target = "nome")
-    @Mapping(source = "restauranteId", target = "restaurante.id")
-    void updateEntityFromDTO(CategoriaRequestDTO dto, @MappingTarget Categoria entity);
+    @Mapping(source = "restaurante.id", target = "restauranteId")
+    CategoriaResponse updateEntityFromDTO(CategoriaEntity categoria);
 }

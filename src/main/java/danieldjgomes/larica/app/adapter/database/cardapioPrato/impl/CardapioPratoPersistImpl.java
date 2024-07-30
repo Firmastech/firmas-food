@@ -26,6 +26,7 @@ public class CardapioPratoPersistImpl implements CardapioPratoPersist {
     private final CardapioPratoRepository cardapioPratoRepository;
     private final PratoRepository pratoRepository;
 
+    @Override
     public void addPratosToCardapio(String cardapioId, List<String> pratoIds) {
         if (!cardapioRepository.existsById(cardapioId)) {
             throw new CardapioPratoNotFoundException();
@@ -45,6 +46,7 @@ public class CardapioPratoPersistImpl implements CardapioPratoPersist {
 
     }
 
+    @Override
     public CardapioResponse getCardapioById(String cardapioId) {
         CardapioEntity cardapio = cardapioRepository.findById(cardapioId)
                 .filter(CardapioEntity::getEstaAtivo)
@@ -64,6 +66,7 @@ public class CardapioPratoPersistImpl implements CardapioPratoPersist {
         return cardapioResponseDTO;
     }
 
+    @Override
     public void removePratosFromCardapio(String cardapioId, List<String> pratoIds) {
         cardapioPratoRepository.deleteByCardapioIdAndPratoIdIn(cardapioId, pratoIds);
     }

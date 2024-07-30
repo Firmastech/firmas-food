@@ -1,11 +1,11 @@
 package danieldjgomes.larica.app.adapter.database.prato.repository;
 
 import danieldjgomes.larica.app.adapter.database.prato.model.PratoEntity;
-import feign.Param;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -28,7 +28,7 @@ public interface PratoRepository extends JpaRepository<PratoEntity, String> {
             set p.nome = :nome,
                 p.descricao = :descricao,
                 p.preco = :preco,
-                p.categoria = :categoria,
+                p.categoria = :categoriaEntity,
                 p.atualizado = CURRENT_TIMESTAMP
             where p.id = :id AND p.estaAtivo = true
             """)
@@ -36,7 +36,7 @@ public interface PratoRepository extends JpaRepository<PratoEntity, String> {
                        @Param("nome") String nome,
                        @Param("descricao") String descricao,
                        @Param("preco") BigDecimal preco,
-                       @Param("categoria") String categoria);
+                       @Param("categoriaEntity") String categoriaEntity);
 
     @Transactional
     @Modifying

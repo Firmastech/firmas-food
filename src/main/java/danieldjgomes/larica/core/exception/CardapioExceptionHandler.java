@@ -1,5 +1,6 @@
 package danieldjgomes.larica.core.exception;
 
+import danieldjgomes.larica.app.usecase.categoria.exception.CategoriaNotFoundException;
 import danieldjgomes.larica.infrastructure.expectionHandler.model.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -25,6 +26,11 @@ public class CardapioExceptionHandler {
                                 .timestamp(new Date())
                                         .build();
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+    }
+
+    @ExceptionHandler(CategoriaNotFoundException.class)
+    public ResponseEntity<String> handleCategoriaNotFoundException(CategoriaNotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
 
 }
