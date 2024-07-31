@@ -1,5 +1,7 @@
 package danieldjgomes.larica.core.exception;
 
+import danieldjgomes.larica.app.usecase.categoria.exception.CategoriaNotFoundException;
+import danieldjgomes.larica.app.usecase.prato.exception.PratoNotFoundException;
 import danieldjgomes.larica.infrastructure.expectionHandler.model.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -16,14 +18,26 @@ import java.util.Date;
 @Slf4j
 public class CardapioExceptionHandler {
 
+
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler(EntityNotFoundException.class)
+    @ExceptionHandler(CategoriaNotFoundException.class)
     @ResponseBody
-    public ResponseEntity handleNotFoundException(EntityNotFoundException ex) {
+    public ResponseEntity handleNotFoundException(CategoriaNotFoundException ex) {
         ErrorResponse response = ErrorResponse.builder()
-                        .mensagens(Collections.singletonList(ex.getMessage()))
-                                .timestamp(new Date())
-                                        .build();
+                .mensagens(Collections.singletonList(ex.getMessage()))
+                .timestamp(new Date())
+                .build();
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(PratoNotFoundException.class)
+    @ResponseBody
+    public ResponseEntity handleNotFoundException(PratoNotFoundException ex) {
+        ErrorResponse response = ErrorResponse.builder()
+                .mensagens(Collections.singletonList(ex.getMessage()))
+                .timestamp(new Date())
+                .build();
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
     }
 

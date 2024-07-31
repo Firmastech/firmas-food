@@ -1,33 +1,32 @@
 package danieldjgomes.larica.infrastructure.mapper;
 
-import danieldjgomes.larica.core.cardapio.dtos.request.CardapioRequestDTO;
-import danieldjgomes.larica.core.cardapio.dtos.response.CardapioResponseDTO;
-import danieldjgomes.larica.core.cardapio.dtos.request.CardapioUpdateRequestDTO;
-import danieldjgomes.larica.core.cardapio.entity.Cardapio;
+import danieldjgomes.larica.app.usecase.cardapio.request.CriarCardapioRequest;
+import danieldjgomes.larica.app.usecase.cardapio.response.AtualizarCardapioResponse;
+import danieldjgomes.larica.app.usecase.cardapio.response.ResumoCardapioResponse;
+import danieldjgomes.larica.app.usecase.cardapio.response.CardapioResponse;
+import danieldjgomes.larica.app.adapter.database.cardapio.model.CardapioEntity;
+import danieldjgomes.larica.app.adapter.database.cardapio.model.CardapioResumidoEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
 
-//@Mapper(componentModel = "spring")
-//public interface CardapioMapper {
-//
-//    CardapioMapper INSTANCE = Mappers.getMapper(CardapioMapper.class);
-//
-//
-//    @Mapping(source = "restauranteId", target = "restaurante")
-//    @Mapping(source = "nome", target = "nome")
-//    @Mapping(source = "descricao", target = "descricao")
-//    Cardapio toEntity(CardapioRequestDTO dto);
-//
-//    @Mapping(source = "id", target = "id")
-//    @Mapping(source = "nome", target = "nome")
-//    @Mapping(source = "descricao", target = "descricao")
-//    CardapioResponseDTO toDto(Cardapio entity);
+@Mapper(componentModel = "spring")
+public interface CardapioMapper {
 
-//    @Mapping(source = "nome", target = "nome")
-//    @Mapping(source = "descricao", target = "descricao")
-//    void updateCardapioFromDto(CardapioUpdateRequestDTO dto, @MappingTarget Cardapio cardapio);
+    CardapioMapper INSTANCE = Mappers.getMapper(CardapioMapper.class);
 
 
-//}
+    @Mapping(source = "restauranteId", target = "restaurante")
+    @Mapping(source = "nome", target = "nome")
+    @Mapping(source = "descricao", target = "descricao")
+    CardapioEntity toEntity(CriarCardapioRequest dto);
+
+    CardapioResponse criarCardapiotoResponse(CardapioEntity entity);
+
+    ResumoCardapioResponse toCardapioResumo(CardapioResumidoEntity cardapios);
+
+
+    CardapioResponse toResponse(CardapioEntity cardapio);
+
+    AtualizarCardapioResponse toAtualizarCardapioResponse(CardapioResponse cardapioResponse);
+}
