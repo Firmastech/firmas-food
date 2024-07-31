@@ -14,7 +14,7 @@ public interface PratoPersist {
 
     List<PratoEntity> getAllPratos();
 
-    Optional<PratoEntity> updatePrato(String id, AtualizarPratoRequest pratoRequest);
+    Integer updatePrato(String id, AtualizarPratoRequest pratoRequest);
 
     void disablePrato(String id);
 

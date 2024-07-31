@@ -3,7 +3,6 @@ package danieldjgomes.larica.app.adapter.database.prato.impl;
 import danieldjgomes.larica.app.adapter.database.prato.model.PratoEntity;
 import danieldjgomes.larica.app.adapter.database.prato.repository.PratoRepository;
 import danieldjgomes.larica.app.ports.database.PratoPersist;
-import danieldjgomes.larica.app.usecase.prato.exception.PratoNotFoundException;
 import danieldjgomes.larica.app.usecase.prato.reqeust.AtualizarPratoRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -37,20 +36,14 @@ public class PratoPersistImpl implements PratoPersist {
     }
 
     @Override
-    public Optional<PratoEntity> updatePrato(String id, AtualizarPratoRequest pratoRequest) {
-        Integer updatedRows = pratoRepository.atualizarPrato(
-                id,
+    public Integer updatePrato(String id, AtualizarPratoRequest pratoRequest) {
+        return pratoRepository.atualizarPrato(id,
                 pratoRequest.getNome(),
                 pratoRequest.getDescricao(),
                 pratoRequest.getPreco(),
-                pratoRequest.getCategoria()
-        );
-
-        if (updatedRows > 0) {
-            return Optional.ofNullable(pratoRepository.findPratoAtivoById(id).orElseThrow(PratoNotFoundException::new));
-        }
-
-        throw new PratoNotFoundException();
+                pratoRequest.getPorcentagemDesconto(),
+                pratoRequest.getUrlImagem(),
+                pratoRequest.getCategoria());
     }
 
     @Override

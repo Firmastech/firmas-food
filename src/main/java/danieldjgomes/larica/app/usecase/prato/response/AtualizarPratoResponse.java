@@ -11,14 +11,11 @@ import java.math.BigDecimal;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class PratoResponse {
+public class AtualizarPratoResponse {
 
-    private String id;
     private String descricao;
     private String nome;
     private BigDecimal preco;
-    private String categoria;
     private String urlImagem;
     private BigDecimal porcentagemDesconto;
-
 }

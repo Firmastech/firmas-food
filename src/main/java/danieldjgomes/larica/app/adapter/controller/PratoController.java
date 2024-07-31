@@ -6,6 +6,7 @@ import danieldjgomes.larica.app.usecase.prato.CriarPratoUseCase;
 import danieldjgomes.larica.app.usecase.prato.DesativarPratoUseCase;
 import danieldjgomes.larica.app.usecase.prato.reqeust.AtualizarPratoRequest;
 import danieldjgomes.larica.app.usecase.prato.reqeust.CriarPratoRequest;
+import danieldjgomes.larica.app.usecase.prato.response.AtualizarPratoResponse;
 import danieldjgomes.larica.app.usecase.prato.response.PratoResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +15,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/prato")
@@ -45,10 +45,11 @@ public class PratoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PratoResponse> updatePrato(
-            @PathVariable String id, @RequestBody @Valid AtualizarPratoRequest updatedPrato) {
-        Optional<PratoResponse> prato = atualizarPratoUseCase.updatePrato(id, updatedPrato);
-        return prato.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    public ResponseEntity<AtualizarPratoResponse> updatePrato(
+            @PathVariable String id,
+            @RequestBody AtualizarPratoRequest updatedPrato) {
+        AtualizarPratoResponse pratoResponse = atualizarPratoUseCase.updatePrato(id, updatedPrato);
+        return new ResponseEntity<>(pratoResponse, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")

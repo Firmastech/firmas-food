@@ -2,6 +2,7 @@ package danieldjgomes.larica.infrastructure.mapper;
 
 import danieldjgomes.larica.app.adapter.database.prato.model.PratoEntity;
 import danieldjgomes.larica.app.usecase.prato.reqeust.CriarPratoRequest;
+import danieldjgomes.larica.app.usecase.prato.response.AtualizarPratoResponse;
 import danieldjgomes.larica.app.usecase.prato.response.PratoResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -30,7 +31,7 @@ public interface PratoMapper {
     @Mapping(source = "porcentagemDesconto", target = "porcentagemDesconto")
     PratoResponse criarPratoResponse(PratoEntity entity);
 
-    PratoResponse toAtualizarPratoResponse(PratoEntity entity);
+    AtualizarPratoResponse toAtualizarPratoResponse(PratoResponse pratoResponse);
 
     PratoResponse toPratoResponse(PratoEntity pratoEntity);
 }

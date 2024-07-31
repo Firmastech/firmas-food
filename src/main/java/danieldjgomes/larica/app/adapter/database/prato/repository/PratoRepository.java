@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -28,15 +29,19 @@ public interface PratoRepository extends JpaRepository<PratoEntity, String> {
             set p.nome = :nome,
                 p.descricao = :descricao,
                 p.preco = :preco,
-                p.categoria = :categoriaEntity,
+                p.porcentagemDesconto= :porcentagemDesconto,
+                p.urlImagem= :urlImagem,
+                p.categoria = :categoria,
                 p.atualizado = CURRENT_TIMESTAMP
             where p.id = :id AND p.estaAtivo = true
             """)
-    Integer atualizarPrato(@Param("id") String id,
-                       @Param("nome") String nome,
-                       @Param("descricao") String descricao,
-                       @Param("preco") BigDecimal preco,
-                       @Param("categoriaEntity") String categoriaEntity);
+    Integer atualizarPrato(String id,
+                           String nome,
+                           String descricao,
+                           BigDecimal preco,
+                           BigDecimal porcentagemDesconto,
+                           String urlImagem,
+                           String categoria);
 
     @Transactional
     @Modifying
