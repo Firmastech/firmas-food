@@ -12,7 +12,7 @@ import danieldjgomes.larica.app.usecase.restaurante.port.InativarRestauranteUseC
 import danieldjgomes.larica.app.usecase.restaurante.request.AtualizarRestauranteRequest;
 import danieldjgomes.larica.app.usecase.endereco.request.CadastrarEnderecoRequest;
 import danieldjgomes.larica.app.usecase.restaurante.request.CriarRestauranteRequest;
-import danieldjgomes.larica.infrastructure.mapper.DTOMapper;
+import danieldjgomes.larica.infrastructure.mapper.RestauranteMapper;
 import jakarta.ws.rs.core.MediaType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -45,7 +45,7 @@ class RestauranteControllerTest {
     private InativarRestauranteUseCase inativarRestauranteUseCase;
 
     @Mock
-    private DTOMapper mapper;
+    private RestauranteMapper mapper;
 
     @InjectMocks
     private RestauranteController restauranteController;

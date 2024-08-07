@@ -44,6 +44,6 @@ public class RestauranteEntity {
     private Date deletadoEm;
 
     @Column(name = "ativo", nullable = false, length = 10)
-    private Boolean ativo;
+    private Boolean ativo = true;
 
 }

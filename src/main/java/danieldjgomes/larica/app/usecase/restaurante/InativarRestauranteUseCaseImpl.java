@@ -16,7 +16,7 @@ public class InativarRestauranteUseCaseImpl implements InativarRestauranteUseCas
     @Override
     public void inativarRestaurante(String ID) {
         RestauranteEntity entity = restaurantePersist.findById(ID).orElseThrow(
-                ()-> new RestauranteNotFoundException("Restaurante nao encontrado")
+                ()-> new RestauranteNotFoundException()
         );
         restaurantePersist.delete(entity);
     }

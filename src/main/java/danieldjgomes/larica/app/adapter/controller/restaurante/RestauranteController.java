@@ -7,7 +7,7 @@ import danieldjgomes.larica.app.usecase.restaurante.port.InativarRestauranteUseC
 import danieldjgomes.larica.app.usecase.restaurante.port.RegistrarRestauranteUseCase;
 import danieldjgomes.larica.app.usecase.restaurante.request.AtualizarRestauranteRequest;
 import danieldjgomes.larica.app.usecase.restaurante.request.CriarRestauranteRequest;
-import danieldjgomes.larica.infrastructure.mapper.DTOMapper;
+import danieldjgomes.larica.infrastructure.mapper.RestauranteMapper;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -27,7 +27,7 @@ public class RestauranteController {
     private final ConsultarRestauranteUseCase consultarRestauranteUseCase;
     private final AtualizarRestauranteUseCase atualizarRestauranteUseCase;
     private final InativarRestauranteUseCase inativarRestauranteUseCase;
-    private final DTOMapper mapper;
+    private final RestauranteMapper mapper;
 
     @PostMapping
     public ResponseEntity registrarRestaurante(@RequestBody @Valid CriarRestauranteRequest dto) {

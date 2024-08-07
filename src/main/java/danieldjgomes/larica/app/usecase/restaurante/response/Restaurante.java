@@ -23,6 +23,5 @@ public class Restaurante {
     private StatusFuncionamento statusFuncionamento;
     private Endereco endereco;
     private Cardapio cardapio;
-    private List<ContatoEntity> contatos;
 
 }

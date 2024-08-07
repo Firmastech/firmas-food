@@ -45,7 +45,7 @@ class RestaurantePersistImplTest {
 
     @Test
     void deveRetornarUmRestauranteEntity() {
-        when(restauranteRepository.findByIdAndAtivo(id,true)).thenReturn(Optional.of(restauranteEntity));
+        when(restauranteRepository.findByIdAndAtivoIsTrue(id)).thenReturn(Optional.of(restauranteEntity));
 
         RestauranteEntity entity = repository.findById(id).get();
 
@@ -56,12 +56,12 @@ class RestaurantePersistImplTest {
         assertEquals(30, entity.getTempoEstimadoDeEntrega());
         assertEquals(id, restauranteEntity.getId());
 
-        verify(restauranteRepository).findByIdAndAtivo(id,true);
+        verify(restauranteRepository).findByIdAndAtivoIsTrue(id);
     }
 
     @Test
     void deveRetornarUmRestauranteEntityComMesmoNomePesquisado() {
-        when(restauranteRepository.findByNomeAndAtivo("Restaurante Novo",true)).thenReturn(Optional.of(restauranteEntity));
+        when(restauranteRepository.findByNomeAndAtivoIsTrue("Restaurante Novo")).thenReturn(Optional.of(restauranteEntity));
 
         RestauranteEntity entity = repository.findByNome("Restaurante Novo").get();
 
@@ -72,7 +72,7 @@ class RestaurantePersistImplTest {
         assertEquals(30, entity.getTempoEstimadoDeEntrega());
         assertEquals(id, restauranteEntity.getId());
 
-        verify(restauranteRepository).findByNomeAndAtivo("Restaurante Novo",true);
+        verify(restauranteRepository).findByNomeAndAtivoIsTrue("Restaurante Novo");
     }
 
     @Test

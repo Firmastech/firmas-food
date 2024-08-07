@@ -6,8 +6,8 @@ import danieldjgomes.larica.app.usecase.endereco.response.Endereco;
 import danieldjgomes.larica.app.usecase.endereco.port.AtualizarEnderecoUseCase;
 import danieldjgomes.larica.app.usecase.endereco.port.ConsultarEnderecoPorIdUseCase;
 import danieldjgomes.larica.app.usecase.endereco.port.InativarEnderecoUseCase;
-import danieldjgomes.larica.infrastructure.mapper.DTOMapper;
 import danieldjgomes.larica.app.usecase.endereco.request.AtualizarEnderecoRequest;
+import danieldjgomes.larica.infrastructure.mapper.EnderecoMapper;
 import jakarta.ws.rs.core.MediaType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -39,7 +39,7 @@ class EnderecoControllerTest {
     private InativarEnderecoUseCase inativarEnderecoUseCase;
 
     @Mock
-    private DTOMapper mapper;
+    private EnderecoMapper mapper;
 
     @InjectMocks
     private EnderecoController enderecoController;
@@ -67,7 +67,7 @@ class EnderecoControllerTest {
     void deveRetornarStatus200AoRealizarChamadaAoUseCaseConsultarEnderecoById() throws Exception {
         String id = UUID.randomUUID().toString();
 
-        mockMvc.perform(get("/api/endereco/"+ id)
+        mockMvc.perform(get("/api/enderecos/"+ id)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
@@ -84,7 +84,7 @@ class EnderecoControllerTest {
         String dtoJson = objectMapper.writeValueAsString(dto);
 
 
-        mockMvc.perform(put("/api/endereco")
+        mockMvc.perform(put("/api/enderecos")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(dtoJson))
                 .andExpect(status().isNoContent());
@@ -96,7 +96,7 @@ class EnderecoControllerTest {
     void deveRetornarStatus204AoRealizarChamadaAoUseCaseInativarEndereco() throws Exception {
         String id = UUID.randomUUID().toString();
 
-        mockMvc.perform(delete("/api/endereco/"+id))
+        mockMvc.perform(delete("/api/enderecos/"+id))
                 .andExpect(status().isNoContent());
 
         verify(inativarEnderecoUseCase, times(1)).inativar(id);
@@ -104,7 +104,7 @@ class EnderecoControllerTest {
 
     @Test
     void deveRetornarStatus400AoRealizarChamadaAoUseCaseConsultarEnderecoById() throws Exception {
-        mockMvc.perform(get("/api/endereco/")
+        mockMvc.perform(get("/api/enderecos/")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isMethodNotAllowed());
     }
@@ -120,7 +120,7 @@ class EnderecoControllerTest {
         String dtoJson = objectMapper.writeValueAsString(dto);
 
 
-        mockMvc.perform(put("/api/endereco")
+        mockMvc.perform(put("/api/enderecos")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(dtoJson))
                 .andExpect(status().isBadRequest());
@@ -130,7 +130,7 @@ class EnderecoControllerTest {
     void deveRetornarStatus204AoRealizarChamadaAoUseCaseinativarEndereco() throws Exception {
         String id = UUID.randomUUID().toString();
 
-        mockMvc.perform(delete("/api/endereco/"+id))
+        mockMvc.perform(delete("/api/enderecos/"+id))
                 .andExpect(status().isNoContent());
     }
 }

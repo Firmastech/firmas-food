@@ -11,7 +11,7 @@ import java.util.Optional;
 @Repository
 public interface RestauranteRepository extends JpaRepository<RestauranteEntity, String> {
 
-    Optional<RestauranteEntity> findByNomeAndAtivo(String nome, boolean ativo);
+    Optional<RestauranteEntity> findByNomeAndAtivoIsTrue(String nome);
 
-    Optional<RestauranteEntity> findByIdAndAtivo(String id, boolean ativo);
+    Optional<RestauranteEntity> findByIdAndAtivoIsTrue(String id);
 }

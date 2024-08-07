@@ -19,7 +19,7 @@ public class ConsultarRestauranteUseCaseImpl implements ConsultarRestauranteUseC
     @Override
      public Restaurante consultar(String ID) {
         RestauranteEntity entity = restaurantePersist.findById(ID).orElseThrow(
-                ()-> new RestauranteNotFoundException("Restaurante nao encontrado")
+                ()-> new RestauranteNotFoundException()
         );
         return mapper.toRestaurante(entity);
      }

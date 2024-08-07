@@ -19,12 +19,12 @@ public class RestaurantePersistImpl implements RestaurantePersist {
 
     @Override
     public Optional<RestauranteEntity> findById(String id) {
-        return restauranteRepository.findByIdAndAtivo(id,true);
+        return restauranteRepository.findByIdAndAtivoIsTrue(id);
     }
 
     @Override
     public Optional<RestauranteEntity> findByNome(String nome) {
-        return restauranteRepository.findByNomeAndAtivo(nome,true);
+        return restauranteRepository.findByNomeAndAtivoIsTrue(nome);
     }
 
     @Override

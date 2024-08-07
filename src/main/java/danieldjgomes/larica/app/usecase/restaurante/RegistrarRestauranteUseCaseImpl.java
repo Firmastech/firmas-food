@@ -8,7 +8,7 @@ import danieldjgomes.larica.app.usecase.restaurante.response.Restaurante;
 import danieldjgomes.larica.app.usecase.restaurante.port.RegistrarRestauranteUseCase;
 import danieldjgomes.larica.app.adapter.mapper.RestauranteMapper;
 import danieldjgomes.larica.app.usecase.endereco.exceptions.EnderecoInvalidoException;
-import danieldjgomes.larica.app.usecase.restaurante.exceptions.RestauranteNomeInvalidoException;
+import danieldjgomes.larica.app.usecase.restaurante.exceptions.RestauranteNomeUtilizadoException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import java.util.Optional;
@@ -33,7 +33,7 @@ public class RegistrarRestauranteUseCaseImpl implements RegistrarRestauranteUseC
 
         restaurantePersist.findByNome(restaurante.getNome())
                 .ifPresent((nome)->{
-                    throw new RestauranteNomeInvalidoException("Nome já Utilizado");
+                    throw new RestauranteNomeUtilizadoException();
                 });
 
         restaurante.setId(UUID.randomUUID().toString());

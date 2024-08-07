@@ -4,8 +4,8 @@ import danieldjgomes.larica.app.usecase.endereco.response.Endereco;
 import danieldjgomes.larica.app.usecase.endereco.port.AtualizarEnderecoUseCase;
 import danieldjgomes.larica.app.usecase.endereco.port.ConsultarEnderecoPorIdUseCase;
 import danieldjgomes.larica.app.usecase.endereco.port.InativarEnderecoUseCase;
-import danieldjgomes.larica.infrastructure.mapper.DTOMapper;
 import danieldjgomes.larica.app.usecase.endereco.request.AtualizarEnderecoRequest;
+import danieldjgomes.larica.infrastructure.mapper.EnderecoMapper;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -18,13 +18,13 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @Validated
 @AllArgsConstructor
-@RequestMapping(path = "api/endereco")
+@RequestMapping(path = "api/enderecos")
 public class EnderecoController {
 
     private final ConsultarEnderecoPorIdUseCase consultarEnderecoPorIdUseCase;
     private final AtualizarEnderecoUseCase atualizarEnderecoUseCase;
     private final InativarEnderecoUseCase inativarEnderecoUseCase;
-    private final DTOMapper mapper;
+    private final EnderecoMapper mapper;
 
 
     @GetMapping("/{id}")
