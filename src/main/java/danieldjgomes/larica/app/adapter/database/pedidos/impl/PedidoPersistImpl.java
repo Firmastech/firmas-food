@@ -6,13 +6,13 @@ import danieldjgomes.larica.app.adapter.database.pedidos.model.UsuarioEntity;
 import danieldjgomes.larica.app.adapter.database.pedidos.repository.PedidoRepository;
 import danieldjgomes.larica.app.adapter.database.pedidos.repository.RestauranteRepositoryMock;
 import danieldjgomes.larica.app.adapter.database.pedidos.repository.UsuarioRepository;
+import danieldjgomes.larica.app.adapter.database.restaurante.model.RestauranteEntity;
 import danieldjgomes.larica.app.ports.database.PedidoPersist;
 import danieldjgomes.larica.app.usecase.pedido.exceptions.PedidoNaoEncontradoException;
 import danieldjgomes.larica.app.usecase.pedido.request.PratosRequestList;
 import danieldjgomes.larica.app.usecase.pedido.request.ProcessarPedidoRequest;
 import danieldjgomes.larica.app.usecase.pedido.response.PratosResponseList;
 import danieldjgomes.larica.app.usecase.pedido.response.ProcessarPedidoResponse;
-import danieldjgomes.larica.dataprovider.repository.entity.RestauranteEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
