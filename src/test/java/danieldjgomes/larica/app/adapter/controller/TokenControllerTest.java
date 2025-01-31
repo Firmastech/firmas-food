@@ -3,7 +3,7 @@ package danieldjgomes.larica.app.adapter.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import danieldjgomes.larica.app.adapter.controller.exceptionHandler.CommonExceptionHandler;
 import danieldjgomes.larica.app.adapter.controller.exceptionHandler.TokenControllerExceptionHandler;
-import danieldjgomes.larica.app.usecase.token.BuscarTokenUsuarioUseCase;
+import danieldjgomes.larica.app.usecase.token.GerarTokenUsuarioUseCase;
 import danieldjgomes.larica.app.usecase.token.RenovarTokenUsuarioUseCase;
 import danieldjgomes.larica.app.usecase.token.TokenMockBuilder;
 import danieldjgomes.larica.app.usecase.token.request.LoginUsuarioRequest;
@@ -38,7 +38,7 @@ class TokenControllerTest {
     private ObjectMapper objectMapper;
 
     @Mock
-    private BuscarTokenUsuarioUseCase buscarTokenUsuarioUseCase;
+    private GerarTokenUsuarioUseCase gerarTokenUsuarioUseCase;
 
     @Mock
     private RenovarTokenUsuarioUseCase renovarTokenUsuarioUseCase;
@@ -60,9 +60,9 @@ class TokenControllerTest {
 
         LoginUsuarioRequest request = tokenMockBuilder.gerarRequestLoginValido();
         TokenResponse response = tokenMockBuilder.geraTokenResponseValido();
-        when(buscarTokenUsuarioUseCase.processar(any(LoginUsuarioRequest.class))).thenReturn(response);
+        when(gerarTokenUsuarioUseCase.processar(any(LoginUsuarioRequest.class))).thenReturn(response);
 
-        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/login")
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/auth/login")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isOk()).andReturn();
@@ -70,17 +70,15 @@ class TokenControllerTest {
         String responseBody = mvcResult.getResponse().getContentAsString();
         TokenResponse tokenResponse = objectMapper.readValue(responseBody, TokenResponse.class);
 
-        assertEquals(tokenResponse.getAccessToken().getValor(), "accessTokenValue");
-        assertEquals(tokenResponse.getAccessToken().getExpiraEm(), 3600L);
-        assertEquals(tokenResponse.getRefreshToken().getValor(), "refreshTokenValue");
-        assertEquals(tokenResponse.getRefreshToken().getExpiraEm(), 7200L);
+        assertEquals(tokenResponse.getAccessToken(), "accessTokenValue");
+        assertEquals(tokenResponse.getRefreshToken(), "refreshTokenValue");
 
-        verify(buscarTokenUsuarioUseCase, times(1)).processar(any(LoginUsuarioRequest.class));
+        verify(gerarTokenUsuarioUseCase, times(1)).processar(any(LoginUsuarioRequest.class));
     }
 
     @Test
     void deveRetornarErroQuandoLogarUsuarioComRequestBodyVazio() throws Exception {
-        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/login")
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/auth/login")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{}"))
                 .andExpect(status().isBadRequest()).andReturn();
@@ -89,7 +87,7 @@ class TokenControllerTest {
         ErrorResponse tokenResponse = objectMapper.readValue(controllerResponse, ErrorResponse.class);
         assertEquals(3, tokenResponse.getMensagens().size());
         assertNotNull(tokenResponse.getTimestamp());
-        verify(buscarTokenUsuarioUseCase, never()).processar(any(LoginUsuarioRequest.class));
+        verify(gerarTokenUsuarioUseCase, never()).processar(any(LoginUsuarioRequest.class));
     }
 
     @Test
@@ -100,7 +98,7 @@ class TokenControllerTest {
         TokenResponse response = tokenMockBuilder.geraTokenResponseValido();
         when(renovarTokenUsuarioUseCase.processar(request)).thenReturn(response);
 
-        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/refresh")
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/auth/refresh")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isOk()).andReturn();
@@ -108,17 +106,15 @@ class TokenControllerTest {
         String responseBody = mvcResult.getResponse().getContentAsString();
         TokenResponse tokenResponse = objectMapper.readValue(responseBody, TokenResponse.class);
 
-        assertEquals(tokenResponse.getAccessToken().getValor(), "accessTokenValue");
-        assertEquals(tokenResponse.getAccessToken().getExpiraEm(), 3600L);
-        assertEquals(tokenResponse.getRefreshToken().getValor(), "refreshTokenValue");
-        assertEquals(tokenResponse.getRefreshToken().getExpiraEm(), 7200L);
+        assertEquals(tokenResponse.getAccessToken(), "accessTokenValue");
+        assertEquals(tokenResponse.getRefreshToken(), "refreshTokenValue");
 
         verify(renovarTokenUsuarioUseCase, times(1)).processar(any(RevalidarTokenRequest.class));
     }
 
     @Test
     void deveRetornarErroQuandoRevalidarTokenComRequestBodyVazio() throws Exception {
-        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/refresh")
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/auth/refresh")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{}"))
                 .andExpect(status().isBadRequest()).andReturn();

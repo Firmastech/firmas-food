@@ -22,6 +22,7 @@ spring:
           keycloak:
             issuer-uri: http://localhost:9081/realms/firmas-food-dev
       resourceserver:
+        Jwk-set-uri: http://localhost:9081/realms/firmas-food-dev/protocol/openid-connect/certs
         jwt:
           issuer-uri: http://localhost:9081/realms/firmas-food-dev
 
@@ -35,5 +36,27 @@ keycloak:
   auth-server-url:  http://localhost:9081
   realm: firmas-food-dev
   token-url: ${spring.security.oauth2.client.provider.keycloak.issuer-uri}/protocol/openid-connect
+  use-resource-role-mappings: true
+  policy-enforcer-config:
+    enforcement-mode: ENFORCING
+    http-method-as-scope: true
+    lazy-load-paths: true
+    paths:
+      - name: pratos
+        path: /api/pratos/{id}
+        methods:
+          - method: GET
+            scopes:
+              - View
+  token:
+    endpoint: ${spring.security.oauth2.client.provider.keycloak.issuer-uri}/protocol/openid-connect
 
-
+api:
+  security:
+    token:
+      secret: ${JWT_SECRET:chave-jwt}
+      expiration-time:
+        token: 1
+        refresh-token: 120
+      issuer: auth-api
+      restaurante-claim: restaurante

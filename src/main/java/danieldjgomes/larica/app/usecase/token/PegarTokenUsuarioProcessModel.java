@@ -11,6 +11,7 @@ import lombok.Setter;
 public class PegarTokenUsuarioProcessModel extends ProcessModel<LoginUsuarioRequest, TokenResponse> {
 
     private String usuarioId;
+    private String restauranteId;
 
     public PegarTokenUsuarioProcessModel(LoginUsuarioRequest entrada) {
         super(entrada);

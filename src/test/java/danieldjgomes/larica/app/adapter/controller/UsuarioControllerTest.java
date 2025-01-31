@@ -60,7 +60,7 @@ class UsuarioControllerTest {
         request.setEmail("jao@test.com");
         request.setSenha("senhaMuitoSecreta");
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/usuarios")
+        mockMvc.perform(MockMvcRequestBuilders.post("/auth/register")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isCreated());
@@ -70,7 +70,7 @@ class UsuarioControllerTest {
 
     @Test
     void deveRetornarBadRequestQuandoCriarUsuarioComRequisicaoInvalida() throws Exception {
-        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/usuarios")
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/auth/register")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{}"))
                 .andExpect(status().isBadRequest()).andReturn();

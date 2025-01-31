@@ -21,10 +21,10 @@ public class AtualizarRestauranteUseCaseImpl implements AtualizarRestauranteUseC
     @Override
     public Restaurante update(Restaurante restaurante) {
         RestauranteEntity entityToUpdate = restaurantePersist.findById(restaurante.getId()).orElseThrow(
-                ()-> new RestauranteNotFoundException()
+                RestauranteNotFoundException::new
         );
         Optional.ofNullable(restaurante.getNome()).ifPresent(entityToUpdate::setNome);
-        Optional.ofNullable(restaurante.getStatusFuncionamento().name()).ifPresent(entityToUpdate::setStatusFuncionamento);
+        Optional.of(restaurante.getStatusFuncionamento().name()).ifPresent(entityToUpdate::setStatusFuncionamento);
         Optional.ofNullable(restaurante.getTempoEstimadoDeEntrega()).ifPresent(entityToUpdate::setTempoEstimadoDeEntrega);
 
         return mapper.toRestaurante(restaurantePersist.update(entityToUpdate));

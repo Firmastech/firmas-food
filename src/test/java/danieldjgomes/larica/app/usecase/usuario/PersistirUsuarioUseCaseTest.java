@@ -1,6 +1,5 @@
 package danieldjgomes.larica.app.usecase.usuario;
 
-import danieldjgomes.larica.infrastructure.keycloak.KeycloakAdminBuilder;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -8,13 +7,13 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-class PersistirUsuarioNoKeycloakUseCaseTest {
+class PersistirUsuarioUseCaseTest {
 
     @InjectMocks
-    private PersistirUsuarioNoKeycloakUseCase persistirUsuarioNoKeycloakUseCase;
+    private PersistirUsuarioUseCase persistirUsuarioUseCase;
 
-    @Mock
-    private KeycloakAdminBuilder keycloakAdminBuilder;
+//    @Mock
+//    private KeycloakAdminBuilder keycloakAdminBuilder;
 
 
     @Test

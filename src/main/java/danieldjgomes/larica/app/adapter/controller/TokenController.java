@@ -1,10 +1,10 @@
 package danieldjgomes.larica.app.adapter.controller;
 
-import danieldjgomes.larica.app.usecase.token.response.TokenResponse;
+import danieldjgomes.larica.app.usecase.token.GerarTokenUsuarioUseCase;
+import danieldjgomes.larica.app.usecase.token.RenovarTokenUsuarioUseCase;
 import danieldjgomes.larica.app.usecase.token.request.LoginUsuarioRequest;
 import danieldjgomes.larica.app.usecase.token.request.RevalidarTokenRequest;
-import danieldjgomes.larica.app.usecase.token.BuscarTokenUsuarioUseCase;
-import danieldjgomes.larica.app.usecase.token.RenovarTokenUsuarioUseCase;
+import danieldjgomes.larica.app.usecase.token.response.TokenResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
@@ -17,17 +17,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class TokenController {
 
-    private final BuscarTokenUsuarioUseCase buscarTokenUsuarioUseCase;
+    private final GerarTokenUsuarioUseCase gerarTokenUsuarioUseCase;
 
     private final RenovarTokenUsuarioUseCase renovarTokenUsuarioUseCase;
 
-    @PostMapping(value = "/login")
+    @PostMapping(value = "/auth/login")
     TokenResponse logarUsuario(@Valid @RequestBody LoginUsuarioRequest request) {
-        return buscarTokenUsuarioUseCase.processar(request);
+        return gerarTokenUsuarioUseCase.processar(request);
     }
 
-    @PostMapping("/refresh")
-    TokenResponse revalidarToken(@Valid @RequestBody RevalidarTokenRequest request) {
+    @PostMapping(value = "/auth/refresh")
+    TokenResponse renovarToken(@Valid @RequestBody RevalidarTokenRequest request) {
         return renovarTokenUsuarioUseCase.processar(request);
     }
 }

@@ -14,8 +14,9 @@ import java.util.Optional;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/prato")
+@RequestMapping("/api/pratos")
 @RequiredArgsConstructor
+
 public class PratoController {
 
     private final PratoUseCase pratoService;

@@ -170,3 +170,90 @@ alter table endereco
     drop column numero;
 alter table endereco
     add column numero varchar (12);
+
+alter table restaurante
+    add subdominio varchar(50);
+
+alter table restaurante
+    add unique (subdominio);
+
+alter table restaurante
+    alter column subdominio set not null;
+
+-- Tabela de Papéis (Roles)
+CREATE TABLE public.papel (
+                              id VARCHAR(36) NOT NULL PRIMARY KEY,
+                              nome VARCHAR(255) NOT NULL, -- Nome do papel (ex: "Gerente", "Garçom")
+                              restaurante_id VARCHAR(36) NOT NULL, -- Papel pertence a um restaurante específico
+                              criado TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                              atualizado TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                              deletado TIMESTAMP,
+                              ativo BOOLEAN DEFAULT TRUE,
+                              CONSTRAINT fk_papel_restaurante FOREIGN KEY (restaurante_id)
+                                  REFERENCES public.restaurante(id)
+);
+
+-- Tabela de Permissões (Permissions)
+CREATE TABLE public.permissao (
+                                  id VARCHAR(36) NOT NULL PRIMARY KEY,
+                                  nome VARCHAR(255) NOT NULL, -- Nome da permissão (ex: "criar_pedido", "editar_cardapio")
+                                  descricao VARCHAR(8000), -- Descrição opcional da permissão
+                                  criado TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                                  atualizado TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                                  deletado TIMESTAMP,
+                                  ativo BOOLEAN DEFAULT TRUE
+);
+
+-- Tabela de Relacionamento entre Papéis e Permissões (Role_Permissions)
+CREATE TABLE public.papel_permissao (
+                                        papel_id VARCHAR(36) NOT NULL,
+                                        permissao_id VARCHAR(36) NOT NULL,
+                                        PRIMARY KEY (papel_id, permissao_id),
+                                        CONSTRAINT fk_papel_permissao_papel FOREIGN KEY (papel_id)
+                                            REFERENCES public.papel(id)
+                                            ON DELETE CASCADE,
+                                        CONSTRAINT fk_papel_permissao_permissao FOREIGN KEY (permissao_id)
+                                            REFERENCES public.permissao(id)
+                                            ON DELETE CASCADE
+);
+
+-- Tabela de Relacionamento entre Usuários e Papéis (User_Roles)
+CREATE TABLE public.usuario_papel (
+                                      usuario_id VARCHAR(255) NOT NULL,
+                                      papel_id VARCHAR(36) NOT NULL,
+                                      restaurante_id VARCHAR(36) NOT NULL, -- Usuário tem um papel em um restaurante específico
+                                      PRIMARY KEY (usuario_id, papel_id, restaurante_id),
+                                      CONSTRAINT fk_usuario_papel_usuario FOREIGN KEY (usuario_id)
+                                          REFERENCES public.usuario(id)
+                                          ON DELETE CASCADE,
+                                      CONSTRAINT fk_usuario_papel_papel FOREIGN KEY (papel_id)
+                                          REFERENCES public.papel(id)
+                                          ON DELETE CASCADE,
+                                      CONSTRAINT fk_usuario_papel_restaurante FOREIGN KEY (restaurante_id)
+                                          REFERENCES public.restaurante(id)
+                                          ON DELETE CASCADE
+);
+
+
+ALTER TABLE public.usuario
+    ADD COLUMN restaurante_id VARCHAR(36);
+
+ALTER TABLE public.usuario
+    ADD CONSTRAINT fk_usuario_restaurante
+        FOREIGN KEY (restaurante_id)
+            REFERENCES public.restaurante(id);
+
+ALTER TABLE public.usuario
+    ADD COLUMN email VARCHAR(255) NOT NULL;
+
+ALTER TABLE public.usuario
+    ADD COLUMN senha VARCHAR(255) NOT NULL;
+
+ALTER TABLE public.usuario
+    ADD COLUMN ativo bool NOT NULL default false;
+
+ALTER TABLE public.usuario
+    ADD COLUMN primeiro_nome VARCHAR(255) NOT NULL;
+
+ALTER TABLE public.usuario
+    ADD COLUMN segundo_nome VARCHAR(255) NOT NULL;

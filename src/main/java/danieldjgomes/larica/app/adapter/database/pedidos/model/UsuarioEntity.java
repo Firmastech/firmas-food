@@ -1,8 +1,12 @@
 package danieldjgomes.larica.app.adapter.database.pedidos.model;
 
+import danieldjgomes.larica.app.adapter.database.restaurante.model.RestauranteEntity;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -12,12 +16,56 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UsuarioEntity {
+public class UsuarioEntity implements UserDetails {
 
     @Id
-    @Column(length = 255, nullable = false)
+    @Column(nullable = false)
     private String id;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PedidoEntity> pedidos;
+
+    @OneToOne
+    private RestauranteEntity restaurante;
+
+    private String email;
+    private String senha;
+    private Boolean ativo;
+    private String primeiroNome;
+    private String segundoNome;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    @Override
+    public String getPassword() {
+        return getSenha();
+    }
+
+    @Override
+    public String getUsername() {
+        return getEmail();
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return getAtivo();
+    }
 }

@@ -2,19 +2,19 @@ package danieldjgomes.larica.adapter.controller.endereco;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import danieldjgomes.larica.app.adapter.controller.endereco.EnderecoController;
+import danieldjgomes.larica.app.adapter.mapper.EnderecoMapper;
 import danieldjgomes.larica.app.usecase.endereco.response.Endereco;
 import danieldjgomes.larica.app.usecase.endereco.port.AtualizarEnderecoUseCase;
 import danieldjgomes.larica.app.usecase.endereco.port.ConsultarEnderecoPorIdUseCase;
 import danieldjgomes.larica.app.usecase.endereco.port.InativarEnderecoUseCase;
 import danieldjgomes.larica.app.usecase.endereco.request.AtualizarEnderecoRequest;
-import danieldjgomes.larica.infrastructure.mapper.EnderecoMapper;
-import jakarta.ws.rs.core.MediaType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 

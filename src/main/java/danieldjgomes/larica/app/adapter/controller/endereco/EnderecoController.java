@@ -1,11 +1,11 @@
 package danieldjgomes.larica.app.adapter.controller.endereco;
 
+import danieldjgomes.larica.app.adapter.mapper.EnderecoMapper;
 import danieldjgomes.larica.app.usecase.endereco.response.Endereco;
 import danieldjgomes.larica.app.usecase.endereco.port.AtualizarEnderecoUseCase;
 import danieldjgomes.larica.app.usecase.endereco.port.ConsultarEnderecoPorIdUseCase;
 import danieldjgomes.larica.app.usecase.endereco.port.InativarEnderecoUseCase;
 import danieldjgomes.larica.app.usecase.endereco.request.AtualizarEnderecoRequest;
-import danieldjgomes.larica.infrastructure.mapper.EnderecoMapper;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

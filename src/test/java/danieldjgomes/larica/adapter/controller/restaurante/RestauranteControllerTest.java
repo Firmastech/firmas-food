@@ -2,6 +2,7 @@ package danieldjgomes.larica.adapter.controller.restaurante;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import danieldjgomes.larica.app.adapter.controller.restaurante.RestauranteController;
+import danieldjgomes.larica.app.adapter.mapper.RestauranteMapper;
 import danieldjgomes.larica.app.usecase.endereco.response.Endereco;
 import danieldjgomes.larica.app.usecase.restaurante.response.Restaurante;
 import danieldjgomes.larica.app.usecase.restaurante.enums.StatusFuncionamento;
@@ -12,14 +13,13 @@ import danieldjgomes.larica.app.usecase.restaurante.port.InativarRestauranteUseC
 import danieldjgomes.larica.app.usecase.restaurante.request.AtualizarRestauranteRequest;
 import danieldjgomes.larica.app.usecase.endereco.request.CadastrarEnderecoRequest;
 import danieldjgomes.larica.app.usecase.restaurante.request.CriarRestauranteRequest;
-import danieldjgomes.larica.infrastructure.mapper.RestauranteMapper;
-import jakarta.ws.rs.core.MediaType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 

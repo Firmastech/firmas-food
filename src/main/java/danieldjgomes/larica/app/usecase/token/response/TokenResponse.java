@@ -1,16 +1,15 @@
 package danieldjgomes.larica.app.usecase.token.response;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class TokenResponse {
 
-    private Token accessToken;
-    private Token refreshToken;
+    private String accessToken;
+    private String refreshToken;
 
-    @Data
-    public static class Token {
-        private String valor;
-        private Long expiraEm;
-    }
 }

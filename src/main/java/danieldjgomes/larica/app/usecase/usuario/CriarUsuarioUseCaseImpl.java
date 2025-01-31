@@ -1,7 +1,11 @@
 package danieldjgomes.larica.app.usecase.usuario;
 
-import danieldjgomes.larica.infrastructure.keycloak.KeycloakAdminBuilder;
+import danieldjgomes.larica.app.adapter.database.pedidos.repository.UsuarioRepository;
 import danieldjgomes.larica.app.usecase.usuario.request.CriarUsuarioRequestDTO;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
@@ -11,13 +15,15 @@ import java.util.List;
 public class CriarUsuarioUseCaseImpl implements CriarUsuarioUseCase {
 
     private final List<EtapaProcessoCriarUsuario> etapas;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
-    public CriarUsuarioUseCaseImpl(KeycloakAdminBuilder keycloakAdminBuilder, BuscarUsuarioPorEmailERestauranteUseCase buscarUsuarioPorEmailERestauranteUseCase) {
+    public CriarUsuarioUseCaseImpl(BuscarUsuarioPorEmailERestauranteUseCase buscarUsuarioPorEmailERestauranteUseCase, UsuarioRepository usuarioRepository, PasswordEncoder passwordEncoder) {
 
         this.etapas = Arrays.asList(
                 new VerificarUsuarioExistenteUseCase(buscarUsuarioPorEmailERestauranteUseCase),
                 new VerificarRestauranteExistenteUseCase(),
-                new PersistirUsuarioNoKeycloakUseCase(keycloakAdminBuilder)
+                new  PersistirUsuarioUseCase(usuarioRepository, passwordEncoder)
         );
     }
 

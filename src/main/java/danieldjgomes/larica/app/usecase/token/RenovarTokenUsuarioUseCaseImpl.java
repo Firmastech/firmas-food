@@ -1,41 +1,33 @@
 package danieldjgomes.larica.app.usecase.token;
 
+import danieldjgomes.larica.app.adapter.database.pedidos.model.UsuarioEntity;
+import danieldjgomes.larica.app.adapter.database.pedidos.repository.UsuarioRepository;
 import danieldjgomes.larica.app.usecase.token.request.RevalidarTokenRequest;
-import danieldjgomes.larica.app.usecase.usuario.request.external.RenovarTokenUsuarioKeycloakModelDTO;
-import danieldjgomes.larica.app.usecase.usuario.request.external.TokenAutenticacaoKeycloakModelResponseDTO;
 import danieldjgomes.larica.app.usecase.token.response.TokenResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Component
 public class RenovarTokenUsuarioUseCaseImpl implements RenovarTokenUsuarioUseCase {
 
-    private final KeycloakUserClient keycloakUserClient;
-    private final TokenMapper tokenMapper;
-
-    @Value("${spring.security.oauth2.client.registration.keycloak.client-secret}")
-    private String clientSecret;
-
-    @Value("${spring.security.oauth2.client.registration.keycloak.client-id}")
-    private String clientId;
+    private final UsuarioRepository usuarioRepository;
+    private final ValidarRestauranteNoTokenUseCase validarRestauranteNoTokenUseCase;
+    private final ValidarEmailNoTokenUseCase validarEmailNoTokenUseCase;
+    private final MontarTokenJWTUseCase montarTokenJWTUseCase;
 
     @Override
     public TokenResponse processar(RevalidarTokenRequest request) {
-        RenovarTokenUsuarioKeycloakModelDTO keycloakTokenRequest = buildModelRenovarTokenUsuarioKeycloak(request);
 
-        TokenAutenticacaoKeycloakModelResponseDTO keycloakTokenResponse = keycloakUserClient.revalidarTokenUsuario(keycloakTokenRequest);
-        return tokenMapper.toLoginResponse(keycloakTokenResponse);
+        String email = validarEmailNoTokenUseCase.validar(request.getToken());
+        String restauranteId = validarRestauranteNoTokenUseCase.validar(request.getToken());
+        Optional<UsuarioEntity> usuario = usuarioRepository.findAllByRestauranteIdAndEmailAndAtivoTrue(restauranteId, email);
+        if (usuario.isPresent()) {
+            return montarTokenJWTUseCase.montar(usuario.get());
+        }
+        throw new UsuarioNaoEncontradoException();
     }
 
-
-    private RenovarTokenUsuarioKeycloakModelDTO buildModelRenovarTokenUsuarioKeycloak(RevalidarTokenRequest revalidarToken) {
-        RenovarTokenUsuarioKeycloakModelDTO renovarTokenUsuarioKeycloakModelDTO = new RenovarTokenUsuarioKeycloakModelDTO();
-        renovarTokenUsuarioKeycloakModelDTO.setRefreshToken(revalidarToken.getToken());
-        renovarTokenUsuarioKeycloakModelDTO.setClientId(clientId);
-        renovarTokenUsuarioKeycloakModelDTO.setClientSecret(clientSecret);
-        renovarTokenUsuarioKeycloakModelDTO.setGrantType("refresh_token");
-        return renovarTokenUsuarioKeycloakModelDTO;
-    }
 }

@@ -1,5 +1,6 @@
 package danieldjgomes.larica.app.adapter.controller.restaurante;
 
+import danieldjgomes.larica.app.adapter.mapper.RestauranteMapper;
 import danieldjgomes.larica.app.usecase.restaurante.response.Restaurante;
 import danieldjgomes.larica.app.usecase.restaurante.port.AtualizarRestauranteUseCase;
 import danieldjgomes.larica.app.usecase.restaurante.port.ConsultarRestauranteUseCase;
@@ -7,7 +8,6 @@ import danieldjgomes.larica.app.usecase.restaurante.port.InativarRestauranteUseC
 import danieldjgomes.larica.app.usecase.restaurante.port.RegistrarRestauranteUseCase;
 import danieldjgomes.larica.app.usecase.restaurante.request.AtualizarRestauranteRequest;
 import danieldjgomes.larica.app.usecase.restaurante.request.CriarRestauranteRequest;
-import danieldjgomes.larica.infrastructure.mapper.RestauranteMapper;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -40,7 +40,6 @@ public class RestauranteController {
     @GetMapping("/{id}")
     public ResponseEntity<Restaurante> consultarRestaurante(@PathVariable @NotBlank @NotNull String id) {
         return ResponseEntity.ok(consultarRestauranteUseCase.consultar(id));
-
     }
 
     @PutMapping

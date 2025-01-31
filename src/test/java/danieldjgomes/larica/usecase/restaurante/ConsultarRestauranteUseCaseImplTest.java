@@ -84,6 +84,6 @@ class ConsultarRestauranteUseCaseImplTest {
 
         assertEquals(messageExceptionExpected,exception.getMessage());
         verify(restaurantePersist).findById(restaurante.getId());
-        verify(mapper,never()).toRestaurante(any());
+        verify(mapper,never()).toRestaurante(any(RestauranteEntity.class));
     }
 }

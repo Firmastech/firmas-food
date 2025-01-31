@@ -8,7 +8,6 @@ public class LoginUsuarioKeycloakModelDTO {
     private String client_id;
     private String grant_type;
     private String username;
-
     private String password;
 
     public void setClientSecret(String clientSecret) {

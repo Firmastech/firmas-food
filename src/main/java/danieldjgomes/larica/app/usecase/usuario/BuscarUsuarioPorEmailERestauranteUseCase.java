@@ -1,10 +1,11 @@
 package danieldjgomes.larica.app.usecase.usuario;
 
-import org.keycloak.representations.idm.UserRepresentation;
 
-import java.util.List;
+import danieldjgomes.larica.app.adapter.database.pedidos.model.UsuarioEntity;
+
+import java.util.Optional;
 
 public interface BuscarUsuarioPorEmailERestauranteUseCase {
 
-    List<UserRepresentation> processar(String email, String restaurante);
+    Optional<UsuarioEntity> processar(String email, String restaurante);
 }

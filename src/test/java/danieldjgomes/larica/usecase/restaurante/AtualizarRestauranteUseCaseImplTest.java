@@ -82,6 +82,6 @@ class AtualizarRestauranteUseCaseImplTest {
         assertEquals(messageExceptionExpected,exception.getMessage());
         verify(restaurantePersist).findById(restaurante.getId());
         verify(restaurantePersist,never()).update(any());
-        verify(mapper,never()).toRestaurante(any());
+        verify(mapper,never()).toRestaurante(any(RestauranteEntity.class));
     }
 }

@@ -1,27 +1,21 @@
 package danieldjgomes.larica.app.usecase.usuario;
 
-import danieldjgomes.larica.infrastructure.keycloak.KeycloakAdminBuilder;
+import danieldjgomes.larica.app.adapter.database.pedidos.model.UsuarioEntity;
+import danieldjgomes.larica.app.adapter.database.pedidos.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
-import org.keycloak.representations.idm.UserRepresentation;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
+import java.util.Optional;
+
 @Component
 @RequiredArgsConstructor
 public class BuscarUsuarioPorEmailERestauranteUseCaseImpl implements BuscarUsuarioPorEmailERestauranteUseCase {
 
-    private final KeycloakAdminBuilder keycloakAdminBuilder;
+    private final UsuarioRepository usuarioRepository;
 
 
-    public List<UserRepresentation> processar(String email, String restaurante) {
-        return keycloakAdminBuilder.getKeycloak().users().searchByAttributes(atributosParaBuscaDeUsuarioExistenteBuilder(email, restaurante));
+    public Optional<UsuarioEntity> processar(String email, String restaurante) {
+        return usuarioRepository.findAllByRestauranteIdAndEmailAndAtivoTrue(restaurante, email);
     }
-
-    private String atributosParaBuscaDeUsuarioExistenteBuilder(String email, String restaurante) {
-        return "email:" + email + " "
-                + "restaurante:" + restaurante;
-    }
-
-
 
 }

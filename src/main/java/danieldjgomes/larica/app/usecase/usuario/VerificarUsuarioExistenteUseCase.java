@@ -13,7 +13,7 @@ public class VerificarUsuarioExistenteUseCase implements EtapaProcessoCriarUsuar
 
     @Override
     public void processar(CriarUsuarioRequestDTO processo) {
-        if (buscarUsuarioPorEmailERestauranteUseCase.processar(processo.getEmail(), processo.getRestaurante()).size() > 0) {
+        if (buscarUsuarioPorEmailERestauranteUseCase.processar(processo.getEmail(), processo.getRestaurante()).isPresent()) {
             throw new CriandoUsuarioDuplicadoException();
         }
     }

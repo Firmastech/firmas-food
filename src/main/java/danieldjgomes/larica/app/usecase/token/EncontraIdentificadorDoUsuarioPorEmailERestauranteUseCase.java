@@ -2,7 +2,6 @@ package danieldjgomes.larica.app.usecase.token;
 
 import danieldjgomes.larica.app.usecase.usuario.BuscarUsuarioPorEmailERestauranteUseCase;
 import lombok.RequiredArgsConstructor;
-import org.keycloak.representations.idm.UserRepresentation;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -13,8 +12,8 @@ public class EncontraIdentificadorDoUsuarioPorEmailERestauranteUseCase implement
 
     @Override
     public PegarTokenUsuarioProcessModel processar(PegarTokenUsuarioProcessModel processo) {
-        UserRepresentation usuario = buscarUsuarioPorEmailERestauranteUseCase.processar(processo.getEntrada().getEmail(), processo.getEntrada().getRestaurante()).get(0);
-        processo.setUsuarioId(usuario.getUsername());
+//        UserRepresentation usuario = buscarUsuarioPorEmailERestauranteUseCase.processar(processo.getEntrada().getEmail(), processo.getRestauranteId()).get(0);
+//        processo.setUsuarioId(usuario.getUsername());
         return processo;
     }
 }
