@@ -1,4 +1,4 @@
-package danieldjgomes.larica.dataprovider.repository.entity;
+package danieldjgomes.larica.app.usecase.token.response.entity;
 
 import jakarta.persistence.*;
 
