@@ -3,6 +3,7 @@ package danieldjgomes.larica.app.usecase.usuario;
 import danieldjgomes.larica.app.adapter.database.pedidos.model.UsuarioEntity;
 import danieldjgomes.larica.app.adapter.database.pedidos.repository.UsuarioRepository;
 import danieldjgomes.larica.app.adapter.database.restaurante.model.RestauranteEntity;
+import danieldjgomes.larica.app.usecase.usuario.exceptions.PapelNaoCadastradoException;
 import danieldjgomes.larica.app.usecase.usuario.request.CriarUsuarioRequestDTO;
 import danieldjgomes.larica.infrastructure.Papel;
 import danieldjgomes.larica.infrastructure.PapelRepository;
@@ -13,7 +14,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 import java.util.Set;
-import java.util.UUID;
 
 @RequiredArgsConstructor
 @Component
