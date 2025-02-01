@@ -3,11 +3,13 @@ package danieldjgomes.larica.core.prato.controller;
 import danieldjgomes.larica.core.prato.dtos.PratoRequestDTO;
 import danieldjgomes.larica.core.prato.dtos.PratoResponseDTO;
 import danieldjgomes.larica.core.usecases.PratoUseCase;
+import danieldjgomes.larica.infrastructure.AuthorizationService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
