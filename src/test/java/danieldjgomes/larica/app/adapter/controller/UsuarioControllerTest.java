@@ -3,7 +3,7 @@ package danieldjgomes.larica.app.adapter.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import danieldjgomes.larica.app.adapter.controller.exceptionHandler.CommonExceptionHandler;
 import danieldjgomes.larica.app.adapter.controller.exceptionHandler.UsuarioControllerExceptionHandler;
-import danieldjgomes.larica.app.usecase.usuario.CriarUsuarioUseCase;
+import danieldjgomes.larica.app.usecase.usuario.CriarClienteUseCase;
 import danieldjgomes.larica.app.usecase.usuario.request.CriarUsuarioRequestDTO;
 import danieldjgomes.larica.infrastructure.expectionHandler.model.ErrorResponse;
 import org.junit.jupiter.api.BeforeEach;
@@ -36,7 +36,7 @@ class UsuarioControllerTest {
     private ObjectMapper objectMapper;
 
     @Mock
-    private CriarUsuarioUseCase criarUsuarioUseCase;
+    private CriarClienteUseCase criarClienteUseCase;
 
     @InjectMocks
     private UsuarioController usuarioController;
@@ -65,7 +65,7 @@ class UsuarioControllerTest {
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isCreated());
 
-        verify(criarUsuarioUseCase, times(1)).processar(any(CriarUsuarioRequestDTO.class));
+        verify(criarClienteUseCase, times(1)).processar(any(CriarUsuarioRequestDTO.class));
     }
 
     @Test

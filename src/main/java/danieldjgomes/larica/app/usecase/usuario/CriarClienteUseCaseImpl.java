@@ -2,9 +2,7 @@ package danieldjgomes.larica.app.usecase.usuario;
 
 import danieldjgomes.larica.app.adapter.database.pedidos.repository.UsuarioRepository;
 import danieldjgomes.larica.app.usecase.usuario.request.CriarUsuarioRequestDTO;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import danieldjgomes.larica.infrastructure.PapelRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -12,18 +10,16 @@ import java.util.Arrays;
 import java.util.List;
 
 @Component
-public class CriarUsuarioUseCaseImpl implements CriarUsuarioUseCase {
+public class CriarClienteUseCaseImpl implements CriarClienteUseCase {
 
     private final List<EtapaProcessoCriarUsuario> etapas;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
-    public CriarUsuarioUseCaseImpl(BuscarUsuarioPorEmailERestauranteUseCase buscarUsuarioPorEmailERestauranteUseCase, UsuarioRepository usuarioRepository, PasswordEncoder passwordEncoder) {
+    public CriarClienteUseCaseImpl(BuscarUsuarioPorEmailERestauranteUseCase buscarUsuarioPorEmailERestauranteUseCase, UsuarioRepository usuarioRepository, PapelRepository papelRepository, PasswordEncoder passwordEncoder) {
 
         this.etapas = Arrays.asList(
                 new VerificarUsuarioExistenteUseCase(buscarUsuarioPorEmailERestauranteUseCase),
-                new VerificarRestauranteExistenteUseCase(),
-                new  PersistirUsuarioUseCase(usuarioRepository, passwordEncoder)
+                new VerificarPapelClienteNoRestauranteUseCase(papelRepository),
+                new PersistirClienteUseCase(usuarioRepository, papelRepository, passwordEncoder)
         );
     }
 

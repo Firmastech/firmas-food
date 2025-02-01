@@ -2,6 +2,7 @@ package danieldjgomes.larica.app.adapter.database.pedidos.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.UuidGenerator;
 
 @Entity
 @Table(name = "item_pedido")
@@ -13,6 +14,7 @@ import lombok.*;
 public class ItemPedidoEntity {
 
     @Id
+    @UuidGenerator
     @Column(length = 36, nullable = false)
     private String id;
 

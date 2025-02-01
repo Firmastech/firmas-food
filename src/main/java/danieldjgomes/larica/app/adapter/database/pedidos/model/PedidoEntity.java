@@ -2,6 +2,7 @@ package danieldjgomes.larica.app.adapter.database.pedidos.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.UuidGenerator;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -18,6 +19,7 @@ import java.util.List;
 public class PedidoEntity {
 
     @Id
+    @UuidGenerator
     @Column(nullable = false)
     private String id;
 

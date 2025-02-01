@@ -3,6 +3,7 @@ package danieldjgomes.larica.app.adapter.database.endereco.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.UuidGenerator;
 
 import java.util.Date;
 
@@ -12,6 +13,7 @@ import java.util.Date;
 @Setter
 public class EnderecoEntity {
     @Id
+    @UuidGenerator
     @Column(name = "id", length = 36, nullable = false, unique = true)
     private String id;
 

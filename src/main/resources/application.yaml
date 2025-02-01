@@ -56,7 +56,7 @@ api:
     token:
       secret: ${JWT_SECRET:chave-jwt}
       expiration-time:
-        token: 1
+        token: 60
         refresh-token: 120
       issuer: auth-api
       restaurante-claim: restaurante
