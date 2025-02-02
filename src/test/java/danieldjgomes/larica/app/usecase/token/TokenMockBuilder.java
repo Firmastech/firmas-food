@@ -2,24 +2,11 @@ package danieldjgomes.larica.app.usecase.token;
 
 import danieldjgomes.larica.app.usecase.token.request.LoginUsuarioRequest;
 import danieldjgomes.larica.app.usecase.token.response.TokenResponse;
-import danieldjgomes.larica.app.usecase.usuario.request.external.TokenAutenticacaoKeycloakModelResponseDTO;
 
 import java.util.*;
 
 public class TokenMockBuilder {
 
-    public TokenAutenticacaoKeycloakModelResponseDTO gerarMockTokenResponseKeycloak() {
-        TokenAutenticacaoKeycloakModelResponseDTO tokenDTO = new TokenAutenticacaoKeycloakModelResponseDTO();
-        tokenDTO.setAccessToken("exemploAccessToken");
-        tokenDTO.setExpiresIn(3600);
-        tokenDTO.setRefreshExpiresIn(1800);
-        tokenDTO.setRefreshToken("exemploRefreshToken");
-        tokenDTO.setTokenType("bearer");
-        tokenDTO.setNotBeforePolicy(0);
-        tokenDTO.setSessionState("exemploSessionState");
-        tokenDTO.setScope("openid email profile");
-        return tokenDTO;
-    }
     public PegarTokenUsuarioProcessModel gerarProcessModel() {
         LoginUsuarioRequest validLoginRequest;
         validLoginRequest = new LoginUsuarioRequest();
