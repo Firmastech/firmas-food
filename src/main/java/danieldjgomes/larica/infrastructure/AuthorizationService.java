@@ -7,8 +7,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class AuthorizationService {
 
-    public static String findRestaurante(){
-        UsuarioEntity usuario = (UsuarioEntity) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return usuario.getRestaurante().getId();
+    public static UsuarioEntity findUsuario(){
+        return (UsuarioEntity) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 }

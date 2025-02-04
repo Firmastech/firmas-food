@@ -52,7 +52,8 @@ public class PratoUseCaseImpl implements PratoUseCase {
     public void deletePrato(String id) {
         Prato prato = pratoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Prato não encontrado"));
-        pratoRepository.delete(prato);
+        prato.setEstaAtivo(false);
+        pratoRepository.save(prato);
     }
 
 }
