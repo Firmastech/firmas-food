@@ -1,7 +1,6 @@
 package danieldjgomes.larica.core.cardapio.dtos.request;
 
 
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +12,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class CardapioRequestDTO {
 
-    private String restauranteId;
     private String nome;
     private String descricao;
 

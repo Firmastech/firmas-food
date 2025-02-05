@@ -10,10 +10,6 @@ public interface CardapioUseCase {
 
     CardapioResponseDTO criarCardapio(CardapioRequestDTO cardapioRequestDTO);
 
-    void adicionarPratos(String cardapioId, List<String> pratoIds);
-
-    void removerPrato (String cardapioId, String pratoId);
-
     CardapioResponseDTO atualizarCardapio(String id, CardapioUpdateRequestDTO cardapioUpdateRequestDTO);
 
     void desativarCardapio(String id);
