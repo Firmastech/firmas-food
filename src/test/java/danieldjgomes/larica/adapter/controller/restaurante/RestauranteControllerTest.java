@@ -1,6 +1,7 @@
 package danieldjgomes.larica.adapter.controller.restaurante;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import danieldjgomes.larica.app.adapter.controller.restaurante.RestauranteController;
 import danieldjgomes.larica.app.adapter.mapper.RestauranteMapper;
 import danieldjgomes.larica.app.usecase.endereco.response.Endereco;
@@ -52,10 +53,14 @@ class RestauranteControllerTest {
 
     private MockMvc mockMvc;
 
+    ObjectMapper objectMapper;
+
 
     @BeforeEach
     void setUp() {
         mockMvc = MockMvcBuilders.standaloneSetup(restauranteController).build();
+        objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
     }
 
     private CriarRestauranteRequest dtoBuilder(){
@@ -91,7 +96,6 @@ class RestauranteControllerTest {
         Restaurante restaurante = restauranteBuilder();
         when(mapper.toRestaurante(dto)).thenReturn(restaurante);
 
-        ObjectMapper objectMapper = new ObjectMapper();
         String dtoJson = objectMapper.writeValueAsString(dto);
 
         mockMvc.perform(post("/api/restaurantes")
@@ -121,7 +125,6 @@ class RestauranteControllerTest {
         AtualizarRestauranteRequest dto = dtoAtualizarBuilder();
         Restaurante restaurante = mapper.toRestaurante(dto);
 
-        ObjectMapper objectMapper = new ObjectMapper();
         String dtoJson = objectMapper.writeValueAsString(dto);
 
         mockMvc.perform(put("/api/restaurantes")
@@ -149,7 +152,6 @@ class RestauranteControllerTest {
         dto.setTempoEstimadoDeEntrega(null);
         dto.setStatusFuncionamento(null);
 
-        ObjectMapper objectMapper = new ObjectMapper();
         String dtoJson = objectMapper.writeValueAsString(dto);
 
         mockMvc.perform(post("/api/restaurantes")
@@ -167,7 +169,6 @@ class RestauranteControllerTest {
         dto.setId(null);
         Restaurante restaurante = mapper.toRestaurante(dto);
 
-        ObjectMapper objectMapper = new ObjectMapper();
         String dtoJson = objectMapper.writeValueAsString(dto);
 
         mockMvc.perform(put("/api/restaurantes")

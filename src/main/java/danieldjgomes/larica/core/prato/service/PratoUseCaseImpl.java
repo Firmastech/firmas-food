@@ -2,7 +2,7 @@ package danieldjgomes.larica.core.prato.service;
 
 import danieldjgomes.larica.core.prato.dtos.PratoRequestDTO;
 import danieldjgomes.larica.core.prato.dtos.PratoResponseDTO;
-import danieldjgomes.larica.core.prato.entity.Prato;
+import danieldjgomes.larica.core.prato.entity.PratoEntity;
 import danieldjgomes.larica.core.prato.repository.PratoRepository;
 import danieldjgomes.larica.core.usecases.PratoUseCase;
 import danieldjgomes.larica.infrastructure.mapper.PratoMapper;
@@ -21,15 +21,15 @@ public class PratoUseCaseImpl implements PratoUseCase {
     private final PratoRepository pratoRepository;
 
     public PratoResponseDTO createPrato(PratoRequestDTO pratoRequest) {
-        Prato prato = PratoMapper.INSTANCE.toEntity(pratoRequest);
-        Prato savedPrato = pratoRepository.save(prato);
-        return PratoMapper.INSTANCE.toResponseDTO(savedPrato);
+        PratoEntity pratoEntity = PratoMapper.INSTANCE.toEntity(pratoRequest);
+        PratoEntity savedPratoEntity = pratoRepository.save(pratoEntity);
+        return PratoMapper.INSTANCE.toResponseDTO(savedPratoEntity);
     }
 
     public Optional<PratoResponseDTO> getPratoById(String id) {
-        Prato prato = pratoRepository.findById(id)
+        PratoEntity pratoEntity = pratoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Prato não encontrado"));
-        return Optional.ofNullable(PratoMapper.INSTANCE.toResponseDTO(prato));
+        return Optional.ofNullable(PratoMapper.INSTANCE.toResponseDTO(pratoEntity));
     }
 
     public List<PratoResponseDTO> getAllPratos() {
@@ -39,21 +39,21 @@ public class PratoUseCaseImpl implements PratoUseCase {
     }
 
     public Optional<PratoResponseDTO> updatePrato(String id, PratoRequestDTO pratoRequestDTO) {
-        Prato existingPrato = pratoRepository.findById(id)
+        PratoEntity existingPratoEntity = pratoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Prato não encontrado"));
 
-        PratoMapper.INSTANCE.updateEntityFromDTO(pratoRequestDTO, existingPrato);
-        existingPrato.setAtualizado(LocalDateTime.now());
-        Prato updatedPrato = pratoRepository.save(existingPrato);
+        PratoMapper.INSTANCE.updateEntityFromDTO(pratoRequestDTO, existingPratoEntity);
+        existingPratoEntity.setAtualizado(LocalDateTime.now());
+        PratoEntity updatedPratoEntity = pratoRepository.save(existingPratoEntity);
 
-        return Optional.ofNullable(PratoMapper.INSTANCE.toResponseDTO(updatedPrato));
+        return Optional.ofNullable(PratoMapper.INSTANCE.toResponseDTO(updatedPratoEntity));
     }
 
     public void deletePrato(String id) {
-        Prato prato = pratoRepository.findById(id)
+        PratoEntity pratoEntity = pratoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Prato não encontrado"));
-        prato.setEstaAtivo(false);
-        pratoRepository.save(prato);
+        pratoEntity.setAtivo(false);
+        pratoRepository.save(pratoEntity);
     }
 
 }

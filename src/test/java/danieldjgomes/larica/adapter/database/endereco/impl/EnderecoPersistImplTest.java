@@ -10,6 +10,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Optional;
 import java.util.UUID;
@@ -65,7 +66,7 @@ class EnderecoPersistImplTest {
         EnderecoEntity entityToCreate = mock(EnderecoEntity.class);
         enderecoPersist.save(entityToCreate);
 
-        verify(entityToCreate).setCriadoEm(any(Date.class));
+        verify(entityToCreate).setCriadoEm(any(LocalDateTime.class));
         verify(entityToCreate).setAtivo(true);
         verify(enderecoRepository).save(entityToCreate);
     }
@@ -74,7 +75,7 @@ class EnderecoPersistImplTest {
     void deveRetornarUmaEntityComOsDadosDeControleDeAtualizacao() {
         EnderecoEntity entityToUpdate = mock(EnderecoEntity.class);
         enderecoPersist.update(entityToUpdate);
-        verify(entityToUpdate).setAtualizadoEm(any(Date.class));
+        verify(entityToUpdate).setAtualizadoEm(any(LocalDateTime.class));
         verify(enderecoRepository).save(entityToUpdate);
     }
 
@@ -82,7 +83,7 @@ class EnderecoPersistImplTest {
     void deveSetarOsDadosDeAtivoAndDataExclusao() {
         EnderecoEntity entityToDelete = mock(EnderecoEntity.class);
         enderecoPersist.inativar(entityToDelete);
-        verify(entityToDelete).setDeletadoEm(any(Date.class));
+        verify(entityToDelete).setDeletadoEm(any(LocalDateTime.class));
         verify(entityToDelete).setAtivo(false);
         verify(enderecoRepository).save(entityToDelete);
     }

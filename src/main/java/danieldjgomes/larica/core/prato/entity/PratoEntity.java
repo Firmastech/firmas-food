@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "prato")
-public class Prato {
+public class PratoEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -32,9 +32,6 @@ public class Prato {
     @Column(name = "preco", nullable = false)
     private BigDecimal preco;
 
-    @Column(name = "categoria")
-    private String categoria;
-
     @Column(name = "url_imagem")
     private String urlImagem;
 
@@ -47,8 +44,8 @@ public class Prato {
     @Column(name = "atualizado", nullable = false)
     private LocalDateTime atualizado = LocalDateTime.now();
 
-    @Column(name = "esta_ativo", nullable = false)
-    private Boolean estaAtivo = true;
+    @Column(name = "ativo", nullable = false)
+    private Boolean ativo = true;
 
     @Column(name = "deletado")
     private LocalDateTime deletado;

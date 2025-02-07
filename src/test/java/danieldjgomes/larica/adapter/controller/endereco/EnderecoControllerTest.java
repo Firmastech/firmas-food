@@ -1,6 +1,7 @@
 package danieldjgomes.larica.adapter.controller.endereco;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import danieldjgomes.larica.app.adapter.controller.endereco.EnderecoController;
 import danieldjgomes.larica.app.adapter.mapper.EnderecoMapper;
 import danieldjgomes.larica.app.usecase.endereco.response.Endereco;
@@ -44,6 +45,7 @@ class EnderecoControllerTest {
     @InjectMocks
     private EnderecoController enderecoController;
 
+    ObjectMapper objectMapper;
     private MockMvc mockMvc;
 
     private AtualizarEnderecoRequest dtoAtualizarBuilder(){
@@ -61,6 +63,8 @@ class EnderecoControllerTest {
     @BeforeEach
     void setUp() {
         mockMvc = MockMvcBuilders.standaloneSetup(enderecoController).build();
+        objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
     }
 
     @Test
@@ -80,7 +84,6 @@ class EnderecoControllerTest {
 
         AtualizarEnderecoRequest dto = dtoAtualizarBuilder();
         Endereco endereco = mapper.toEndereco(dto);
-        ObjectMapper objectMapper = new ObjectMapper();
         String dtoJson = objectMapper.writeValueAsString(dto);
 
 
@@ -116,7 +119,6 @@ class EnderecoControllerTest {
         AtualizarEnderecoRequest dto = dtoAtualizarBuilder();
         dto.setId(null);
         Endereco endereco = mapper.toEndereco(dto);
-        ObjectMapper objectMapper = new ObjectMapper();
         String dtoJson = objectMapper.writeValueAsString(dto);
 
 

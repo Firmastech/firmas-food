@@ -1,11 +1,14 @@
 package danieldjgomes.larica.app.adapter.database.endereco.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.UuidGenerator;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "endereco")
@@ -36,21 +39,15 @@ public class EnderecoEntity {
     private String pontoReferencia;
 
     @Column(name = "criado")
-    private Date criadoEm;
+    private LocalDateTime criadoEm;
 
     @Column(name = "atualizado")
-    private Date atualizadoEm;
+    private LocalDateTime atualizadoEm;
 
     @Column(name = "deletado")
-    private Date deletadoEm;
+    private LocalDateTime deletadoEm;
 
     @Column(name = "ativo", nullable = false, length = 10)
     private Boolean ativo;
-
-    @PrePersist
-    protected void onCreate() {
-        criadoEm = new Date();
-        ativo = true;
-    }
 
 }

@@ -2,7 +2,7 @@ package danieldjgomes.larica.core.categoria.service;
 
 import danieldjgomes.larica.core.categoria.dtos.CategoriaRequestDTO;
 import danieldjgomes.larica.core.categoria.dtos.CategoriaResponseDTO;
-import danieldjgomes.larica.core.categoria.entity.Categoria;
+import danieldjgomes.larica.core.categoria.entity.CategoriaEntity;
 import danieldjgomes.larica.core.categoria.repository.CategoriaRepository;
 import danieldjgomes.larica.core.usecases.CategoriaUseCase;
 import danieldjgomes.larica.infrastructure.mapper.CategoriaMapper;
@@ -23,9 +23,9 @@ public class CategoriaService implements CategoriaUseCase {
     private final CategoriaMapper categoriaMapper;
 
     public CategoriaResponseDTO createCategoria(CategoriaRequestDTO categoriaRequestDTO) {
-        Categoria categoria = categoriaMapper.toEntity(categoriaRequestDTO);
-        Categoria savedCategoria = categoriaRepository.save(categoria);
-        return categoriaMapper.toResponseDTO(savedCategoria);
+        CategoriaEntity categoriaEntity = categoriaMapper.toEntity(categoriaRequestDTO);
+        CategoriaEntity savedCategoriaEntity = categoriaRepository.save(categoriaEntity);
+        return categoriaMapper.toResponseDTO(savedCategoriaEntity);
     }
 
     public Optional<CategoriaResponseDTO> getCategoriaById(String id) {
@@ -41,11 +41,11 @@ public class CategoriaService implements CategoriaUseCase {
 
     public Optional<CategoriaResponseDTO> updateCategoria(String id, CategoriaRequestDTO categoriaRequestDTO) {
         return categoriaRepository.findById(id)
-                .map(existingCategoria -> {
-                    categoriaMapper.updateEntityFromDTO(categoriaRequestDTO, existingCategoria);
-                    existingCategoria.setAtualizado(LocalDateTime.now());
-                    Categoria updatedCategoria = categoriaRepository.save(existingCategoria);
-                    return categoriaMapper.toResponseDTO(updatedCategoria);
+                .map(existingCategoriaEntity -> {
+                    categoriaMapper.updateEntityFromDTO(categoriaRequestDTO, existingCategoriaEntity);
+                    existingCategoriaEntity.setAtualizado(LocalDateTime.now());
+                    CategoriaEntity updatedCategoriaEntity = categoriaRepository.save(existingCategoriaEntity);
+                    return categoriaMapper.toResponseDTO(updatedCategoriaEntity);
                 });
     }
 

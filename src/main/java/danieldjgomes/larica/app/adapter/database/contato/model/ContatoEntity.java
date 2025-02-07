@@ -1,22 +1,19 @@
 package danieldjgomes.larica.app.adapter.database.contato.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.UuidGenerator;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "contato_Restaurante")
+@Table(name = "contato")
 @Entity
 public class ContatoEntity {
 
@@ -29,19 +26,17 @@ public class ContatoEntity {
     private String contato;
 
     @Column(name = "tipo_contato")
-    private String tipoContato;
-
-    @Column(name = "restaurante_id")
-    private String restauranteId;
+    @Enumerated(EnumType.STRING)
+    private TipoContato tipoContato;
 
     @Column(name = "criado")
-    private Date criadoEm;
+    private LocalDateTime criadoEm;
 
     @Column(name = "atualizado")
-    private Date atualizadoEm;
+    private LocalDateTime atualizadoEm;
 
     @Column(name = "deletado")
-    private Date deletadoEm;
+    private LocalDateTime deletadoEm;
 
     @Column(name = "ativo", nullable = false, length = 10)
     private Boolean ativo;

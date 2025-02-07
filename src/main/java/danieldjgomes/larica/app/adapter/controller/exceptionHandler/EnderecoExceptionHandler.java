@@ -1,8 +1,8 @@
 package danieldjgomes.larica.app.adapter.controller.exceptionHandler;
 
-import danieldjgomes.larica.infrastructure.expectionHandler.model.ErrorResponse;
 import danieldjgomes.larica.app.usecase.endereco.exceptions.EnderecoInvalidoException;
 import danieldjgomes.larica.app.usecase.endereco.exceptions.EnderecoNaoEncontradoException;
+import danieldjgomes.larica.infrastructure.expectionHandler.model.ErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.View;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @ControllerAdvice
@@ -28,7 +28,7 @@ public class EnderecoExceptionHandler {
 
         ErrorResponse dto = ErrorResponse.builder()
                 .mensagens(List.of(exception.getMessage()))
-                .timestamp(new Date())
+                .timestamp(LocalDateTime.now())
                 .build();
         return new ResponseEntity<>(dto, HttpStatus.BAD_REQUEST);
     }
@@ -39,7 +39,7 @@ public class EnderecoExceptionHandler {
 
         ErrorResponse dto = ErrorResponse.builder()
                 .mensagens(List.of(exception.getMessage()))
-                .timestamp(new Date())
+                .timestamp(LocalDateTime.now())
                 .build();
         return new ResponseEntity<>(dto, HttpStatus.BAD_REQUEST);
     }

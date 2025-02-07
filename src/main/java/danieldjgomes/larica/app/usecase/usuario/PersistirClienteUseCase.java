@@ -5,7 +5,7 @@ import danieldjgomes.larica.app.adapter.database.pedidos.repository.UsuarioRepos
 import danieldjgomes.larica.app.adapter.database.restaurante.model.RestauranteEntity;
 import danieldjgomes.larica.app.usecase.usuario.exceptions.PapelNaoCadastradoException;
 import danieldjgomes.larica.app.usecase.usuario.request.CriarUsuarioRequestDTO;
-import danieldjgomes.larica.infrastructure.Papel;
+import danieldjgomes.larica.infrastructure.PapelEntity;
 import danieldjgomes.larica.infrastructure.PapelRepository;
 import danieldjgomes.larica.infrastructure.TipoPapel;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +26,7 @@ public class PersistirClienteUseCase implements EtapaProcessoCriarUsuario {
     @Override
     public void processar(CriarUsuarioRequestDTO criarUsuarioRequestDTO) {
         UsuarioEntity novoUsuario = montarEstruturaUsuario(criarUsuarioRequestDTO, passwordEncoder);
-        Optional<Papel> papel = papelRepository.findByRestauranteIdAndNomeAndAtivoTrue(criarUsuarioRequestDTO.getRestaurante(), TipoPapel.CLIENTE.toString());
+        Optional<PapelEntity> papel = papelRepository.findByRestauranteIdAndNomeAndAtivoTrue(criarUsuarioRequestDTO.getRestaurante(), TipoPapel.CLIENTE.toString());
         if (papel.isEmpty()) {
             throw new PapelNaoCadastradoException();
         }

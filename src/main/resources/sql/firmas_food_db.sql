@@ -17,7 +17,7 @@ CREATE TABLE public.restaurante (
                                     FOREIGN KEY (enderecoId) REFERENCES endereco (id));
 
 
-CREATE TABLE public.cardapio (
+CREATE TABLE public.cardapioEntity (
                                  id VARCHAR(36) NOT NULL,
                                  nome VARCHAR(255) NOT NULL,
                                  descricao VARCHAR(8000),
@@ -30,12 +30,12 @@ CREATE TABLE public.cardapio (
                                  CONSTRAINT cardapio_restaurante_id FOREIGN KEY (restaurante_id)
                                      REFERENCES public.restaurante(id)
 );
-CREATE TABLE public.prato (
+CREATE TABLE public.pratoEntity (
                               id VARCHAR(36) NOT NULL,
                               descricao VARCHAR(8000),
                               nome VARCHAR(255) NOT NULL,
                               preco NUMERIC(10, 2) NOT NULL,
-                              categoria VARCHAR(255),
+                              categoriaEntity VARCHAR(255),
                               url_imagem VARCHAR(8000),
                               porcentagem_desconto DECIMAL(10, 2),
                               criado TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -51,11 +51,11 @@ CREATE TABLE public.cardapio_prato (
                                        PRIMARY KEY (cardapio_id, prato_id),
                                        CONSTRAINT fk_cardapio
                                            FOREIGN KEY (cardapio_id)
-                                               REFERENCES public.cardapio(id)
+                                               REFERENCES public.cardapioEntity(id)
                                                ON DELETE CASCADE,
                                        CONSTRAINT fk_prato
                                            FOREIGN KEY (prato_id)
-                                               REFERENCES public.prato(id)
+                                               REFERENCES public.pratoEntity(id)
                                                ON DELETE CASCADE
 );
 
@@ -103,7 +103,7 @@ CREATE TABLE public.item_pedido (
                                         quantidade int4 NOT NULL,
                                     CONSTRAINT item_pedido_pkey PRIMARY KEY (id),
                                     CONSTRAINT item_pedido_pratoid_fkey FOREIGN KEY (prato_id)
-                                        REFERENCES public.prato(id),
+                                        REFERENCES public.pratoEntity(id),
                                         CONSTRAINT fk_item_pedido FOREIGN KEY (pedido_id)
                                         REFERENCES public.pedido(id)
 );
@@ -136,7 +136,7 @@ ALTER TABLE public.restaurante
 
 ALTER TABLE public.restaurante
     ADD CONSTRAINT fk_restaurante_cardapio_id
-        FOREIGN KEY (cardapio_id) REFERENCES public.cardapio (id);
+        FOREIGN KEY (cardapio_id) REFERENCES public.cardapioEntity (id);
 
 -- Adicionar novas colunas
 ALTER TABLE public.endereco

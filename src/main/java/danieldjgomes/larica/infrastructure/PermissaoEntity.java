@@ -3,15 +3,17 @@ package danieldjgomes.larica.infrastructure;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.UuidGenerator;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "permissao")
-@Data
-public class Permissao {
+@Getter
+@Setter
+public class PermissaoEntity {
 
     @Id
     @UuidGenerator
@@ -21,11 +23,11 @@ public class Permissao {
 
     private String descricao;
 
-    private Date criado;
+    private LocalDateTime criado;
 
-    private Date atualizado;
+    private LocalDateTime atualizado;
 
-    private Date deletado;
+    private LocalDateTime deletado;
 
     private Boolean ativo;
 

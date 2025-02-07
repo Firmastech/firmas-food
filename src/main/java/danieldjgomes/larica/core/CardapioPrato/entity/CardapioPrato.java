@@ -1,8 +1,8 @@
 package danieldjgomes.larica.core.CardapioPrato.entity;
 
 
-import danieldjgomes.larica.core.cardapio.entity.Cardapio;
-import danieldjgomes.larica.core.prato.entity.Prato;
+import danieldjgomes.larica.core.cardapio.entity.CardapioEntity;
+import danieldjgomes.larica.core.prato.entity.PratoEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,15 +20,15 @@ public class CardapioPrato{
 
     @ManyToOne
     @JoinColumn(name = "cardapio_id", nullable = false)
-    private Cardapio cardapio;
+    private CardapioEntity cardapioEntity;
 
     @ManyToOne
     @JoinColumn(name = "prato_id", nullable = false)
-    private Prato prato;
+    private PratoEntity pratoEntity;
 
-    public CardapioPrato(Cardapio cardapio, Prato prato) {
-        this.cardapio = cardapio;
-        this.prato = prato;
+    public CardapioPrato(CardapioEntity cardapioEntity, PratoEntity pratoEntity) {
+        this.cardapioEntity = cardapioEntity;
+        this.pratoEntity = pratoEntity;
     }
 
 }

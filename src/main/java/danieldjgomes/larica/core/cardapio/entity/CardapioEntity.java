@@ -1,6 +1,8 @@
 package danieldjgomes.larica.core.cardapio.entity;
 
 import danieldjgomes.larica.app.adapter.database.restaurante.model.RestauranteEntity;
+import danieldjgomes.larica.core.categoria.entity.CategoriaEntity;
+import danieldjgomes.larica.core.prato.entity.PratoEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,6 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -15,7 +18,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "cardapio")
-public class Cardapio {
+public class CardapioEntity {
 
     @Id
     private String id;
@@ -25,6 +28,11 @@ public class Cardapio {
 
     @Column(length = 8000)
     private String descricao;
+
+    private String etiqueta;
+
+    @OneToMany(mappedBy = "id")
+    private Set<CategoriaEntity> categotias;
 
     @ManyToOne
     @JoinColumn(name = "restaurante_id", nullable = false)

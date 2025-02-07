@@ -1,8 +1,8 @@
 package danieldjgomes.larica.app.adapter.controller.exceptionHandler;
 
 import danieldjgomes.larica.app.adapter.controller.restaurante.RestauranteController;
-import danieldjgomes.larica.infrastructure.expectionHandler.model.ErrorResponse;
 import danieldjgomes.larica.app.usecase.restaurante.exceptions.RestauranteNotFoundException;
+import danieldjgomes.larica.infrastructure.expectionHandler.model.ErrorResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @ControllerAdvice(assignableTypes = {RestauranteController.class})
@@ -33,7 +33,7 @@ public class RestauranteExceptionHandler {
 
         ErrorResponse dto = ErrorResponse.builder()
                 .mensagens(List.of(exception.getMessage()))
-                .timestamp(new Date())
+                .timestamp(LocalDateTime.now())
                 .build();
         return new ResponseEntity<>(dto, HttpStatus.BAD_REQUEST);
     }

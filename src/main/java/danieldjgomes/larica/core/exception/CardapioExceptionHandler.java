@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import java.time.LocalDateTime;
 import java.util.Collections;
-import java.util.Date;
 
 @ControllerAdvice
 @Slf4j
@@ -21,9 +21,9 @@ public class CardapioExceptionHandler {
     @ResponseBody
     public ResponseEntity handleNotFoundException(EntityNotFoundException ex) {
         ErrorResponse response = ErrorResponse.builder()
-                        .mensagens(Collections.singletonList(ex.getMessage()))
-                                .timestamp(new Date())
-                                        .build();
+                .mensagens(Collections.singletonList(ex.getMessage()))
+                .timestamp(LocalDateTime.now())
+                .build();
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
     }
 

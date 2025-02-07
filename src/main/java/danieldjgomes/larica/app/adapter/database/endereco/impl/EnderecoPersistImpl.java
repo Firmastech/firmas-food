@@ -6,6 +6,7 @@ import danieldjgomes.larica.app.ports.database.EnderecoPersist;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Optional;
 
@@ -27,20 +28,20 @@ public class EnderecoPersistImpl implements EnderecoPersist {
 
     @Override
     public EnderecoEntity save(EnderecoEntity endereco) {
-        endereco.setCriadoEm(new Date());
+        endereco.setCriadoEm(LocalDateTime.now());
         endereco.setAtivo(true);
         return enderecoRepository.save(endereco);
     }
 
     @Override
     public EnderecoEntity update(EnderecoEntity endereco) {
-        endereco.setAtualizadoEm(new Date());
+        endereco.setAtualizadoEm(LocalDateTime.now());
         return enderecoRepository.save(endereco);
     }
 
     @Override
     public void inativar(EnderecoEntity endereco) {
-        endereco.setDeletadoEm(new Date());
+        endereco.setDeletadoEm(LocalDateTime.now());
         endereco.setAtivo(false);
         enderecoRepository.save(endereco);
     }

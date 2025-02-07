@@ -2,17 +2,19 @@ package danieldjgomes.larica.infrastructure;
 
 import danieldjgomes.larica.app.adapter.database.restaurante.model.RestauranteEntity;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.UuidGenerator;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "papel")
-@Data
-public class Papel {
+@Getter
+@Setter
+public class PapelEntity {
 
     @Id
     @UuidGenerator
@@ -27,16 +29,16 @@ public class Papel {
             joinColumns = @JoinColumn(name = "papel_id"),
             inverseJoinColumns = @JoinColumn(name = "permissao_id")
     )
-    private Set<Permissao> permissoes = new HashSet<>();
+    private Set<PermissaoEntity> permissoes = new HashSet<>();
 
     @OneToOne
     private RestauranteEntity restaurante;
 
-    private Date criado;
+    private LocalDateTime criado;
 
-    private Date atualizado;
+    private LocalDateTime atualizado;
 
-    private Date deletado;
+    private LocalDateTime deletado;
 
     private Boolean ativo;
 }

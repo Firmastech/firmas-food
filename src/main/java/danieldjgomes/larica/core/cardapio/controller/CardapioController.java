@@ -24,16 +24,11 @@ public class CardapioController {
 
     private final CardapioUseCase cardapioUseCase;
 
-
     @PostMapping
     public ResponseEntity<CardapioResponseDTO> criarCardapio(@RequestBody CardapioRequestDTO dto) {
         CardapioResponseDTO response = cardapioUseCase.criarCardapio(dto);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
-
-
-
-
 
     @PutMapping("/{id}")
     public ResponseEntity<CardapioResponseDTO> atualizarCardapio(@PathVariable String id, @RequestBody CardapioUpdateRequestDTO dto) {

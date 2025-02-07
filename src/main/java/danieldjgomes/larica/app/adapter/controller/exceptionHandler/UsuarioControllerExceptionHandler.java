@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.Date;
 
@@ -24,7 +25,7 @@ public class UsuarioControllerExceptionHandler {
     ResponseEntity<ErrorResponse> handleCriandoUsuarioDuplicadoException(CriandoUsuarioDuplicadoException duplicadoException) {
         ErrorResponse response = ErrorResponse.builder()
                 .mensagens(Collections.singletonList(duplicadoException.getMessage()))
-                .timestamp(new Date())
+                .timestamp(LocalDateTime.now())
                 .build();
         return new ResponseEntity<>(response, HttpStatus.CONFLICT);
     }

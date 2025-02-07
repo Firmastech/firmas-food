@@ -4,7 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-public interface PapelRepository extends JpaRepository<Papel,String> {
+public interface PapelRepository extends JpaRepository<PapelEntity,String> {
 
-    Optional<Papel> findByRestauranteIdAndNomeAndAtivoTrue(String id, String nome);
+    Optional<PapelEntity> findByRestauranteIdAndNomeAndAtivoTrue(String id, String nome);
 }

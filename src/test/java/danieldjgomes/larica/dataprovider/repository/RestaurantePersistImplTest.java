@@ -11,6 +11,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Optional;
 import java.util.UUID;
@@ -80,7 +81,7 @@ class RestaurantePersistImplTest {
         RestauranteEntity entityToCreate = mock(RestauranteEntity.class);
         repository.save(entityToCreate);
 
-        verify(entityToCreate).setCriadoEm(any(Date.class));
+        verify(entityToCreate).setCriadoEm(any(LocalDateTime.class));
         verify(entityToCreate).setAtivo(true);
         verify(restauranteRepository).save(entityToCreate);
     }
@@ -89,7 +90,7 @@ class RestaurantePersistImplTest {
     void deveRetornarUmaEntityComOsDadosDeControleDeAtualizacao() {
         RestauranteEntity entityToUpdate = mock(RestauranteEntity.class);
         repository.update(entityToUpdate);
-        verify(entityToUpdate).setAtualizadoEm(any(Date.class));
+        verify(entityToUpdate).setAtualizadoEm(any(LocalDateTime.class));
         verify(restauranteRepository).save(entityToUpdate);
     }
 
@@ -97,7 +98,7 @@ class RestaurantePersistImplTest {
     void deveSetarOsDadosDeAtivoAndDataExclusao() {
         RestauranteEntity entityToDelete = mock(RestauranteEntity.class);
         repository.delete(entityToDelete);
-        verify(entityToDelete).setDeletadoEm(any(Date.class));
+        verify(entityToDelete).setDeletadoEm(any(LocalDateTime.class));
         verify(entityToDelete).setAtivo(false);
         verify(restauranteRepository).save(entityToDelete);
     }

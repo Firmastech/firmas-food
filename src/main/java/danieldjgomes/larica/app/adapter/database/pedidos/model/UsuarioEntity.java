@@ -1,7 +1,8 @@
 package danieldjgomes.larica.app.adapter.database.pedidos.model;
 
+import danieldjgomes.larica.app.adapter.database.contato.model.ContatoEntity;
 import danieldjgomes.larica.app.adapter.database.restaurante.model.RestauranteEntity;
-import danieldjgomes.larica.infrastructure.Papel;
+import danieldjgomes.larica.infrastructure.PapelEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.UuidGenerator;
@@ -41,15 +42,18 @@ public class UsuarioEntity implements UserDetails {
     private String primeiroNome;
     private String segundoNome;
 
+    @OneToMany(mappedBy = "id")
+    private Set<ContatoEntity> contatos;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "usuario_papel",
             joinColumns = @JoinColumn(name = "usuario_id"),
             inverseJoinColumns = @JoinColumn(name = "papel_id"))
-    private Set<Papel> papeis = new HashSet<>();
+    private Set<PapelEntity> papeis = new HashSet<>();
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return papeis.stream().
-                filter(Papel::getAtivo)
+                filter(PapelEntity::getAtivo)
                 .flatMap(p -> p.getPermissoes().stream()
                         .map(permissao -> new SimpleGrantedAuthority(permissao.getNome()))).collect(Collectors.toList());
     }

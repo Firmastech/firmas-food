@@ -2,7 +2,7 @@ package danieldjgomes.larica.app.usecase.restaurante.response;
 
 import danieldjgomes.larica.app.usecase.endereco.response.Endereco;
 import danieldjgomes.larica.app.usecase.restaurante.enums.StatusFuncionamento;
-import danieldjgomes.larica.core.cardapio.entity.Cardapio;
+import danieldjgomes.larica.core.cardapio.entity.CardapioEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,6 +19,6 @@ public class Restaurante {
     private Integer tempoEstimadoDeEntrega;
     private StatusFuncionamento statusFuncionamento;
     private Endereco endereco;
-    private Cardapio cardapio;
+    private CardapioEntity cardapioEntity;
 
 }

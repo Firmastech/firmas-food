@@ -5,8 +5,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Component
@@ -23,7 +23,7 @@ public class CommonExceptionHandler {
 
         return ErrorResponse.builder()
                 .mensagens(errors)
-                .timestamp(new Date())
+                .timestamp(LocalDateTime.now())
                 .build();
     }
 }

@@ -4,10 +4,10 @@ import danieldjgomes.larica.core.CardapioPrato.entity.CardapioPrato;
 import danieldjgomes.larica.core.CardapioPrato.repository.CardapioPratoRepository;
 import danieldjgomes.larica.core.cardapio.dtos.request.AddPratosToCardapioRequest;
 import danieldjgomes.larica.core.cardapio.dtos.response.CardapioResponseDTO;
-import danieldjgomes.larica.core.cardapio.entity.Cardapio;
+import danieldjgomes.larica.core.cardapio.entity.CardapioEntity;
 import danieldjgomes.larica.core.cardapio.repository.CardapioRepository;
 import danieldjgomes.larica.core.exception.EntityNotFoundException;
-import danieldjgomes.larica.core.prato.entity.Prato;
+import danieldjgomes.larica.core.prato.entity.PratoEntity;
 import danieldjgomes.larica.core.prato.repository.PratoRepository;
 import danieldjgomes.larica.core.usecases.CardapioPratoUseCase;
 import danieldjgomes.larica.infrastructure.mapper.CardapioMapper;
@@ -28,57 +28,57 @@ public class CardapioPratoUseCaImpl implements CardapioPratoUseCase {
 
     public CardapioResponseDTO adicionarPratos(String cardapioId, AddPratosToCardapioRequest request) {
 
-        Cardapio cardapio = cardapioRepository.findById(request.getCardapioId())
+        CardapioEntity cardapioEntity = cardapioRepository.findById(request.getCardapioId())
                 .orElseThrow(() -> new EntityNotFoundException("Cardápio não encontrado"));
 
-        List<Prato> pratos = findAllPratosById(request.getPratoIds());
+        List<PratoEntity> pratoEntities = findAllPratosById(request.getPratoIds());
 
-        if (pratos.size() != request.getPratoIds().size()) {
+        if (pratoEntities.size() != request.getPratoIds().size()) {
             throw new EntityNotFoundException("Um ou mais pratos não foram encontrados.");
         }
 
-        List<CardapioPrato> cardapioPratos = pratos.stream()
-                .map(prato -> new CardapioPrato(cardapio, prato))
+        List<CardapioPrato> cardapioPratos = pratoEntities.stream()
+                .map(prato -> new CardapioPrato(cardapioEntity, prato))
                 .collect(Collectors.toList());
 
         cardapioPratoRepository.saveAll(cardapioPratos);
 
-        cardapio.setAtualizado(LocalDateTime.now());
-        cardapioRepository.save(cardapio);
+        cardapioEntity.setAtualizado(LocalDateTime.now());
+        cardapioRepository.save(cardapioEntity);
 
-        return CardapioMapper.INSTANCE.toDto(cardapio);
+        return CardapioMapper.INSTANCE.toDto(cardapioEntity);
     }
 
     public void removerPrato(String cardapioId, String pratoId) {
-        Cardapio cardapio = getExistingCardapio(cardapioId);
-        Prato prato = pratoRepository.findById(pratoId)
+        CardapioEntity cardapioEntity = getExistingCardapio(cardapioId);
+        PratoEntity pratoEntity = pratoRepository.findById(pratoId)
                 .orElseThrow(() ->
                         new EntityNotFoundException("Prato not found with id: " + pratoId));
 
-        CardapioPrato cardapioPrato = cardapioPratoRepository.findByCardapioAndPrato(cardapio, prato)
+        CardapioPrato cardapioPrato = cardapioPratoRepository.findByCardapioAndPrato(cardapioEntity, pratoEntity)
                 .orElseThrow(() -> new EntityNotFoundException("Prato não associado a este cardápio"));
 
         cardapioPratoRepository.delete(cardapioPrato);
-        cardapio.setAtualizado(LocalDateTime.now());
+        cardapioEntity.setAtualizado(LocalDateTime.now());
 
-        cardapioRepository.save(cardapio);
+        cardapioRepository.save(cardapioEntity);
     }
 
-    private List<Prato> findAllPratosById(List<String> ids) {
-        List<Prato> pratos = pratoRepository.findAllById(ids);
-        if (pratos.size() != ids.size()) {
-            List<String> foundIds = pratos.stream()
-                    .map(Prato::getId)
+    private List<PratoEntity> findAllPratosById(List<String> ids) {
+        List<PratoEntity> pratoEntities = pratoRepository.findAllById(ids);
+        if (pratoEntities.size() != ids.size()) {
+            List<String> foundIds = pratoEntities.stream()
+                    .map(PratoEntity::getId)
                     .toList();
             List<String> notFoundIds = ids.stream()
                     .filter(id -> !foundIds.contains(id))
                     .toList();
             throw new EntityNotFoundException("Pratos not found with ids: " + notFoundIds);
         }
-        return pratos;
+        return pratoEntities;
     }
 
-    private Cardapio getExistingCardapio(String id) {
+    private CardapioEntity getExistingCardapio(String id) {
         return cardapioRepository.findById(id)
                 .orElseThrow(() ->
                         new EntityNotFoundException("Cardapio not found with id: " + id));

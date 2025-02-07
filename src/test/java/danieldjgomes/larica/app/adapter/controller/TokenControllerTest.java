@@ -1,6 +1,8 @@
 package danieldjgomes.larica.app.adapter.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JSR310Module;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import danieldjgomes.larica.app.adapter.controller.exceptionHandler.CommonExceptionHandler;
 import danieldjgomes.larica.app.adapter.controller.exceptionHandler.TokenControllerExceptionHandler;
 import danieldjgomes.larica.app.usecase.token.GerarTokenUsuarioUseCase;
@@ -53,6 +55,7 @@ class TokenControllerTest {
         mockMvc = MockMvcBuilders.standaloneSetup(tokenController)
                 .setControllerAdvice(new TokenControllerExceptionHandler(new CommonExceptionHandler())).build();
         objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
     }
 
     @Test

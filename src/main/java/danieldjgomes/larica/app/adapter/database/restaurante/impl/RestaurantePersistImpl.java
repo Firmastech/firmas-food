@@ -7,7 +7,7 @@ import danieldjgomes.larica.app.ports.database.RestaurantePersist;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Component
@@ -31,19 +31,19 @@ public class RestaurantePersistImpl implements RestaurantePersist {
     public RestauranteEntity save(RestauranteEntity restaurante) {
         RestauranteEntity entity = restaurante;
         entity.setAtivo(true);
-        entity.setCriadoEm(new Date());
+        entity.setCriadoEm(LocalDateTime.now());
         return restauranteRepository.save(entity);
     }
 
     @Override
     public RestauranteEntity update(RestauranteEntity entityToUpdate) {
-        entityToUpdate.setAtualizadoEm(new Date());
+        entityToUpdate.setAtualizadoEm(LocalDateTime.now());
         return restauranteRepository.save(entityToUpdate);
     }
 
     @Override
     public void delete(RestauranteEntity entityToDelete) {
-        entityToDelete.setDeletadoEm(new Date());
+        entityToDelete.setDeletadoEm(LocalDateTime.now());
         entityToDelete.setAtivo(false);
         restauranteRepository.save(entityToDelete);
     }

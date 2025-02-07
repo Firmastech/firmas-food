@@ -1,6 +1,7 @@
 package danieldjgomes.larica.app.adapter.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import danieldjgomes.larica.app.adapter.controller.exceptionHandler.CommonExceptionHandler;
 import danieldjgomes.larica.app.adapter.controller.exceptionHandler.UsuarioControllerExceptionHandler;
 import danieldjgomes.larica.app.usecase.usuario.CriarClienteUseCase;
@@ -48,6 +49,8 @@ class UsuarioControllerTest {
                 .setControllerAdvice(new UsuarioControllerExceptionHandler(new CommonExceptionHandler()))
                 .build();
         objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
+
     }
 
     @Test

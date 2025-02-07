@@ -1,5 +1,6 @@
 package danieldjgomes.larica.app.adapter.database.restaurante.model;
 
+import danieldjgomes.larica.app.adapter.database.contato.model.ContatoEntity;
 import danieldjgomes.larica.app.adapter.database.endereco.model.EnderecoEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -8,7 +9,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.UuidGenerator;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 @Table(name = "restaurante")
@@ -36,14 +38,17 @@ public class RestauranteEntity {
     @JoinColumn(name = "endereco_id")
     private EnderecoEntity endereco;
 
+    @OneToMany(mappedBy = "id")
+    private Set<ContatoEntity> contatos;
+
     @Column(name = "criado")
-    private Date criadoEm;
+    private LocalDateTime criadoEm;
 
     @Column(name = "atualizado")
-    private Date atualizadoEm;
+    private LocalDateTime atualizadoEm;
 
     @Column(name = "deletado")
-    private Date deletadoEm;
+    private LocalDateTime deletadoEm;
 
     @Column(name = "ativo", nullable = false, length = 10)
     private Boolean ativo = true;
