@@ -1,47 +1,24 @@
-## Roles
-- RestauranteAdmin
-- RestauranteFuncionario
-- RestauranteUsuario
-
-## Use Case
-- Configuracao de security (Daniel)
-- Fluxo de cardapio - Adicionar e atualizar cardapio (Martins)
-- Fluxo do pedido - Usuario do restaurante X criar um pedido com N quantidade de M itens (Henrique)
-- Adicionar e atualizar dados do restaurante (Renan)
-- Sistema de desconto de pedidos
+## TODO: Use Case
+- Fluxo de cardapio - Adicionar e atualizar cardapio
+- Fluxo de categoria - Criar Categoria e adicionar a cardapio
+- Fluxo de prato - Criar prato e adicionar a categoria
+- Fluxo do pedido - Usuario do restaurante X criar um pedido com N quantidade de M itens 
+- Adicionar e atualizar dados do restaurante (contato e endereco)
+- Adicionar e atualizar dados do usuario (contato e endereco)
 
 
-# Projeto Firmas Food
+## Guias de Endpoints:
 
-Este é um guia para configurar e executar o projeto XYZ usando Docker Compose.
+- Não passar como parâmetro o `RestauranteId` nem `UsuarioId` (já estão no JWT, não é seguro)
+- As entidades devem ser utilizadas com nomes no plural, ou seja:
+    - `restaurantes`
+    - `usuarios`
+    - `pedidos`
 
-## Pré-requisitos
-
-Antes de começar, certifique-se de ter instalado em sua máquina:
-
-- Docker: [Instalação do Docker](https://docs.docker.com/get-docker/)
-- Docker Compose: [Instalação do Docker Compose](https://docs.docker.com/compose/install/)
-
-## Configuração
-
-1. **Clone o repositório**
-
-   ```bash
-   git clone https://github.com/Firmastech/firmas-food.git
-   cd firmas-food
-   ```
-2. **Executando o projeto**
-    ```
-   sh build_containers.sh
-    ```
-    Se tiver algum problema para executar o arquivo no windows, execute
-    ```
-   apt install dos2unix
-   dos2unix build_containers.sh
-    ```
-
-    Após isso, inicie a aplicação java normalmente,
-
-## Persistindo as mudancas de banco
- - Salve suas mudancas no arquivo `resources/sql/firmas_food_db.sql`
- - Execute o arquivo `backup_db.sh` e commite com os novos arquivos gerados.
+- Dados no devem ser deletados, i.e os endpoints de `Delete` devem atribuir o valor `false` no campo `ativo` na Entity e adicionar um `LocalDateTime.now()` no campo deletado.
+ - Use o prefixo `/rest` para todos endpoints, utilizando os padroes REST
+  - Criar prato `POST /rest/pratos`.
+  - Alterar prato `PUT /rest/pratos`.
+  - Desativar prato `DELETE /rest/pratos/{pratoId}`.
+  - Buscar pratos `GET /rest/pratos`.
+  - Buscar detalhes prato `GET /rest/pratos/{id}`.
