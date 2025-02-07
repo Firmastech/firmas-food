@@ -60,3 +60,8 @@ api:
         refresh-token: 120
       issuer: auth-api
       restaurante-claim: restaurante
+
+logging:
+  level:
+    sql: debug
+    org.hibernate.orm.jdbc.bind: trace

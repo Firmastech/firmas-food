@@ -26,7 +26,7 @@ public class PersistirClienteUseCase implements EtapaProcessoCriarUsuario {
     @Override
     public void processar(CriarUsuarioRequestDTO criarUsuarioRequestDTO) {
         UsuarioEntity novoUsuario = montarEstruturaUsuario(criarUsuarioRequestDTO, passwordEncoder);
-        Optional<PapelEntity> papel = papelRepository.findByRestauranteIdAndNomeAndAtivoTrue(criarUsuarioRequestDTO.getRestaurante(), TipoPapel.CLIENTE.toString());
+        Optional<PapelEntity> papel = papelRepository.findByNomeAndAtivoTrue(TipoPapel.CLIENTE.toString());
         if (papel.isEmpty()) {
             throw new PapelNaoCadastradoException();
         }

@@ -13,8 +13,4 @@ public class UsuarioPapel {
     @ManyToOne
     @JoinColumn(name = "usuario_id", nullable = false)
     private UsuarioEntity usuario;
-
-    @Column(name = "restaurante_id", nullable = false)
-    private String restauranteId;
-
 }

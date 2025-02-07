@@ -6,5 +6,5 @@ import java.util.Optional;
 
 public interface PapelRepository extends JpaRepository<PapelEntity,String> {
 
-    Optional<PapelEntity> findByRestauranteIdAndNomeAndAtivoTrue(String id, String nome);
+    Optional<PapelEntity> findByNomeAndAtivoTrue(String nome);
 }

@@ -31,9 +31,6 @@ public class PapelEntity {
     )
     private Set<PermissaoEntity> permissoes = new HashSet<>();
 
-    @OneToOne
-    private RestauranteEntity restaurante;
-
     private LocalDateTime criado;
 
     private LocalDateTime atualizado;
