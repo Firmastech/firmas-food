@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.UuidGenerator;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -20,6 +21,7 @@ import java.util.List;
 public class CardapioEntity {
 
     @Id
+    @UuidGenerator
     private String id;
 
     @Column(nullable = false)
@@ -28,7 +30,6 @@ public class CardapioEntity {
     @Column(length = 8000)
     private String descricao;
 
-    private String etiqueta;
 
     @OneToMany(mappedBy = "id")
     private List<CategoriaEntity> categorias;
@@ -44,7 +45,7 @@ public class CardapioEntity {
     private LocalDateTime atualizado = LocalDateTime.now();
 
     @Column(nullable = false)
-    private Boolean estaAtivo = true;
+    private Boolean ativo = true;
 
     private LocalDateTime deletado;
 

@@ -1,10 +1,12 @@
 package danieldjgomes.larica.core.cardapio.controller;
 
+import danieldjgomes.larica.app.adapter.database.pedidos.model.UsuarioEntity;
 import danieldjgomes.larica.core.cardapio.dtos.request.CardapioRequestDTO;
 import danieldjgomes.larica.core.cardapio.dtos.request.CardapioUpdateRequestDTO;
-import danieldjgomes.larica.core.cardapio.dtos.request.DesativarCardapioRequestDTO;
 import danieldjgomes.larica.core.cardapio.dtos.response.CardapioResponseDTO;
 import danieldjgomes.larica.core.usecases.CardapioUseCase;
+import danieldjgomes.larica.infrastructure.AuthorizationService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,15 +20,16 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 
 
 @RestController
-@RequestMapping("/api/cardapio")
+@RequestMapping("/rest/cardapios")
 @AllArgsConstructor
 public class CardapioController {
 
     private final CardapioUseCase cardapioUseCase;
 
     @PostMapping
-    public ResponseEntity<CardapioResponseDTO> criarCardapio(@RequestBody CardapioRequestDTO dto) {
-        CardapioResponseDTO response = cardapioUseCase.criarCardapio(dto);
+    public ResponseEntity<CardapioResponseDTO> criarCardapio(@RequestBody @Valid CardapioRequestDTO dto) {
+        UsuarioEntity usuario = AuthorizationService.findUsuario();
+        CardapioResponseDTO response = cardapioUseCase.criarCardapio(dto, usuario);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
@@ -36,9 +39,9 @@ public class CardapioController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @DeleteMapping("/desativar")
-    public ResponseEntity<Void> desativarCardapio(@RequestBody DesativarCardapioRequestDTO dto) {
-        cardapioUseCase.desativarCardapio(dto.getCardapioId());
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> desativarCardapio(@PathVariable String id) {
+        cardapioUseCase.desativarCardapio(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 

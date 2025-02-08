@@ -36,7 +36,6 @@ public class RegistrarRestauranteUseCaseImpl implements RegistrarRestauranteUseC
                     throw new RestauranteNomeUtilizadoException();
                 });
 
-        restaurante.getEndereco().setId(UUID.randomUUID().toString());
         RestauranteEntity restauranteEntity = mapper.toEntity(restaurante);
         restauranteEntity = restaurantePersist.save(restauranteEntity);
         return mapper.toRestaurante(restauranteEntity);

@@ -13,4 +13,5 @@ public class CardapioUpdateRequestDTO {
 
     private String nome;
     private String descricao;
+    private String etiqueta;
 }

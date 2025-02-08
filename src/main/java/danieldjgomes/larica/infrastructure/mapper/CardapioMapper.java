@@ -15,13 +15,8 @@ public interface CardapioMapper {
     CardapioMapper INSTANCE = Mappers.getMapper(CardapioMapper.class);
 
 
-    @Mapping(source = "nome", target = "nome")
-    @Mapping(source = "descricao", target = "descricao")
     CardapioEntity toEntity(CardapioRequestDTO dto);
 
-    @Mapping(source = "id", target = "id")
-    @Mapping(source = "nome", target = "nome")
-    @Mapping(source = "descricao", target = "descricao")
     CardapioResponseDTO toDto(CardapioEntity entity);
 
     @Mapping(source = "nome", target = "nome")
