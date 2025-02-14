@@ -2,8 +2,8 @@ package danieldjgomes.larica.infrastructure.config;
 
 import danieldjgomes.larica.app.adapter.database.pedidos.model.UsuarioEntity;
 import danieldjgomes.larica.app.adapter.database.pedidos.repository.UsuarioRepository;
-import danieldjgomes.larica.app.usecase.token.ValidarEmailNoTokenUseCase;
-import danieldjgomes.larica.app.usecase.token.ValidarRestauranteNoTokenUseCase;
+import danieldjgomes.larica.app.usecase.token.usecase.ValidarEmailNoTokenUseCase;
+import danieldjgomes.larica.app.usecase.token.usecase.ValidarRestauranteNoTokenUseCase;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

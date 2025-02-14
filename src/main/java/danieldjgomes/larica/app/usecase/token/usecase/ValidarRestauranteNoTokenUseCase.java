@@ -1,4 +1,4 @@
-package danieldjgomes.larica.app.usecase.token;
+package danieldjgomes.larica.app.usecase.token.usecase;
 
 public interface ValidarRestauranteNoTokenUseCase {
 

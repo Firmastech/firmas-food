@@ -1,4 +1,4 @@
-package danieldjgomes.larica.app.usecase.token;
+package danieldjgomes.larica.app.usecase.token.usecase.impl;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -6,6 +6,7 @@ import com.auth0.jwt.exceptions.JWTCreationException;
 import danieldjgomes.larica.app.adapter.database.pedidos.model.UsuarioEntity;
 import danieldjgomes.larica.app.usecase.token.exceptions.ErroAoMontarTokenException;
 import danieldjgomes.larica.app.usecase.token.response.TokenResponse;
+import danieldjgomes.larica.app.usecase.token.usecase.MontarTokenJWTUseCase;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 

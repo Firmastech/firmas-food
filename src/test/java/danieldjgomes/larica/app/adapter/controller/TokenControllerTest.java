@@ -1,12 +1,12 @@
 package danieldjgomes.larica.app.adapter.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JSR310Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import danieldjgomes.larica.app.adapter.controller.exceptionHandler.CommonExceptionHandler;
 import danieldjgomes.larica.app.adapter.controller.exceptionHandler.TokenControllerExceptionHandler;
-import danieldjgomes.larica.app.usecase.token.GerarTokenUsuarioUseCase;
-import danieldjgomes.larica.app.usecase.token.RenovarTokenUsuarioUseCase;
+import danieldjgomes.larica.app.usecase.token.exceptions.ErroAoBuscarUsuarioERestauranteNaRevalidacaoDeTokenException;
+import danieldjgomes.larica.app.usecase.token.usecase.GerarTokenUsuarioUseCase;
+import danieldjgomes.larica.app.usecase.token.usecase.RenovarTokenUsuarioUseCase;
 import danieldjgomes.larica.app.usecase.token.TokenMockBuilder;
 import danieldjgomes.larica.app.usecase.token.request.LoginUsuarioRequest;
 import danieldjgomes.larica.app.usecase.token.request.RevalidarTokenRequest;
@@ -114,6 +114,19 @@ class TokenControllerTest {
 
         verify(renovarTokenUsuarioUseCase, times(1)).processar(any(RevalidarTokenRequest.class));
     }
+
+  @Test
+  void deveRetornarErroQuandoRevalidarTokenComTokenInvalido() throws Exception {
+
+    RevalidarTokenRequest request = new RevalidarTokenRequest();
+    request.setToken("tokenInvalido");
+    when(renovarTokenUsuarioUseCase.processar(request)).thenThrow(new ErroAoBuscarUsuarioERestauranteNaRevalidacaoDeTokenException("emailMock","restauranteMock"));
+
+    mockMvc.perform(MockMvcRequestBuilders.post("/auth/refresh")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(objectMapper.writeValueAsString(request)))
+        .andExpect(status().isForbidden());
+  }
 
     @Test
     void deveRetornarErroQuandoRevalidarTokenComRequestBodyVazio() throws Exception {

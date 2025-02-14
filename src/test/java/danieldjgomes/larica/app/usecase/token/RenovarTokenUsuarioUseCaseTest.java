@@ -2,8 +2,13 @@ package danieldjgomes.larica.app.usecase.token;
 
 import danieldjgomes.larica.app.adapter.database.pedidos.model.UsuarioEntity;
 import danieldjgomes.larica.app.adapter.database.pedidos.repository.UsuarioRepository;
+import danieldjgomes.larica.app.usecase.token.exceptions.ErroAoBuscarUsuarioERestauranteNaRevalidacaoDeTokenException;
 import danieldjgomes.larica.app.usecase.token.request.RevalidarTokenRequest;
 import danieldjgomes.larica.app.usecase.token.response.TokenResponse;
+import danieldjgomes.larica.app.usecase.token.usecase.MontarTokenJWTUseCase;
+import danieldjgomes.larica.app.usecase.token.usecase.ValidarEmailNoTokenUseCase;
+import danieldjgomes.larica.app.usecase.token.usecase.ValidarRestauranteNoTokenUseCase;
+import danieldjgomes.larica.app.usecase.token.usecase.impl.RenovarTokenUsuarioUseCaseImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,6 +18,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -49,6 +55,18 @@ class RenovarTokenUsuarioUseCaseTest {
         Assertions.assertEquals("exemploRefreshToken", response.getRefreshToken());
 
     }
+
+  @Test
+  public void deveProcessarComUsuarioNaoExistente() {
+    RevalidarTokenRequest revalidarTokenRequest = new RevalidarTokenRequest();
+    revalidarTokenRequest.setToken("token-valido");
+
+    when(usuarioRepository.findAllByRestauranteIdAndEmailAndAtivoTrue(any(), any())).thenReturn(
+        Optional.empty());
+
+    assertThrows(ErroAoBuscarUsuarioERestauranteNaRevalidacaoDeTokenException.class,
+        () -> renovarTokenUsuarioUseCase.processar(revalidarTokenRequest));
+  }
 
 
 }

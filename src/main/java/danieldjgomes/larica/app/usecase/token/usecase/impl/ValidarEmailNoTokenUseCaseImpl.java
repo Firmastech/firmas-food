@@ -1,9 +1,10 @@
-package danieldjgomes.larica.app.usecase.token;
+package danieldjgomes.larica.app.usecase.token.usecase.impl;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import danieldjgomes.larica.app.usecase.token.exceptions.EmailNoTokenInvalidoException;
+import danieldjgomes.larica.app.usecase.token.usecase.ValidarEmailNoTokenUseCase;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 

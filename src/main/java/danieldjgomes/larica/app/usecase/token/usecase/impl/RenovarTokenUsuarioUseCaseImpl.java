@@ -1,10 +1,14 @@
-package danieldjgomes.larica.app.usecase.token;
+package danieldjgomes.larica.app.usecase.token.usecase.impl;
 
 import danieldjgomes.larica.app.adapter.database.pedidos.model.UsuarioEntity;
 import danieldjgomes.larica.app.adapter.database.pedidos.repository.UsuarioRepository;
-import danieldjgomes.larica.app.usecase.token.exceptions.UsuarioNaoEncontradoException;
+import danieldjgomes.larica.app.usecase.token.exceptions.ErroAoBuscarUsuarioERestauranteNaRevalidacaoDeTokenException;
 import danieldjgomes.larica.app.usecase.token.request.RevalidarTokenRequest;
 import danieldjgomes.larica.app.usecase.token.response.TokenResponse;
+import danieldjgomes.larica.app.usecase.token.usecase.MontarTokenJWTUseCase;
+import danieldjgomes.larica.app.usecase.token.usecase.RenovarTokenUsuarioUseCase;
+import danieldjgomes.larica.app.usecase.token.usecase.ValidarEmailNoTokenUseCase;
+import danieldjgomes.larica.app.usecase.token.usecase.ValidarRestauranteNoTokenUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -28,7 +32,7 @@ public class RenovarTokenUsuarioUseCaseImpl implements RenovarTokenUsuarioUseCas
         if (usuario.isPresent()) {
             return montarTokenJWTUseCase.montar(usuario.get());
         }
-        throw new UsuarioNaoEncontradoException();
+        throw new ErroAoBuscarUsuarioERestauranteNaRevalidacaoDeTokenException(email,restauranteId);
     }
 
 }

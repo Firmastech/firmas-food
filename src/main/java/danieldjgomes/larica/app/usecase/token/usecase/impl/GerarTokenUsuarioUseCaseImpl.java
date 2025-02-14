@@ -1,8 +1,10 @@
-package danieldjgomes.larica.app.usecase.token;
+package danieldjgomes.larica.app.usecase.token.usecase.impl;
 
 import danieldjgomes.larica.app.adapter.database.pedidos.model.UsuarioEntity;
 import danieldjgomes.larica.app.usecase.token.request.LoginUsuarioRequest;
 import danieldjgomes.larica.app.usecase.token.response.TokenResponse;
+import danieldjgomes.larica.app.usecase.token.usecase.GerarTokenUsuarioUseCase;
+import danieldjgomes.larica.app.usecase.token.usecase.MontarTokenJWTUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

@@ -1,7 +1,7 @@
 package danieldjgomes.larica.app.adapter.controller;
 
-import danieldjgomes.larica.app.usecase.token.GerarTokenUsuarioUseCase;
-import danieldjgomes.larica.app.usecase.token.RenovarTokenUsuarioUseCase;
+import danieldjgomes.larica.app.usecase.token.usecase.GerarTokenUsuarioUseCase;
+import danieldjgomes.larica.app.usecase.token.usecase.RenovarTokenUsuarioUseCase;
 import danieldjgomes.larica.app.usecase.token.request.LoginUsuarioRequest;
 import danieldjgomes.larica.app.usecase.token.request.RevalidarTokenRequest;
 import danieldjgomes.larica.app.usecase.token.response.TokenResponse;

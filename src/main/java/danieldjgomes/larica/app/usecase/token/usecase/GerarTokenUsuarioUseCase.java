@@ -1,4 +1,4 @@
-package danieldjgomes.larica.app.usecase.token;
+package danieldjgomes.larica.app.usecase.token.usecase;
 
 import danieldjgomes.larica.app.usecase.token.request.LoginUsuarioRequest;
 import danieldjgomes.larica.app.usecase.token.response.TokenResponse;
