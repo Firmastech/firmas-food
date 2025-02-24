@@ -1,7 +1,7 @@
 package danieldjgomes.larica.core.categoria.entity;
 
-import danieldjgomes.larica.app.adapter.database.restaurante.model.RestauranteEntity;
-import danieldjgomes.larica.core.prato.entity.PratoEntity;
+
+import danieldjgomes.larica.app.adapter.database.prato.model.PratoEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,13 +11,14 @@ import org.hibernate.annotations.UuidGenerator;
 
 import java.time.LocalDateTime;
 import java.util.Set;
+import java.util.Date;
 
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "categoria_prato")
+@Table(name = "categoria")
 public class CategoriaEntity {
 
     @Id
@@ -35,10 +36,10 @@ public class CategoriaEntity {
     private Set<PratoEntity> pratos;
 
     @Column(nullable = false)
-    private LocalDateTime criado = LocalDateTime.now();
+    private LocalDateTime criado;
 
     @Column(nullable = false)
-    private LocalDateTime atualizado = LocalDateTime.now();
+    private LocalDateTime atualizado;
 
     @Column(nullable = false)
     private Boolean ativo = true;

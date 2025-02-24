@@ -6,7 +6,7 @@
 //import danieldjgomes.larica.core.culinaria.entity.Culinaria;
 //import danieldjgomes.larica.core.culinaria.repository.CulinariaRepository;
 //import danieldjgomes.larica.core.exception.EntityNotFoundException;
-//import danieldjgomes.larica.core.prato.entity.Prato;
+//import danieldjgomes.larica.app.adapter.database.prato.model.Prato;
 //import danieldjgomes.larica.core.prato.repository.PratoRepository;
 //import org.junit.jupiter.api.BeforeEach;
 //import org.junit.jupiter.api.Test;
