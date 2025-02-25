@@ -7,11 +7,11 @@ import java.util.Optional;
 
 public interface CategoriaPersist {
 
-    CategoriaEntity createCategoria(CategoriaEntity categoria);
+    CategoriaEntity criarCategoria(CategoriaEntity categoria);
 
     Optional<CategoriaEntity> getCategoriaById(String id);
 
-    List<CategoriaEntity> listAllCategorias();
+    List<CategoriaEntity> buscarCategorias(String cardapioId);
 
     Optional<CategoriaEntity> updateCategoria(CategoriaEntity categoria);
 

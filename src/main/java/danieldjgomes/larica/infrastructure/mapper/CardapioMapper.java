@@ -18,7 +18,7 @@ public interface CardapioMapper {
 
     CardapioEntity toEntity(CardapioRequestDTO dto);
 
-    CardapioResponse toDto(CardapioEntity entity);
+    CardapioResponse toCardapioResponse(CardapioEntity entity);
 
     @Mapping(source = "nome", target = "nome")
     @Mapping(source = "descricao", target = "descricao")

@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface BuscarCategoriaUseCase {
 
-    List<CategoriaResponse> buscarPratoList();
+    List<CategoriaResponse> buscarCategorias(String cardapioId);
 
     CategoriaResponse buscarCategoria(String categoriaId);
 }

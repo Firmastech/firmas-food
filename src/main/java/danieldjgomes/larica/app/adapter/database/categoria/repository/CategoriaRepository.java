@@ -15,7 +15,6 @@ import java.util.Optional;
 @Repository
 public interface CategoriaRepository extends JpaRepository<CategoriaEntity, String> {
 
-
     @Query("SELECT c FROM CategoriaEntity c WHERE c.ativo = true")
     List<CategoriaEntity> findAllAtivos();
 

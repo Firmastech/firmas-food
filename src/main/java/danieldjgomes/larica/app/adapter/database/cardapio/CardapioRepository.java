@@ -11,14 +11,7 @@ import java.util.Optional;
 
 public interface CardapioRepository extends JpaRepository<CardapioEntity, String> {
 
-    Optional<CardapioEntity> findCardapioByIdAndAtivoTrue(String id);
+    Optional<CardapioEntity> findCardapioByIdAndRestauranteIdAndAtivoTrue(String id, String restauranteId);
 
-    @Transactional
-    @Modifying
-    @Query("""
-            update CardapioEntity c
-            set c.deletado = :horarioAtual, c.atualizado = :horarioAtual, c.ativo = false
-            where c.id = :id
-            """)
-    void desativarCardapio(String id, Date horarioAtual);
+    Optional<CardapioEntity> findFirstByRestauranteIdAndAtivoTrue(String restauranteId);
 }

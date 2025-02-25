@@ -5,5 +5,5 @@ import danieldjgomes.larica.core.categoria.dtos.CriarCategoriaResponse;
 
 public interface CriarCategoriaUseCase {
 
-    CriarCategoriaResponse criar(CriarCategoriaRequest categoria);
+    CriarCategoriaResponse criar(CriarCategoriaRequest categoria, String cardapioId);
 }

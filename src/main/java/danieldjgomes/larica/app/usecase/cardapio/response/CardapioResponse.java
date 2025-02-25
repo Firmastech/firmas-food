@@ -17,6 +17,5 @@ public class CardapioResponse {
     private String id;
     private String nome;
     private String descricao;
-    private String restauranteId;
-    private List<PratoResponse> pratos;
+
 }

@@ -5,5 +5,5 @@ import danieldjgomes.larica.app.usecase.cardapio.response.CardapioResponse;
 
 public interface CriarCardapioUseCase {
 
-    CardapioResponse criar(CriarCardapioRequest request);
+    CardapioResponse criarCardapio(CriarCardapioRequest request);
 }

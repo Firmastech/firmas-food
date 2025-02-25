@@ -1,9 +1,6 @@
 package danieldjgomes.larica.app.adapter.controller;
 
-import danieldjgomes.larica.app.usecase.cardapio.AtualizarDescritivoCardapioUseCase;
-import danieldjgomes.larica.app.usecase.cardapio.BuscarCardapiosPertencentesAoRestauranteUseCase;
-import danieldjgomes.larica.app.usecase.cardapio.CriarCardapioUseCase;
-import danieldjgomes.larica.app.usecase.cardapio.DesativarCardapioUseCase;
+import danieldjgomes.larica.app.usecase.cardapio.*;
 import danieldjgomes.larica.app.usecase.cardapio.request.AtualizarDescritivosCardapioRequest;
 import danieldjgomes.larica.app.usecase.cardapio.request.CriarCardapioRequest;
 import danieldjgomes.larica.app.usecase.cardapio.response.AtualizarCardapioResponse;
@@ -13,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/rest/cardapios")
@@ -21,37 +17,44 @@ import java.util.Optional;
 public class CardapioController {
     private final CriarCardapioUseCase criarCardapioUseCase;
     private final AtualizarDescritivoCardapioUseCase atualizarDescritivoCardapioUseCase;
-    private final BuscarCardapiosPertencentesAoRestauranteUseCase buscarCardapiosPertencentesAoRestaurante;
+    private final BuscarDetalheCardapioUseCase buscarDetalheCardapioUseCase;
+    private final BuscarCardapioAtivoUseCase buscarCardapioAtivoUseCase;
     private final DesativarCardapioUseCase desativarCardapioUseCase;
 
     @PostMapping
     public ResponseEntity<CardapioResponse> criarCardapio(@RequestBody CriarCardapioRequest request) {
-        CardapioResponse response = criarCardapioUseCase.criar(request);
+        CardapioResponse response = criarCardapioUseCase.criarCardapio(request);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Optional<AtualizarCardapioResponse>> atualizarCardapio(@PathVariable String id,
-                                                                                 @RequestBody AtualizarDescritivosCardapioRequest dto) {
-        Optional<AtualizarCardapioResponse> response = atualizarDescritivoCardapioUseCase.atualizarCardapio(id, dto);
-        return new ResponseEntity<>(response, HttpStatus.OK);
+    public ResponseEntity<AtualizarCardapioResponse> atualizarCardapio(@PathVariable String id,
+                                                                       @RequestBody AtualizarDescritivosCardapioRequest atualizarDescritivosCardapioRequest) {
+        return atualizarDescritivoCardapioUseCase
+                .atualizarCardapio(id, atualizarDescritivosCardapioRequest)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    //TODO DANIEL PF ANALISAR O QUE VAMOS FAZER AQUI
-//    @GetMapping("/restaurantes/{restauranteId}")
-//    public ResponseEntity<List<CardapioResponse>> buscarCardapiosPertencentesAoRestaurante(@PathVariable String restauranteId) {
-//        List<CardapioResponse> response = buscarCardapiosPertencentesAoRestaurante(restauranteId);
-//        return ResponseEntity.ok(response);
-//    }
+    @GetMapping
+    public ResponseEntity<CardapioResponse> buscarCardapioAtivo() {
+        return buscarCardapioAtivoUseCase
+                .buscar()
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
 
-    @GetMapping("{cardapioId}/restaurantes/{restauranteId}")
+    //TODO: Analisar se esse deve continuar existindo
+    @GetMapping("/{cardapioId}")
     public ResponseEntity<CardapioResponse> buscarDetalheCardapio(@PathVariable String cardapioId) {
-        CardapioResponse response = buscarCardapiosPertencentesAoRestaurante.buscarDetalheCardapio(cardapioId);
-        return ResponseEntity.ok(response);
+        return buscarDetalheCardapioUseCase
+                .buscarDetalheCardapio(cardapioId)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> desativarCardapio(@PathVariable String id) {
+    public ResponseEntity desativarCardapio(@PathVariable String id) {
         desativarCardapioUseCase.desativar(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

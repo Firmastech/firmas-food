@@ -18,7 +18,7 @@ public class CategoriaPersistImpl implements CategoriaPersist {
     private final CategoriaRepository categoriaRepository;
 
     @Override
-    public CategoriaEntity createCategoria(CategoriaEntity categoria) {
+    public CategoriaEntity criarCategoria(CategoriaEntity categoria) {
         LocalDateTime dateAtual = LocalDateTime.now();
         categoria.setCriado(dateAtual);
         categoria.setAtualizado(dateAtual);
@@ -29,7 +29,7 @@ public class CategoriaPersistImpl implements CategoriaPersist {
         return categoriaRepository.findCategoriaAtivoById(id);
     }
 
-    public List<CategoriaEntity> listAllCategorias() {
+    public List<CategoriaEntity> buscarCategorias(String cardapioId) {
         return categoriaRepository.findAllAtivos();
     }
 

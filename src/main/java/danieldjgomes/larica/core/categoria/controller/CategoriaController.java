@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/rest/categorias")
+@RequestMapping("/rest/cardapios")
 @RequiredArgsConstructor
 public class CategoriaController {
 
@@ -27,34 +27,38 @@ public class CategoriaController {
     private final DesativarCategoriaUseCase desativarCategoriaUseCase;
     private final BuscarCategoriaUseCase buscarCategoriaUseCase;
 
-    @PostMapping
-    public ResponseEntity<CriarCategoriaResponse> createCategoria(@RequestBody CriarCategoriaRequest categoriaRequest) {
-        CriarCategoriaResponse responseDTO = criarCategoriaUseCase.criar(categoriaRequest);
+    @PostMapping("/{cardapioId}/categorias")
+    public ResponseEntity<CriarCategoriaResponse> criarCategoria(@RequestBody CriarCategoriaRequest categoriaRequest, @PathVariable String cardapioId) {
+        CriarCategoriaResponse responseDTO = criarCategoriaUseCase.criar(categoriaRequest, cardapioId);
         return ResponseEntity.ok(responseDTO);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<CategoriaResponse> getCategoriaById(@PathVariable String id) {
-        CategoriaResponse responseDTO = buscarCategoriaUseCase.buscarCategoria(id);
-        return ResponseEntity.ok(responseDTO);
-    }
+    //TODO: Implementar
+//    @GetMapping("/{cardapioId}/categorias/{id}")
+//    public ResponseEntity<CategoriaResponse> buscarCategoria(@PathVariable String id, @PathVariable String cardapioId) {
+//        CategoriaResponse responseDTO = buscarCategoriaUseCase.buscarCategoria(id);
+//        return ResponseEntity.ok(responseDTO);
+//    }
 
-    @GetMapping
-    public ResponseEntity<List<CategoriaResponse>> getAllCategorias() {
-        List<CategoriaResponse> responseDTOList = buscarCategoriaUseCase.buscarPratoList();
+    @GetMapping("/{cardapioId}/categorias")
+    public ResponseEntity<List<CategoriaResponse>> buscarCategorias(@PathVariable String cardapioId) {
+        List<CategoriaResponse> responseDTOList = buscarCategoriaUseCase.buscarCategorias(cardapioId);
         return ResponseEntity.ok(responseDTOList);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<AtualizarCategoriaResponse> updateCategoria(@PathVariable String id, @RequestBody AtualizarCategoriaRequest atualizarCategoriaRequest) {
-        Optional<AtualizarCategoriaResponse> responseDTO = atualizarCategoriaUseCase.updateCategoria(id, atualizarCategoriaRequest);
-        return responseDTO.map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCategoria(@PathVariable String id) {
-        desativarCategoriaUseCase.desativar(id);
-        return ResponseEntity.noContent().build();
-    }
+    //TODO: Implementar
+//
+//    @PutMapping("/{id}")
+//    public ResponseEntity<AtualizarCategoriaResponse> updateCategoria(@PathVariable String id, @RequestBody AtualizarCategoriaRequest atualizarCategoriaRequest) {
+//        Optional<AtualizarCategoriaResponse> responseDTO = atualizarCategoriaUseCase.updateCategoria(id, atualizarCategoriaRequest);
+//        return responseDTO.map(ResponseEntity::ok)
+//                .orElseGet(() -> ResponseEntity.notFound().build());
+//    }
+//
+    //TODO: Implementar
+//    @DeleteMapping("/{id}")
+//    public ResponseEntity<Void> deleteCategoria(@PathVariable String id) {
+//        desativarCategoriaUseCase.desativar(id);
+//        return ResponseEntity.noContent().build();
+//    }
 }
