@@ -46,7 +46,8 @@ public class SecurityConfig implements WebMvcConfigurer {
                             authorizeConfig.requestMatchers(
                                     new AntPathRequestMatcher("/auth/login", "POST"),
                                     new AntPathRequestMatcher("/auth/register", "POST"),
-                                    new AntPathRequestMatcher("/auth/refresh", "POST")
+                                    new AntPathRequestMatcher("/auth/refresh", "POST"),
+                                    new AntPathRequestMatcher("/rest/restaurantes", "GET")
                             ).permitAll();
                             authorizeConfig.anyRequest().authenticated();
                         })
