@@ -23,12 +23,18 @@ public class AtualizarDescritivoCardapioUseCaseImpl implements AtualizarDescriti
 
     public Optional<AtualizarCardapioResponse> atualizarCardapio(String cardapioId, AtualizarDescritivosCardapioRequest atualizarDescritivosCardapioRequest) {
         UsuarioEntity usuario = AuthorizationService.findUsuario();
-        Optional<CardapioEntity> findByCardapio = cardapioPersist.buscarDetalheCardapio(cardapioId,usuario.getRestaurante().getId());
-           if (findByCardapio.isEmpty()){
-               throw new CardapioNotFoundException();
-           }
+        Optional<CardapioEntity> cardapioBuscado = cardapioPersist
+                .buscarDetalheCardapio(cardapioId, usuario.getRestaurante().getId());
 
-        Optional<CardapioEntity> cardaprioAtualizado = Optional.ofNullable(cardapioPersist.atualizarDescritivos(findByCardapio.get()));
+        CardapioEntity cardapioParaAtualizar = cardapioBuscado
+                .map(c -> {
+                    c.setDescricao(atualizarDescritivosCardapioRequest.getDescricao());
+                    c.setNome(atualizarDescritivosCardapioRequest.getNome());
+                    return c;
+                })
+                .orElseThrow(CardapioNotFoundException::new);
+
+        Optional<CardapioEntity> cardaprioAtualizado = Optional.ofNullable(cardapioPersist.atualizarDescritivos(cardapioParaAtualizar));
         return cardaprioAtualizado.map(cardapioMapper::updateCardapioFromDto);
 
     }

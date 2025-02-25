@@ -13,5 +13,4 @@ public class AtualizarDescritivosCardapioRequest {
 
     private String nome;
     private String descricao;
-    private String etiqueta;
 }
