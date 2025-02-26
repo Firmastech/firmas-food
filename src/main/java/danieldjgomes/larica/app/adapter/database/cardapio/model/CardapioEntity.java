@@ -1,7 +1,7 @@
 package danieldjgomes.larica.app.adapter.database.cardapio.model;
 
 import danieldjgomes.larica.app.adapter.database.restaurante.model.RestauranteEntity;
-import danieldjgomes.larica.core.categoria.entity.CategoriaEntity;
+import danieldjgomes.larica.app.adapter.database.categoria.model.CategoriaEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

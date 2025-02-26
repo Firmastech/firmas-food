@@ -1,7 +1,7 @@
 package danieldjgomes.larica.app.usecase.categoria;
 
 import danieldjgomes.larica.app.usecase.categoria.request.AtualizarCategoriaRequest;
-import danieldjgomes.larica.core.categoria.dtos.AtualizarCategoriaResponse;
+import danieldjgomes.larica.app.usecase.categoria.response.AtualizarCategoriaResponse;
 
 import java.util.Optional;
 

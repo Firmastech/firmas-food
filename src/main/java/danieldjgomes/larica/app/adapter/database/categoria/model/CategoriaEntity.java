@@ -1,4 +1,4 @@
-package danieldjgomes.larica.core.categoria.entity;
+package danieldjgomes.larica.app.adapter.database.categoria.model;
 
 
 import danieldjgomes.larica.app.adapter.database.prato.model.PratoEntity;
@@ -11,7 +11,6 @@ import org.hibernate.annotations.UuidGenerator;
 
 import java.time.LocalDateTime;
 import java.util.Set;
-import java.util.Date;
 
 @Entity
 @Getter

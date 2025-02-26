@@ -13,5 +13,4 @@ public class CategoriaResponse {
 
     private String id;
     private String nome;
-
 }

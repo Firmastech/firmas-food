@@ -1,7 +1,7 @@
 package danieldjgomes.larica.app.ports.database;
 
 import danieldjgomes.larica.app.adapter.database.cardapio.model.CardapioEntity;
-import danieldjgomes.larica.core.categoria.entity.CategoriaEntity;
+import danieldjgomes.larica.app.adapter.database.categoria.model.CategoriaEntity;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,5 +1,4 @@
-package danieldjgomes.larica.core.categoria.dtos;
-
+package danieldjgomes.larica.app.usecase.categoria.request;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,9 +8,8 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CriarCategoriaResponse {
+public class CriarCategoriaRequest {
 
-    private String id;
     private String nome;
-
+    private String etiqueta;
 }

@@ -7,9 +7,9 @@ import danieldjgomes.larica.app.ports.database.CategoriaPersist;
 import danieldjgomes.larica.app.usecase.GerarUUIDUseCase;
 import danieldjgomes.larica.app.usecase.cardapio.exception.CardapioNotFoundException;
 import danieldjgomes.larica.app.usecase.categoria.CriarCategoriaUseCase;
-import danieldjgomes.larica.core.categoria.dtos.CriarCategoriaRequest;
-import danieldjgomes.larica.core.categoria.dtos.CriarCategoriaResponse;
-import danieldjgomes.larica.core.categoria.entity.CategoriaEntity;
+import danieldjgomes.larica.app.usecase.categoria.request.CriarCategoriaRequest;
+import danieldjgomes.larica.app.adapter.database.categoria.model.CategoriaEntity;
+import danieldjgomes.larica.app.usecase.categoria.response.CategoriaResponse;
 import danieldjgomes.larica.infrastructure.AuthorizationService;
 import danieldjgomes.larica.infrastructure.mapper.CategoriaMapper;
 import lombok.RequiredArgsConstructor;
@@ -27,12 +27,12 @@ public class CriarCategoriaUseCaseImpl implements CriarCategoriaUseCase {
     private final GerarUUIDUseCase gerarUUIDUseCase;
     private final CategoriaMapper categoriaMapper;
 
-    public CriarCategoriaResponse criar(CriarCategoriaRequest criarCategoriaRequest, String cardapioId) {
+    public CategoriaResponse criar(CriarCategoriaRequest criarCategoriaRequest, String cardapioId) {
         CardapioEntity cardapioEncontrado = buscarCardapio(cardapioId);
         CategoriaEntity categoriaPersistida = criarCategoria(criarCategoriaRequest);
 
         cardapioPersist.adicionarCategorias(cardapioEncontrado, List.of(categoriaPersistida));
-        return categoriaMapper.toCriarCategoriaResponse(categoriaPersistida);
+        return categoriaMapper.toResponseDTO(categoriaPersistida);
 
     }
 

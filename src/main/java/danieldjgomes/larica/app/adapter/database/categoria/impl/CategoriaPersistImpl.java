@@ -2,7 +2,8 @@ package danieldjgomes.larica.app.adapter.database.categoria.impl;
 
 import danieldjgomes.larica.app.adapter.database.categoria.repository.CategoriaRepository;
 import danieldjgomes.larica.app.ports.database.CategoriaPersist;
-import danieldjgomes.larica.core.categoria.entity.CategoriaEntity;
+import danieldjgomes.larica.app.adapter.database.categoria.model.CategoriaEntity;
+import danieldjgomes.larica.app.usecase.cardapio.exception.CardapioNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +26,7 @@ public class CategoriaPersistImpl implements CategoriaPersist {
         return categoriaRepository.save(categoria);
     }
 
-    public Optional<CategoriaEntity> getCategoriaById(String id) {
+    public Optional<CategoriaEntity> buscarDetalhesCategoria(String id) {
         return categoriaRepository.findCategoriaAtivoById(id);
     }
 
@@ -34,11 +35,19 @@ public class CategoriaPersistImpl implements CategoriaPersist {
     }
 
     public Optional<CategoriaEntity> updateCategoria(CategoriaEntity categoria) {
+        categoria.setAtualizado(LocalDateTime.now());
         return Optional.of(categoriaRepository.save(categoria));
     }
 
-    public void disableCategoria(String id) {
-        categoriaRepository.desativarCategoria(id, new Date());
+    public void disableCategoria(String categoriaId) {
+        Optional<CategoriaEntity> categoria = buscarDetalhesCategoria(categoriaId);
+        if (categoria.isEmpty()) {
+            throw new CardapioNotFoundException();
+        }
+        CategoriaEntity categoriaEncontrado = categoria.get();
+        categoriaEncontrado.setAtivo(false);
+        categoriaEncontrado.setDeletado(LocalDateTime.now());
+        categoriaRepository.save(categoriaEncontrado);
     }
 
 }

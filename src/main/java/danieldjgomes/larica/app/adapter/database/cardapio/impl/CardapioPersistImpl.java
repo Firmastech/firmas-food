@@ -5,7 +5,7 @@ import danieldjgomes.larica.app.adapter.database.cardapio.model.CardapioEntity;
 import danieldjgomes.larica.app.ports.database.CardapioPersist;
 import danieldjgomes.larica.app.usecase.GerarUUIDUseCase;
 import danieldjgomes.larica.app.usecase.cardapio.exception.CardapioNotFoundException;
-import danieldjgomes.larica.core.categoria.entity.CategoriaEntity;
+import danieldjgomes.larica.app.adapter.database.categoria.model.CategoriaEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

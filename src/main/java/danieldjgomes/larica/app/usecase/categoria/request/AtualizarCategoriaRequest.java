@@ -13,6 +13,5 @@ public class AtualizarCategoriaRequest {
 
 
     private String nome;
-    private String etiqueta;
 
 }

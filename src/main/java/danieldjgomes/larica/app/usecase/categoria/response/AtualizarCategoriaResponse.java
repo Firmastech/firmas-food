@@ -1,4 +1,4 @@
-package danieldjgomes.larica.core.categoria.dtos;
+package danieldjgomes.larica.app.usecase.categoria.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,6 +12,5 @@ import lombok.Setter;
 public class AtualizarCategoriaResponse {
 
     private String nome;
-    private String etiqueta;
 
 }

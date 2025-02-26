@@ -13,19 +13,12 @@ import org.mapstruct.factory.Mappers;
 @Mapper(componentModel = "spring")
 public interface CardapioMapper {
 
-    CardapioMapper INSTANCE = Mappers.getMapper(CardapioMapper.class);
-
-
     CardapioEntity toEntity(CardapioRequestDTO dto);
 
     CardapioResponse toCardapioResponse(CardapioEntity entity);
 
-    @Mapping(source = "nome", target = "nome")
-    @Mapping(source = "descricao", target = "descricao")
     AtualizarCardapioResponse updateCardapioFromDto(CardapioEntity cardapioEntity);
 
-    @Mapping(source = "nome", target = "nome")
-    @Mapping(source = "descricao", target = "descricao")
     CardapioEntity toEntity(CriarCardapioRequest dto);
 
 

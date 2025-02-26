@@ -1,13 +1,12 @@
 package danieldjgomes.larica.infrastructure.mapper;
 
+import danieldjgomes.larica.app.usecase.categoria.response.BuscarDetalhesCategoriaResponse;
 import danieldjgomes.larica.app.usecase.categoria.response.CategoriaResponse;
-import danieldjgomes.larica.core.categoria.dtos.AtualizarCategoriaResponse;
-import danieldjgomes.larica.core.categoria.dtos.CriarCategoriaRequest;
-import danieldjgomes.larica.core.categoria.dtos.CriarCategoriaResponse;
-import danieldjgomes.larica.core.categoria.entity.CategoriaEntity;
+import danieldjgomes.larica.app.usecase.categoria.response.AtualizarCategoriaResponse;
+import danieldjgomes.larica.app.usecase.categoria.request.CriarCategoriaRequest;
+import danieldjgomes.larica.app.adapter.database.categoria.model.CategoriaEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = "spring")
 public interface CategoriaMapper {
@@ -16,7 +15,8 @@ public interface CategoriaMapper {
     CategoriaEntity toEntity(CriarCategoriaRequest dto);
 
     CategoriaResponse toResponseDTO(CategoriaEntity entity);
-    CriarCategoriaResponse toCriarCategoriaResponse(CategoriaEntity entity);
+
+    BuscarDetalhesCategoriaResponse toDetalhesCategoria(CategoriaEntity entity);
 
     AtualizarCategoriaResponse updateEntityFromDTO(CategoriaEntity entity);
 }
