@@ -25,7 +25,6 @@ public class CriarCategoriaUseCaseImpl implements CriarCategoriaUseCase {
 
     private final CategoriaPersist categoriaPersist;
     private final CardapioPersist cardapioPersist;
-    private final GerarUUIDUseCase gerarUUIDUseCase;
     private final CategoriaMapper categoriaMapper;
 
     public CategoriaResponse criar(CriarCategoriaRequest criarCategoriaRequest, String cardapioId) {
@@ -39,15 +38,16 @@ public class CriarCategoriaUseCaseImpl implements CriarCategoriaUseCase {
 
     private CategoriaEntity criarCategoria(CriarCategoriaRequest criarCategoriaRequest, RestauranteEntity restaurante) {
         CategoriaEntity categoria = categoriaMapper.toEntity(criarCategoriaRequest);
-        categoria.setId(gerarUUIDUseCase.gerar());
-        categoria.setRestaurante(restaurante);
+        RestauranteEntity restauranteCategoria = new RestauranteEntity();
+        restauranteCategoria.setId(restaurante.getId());
+        categoria.setRestaurante(restauranteCategoria);
         return categoriaPersist.criarCategoria(categoria);
     }
 
     private CardapioEntity buscarCardapio(String cardapioId) {
         UsuarioEntity usuario = AuthorizationService.findUsuario();
 
-        Optional<CardapioEntity> cardapioEncontrado = cardapioPersist.buscarCardapioPorId(cardapioId, usuario.getRestaurante().getId());
+        Optional<CardapioEntity> cardapioEncontrado = cardapioPersist.buscarCardapioPorId(usuario.getRestaurante().getId(),cardapioId);
 
         if(cardapioEncontrado.isEmpty()){
             throw new CardapioNotFoundException();

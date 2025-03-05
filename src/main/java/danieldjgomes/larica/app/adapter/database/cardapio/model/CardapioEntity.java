@@ -30,7 +30,11 @@ public class CardapioEntity {
     @Column(length = 8000)
     private String descricao;
 
-    @OneToMany(mappedBy = "id")
+    @ManyToMany
+    @JoinTable(
+            name = "cardapio_categoria",
+            joinColumns = @JoinColumn(name = "cardapio_id"),
+            inverseJoinColumns = @JoinColumn(name = "categoria_id"))
     private List<CategoriaEntity> categorias;
 
     @ManyToOne

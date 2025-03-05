@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/rest/categorias")
+@RequestMapping("/rest/cardapios")
 @RequiredArgsConstructor
 public class CategoriaController {
 
@@ -27,7 +27,7 @@ public class CategoriaController {
     private final DesativarCategoriaUseCase desativarCategoriaUseCase;
     private final BuscarCategoriaUseCase buscarCategoriaUseCase;
 
-    @PostMapping("/{cardapioId}")
+    @PostMapping("/{cardapioId}/categorias")
     public ResponseEntity<CategoriaResponse> criarCategoria(@RequestBody CriarCategoriaRequest categoriaRequest, @PathVariable String cardapioId) {
         CategoriaResponse responseDTO = criarCategoriaUseCase.criar(categoriaRequest, cardapioId);
         return ResponseEntity.ok(responseDTO);
@@ -46,16 +46,16 @@ public class CategoriaController {
         return ResponseEntity.ok(responseDTOList);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<AtualizarCategoriaResponse> updateCategoria(@PathVariable String id, @RequestBody AtualizarCategoriaRequest atualizarCategoriaRequest) {
-        Optional<AtualizarCategoriaResponse> responseDTO = atualizarCategoriaUseCase.updateCategoria(id, atualizarCategoriaRequest);
+    @PutMapping("/{cardapioId}/categorias/{categoriaId}")
+    public ResponseEntity<AtualizarCategoriaResponse> updateCategoria(@PathVariable String categoriaId, @RequestBody AtualizarCategoriaRequest atualizarCategoriaRequest) {
+        Optional<AtualizarCategoriaResponse> responseDTO = atualizarCategoriaUseCase.updateCategoria(categoriaId, atualizarCategoriaRequest);
         return responseDTO.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> desativarCategoria(@PathVariable String id) {
-        desativarCategoriaUseCase.desativar(id);
+    @DeleteMapping("/{cardapioId}/categorias/{categoriaId}")
+    public ResponseEntity<Void> desativarCategoria(@PathVariable String categoriaId) {
+        desativarCategoriaUseCase.desativar(categoriaId);
         return ResponseEntity.noContent().build();
     }
 }

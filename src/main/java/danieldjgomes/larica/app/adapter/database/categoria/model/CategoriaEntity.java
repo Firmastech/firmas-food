@@ -1,6 +1,7 @@
 package danieldjgomes.larica.app.adapter.database.categoria.model;
 
 
+import danieldjgomes.larica.app.adapter.database.cardapio.model.CardapioEntity;
 import danieldjgomes.larica.app.adapter.database.prato.model.PratoEntity;
 import danieldjgomes.larica.app.adapter.database.restaurante.model.RestauranteEntity;
 import jakarta.persistence.*;
@@ -11,6 +12,7 @@ import lombok.Setter;
 import org.hibernate.annotations.UuidGenerator;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -36,8 +38,15 @@ public class CategoriaEntity {
     private Set<PratoEntity> pratos;
 
     @ManyToOne
-    @JoinColumn(name = "id", updatable = false, insertable = false)
+    @JoinColumn(name = "restaurante_id")
     private RestauranteEntity restaurante;
+
+    @ManyToMany
+    @JoinTable(
+            name = "cardapio_categoria",
+            joinColumns = @JoinColumn(name = "cardapio_id"),
+            inverseJoinColumns = @JoinColumn(name = "categoria_id"))
+    private List<CardapioEntity> cardapios;
 
     @Column(nullable = false)
     private LocalDateTime criado;

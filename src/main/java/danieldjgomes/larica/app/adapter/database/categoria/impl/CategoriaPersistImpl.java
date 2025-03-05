@@ -3,6 +3,7 @@ package danieldjgomes.larica.app.adapter.database.categoria.impl;
 import danieldjgomes.larica.app.adapter.database.categoria.repository.CategoriaRepository;
 import danieldjgomes.larica.app.ports.database.CategoriaPersist;
 import danieldjgomes.larica.app.adapter.database.categoria.model.CategoriaEntity;
+import danieldjgomes.larica.app.usecase.GerarUUIDUseCase;
 import danieldjgomes.larica.app.usecase.cardapio.exception.CardapioNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,12 +18,14 @@ import java.util.Optional;
 public class CategoriaPersistImpl implements CategoriaPersist {
 
     private final CategoriaRepository categoriaRepository;
+    private final GerarUUIDUseCase gerarUUIDUseCase;
+
 
     @Override
     public CategoriaEntity criarCategoria(CategoriaEntity categoria) {
         LocalDateTime dateAtual = LocalDateTime.now();
+        categoria.setId(gerarUUIDUseCase.gerar());
         categoria.setCriado(dateAtual);
-        categoria.setAtualizado(dateAtual);
         return categoriaRepository.save(categoria);
     }
 
