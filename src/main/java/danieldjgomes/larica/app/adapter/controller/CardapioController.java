@@ -38,8 +38,8 @@ public class CardapioController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @GetMapping("/ativo")
-    public ResponseEntity<CardapioResponse> buscarCardapioAtivo() {
+    @GetMapping("/principal")
+    public ResponseEntity<CardapioResponse> buscarCardapioPrincipal() {
         return buscarCardapioAtivoUseCase
                 .buscar()
                 .map(ResponseEntity::ok)

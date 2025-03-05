@@ -49,7 +49,7 @@ public class SecurityConfig implements WebMvcConfigurer {
                                     new AntPathRequestMatcher("/auth/register", "POST"),
                                     new AntPathRequestMatcher("/auth/refresh", "POST"),
                                     new AntPathRequestMatcher("/rest/restaurantes", "GET"),
-                                    new AntPathRequestMatcher("/rest/cardapios/ativo", "GET"),
+                                    new AntPathRequestMatcher("/rest/cardapios/principal", "GET"),
                                     new AntPathRequestMatcher("/rest/cardapios/*/categorias", "GET"),
                                     new AntPathRequestMatcher("/rest/cardapios/*/categorias/*", "GET")
                             ).permitAll();

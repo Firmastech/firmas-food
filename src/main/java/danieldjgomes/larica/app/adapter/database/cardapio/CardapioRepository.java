@@ -10,6 +10,6 @@ import java.util.Optional;
 public interface CardapioRepository extends JpaRepository<CardapioEntity, String> {
 
     Page<CardapioEntity> findAllByRestauranteIdAndAtivoTrue(String restauranteId, Pageable pageable);
-    Optional<CardapioEntity> findByIdAndRestauranteIdAndAtivoTrue(String cardapioId, String restauranteId);
+    Optional<CardapioEntity> findByIdAndRestauranteIdAndDeletadoNotNull(String cardapioId, String restauranteId);
     Optional<CardapioEntity> findFirstByRestauranteIdAndAtivoTrue(String restauranteId);
 }

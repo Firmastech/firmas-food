@@ -27,7 +27,6 @@ public class CardapioPersistImpl implements CardapioPersist {
         LocalDateTime dataAtual = LocalDateTime.now();
         cardapio.setId(gerarUUIDUseCase.gerar());
         cardapio.setCriado(dataAtual);
-        cardapio.setAtualizado(dataAtual);
         return cardapioRepository.save(cardapio);
     }
 
@@ -50,7 +49,7 @@ public class CardapioPersistImpl implements CardapioPersist {
 
     @Override
     public Optional<CardapioEntity> buscarCardapioPorId(String restauranteId, String cardapioId) {
-        return cardapioRepository.findByIdAndRestauranteIdAndAtivoTrue(cardapioId, restauranteId);
+        return cardapioRepository.findByIdAndRestauranteIdAndDeletadoNotNull(cardapioId, restauranteId);
     }
 
 
