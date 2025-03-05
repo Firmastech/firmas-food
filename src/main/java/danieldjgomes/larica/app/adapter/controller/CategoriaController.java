@@ -46,7 +46,6 @@ public class CategoriaController {
         return ResponseEntity.ok(responseDTOList);
     }
 
-
     @PutMapping("/{id}")
     public ResponseEntity<AtualizarCategoriaResponse> updateCategoria(@PathVariable String id, @RequestBody AtualizarCategoriaRequest atualizarCategoriaRequest) {
         Optional<AtualizarCategoriaResponse> responseDTO = atualizarCategoriaUseCase.updateCategoria(id, atualizarCategoriaRequest);

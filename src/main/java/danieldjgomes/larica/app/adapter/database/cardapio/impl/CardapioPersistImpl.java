@@ -7,7 +7,9 @@ import danieldjgomes.larica.app.usecase.GerarUUIDUseCase;
 import danieldjgomes.larica.app.usecase.cardapio.exception.CardapioNotFoundException;
 import danieldjgomes.larica.app.adapter.database.categoria.model.CategoriaEntity;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
+import org.springframework.data.domain.Pageable;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -41,20 +43,22 @@ public class CardapioPersistImpl implements CardapioPersist {
     }
 
     @Override
-    public Optional<CardapioEntity> buscarDetalheCardapio(String cardapioId, String restauranteId) {
-      return cardapioRepository.findCardapioByIdAndRestauranteIdAndAtivoTrue(cardapioId, restauranteId);
+    public Page<CardapioEntity> buscarTodosCardapios(String restauranteId, Pageable pageable) {
+        return cardapioRepository.findAllByRestauranteIdAndAtivoTrue(restauranteId,pageable);
+
     }
 
     @Override
-    public void desativarCardapio(String cardapioId, String restauranteId) {
-        Optional<CardapioEntity> cardapioEntity = buscarDetalheCardapio(cardapioId, restauranteId);
-        if(cardapioEntity.isEmpty()){
-            throw new CardapioNotFoundException();
-        }
-        CardapioEntity cardapioEncontrado = cardapioEntity.get();
-        cardapioEncontrado.setAtivo(false);
-        cardapioEncontrado.setDeletado(LocalDateTime.now());
-        cardapioRepository.save(cardapioEncontrado);
+    public Optional<CardapioEntity> buscarCardapioPorId(String restauranteId, String cardapioId) {
+        return cardapioRepository.findByIdAndRestauranteIdAndAtivoTrue(cardapioId, restauranteId);
+    }
+
+
+    @Override
+    public void desabilitarCardapio(CardapioEntity cardapioEntity) {
+        cardapioEntity.setAtivo(false);
+        cardapioEntity.setDeletado(LocalDateTime.now());
+        cardapioRepository.save(cardapioEntity);
     }
 
     @Override

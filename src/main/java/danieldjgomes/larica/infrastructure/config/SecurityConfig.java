@@ -33,6 +33,7 @@ import java.util.List;
 public class SecurityConfig implements WebMvcConfigurer {
 
     private final SecurityFilter securityFilter;
+    private final UsuarioAnonimoFilter usuarioAnonimoFilter;
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -47,11 +48,15 @@ public class SecurityConfig implements WebMvcConfigurer {
                                     new AntPathRequestMatcher("/auth/login", "POST"),
                                     new AntPathRequestMatcher("/auth/register", "POST"),
                                     new AntPathRequestMatcher("/auth/refresh", "POST"),
-                                    new AntPathRequestMatcher("/rest/restaurantes", "GET")
+                                    new AntPathRequestMatcher("/rest/restaurantes", "GET"),
+                                    new AntPathRequestMatcher("/rest/cardapios/ativo", "GET"),
+                                    new AntPathRequestMatcher("/rest/cardapios/*/categorias", "GET"),
+                                    new AntPathRequestMatcher("/rest/cardapios/*/categorias/*", "GET")
                             ).permitAll();
                             authorizeConfig.anyRequest().authenticated();
                         })
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterAfter(usuarioAnonimoFilter, securityFilter.getClass())
                 .build();
     }
 

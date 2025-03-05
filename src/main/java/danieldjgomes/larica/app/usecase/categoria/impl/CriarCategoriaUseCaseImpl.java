@@ -2,6 +2,7 @@ package danieldjgomes.larica.app.usecase.categoria.impl;
 
 import danieldjgomes.larica.app.adapter.database.cardapio.model.CardapioEntity;
 import danieldjgomes.larica.app.adapter.database.pedidos.model.UsuarioEntity;
+import danieldjgomes.larica.app.adapter.database.restaurante.model.RestauranteEntity;
 import danieldjgomes.larica.app.ports.database.CardapioPersist;
 import danieldjgomes.larica.app.ports.database.CategoriaPersist;
 import danieldjgomes.larica.app.usecase.GerarUUIDUseCase;
@@ -28,24 +29,25 @@ public class CriarCategoriaUseCaseImpl implements CriarCategoriaUseCase {
     private final CategoriaMapper categoriaMapper;
 
     public CategoriaResponse criar(CriarCategoriaRequest criarCategoriaRequest, String cardapioId) {
+        UsuarioEntity usuario = AuthorizationService.findUsuario();
         CardapioEntity cardapioEncontrado = buscarCardapio(cardapioId);
-        CategoriaEntity categoriaPersistida = criarCategoria(criarCategoriaRequest);
-
+        CategoriaEntity categoriaPersistida = criarCategoria(criarCategoriaRequest,usuario.getRestaurante());
         cardapioPersist.adicionarCategorias(cardapioEncontrado, List.of(categoriaPersistida));
         return categoriaMapper.toResponseDTO(categoriaPersistida);
 
     }
 
-    private CategoriaEntity criarCategoria(CriarCategoriaRequest criarCategoriaRequest) {
+    private CategoriaEntity criarCategoria(CriarCategoriaRequest criarCategoriaRequest, RestauranteEntity restaurante) {
         CategoriaEntity categoria = categoriaMapper.toEntity(criarCategoriaRequest);
         categoria.setId(gerarUUIDUseCase.gerar());
+        categoria.setRestaurante(restaurante);
         return categoriaPersist.criarCategoria(categoria);
     }
 
     private CardapioEntity buscarCardapio(String cardapioId) {
         UsuarioEntity usuario = AuthorizationService.findUsuario();
 
-        Optional<CardapioEntity> cardapioEncontrado = cardapioPersist.buscarDetalheCardapio(cardapioId, usuario.getRestaurante().getId());
+        Optional<CardapioEntity> cardapioEncontrado = cardapioPersist.buscarCardapioPorId(cardapioId, usuario.getRestaurante().getId());
 
         if(cardapioEncontrado.isEmpty()){
             throw new CardapioNotFoundException();

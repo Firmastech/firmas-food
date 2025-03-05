@@ -1,7 +1,7 @@
 package danieldjgomes.larica.app.usecase.categoria.impl;
 
 import danieldjgomes.larica.app.ports.database.CategoriaPersist;
-import danieldjgomes.larica.app.usecase.cardapio.BuscarDetalheCardapioUseCase;
+import danieldjgomes.larica.app.usecase.cardapio.BuscarCardapioPorIdUseCase;
 import danieldjgomes.larica.app.usecase.cardapio.exception.CardapioNotFoundException;
 import danieldjgomes.larica.app.usecase.categoria.BuscarCategoriaUseCase;
 import danieldjgomes.larica.app.usecase.categoria.exception.CategoriaNotFoundException;
@@ -19,8 +19,7 @@ import java.util.List;
 public class BuscarCategoriaUseCaseImpl implements BuscarCategoriaUseCase {
 
     private final CategoriaPersist categoriaPersist;
-
-    private final BuscarDetalheCardapioUseCase buscarDetalheCardapioUseCase;
+    private final BuscarCardapioPorIdUseCase buscarCardapioPorIdUseCase;
     private final CategoriaMapper categoriaMapper;
 
     public List<CategoriaResponse> buscarCategorias(String cardapioId) {
@@ -45,7 +44,7 @@ public class BuscarCategoriaUseCaseImpl implements BuscarCategoriaUseCase {
     }
 
     private void validarCardapio(String cardapioId) {
-        if (buscarDetalheCardapioUseCase.buscarDetalheCardapio(cardapioId).isEmpty()) {
+        if (buscarCardapioPorIdUseCase.buscar(cardapioId).isEmpty()) {
             throw new CardapioNotFoundException();
         }
     }

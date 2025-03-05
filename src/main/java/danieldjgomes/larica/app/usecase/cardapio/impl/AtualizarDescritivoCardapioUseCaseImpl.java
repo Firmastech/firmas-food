@@ -24,7 +24,7 @@ public class AtualizarDescritivoCardapioUseCaseImpl implements AtualizarDescriti
     public Optional<AtualizarCardapioResponse> atualizarCardapio(String cardapioId, AtualizarDescritivosCardapioRequest atualizarDescritivosCardapioRequest) {
         UsuarioEntity usuario = AuthorizationService.findUsuario();
         Optional<CardapioEntity> cardapioBuscado = cardapioPersist
-                .buscarDetalheCardapio(cardapioId, usuario.getRestaurante().getId());
+                .buscarCardapioPorId(usuario.getRestaurante().getId(),cardapioId);
 
         CardapioEntity cardapioParaAtualizar = cardapioBuscado
                 .map(c -> {

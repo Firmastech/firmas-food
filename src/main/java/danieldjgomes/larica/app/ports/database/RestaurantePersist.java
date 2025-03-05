@@ -14,5 +14,7 @@ public interface RestaurantePersist {
 
     void delete(RestauranteEntity entity);
 
+    Optional<RestauranteEntity> findBySubdominio(String id);
+
     Optional<RestauranteEntity> findByNome(String nome);
 }

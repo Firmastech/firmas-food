@@ -2,6 +2,7 @@ package danieldjgomes.larica.app.adapter.database.categoria.model;
 
 
 import danieldjgomes.larica.app.adapter.database.prato.model.PratoEntity;
+import danieldjgomes.larica.app.adapter.database.restaurante.model.RestauranteEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -33,6 +34,10 @@ public class CategoriaEntity {
 
     @OneToMany(mappedBy = "id")
     private Set<PratoEntity> pratos;
+
+    @ManyToOne
+    @JoinColumn(name = "id", updatable = false, insertable = false)
+    private RestauranteEntity restaurante;
 
     @Column(nullable = false)
     private LocalDateTime criado;

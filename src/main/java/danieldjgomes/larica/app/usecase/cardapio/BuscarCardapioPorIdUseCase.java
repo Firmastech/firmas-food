@@ -4,8 +4,7 @@ import danieldjgomes.larica.app.usecase.cardapio.response.CardapioResponse;
 
 import java.util.Optional;
 
+public interface BuscarCardapioPorIdUseCase {
 
-public interface BuscarDetalheCardapioUseCase {
-
-    Optional<CardapioResponse> buscarDetalheCardapio(String cardapioId);
+    Optional<CardapioResponse> buscar(String cardapioId);
 }

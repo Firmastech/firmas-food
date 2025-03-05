@@ -6,6 +6,8 @@ import danieldjgomes.larica.app.usecase.cardapio.request.CriarCardapioRequest;
 import danieldjgomes.larica.app.usecase.cardapio.response.AtualizarCardapioResponse;
 import danieldjgomes.larica.app.usecase.cardapio.response.CardapioResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,9 +19,9 @@ import org.springframework.web.bind.annotation.*;
 public class CardapioController {
     private final CriarCardapioUseCase criarCardapioUseCase;
     private final AtualizarDescritivoCardapioUseCase atualizarDescritivoCardapioUseCase;
-    private final BuscarDetalheCardapioUseCase buscarDetalheCardapioUseCase;
+    private final BuscarTodosCardapioUseCase buscarTodosCardapioUseCase;
     private final BuscarCardapioAtivoUseCase buscarCardapioAtivoUseCase;
-    private final DesativarCardapioUseCase desativarCardapioUseCase;
+    private final DesabilitarCardapioUseCase desabilitarCardapioUseCase;
 
     @PostMapping
     public ResponseEntity<CardapioResponse> criarCardapio(@RequestBody CriarCardapioRequest request) {
@@ -36,7 +38,7 @@ public class CardapioController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @GetMapping
+    @GetMapping("/ativo")
     public ResponseEntity<CardapioResponse> buscarCardapioAtivo() {
         return buscarCardapioAtivoUseCase
                 .buscar()
@@ -44,18 +46,16 @@ public class CardapioController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    //TODO: Analisar se esse deve continuar existindo
-    @GetMapping("/{cardapioId}")
-    public ResponseEntity<CardapioResponse> buscarDetalheCardapio(@PathVariable String cardapioId) {
-        return buscarDetalheCardapioUseCase
-                .buscarDetalheCardapio(cardapioId)
-                .map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
+    @GetMapping
+    public ResponseEntity<Page<CardapioResponse>> buscarTodosCardapios(Pageable pageable) {
+        return ResponseEntity.ok(buscarTodosCardapioUseCase
+                .buscarTodosCardapios(pageable));
+
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity desativarCardapio(@PathVariable String id) {
-        desativarCardapioUseCase.desativar(id);
+    public ResponseEntity desabilitar(@PathVariable String id) {
+        desabilitarCardapioUseCase.desabilitar(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
