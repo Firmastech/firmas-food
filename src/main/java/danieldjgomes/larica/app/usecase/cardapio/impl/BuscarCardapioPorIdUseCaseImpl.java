@@ -22,7 +22,7 @@ public class BuscarCardapioPorIdUseCaseImpl implements BuscarCardapioPorIdUseCas
     @Override
     public Optional<CardapioResponse> buscar(String cardapioId) {
         UsuarioEntity usuario = AuthorizationService.findUsuario();
-        Optional<CardapioEntity> cardapioBuscado = cardapioPersist.buscarCardapioPorId(cardapioId, usuario.getRestaurante().getId());
+        Optional<CardapioEntity> cardapioBuscado = cardapioPersist.buscarCardapioPorId(usuario.getRestaurante().getId(), cardapioId);
         return Optional.ofNullable(cardapioBuscado.map(cardapioMapper::toCardapioResponse).orElseThrow(CardapioNotFoundException::new));
     }
 }

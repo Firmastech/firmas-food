@@ -34,7 +34,12 @@ public class CategoriaEntity {
     @Column(nullable = false)
     private String etiqueta;
 
-    @OneToMany(mappedBy = "id")
+    @ManyToMany
+    @JoinTable(
+            name = "categoria_prato",
+            joinColumns = @JoinColumn(name = "categoria_id"),
+            inverseJoinColumns = @JoinColumn(name = "prato_id")
+    )
     private Set<PratoEntity> pratos;
 
     @ManyToOne

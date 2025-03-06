@@ -11,7 +11,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class AtualizarCategoriaRequest {
 
-
     private String nome;
 
 }

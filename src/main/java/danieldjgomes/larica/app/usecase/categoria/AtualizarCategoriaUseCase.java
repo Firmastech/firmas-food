@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface AtualizarCategoriaUseCase {
 
-    Optional<AtualizarCategoriaResponse> updateCategoria(String id, AtualizarCategoriaRequest categoriaRequest);
+    Optional<AtualizarCategoriaResponse> updateCategoria(String id, String cardapioId, AtualizarCategoriaRequest categoriaRequest);
 }

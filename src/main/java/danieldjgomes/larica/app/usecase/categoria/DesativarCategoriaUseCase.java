@@ -2,5 +2,5 @@ package danieldjgomes.larica.app.usecase.categoria;
 
 public interface DesativarCategoriaUseCase {
 
-    void desativar(String categoraId);
+    void desativar(String categoraId, String cardapioId);
 }

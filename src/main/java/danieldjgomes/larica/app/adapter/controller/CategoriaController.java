@@ -47,15 +47,15 @@ public class CategoriaController {
     }
 
     @PutMapping("/{cardapioId}/categorias/{categoriaId}")
-    public ResponseEntity<AtualizarCategoriaResponse> updateCategoria(@PathVariable String categoriaId, @RequestBody AtualizarCategoriaRequest atualizarCategoriaRequest) {
-        Optional<AtualizarCategoriaResponse> responseDTO = atualizarCategoriaUseCase.updateCategoria(categoriaId, atualizarCategoriaRequest);
+    public ResponseEntity<AtualizarCategoriaResponse> updateCategoria(@PathVariable String categoriaId, @PathVariable String cardapioId, @RequestBody AtualizarCategoriaRequest atualizarCategoriaRequest) {
+        Optional<AtualizarCategoriaResponse> responseDTO = atualizarCategoriaUseCase.updateCategoria(categoriaId,cardapioId, atualizarCategoriaRequest);
         return responseDTO.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{cardapioId}/categorias/{categoriaId}")
-    public ResponseEntity<Void> desativarCategoria(@PathVariable String categoriaId) {
-        desativarCategoriaUseCase.desativar(categoriaId);
+    public ResponseEntity<Void> desativarCategoria(@PathVariable String categoriaId, @PathVariable String cardapioId) {
+        desativarCategoriaUseCase.desativar(categoriaId,cardapioId);
         return ResponseEntity.noContent().build();
     }
 }

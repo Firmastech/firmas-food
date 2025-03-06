@@ -42,15 +42,10 @@ public class CategoriaPersistImpl implements CategoriaPersist {
         return Optional.of(categoriaRepository.save(categoria));
     }
 
-    public void disableCategoria(String categoriaId) {
-        Optional<CategoriaEntity> categoria = buscarDetalhesCategoria(categoriaId);
-        if (categoria.isEmpty()) {
-            throw new CardapioNotFoundException();
-        }
-        CategoriaEntity categoriaEncontrado = categoria.get();
-        categoriaEncontrado.setAtivo(false);
-        categoriaEncontrado.setDeletado(LocalDateTime.now());
-        categoriaRepository.save(categoriaEncontrado);
+    public void desabilitarCategoria(CategoriaEntity categoria) {
+        categoria.setAtivo(false);
+        categoria.setDeletado(LocalDateTime.now());
+        categoriaRepository.save(categoria);
     }
 
 }

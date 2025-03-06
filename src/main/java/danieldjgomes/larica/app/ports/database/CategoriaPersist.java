@@ -15,5 +15,5 @@ public interface CategoriaPersist {
 
     Optional<CategoriaEntity> updateCategoria(CategoriaEntity categoria);
 
-    void disableCategoria(String id);
+    void desabilitarCategoria(CategoriaEntity categoria);
 }
