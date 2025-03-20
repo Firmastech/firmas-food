@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @Validated
 @AllArgsConstructor
-@RequestMapping(path = "api/restaurantes")
+@RequestMapping(path = "rest/restaurantes")
 public class RestauranteController {
 
     private final RegistrarRestauranteUseCase registrarRestauranteInterador;
@@ -35,6 +35,15 @@ public class RestauranteController {
         Restaurante restauranteCriado = registrarRestauranteInterador.registrarRestaurante(restaurante);
         return ResponseEntity.status(HttpStatus.CREATED).body(restauranteCriado);
 
+    }
+
+    @GetMapping
+    public ResponseEntity<String> metadadosRestaurante(@RequestParam String restauranteUrl){
+        return ResponseEntity.ok(""" 
+                {
+                "resturautanteId": "123e4567-e89b-12d3-a456-426614174000"
+                }
+                """);
     }
 
     @GetMapping("/{id}")

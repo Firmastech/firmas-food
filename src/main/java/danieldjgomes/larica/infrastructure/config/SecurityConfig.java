@@ -13,7 +13,10 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.annotation.web.configurers.RequestCacheConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
+import org.springframework.security.crypto.password.MessageDigestPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -33,6 +36,7 @@ import java.util.List;
 public class SecurityConfig implements WebMvcConfigurer {
 
     private final SecurityFilter securityFilter;
+    private final UsuarioAnonimoFilter usuarioAnonimoFilter;
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -46,11 +50,16 @@ public class SecurityConfig implements WebMvcConfigurer {
                             authorizeConfig.requestMatchers(
                                     new AntPathRequestMatcher("/auth/login", "POST"),
                                     new AntPathRequestMatcher("/auth/register", "POST"),
-                                    new AntPathRequestMatcher("/auth/refresh", "POST")
+                                    new AntPathRequestMatcher("/auth/refresh", "POST"),
+                                    new AntPathRequestMatcher("/rest/restaurantes", "GET"),
+                                    new AntPathRequestMatcher("/rest/cardapios/principal", "GET"),
+                                    new AntPathRequestMatcher("/rest/cardapios/*/categorias", "GET"),
+                                    new AntPathRequestMatcher("/rest/cardapios/*/categorias/*", "GET")
                             ).permitAll();
                             authorizeConfig.anyRequest().authenticated();
                         })
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterAfter(usuarioAnonimoFilter, securityFilter.getClass())
                 .build();
     }
 
@@ -58,6 +67,7 @@ public class SecurityConfig implements WebMvcConfigurer {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {

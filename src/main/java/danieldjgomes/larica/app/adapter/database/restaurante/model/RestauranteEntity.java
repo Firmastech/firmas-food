@@ -34,6 +34,9 @@ public class RestauranteEntity {
     @Column(name = "status_funcionamento", nullable = false)
     private String statusFuncionamento;
 
+    @Column(name = "subdominio", nullable = false)
+    private String subdominio;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "endereco_id")
     private EnderecoEntity endereco;

@@ -14,4 +14,5 @@ public interface RestauranteRepository extends JpaRepository<RestauranteEntity, 
     Optional<RestauranteEntity> findByNomeAndAtivoIsTrue(String nome);
 
     Optional<RestauranteEntity> findByIdAndAtivoIsTrue(String id);
+    Optional<RestauranteEntity> findBySubdominioAndAndAtivoTrue(String id);
 }

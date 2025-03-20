@@ -1,8 +1,8 @@
 package danieldjgomes.larica.app.usecase.restaurante.response;
 
+import danieldjgomes.larica.app.adapter.database.cardapio.model.CardapioEntity;
 import danieldjgomes.larica.app.usecase.endereco.response.Endereco;
 import danieldjgomes.larica.app.usecase.restaurante.enums.StatusFuncionamento;
-import danieldjgomes.larica.core.cardapio.entity.CardapioEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

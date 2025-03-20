@@ -53,7 +53,7 @@ public class MontarTokenJWTUseCaseImpl implements MontarTokenJWTUseCase {
         return LocalDateTime.now().plusMinutes(tempoDeExpiracaoToken).toInstant(ZoneOffset.of("-03:00"));
     }
 
-    private Instant getExpirationDateRefreshToken() {
+    public Instant getExpirationDateRefreshToken() {
         return LocalDateTime.now().plusMinutes(tempoDeExpiracaoRefreshToken).toInstant(ZoneOffset.of("-03:00"));
     }
 }
