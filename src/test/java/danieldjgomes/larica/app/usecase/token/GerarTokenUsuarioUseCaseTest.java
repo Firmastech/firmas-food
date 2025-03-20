@@ -5,6 +5,7 @@ import danieldjgomes.larica.app.adapter.database.pedidos.repository.UsuarioRepos
 import danieldjgomes.larica.app.usecase.token.request.LoginUsuarioRequest;
 import danieldjgomes.larica.app.usecase.token.response.TokenResponse;
 import danieldjgomes.larica.app.usecase.token.usecase.MontarTokenJWTUseCase;
+import danieldjgomes.larica.app.usecase.token.usecase.PersistirTokenRevalidadoUseCase;
 import danieldjgomes.larica.app.usecase.token.usecase.ValidarEmailNoTokenUseCase;
 import danieldjgomes.larica.app.usecase.token.usecase.ValidarRestauranteNoTokenUseCase;
 import danieldjgomes.larica.app.usecase.token.usecase.impl.GerarTokenUsuarioUseCaseImpl;
@@ -35,6 +36,9 @@ class GerarTokenUsuarioUseCaseTest {
     ValidarRestauranteNoTokenUseCase validarRestauranteNoTokenUseCase;
     @Mock
     ValidarEmailNoTokenUseCase validarEmailNoTokenUseCase;
+
+    @Mock
+    PersistirTokenRevalidadoUseCase persistirTokenRevalidadoUseCase;
     @Mock
     MontarTokenJWTUseCase montarTokenJWTUseCase;
     @Mock

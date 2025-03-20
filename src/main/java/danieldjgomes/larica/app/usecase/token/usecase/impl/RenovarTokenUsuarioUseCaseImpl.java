@@ -5,13 +5,15 @@ import danieldjgomes.larica.app.adapter.database.pedidos.repository.UsuarioRepos
 import danieldjgomes.larica.app.usecase.token.exceptions.ErroAoBuscarUsuarioERestauranteNaRevalidacaoDeTokenException;
 import danieldjgomes.larica.app.usecase.token.request.RevalidarTokenRequest;
 import danieldjgomes.larica.app.usecase.token.response.TokenResponse;
-import danieldjgomes.larica.app.usecase.token.usecase.MontarTokenJWTUseCase;
-import danieldjgomes.larica.app.usecase.token.usecase.RenovarTokenUsuarioUseCase;
-import danieldjgomes.larica.app.usecase.token.usecase.ValidarEmailNoTokenUseCase;
-import danieldjgomes.larica.app.usecase.token.usecase.ValidarRestauranteNoTokenUseCase;
+import danieldjgomes.larica.app.usecase.token.usecase.*;
+import danieldjgomes.larica.infrastructure.TokenRevalidado;
+import danieldjgomes.larica.infrastructure.TokenRevalidadoRepository;
+import danieldjgomes.larica.infrastructure.config.HMACEncoder;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -22,6 +24,9 @@ public class RenovarTokenUsuarioUseCaseImpl implements RenovarTokenUsuarioUseCas
     private final ValidarRestauranteNoTokenUseCase validarRestauranteNoTokenUseCase;
     private final ValidarEmailNoTokenUseCase validarEmailNoTokenUseCase;
     private final MontarTokenJWTUseCase montarTokenJWTUseCase;
+    private final TokenRevalidadoRepository tokenRevalidadoRepository;
+    private final PersistirTokenRevalidadoUseCase persistirTokenRevalidadoUseCase;
+    private final HMACEncoder hmacEncoder;
 
     @Override
     public TokenResponse processar(RevalidarTokenRequest request) {
@@ -29,10 +34,21 @@ public class RenovarTokenUsuarioUseCaseImpl implements RenovarTokenUsuarioUseCas
         String email = validarEmailNoTokenUseCase.validar(request.getToken());
         String restauranteId = validarRestauranteNoTokenUseCase.validar(request.getToken());
         Optional<UsuarioEntity> usuario = usuarioRepository.findAllByRestauranteIdAndEmailAndAtivoTrue(restauranteId, email);
-        if (usuario.isPresent()) {
-            return montarTokenJWTUseCase.montar(usuario.get());
-        }
-        throw new ErroAoBuscarUsuarioERestauranteNaRevalidacaoDeTokenException(email,restauranteId);
-    }
 
+        if (usuario.isEmpty()) {
+            throw new ErroAoBuscarUsuarioERestauranteNaRevalidacaoDeTokenException(email, restauranteId);
+        }
+
+        TokenRevalidado tokenRevalidado = tokenRevalidadoRepository.findByTokenAndExpiracaoAfter(
+                        hmacEncoder.encode(request.getToken()), LocalDateTime.now())
+                .orElseThrow(RevalidarTokenInvalidoException::new);
+
+        tokenRevalidadoRepository.delete(tokenRevalidado);
+
+        TokenResponse tokenResponse = montarTokenJWTUseCase.montar(usuario.get());
+        persistirTokenRevalidadoUseCase.persistir(usuario.get(), tokenResponse);
+        return tokenResponse;
+    }
 }
+
+

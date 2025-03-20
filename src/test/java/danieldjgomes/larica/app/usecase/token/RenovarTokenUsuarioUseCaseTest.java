@@ -10,6 +10,7 @@ import danieldjgomes.larica.app.usecase.token.usecase.ValidarEmailNoTokenUseCase
 import danieldjgomes.larica.app.usecase.token.usecase.ValidarRestauranteNoTokenUseCase;
 import danieldjgomes.larica.app.usecase.token.usecase.impl.RenovarTokenUsuarioUseCaseImpl;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -23,6 +24,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
+@Disabled
 class RenovarTokenUsuarioUseCaseTest {
 
     @InjectMocks

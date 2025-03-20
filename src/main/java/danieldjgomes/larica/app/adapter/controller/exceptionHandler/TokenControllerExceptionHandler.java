@@ -3,6 +3,7 @@ package danieldjgomes.larica.app.adapter.controller.exceptionHandler;
 import danieldjgomes.larica.app.adapter.controller.TokenController;
 import danieldjgomes.larica.app.usecase.token.exceptions.ErroAoBuscarUsuarioERestauranteNaRevalidacaoDeTokenException;
 import danieldjgomes.larica.app.usecase.token.exceptions.ErroAoMontarTokenException;
+import danieldjgomes.larica.app.usecase.token.usecase.impl.RevalidarTokenInvalidoException;
 import danieldjgomes.larica.infrastructure.expectionHandler.model.ErrorResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -33,4 +34,10 @@ public class TokenControllerExceptionHandler {
     log.debug(exception.getMessage());
     return new ResponseEntity<>(HttpStatus.FORBIDDEN);
   }
+    @ExceptionHandler(RevalidarTokenInvalidoException.class)
+    public ResponseEntity<ErrorResponse> erroAoRevalidarTokenRequestException(
+            RevalidarTokenInvalidoException exception) {
+        log.debug(exception.getMessage());
+        return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+    }
 }

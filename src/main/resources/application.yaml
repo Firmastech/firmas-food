@@ -60,6 +60,8 @@ api:
         refresh-token: 120
       issuer: auth-api
       restaurante-claim: restaurante
+    refresh-token:
+      key: ${REFRESH_KEY_HMAC:chave-refresh}
 
 logging:
   level:

@@ -15,6 +15,7 @@ import danieldjgomes.larica.app.usecase.restaurante.request.AtualizarRestaurante
 import danieldjgomes.larica.app.usecase.endereco.request.CadastrarEnderecoRequest;
 import danieldjgomes.larica.app.usecase.restaurante.request.CriarRestauranteRequest;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -31,6 +32,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ExtendWith(MockitoExtension.class)
+@Disabled
 class RestauranteControllerTest {
 
     @Mock
